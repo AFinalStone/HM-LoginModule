@@ -1,0 +1,28 @@
+<resources>
+    <!--登录方式选择-->
+    <string name="loginType_mobile">手机号</string>
+    <string name="loginType_chat">微信号</string>
+    <string name="loginType_onlyLook">随便看看</string>
+
+    <!--请输入手机号-->
+    <string name="inputPhone_title">输入手机号码</string>
+    <string name="inputPhone_et_mobileHint">请使用11位手机号</string>
+    <string name="inputPhone_btn_next">下一步</string>
+    <string name="inputPhone_et_mobileError">请输入正确的手机号码</string>
+
+
+    <!--绑定手机号-->
+    <string name="bind_mobile_title">Hi，请绑定下手机号</string>
+    <string name="bind_mobile_et_mobileHint">请使用11位手机号</string>
+    <string name="bind_mobile_et_passwordHint">输入6-16位的新密码</string>
+    <string name="loginmobile_bind_mobile">绑定手机号</string>
+    <string name="bind_mobile_have_bind_wx">该手机号已经绑定了微信账号</string>
+    <string name="bind_mobile_loginFailed">账号注册成功，自动登录失败，请尝试手动登录</string>
+    <string name="bind_mobile_check_mobile_failed">手机号校验失败</string>
+    <string name="bind_mobile_dialog01_title">该号码已绑定过【微信】</string>
+    <string name="bind_mobile_dialog01_msg">该手机号已经绑定过微信，请通过手机号登录</string>
+    <string name="bind_mobile_dialog01_ok">手机登录</string>
+    <string name="bind_mobile_dialog02_title">该号码已有【账户】</string>
+    <string name="bind_mobile_dialog02_msg">该手机号已经注册，如果是您本人，请继续完成绑定</string>
+    <string name="bind_mobile_dialog02_ok">继续</string>
+</resources>

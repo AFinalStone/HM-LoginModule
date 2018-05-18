@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background_login_type_select_02"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="18dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/ll_loginByChat"
+        android:layout_width="305dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_common_btn_inblack"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_loginByWX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_login_wx_chat" />
+
+        <TextView
+            android:id="@+id/tv_loginByWx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginType_chat"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textFontSize_18" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_loginByPhone"
+        android:layout_width="305dp"
+        android:layout_height="48dp"
+        android:background="@drawable/shape_common_btn_intrans_outblack"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_loginByPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mobile_black" />
+
+        <TextView
+            android:id="@+id/tv_loginByPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginType_mobile"
+            android:textColor="#FF111111"
+            android:textSize="@dimen/textFontSize_18" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_onlyLook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:minHeight="22dp"
+        android:minWidth="64dp"
+        android:text="@string/loginType_onlyLook"
+        android:textColor="#ff222222"
+        android:textSize="@dimen/textFontSize_16"
+        android:visibility="gone" />
+</LinearLayout>
+
