@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.psd;
+package com.hm.iou.loginmodule.business.password;
 
 
 import com.hm.iou.base.mvp.BaseContract;
@@ -9,7 +9,7 @@ import com.hm.iou.base.mvp.BaseContract;
  * @author syl
  * @time 2018/5/17 下午1:54
  */
-public interface FindLoginPsdByEmialContract {
+public interface FindByEmailContract {
 
     /**
      * 通过邮箱找回密码

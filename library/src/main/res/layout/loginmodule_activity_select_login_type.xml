@@ -38,20 +38,20 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_loginByPhone"
+        android:id="@+id/ll_loginByMobile"
         android:layout_width="305dp"
         android:layout_height="48dp"
         android:background="@drawable/shape_common_btn_intrans_outblack"
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iv_loginByPhone"
+            android:id="@+id/iv_loginByMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_mobile_black" />
 
         <TextView
-            android:id="@+id/tv_loginByPhone"
+            android:id="@+id/tv_loginByMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loginType_mobile"

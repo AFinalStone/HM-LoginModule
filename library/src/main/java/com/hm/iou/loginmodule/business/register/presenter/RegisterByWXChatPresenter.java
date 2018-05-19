@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.register.wx;
+package com.hm.iou.loginmodule.business.register.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.business.register.RegisterByWXChatContract;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 

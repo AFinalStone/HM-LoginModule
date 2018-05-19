@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.hm.iou.loginmodule.demo.MainActivity">
 
@@ -11,11 +12,13 @@
         android:layout_height="wrap_content"
         android:onClick="onClickOpenLoginTypeSelect"
         android:text="打开LoginTypeSelect" />
-
-    <Button
+    <com.hm.iou.uikit.HMPasswordEditText
+        android:id="@+id/input_password2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickOpen"
-        android:text="打开Select" />
-
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:hint="@string/uikit_edit_text_input_password_hint"
+        android:inputType="textPassword"
+        app:disableIconAlpha="true"
+        app:hoverShowsPw="true" />
 </LinearLayout>

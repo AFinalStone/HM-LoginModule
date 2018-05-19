@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.hm.iou.uikit.HMTopBarView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uikit_topbar_height"
+        app:bottomDividerIsShow="false"
+        app:titleText="" />
+
+    <TextView
+        style="@style/UikitTextView"
+        android:minHeight="30dp"
+        android:text="@string/findPassword_resetPsd"
+        android:textSize="@dimen/textFontSize_22" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/uikit_icon_password" />
+
+        <com.hm.iou.uikit.HMPasswordEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/uikit_edit_text_input_password_hint"
+            android:inputType="textPassword"
+            app:disableIconAlpha="true"
+            app:hoverShowsPw="true" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_queryOk"
+        style="@style/UikitButton.Bottom"
+        android:layout_marginTop="119dp"
+        android:text="@string/findPasswordBySMS_queryOK" />
+</LinearLayout>

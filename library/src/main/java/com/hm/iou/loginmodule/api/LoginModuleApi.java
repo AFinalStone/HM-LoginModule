@@ -55,12 +55,12 @@ public class LoginModuleApi {
     /**
      * 通过手机号进行登录
      *
-     * @param userPhone 手机号
+     * @param mobile 手机号
      * @param loginPsd  登录密码
      * @return
      */
-    public static Flowable<BaseResponse<UserInfo>> mobileLogin(String userPhone, String loginPsd) {
-        return getService().mobileLogin(userPhone, loginPsd).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    public static Flowable<BaseResponse<UserInfo>> mobileLogin(String mobile, String loginPsd) {
+        return getService().mobileLogin(mobile, loginPsd).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

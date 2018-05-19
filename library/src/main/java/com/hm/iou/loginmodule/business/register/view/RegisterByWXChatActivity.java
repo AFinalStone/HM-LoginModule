@@ -1,14 +1,11 @@
-package com.hm.iou.loginmodule.business.register.wx;
+package com.hm.iou.loginmodule.business.register.view;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +14,8 @@ import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
+import com.hm.iou.loginmodule.business.register.RegisterByWXChatContract;
+import com.hm.iou.loginmodule.business.register.presenter.RegisterByWXChatPresenter;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMTopBarView;
@@ -70,18 +69,22 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     @Override
     protected int getLayoutId() {
-        return R.layout.loginmodule_activity_login_by_wx_bind_mobile;
+        return R.layout.loginmodule_activity_register_by_wx_chat;
     }
 
     @Override
     protected RegisterByWXChatPresenter initPresenter() {
-        return null;
+        return new RegisterByWXChatPresenter(this, this);
     }
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        mWXChatSN = getIntent().getStringExtra(EXTRA_KEY_WXCHAT_SN);
-        showSoftKeyboard();
+        mTopbar.setOnBackClickListener(new HMTopBarView.OnTopBarBackClickListener() {
+            @Override
+            public void onClickBack() {
+                finish();
+            }
+        });
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
@@ -113,6 +116,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                 checkValue();
             }
         });
+        showSoftKeyboard();
+        mWXChatSN = getIntent().getStringExtra(EXTRA_KEY_WXCHAT_SN);
     }
 
 

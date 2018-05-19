@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.register.mobile;
+package com.hm.iou.loginmodule.business.register;
 
 
 import com.hm.iou.base.mvp.BaseContract;
@@ -9,11 +9,7 @@ import com.hm.iou.base.mvp.BaseContract;
 public interface RegisterByMobileContract {
 
     interface View extends BaseContract.BaseView {
-        void registerAndLoginSuccess();
 
-        void getCodeSuccess();
-
-        void showRegisterResult();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

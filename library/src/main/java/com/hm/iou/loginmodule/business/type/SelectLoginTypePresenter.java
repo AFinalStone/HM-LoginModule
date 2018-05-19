@@ -84,9 +84,10 @@ public class SelectLoginTypePresenter extends MvpActivityPresenter<SelectLoginTy
                     public void handleResult(IsWXExistResp resp) {
                         String wxSn = resp.getSn();
                         if (resp.getCount() == 0) {
+                            //微信没有绑定过手机号
                             NavigationHelper.toRegisterByWXChat(mContext, wxSn);
-                            mView.startNewActivityAnimator();
                         } else {
+                            //微信绑定过手机号
                             wxLogin(wxSn);
                         }
                     }

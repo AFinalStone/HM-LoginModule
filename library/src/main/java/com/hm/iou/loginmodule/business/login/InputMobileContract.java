@@ -9,7 +9,7 @@ import com.hm.iou.base.mvp.BaseContract;
  * @author syl
  * @time 2018/5/17 下午1:57
  */
-public interface MobileLoginInputPhoneContract {
+public interface InputMobileContract {
 
     interface View extends BaseContract.BaseView {
 

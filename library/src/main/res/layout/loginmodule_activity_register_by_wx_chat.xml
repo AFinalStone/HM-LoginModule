@@ -11,6 +11,7 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
+        app:bottomDividerIsShow="false"
         app:titleText="" />
 
     <TextView
@@ -47,7 +48,7 @@
 
             <com.hm.iou.uikit.ClearEditText
                 android:id="@+id/et_mobile"
-                style="@style/UikitEditText.InputPhone" />
+                style="@style/UikitEditText.InputMobile" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -78,11 +79,14 @@
 
         <EditText
             android:id="@+id/et_code"
-            style="@style/UikitEditText.SMSCheckCode" />
+            style="@style/UikitEditText.SMSCheckCode"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/btn_getCode"
-            style="@style/UikitButton.SMSCheckCode" />
+            style="@style/UikitButton.SMSCheckCode"
+            android:enabled="false" />
 
     </LinearLayout>
 
@@ -140,14 +144,9 @@
 
     <TextView
         android:id="@+id/btn_bindMobile"
-        style="@style/UikitButton"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        style="@style/UikitButton.Bottom"
         android:layout_marginTop="32dp"
-        android:text="@string/loginmobile_bind_mobile"
-        android:textSize="@dimen/textFontSize_18" />
+        android:text="@string/loginmobile_bind_mobile" />
 
 
 </LinearLayout>

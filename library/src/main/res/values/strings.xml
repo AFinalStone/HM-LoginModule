@@ -1,4 +1,6 @@
 <resources>
+
+
     <!--登录方式选择-->
     <string name="loginType_mobile">手机号</string>
     <string name="loginType_chat">微信号</string>
@@ -10,6 +12,25 @@
     <string name="inputPhone_btn_next">下一步</string>
     <string name="inputPhone_et_mobileError">请输入正确的手机号码</string>
 
+    <!--手机号登录-->
+    <string name="loginByPhone_title">输入登录密码</string>
+    <string name="loginByPhone_et_passwordHint">请输入密码</string>
+    <string name="loginByPhone_txt_forgetPassword">忘记密码？</string>
+    <string name="loginByPhone_btn_login">登录</string>
+    <string name="loginByPhone_txt_desc">登录即表示同意</string>
+    <string name="loginByPhone_txt_agreement">《用户协议》</string>
+    <string name="userLoginFailed">登录失败</string>
+
+    <!--手机号注册-->
+    <string name="register_title">Hi，请注册</string>
+    <string name="register_et_passwordHint">输入6-16位密码</string>
+    <string name="register_btn_reg">注册</string>
+    <string name="register_txt_desc">注册即同意</string>
+    <string name="register_txt_agreement01">《注册与使用协议》</string>
+    <string name="register_txt_and">及</string>
+    <string name="register_txt_agreement02">《隐私条款》</string>
+    <string name="register_registerSuccess">注册成功</string>
+    <string name="register_registerFailed">注册失败</string>
 
     <!--绑定手机号-->
     <string name="bind_mobile_title">Hi，请绑定下手机号</string>
@@ -25,4 +46,20 @@
     <string name="bind_mobile_dialog02_title">该号码已有【账户】</string>
     <string name="bind_mobile_dialog02_msg">该手机号已经注册，如果是您本人，请继续完成绑定</string>
     <string name="bind_mobile_dialog02_ok">继续</string>
+
+    <!--找回密码-->
+    <string name="findPassword_resetPsd">重置密码</string>
+    <string name="findPassword_pleaseInputNewPsd">请输入6到16位的新密码</string>
+    <string name="findPasswordBySMS_title">请输入手机号</string>
+    <string name="findPasswordBySMS_btn_find">找回密码</string>
+    <string name="findPasswordBySMS_queryOK">确定</string>
+
+    <!--输入验证码-->
+    <string name="inputCode_title">验证码已发送至</string>
+    <string name="tv_retry_code">重发验证码</string>
+
+    <!--首页预加载页面-->
+    <string name="loginLoading_loading">小管家正在加载内容</string>
+    <string name="loginLoading_loginFailed">登录失败</string>
+    <string name="loginLoading_bindWXFailed">绑定失败</string>
 </resources>

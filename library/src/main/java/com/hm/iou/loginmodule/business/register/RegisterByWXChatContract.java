@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.register.wx;
+package com.hm.iou.loginmodule.business.register;
 
 
 import com.hm.iou.base.mvp.BaseContract;

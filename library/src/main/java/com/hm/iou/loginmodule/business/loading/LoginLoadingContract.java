@@ -10,14 +10,6 @@ public interface LoginLoadingContract {
 
     interface View extends BaseContract.BaseView {
 
-
-        void tokenLoginSuccess();
-
-        void tokenLoginFailed(Throwable e);
-
-        void getHomeDataSuccess();
-
-        void getHomeDataFailed();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

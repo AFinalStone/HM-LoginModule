@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.psd;
+package com.hm.iou.loginmodule.business.password;
 
 
 import com.hm.iou.base.mvp.BaseContract;
@@ -9,10 +9,6 @@ import com.hm.iou.base.mvp.BaseContract;
 public interface ResetLoginPsdContract {
 
     interface View extends BaseContract.BaseView {
-
-        void resetQueryPsdSuccess();
-
-        void loginSuccess();
 
     }
 

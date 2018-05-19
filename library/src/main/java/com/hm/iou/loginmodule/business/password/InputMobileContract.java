@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.psd;
+package com.hm.iou.loginmodule.business.password;
 
 
 import com.hm.iou.base.mvp.BaseContract;
@@ -9,7 +9,7 @@ import com.hm.iou.base.mvp.BaseContract;
  * @author AFinalStone
  * @time 2018/5/17 下午1:54
  */
-public interface FindLoginPsdInputPhoneContract {
+public interface InputMobileContract {
 
     /**
      * 输入手机号，判断找回密码的方式

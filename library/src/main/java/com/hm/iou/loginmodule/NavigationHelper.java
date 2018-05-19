@@ -1,16 +1,62 @@
 package com.hm.iou.loginmodule;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.hm.iou.loginmodule.business.register.wx.RegisterByWXChatActivity;
+import com.hm.iou.loginmodule.business.login.view.InputMobileActivity;
+import com.hm.iou.loginmodule.business.login.view.MobileLoginActivity;
+import com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity;
+import com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity;
 
 /**
- * Created by hjy on 18/5/4.<br>
+ * @author syl
+ * @time 2018/5/19 下午2:59
  */
-
 public class NavigationHelper {
+
+    /**
+     * 跳转到登录方式选择页面
+     *
+     * @param context
+     */
+    public static void toSelectLoginType(Context context) {
+        context.startActivity(new Intent(context, SelectLoginTypeActivity.class));
+    }
+
+
+    /**
+     * 跳转到输入手机号的页面
+     *
+     * @param context
+     */
+    public static void toInputMobile(Context context) {
+        context.startActivity(new Intent(context, InputMobileActivity.class));
+    }
+
+    /**
+     * 通过手机号进行注册
+     *
+     * @param context
+     * @param mobil
+     */
+    public static void toRegisterByMobile(Context context, String mobil) {
+//        Intent intent = new Intent(context, RegisterByWXChatActivity.class);
+//        intent.putExtra(RegisterByWXChatActivity.EXTRA_KEY_WXCHAT_SN, mobile);
+//        context.startActivity(intent);
+    }
+
+
+    /**
+     * 跳转到手机号登录页面
+     *
+     * @param context
+     * @param mobile
+     */
+    public static void toMobileLogin(Context context, String mobile) {
+        Intent intent = new Intent(context, MobileLoginActivity.class);
+        intent.putExtra(MobileLoginActivity.EXTRA_KEY_MOBILE, mobile);
+        context.startActivity(intent);
+    }
 
     /**
      * 跳转到首页
@@ -25,22 +71,13 @@ public class NavigationHelper {
     /**
      * 通过微信进行注册或者绑定操作
      *
-     * @param activity
-     * @param wxSn     判断微信是否绑定过手机的交易流水号
+     * @param context
+     * @param wxSn    判断微信是否绑定过手机的交易流水号
      */
     public static void toRegisterByWXChat(Context context, String wxSn) {
         Intent intent = new Intent(context, RegisterByWXChatActivity.class);
         intent.putExtra(RegisterByWXChatActivity.EXTRA_KEY_WXCHAT_SN, wxSn);
         context.startActivity(intent);
-    }
-
-    /**
-     * 跳转到输入手机号的页面
-     *
-     * @param context
-     */
-    public static void toMobileLoginInputPhone(Context context) {
-//        startNewActivity(LoginInputPhoneActivity.class);
     }
 
     /**
@@ -56,17 +93,5 @@ public class NavigationHelper {
 //        overridePendingTransition(R.anim.activity_open_from_right, R.anim.activity_to_left);
     }
 
-
-    /**
-     * 跳转到手机号登录页面
-     *
-     * @param context
-     * @param mobile
-     */
-    public static void toMobileLogin(Context context, String mobile) {
-//        Intent intent = new Intent(this, LoginByPhoneActivity.class);
-//        intent.putExtra(Constants.INTENT_INPUT_PHONE, userPhone);
-//        startActivity(intent);
-    }
 
 }

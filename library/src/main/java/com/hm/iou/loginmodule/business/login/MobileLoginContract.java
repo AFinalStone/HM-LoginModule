@@ -10,11 +10,6 @@ public interface MobileLoginContract {
 
     interface View extends BaseContract.BaseView {
 
-        void showResult(String info);
-
-        void jumpFindPswView();
-
-        void jumpMainView();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

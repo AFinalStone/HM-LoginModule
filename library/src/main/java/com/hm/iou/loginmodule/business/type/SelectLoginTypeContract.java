@@ -17,11 +17,6 @@ public interface SelectLoginTypeContract {
          * 隐藏微信登录的方式
          */
         void hideButtonForLoginByWx();
-
-        /**
-         * 打开新的Activity的动画
-         */
-        void startNewActivityAnimator();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

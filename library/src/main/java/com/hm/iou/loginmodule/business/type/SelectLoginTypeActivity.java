@@ -35,14 +35,14 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
     @BindView(R2.id.ll_loginByChat)
     LinearLayout mLlLoginByChat;
 
-    @BindView(R2.id.iv_loginByPhone)
-    ImageView ivLoginByPhone;
+    @BindView(R2.id.iv_loginByMobile)
+    ImageView mIvLoginByMobile;
 
-    @BindView(R2.id.tv_loginByPhone)
-    TextView tvLoginByPhone;
+    @BindView(R2.id.tv_loginByMobile)
+    TextView mTvLoginByMobile;
 
-    @BindView(R2.id.ll_loginByPhone)
-    LinearLayout mLlLoginByPhone;
+    @BindView(R2.id.ll_loginByMobile)
+    LinearLayout mLlLoginByMobile;
 
     @Override
     protected int getLayoutId() {
@@ -59,32 +59,26 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
         mPresenter.isExistsWx();
     }
 
-    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByPhone, R2.id.tv_onlyLook})
+    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile, R2.id.tv_onlyLook})
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.ll_loginByChat == id) {
             mPresenter.getWxCode();
-        } else if (R.id.ll_loginByPhone == id) {
-            NavigationHelper.toMobileLoginInputPhone(mContext);
+        } else if (R.id.ll_loginByMobile == id) {
+            NavigationHelper.toInputMobile(mContext);
         } else if (R.id.tv_onlyLook == id) {
             NavigationHelper.toMain(mContext);
         }
     }
 
 
-
     @Override
     public void hideButtonForLoginByWx() {
         mLlBackground.setBackground(getResources().getDrawable(R.mipmap.background_login_type_select_01));
         mLlLoginByChat.setVisibility(View.INVISIBLE);
-        mLlLoginByPhone.setBackground(getResources().getDrawable(R.drawable.shape_common_btn_inblack));
-        ivLoginByPhone.setImageResource(R.mipmap.icon_mobile_white);
-        tvLoginByPhone.setTextColor(Color.WHITE);
-    }
-
-    @Override
-    public void startNewActivityAnimator() {
-        overridePendingTransition(R.anim.uikit_activity_open_from_right, R.anim.uikit_activity_open_from_left);
+        mLlLoginByMobile.setBackground(getResources().getDrawable(R.drawable.shape_common_btn_inblack));
+        mIvLoginByMobile.setImageResource(R.mipmap.icon_mobile_white);
+        mTvLoginByMobile.setTextColor(Color.WHITE);
     }
 
 }
