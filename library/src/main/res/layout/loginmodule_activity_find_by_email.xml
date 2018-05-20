@@ -8,15 +8,15 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
-        android:id="@+id/topbar"
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false"
-        app:titleText="" />
+        app:bottomDividerIsShow="false" />
 
     <TextView
         style="@style/UikitTextView"
-        android:text="@string/loginByPhone_title"
+        android:text="@string/bindEmailAndResetPsd_title"
+        android:textColor="#FF222222"
         android:textSize="@dimen/textFontSize_22"
         android:textStyle="bold" />
 
@@ -34,13 +34,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_mobile_black" />
+            android:src="@mipmap/loginmodule_icon_email_black" />
 
-        <TextView
-            android:id="@+id/et_phone"
-            style="@style/UikitEditText.SMSCheckCode"
-            android:layout_marginStart="10dp"
-            android:textSize="@dimen/textFontSize_14" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <com.hm.iou.uikit.ClearEditText
+                android:id="@+id/et_email"
+                style="@style/UikitEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="@dimen/textFontSize_14" />
+        </android.support.design.widget.TextInputLayout>
+
 
     </LinearLayout>
 
@@ -48,38 +59,33 @@
         style="@style/UikitDivider.Horizontal"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/uikit_icon_password" />
+            android:src="@mipmap/loginmodule_icon_register_message" />
 
-        <com.hm.iou.uikit.HMPasswordEditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/uikit_edit_text_input_password_hint"
-            android:inputType="textPassword"
-            app:disableIconAlpha="true"
-            app:hoverShowsPw="true" />
+
+        <EditText
+            android:id="@+id/et_emailCode"
+            style="@style/UikitEditText.EmailCheckCode" />
+
+        <TextView
+            android:id="@+id/tv_getEmailCode"
+            style="@style/UikitButton.EmailCheckCode" />
 
     </LinearLayout>
-
 
     <View
         style="@style/UikitDivider.Horizontal"
@@ -87,19 +93,10 @@
         android:layout_marginRight="35dp" />
 
     <TextView
-        android:id="@+id/tv_forgetPassword"
-        style="@style/UikitTextView"
-        android:layout_gravity="right"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:minHeight="40dp"
-        android:text="@string/loginByPhone_txt_forgetPassword"
-        android:textSize="@dimen/textFontSize_14" />
-
-    <TextView
-        android:id="@+id/btn_login"
+        android:id="@+id/tv_find"
         style="@style/UikitButton.Bottom"
-        android:layout_marginTop="52dp"
-        android:text="@string/loginByPhone_btn_login" />
+        android:layout_marginTop="90dp"
+        android:text="@string/bindEmailAndResetPsd_findPsd" />
+
 
 </LinearLayout>

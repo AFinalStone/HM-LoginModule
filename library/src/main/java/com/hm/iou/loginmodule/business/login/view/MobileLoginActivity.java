@@ -37,7 +37,7 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login_by_phone;
+        return R.layout.loginmodule_activity_login_by_mobile;
     }
 
     @Override

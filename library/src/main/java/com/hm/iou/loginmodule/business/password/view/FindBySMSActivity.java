@@ -26,12 +26,11 @@ import io.reactivex.functions.Consumer;
 /**
  * 通过短信验证码找回登录密码
  *
- * @author AFinalStone
+ * @author syl
  */
 public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implements FindBySMSContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
-
 
     @BindView(R2.id.tv_phone)
     TextView tvPhone;
@@ -51,7 +50,7 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_find_login_psd_by_send_sms_code;
+        return R.layout.loginmodule_activity_find_by_sms;
     }
 
     @Override

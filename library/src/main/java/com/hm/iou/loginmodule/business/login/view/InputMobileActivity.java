@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
@@ -37,7 +36,7 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_input_phone;
+        return R.layout.loginmodule_activity_input_mobile;
     }
 
     @Override

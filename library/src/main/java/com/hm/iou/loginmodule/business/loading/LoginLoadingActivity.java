@@ -1,6 +1,5 @@
 package com.hm.iou.loginmodule.business.loading;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import butterknife.BindView;
 
 
 /**
- * Created by AFinalStone on 2017/11/10.
+ * Created by syl on 2017/11/10.
  * 1.用户从手机登录页面进入这个页面，根据手机号和密码进行登录
  * 2.用户通过token进行登录
  * 3.用户通过微信进行登录
@@ -36,7 +35,7 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login_loading;
+        return R.layout.loginmodule_activity_login_loading;
     }
 
     @Override

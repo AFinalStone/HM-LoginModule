@@ -12,9 +12,6 @@ import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,7 +21,7 @@ import butterknife.OnClick;
  * 2.这个页面要把用户相关的数据清空，因为所有的请求，Retrofit里面对所有的接口进行了统一的header封装，
  * 如果这里不清除用户数据，则服务端的接口会自动取header里面的内容，部分接口会报错
  *
- * @author AFinalStone
+ * @author syl
  * @time 2018/3/30 下午4:36
  */
 public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresenter> implements SelectLoginTypeContract.View {
@@ -74,10 +71,10 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
 
     @Override
     public void hideButtonForLoginByWx() {
-        mLlBackground.setBackground(getResources().getDrawable(R.mipmap.background_login_type_select_01));
+        mLlBackground.setBackground(getResources().getDrawable(R.mipmap.loginmodule_background_login_type_select_01));
         mLlLoginByChat.setVisibility(View.INVISIBLE);
-        mLlLoginByMobile.setBackground(getResources().getDrawable(R.drawable.shape_common_btn_inblack));
-        mIvLoginByMobile.setImageResource(R.mipmap.icon_mobile_white);
+        mLlLoginByMobile.setBackground(getResources().getDrawable(R.drawable.loginmodule_shape_common_btn_inblack));
+        mIvLoginByMobile.setImageResource(R.mipmap.loginmodule_icon_mobile_white);
         mTvLoginByMobile.setTextColor(Color.WHITE);
     }
 

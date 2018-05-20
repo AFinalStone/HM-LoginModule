@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_mobile_black" />
+            android:src="@mipmap/loginmodule_icon_mobile_black" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"

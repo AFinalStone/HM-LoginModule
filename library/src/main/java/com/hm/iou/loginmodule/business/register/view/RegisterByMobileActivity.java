@@ -1,12 +1,8 @@
 package com.hm.iou.loginmodule.business.register.view;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.Selection;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -14,6 +10,7 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByMobilePresenter;
+import com.hm.iou.uikit.HMPasswordEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -23,7 +20,7 @@ import io.reactivex.functions.Consumer;
 /**
  * 用户注册账号
  *
- * @author AFinalStone
+ * @author syl
  * @time 2018/4/23 上午11:12
  */
 public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePresenter> implements RegisterByMobileContract.View {
@@ -39,12 +36,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     String userCode = "";
 
     @BindView(R2.id.et_password)
-    EditText etPassword;
+    HMPasswordEditText etPassword;
     String userPsd = "";
-
-    @BindView(R2.id.iv_eye)
-    ImageView ivEye;
-    boolean isEyeOpen = true;
 
     @BindView(R2.id.btn_register)
     TextView btnRegister;
@@ -54,7 +47,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.loginmodule_activity_register_mobile;
     }
 
     @Override
@@ -116,12 +109,10 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 //    }
 
 
-    @OnClick({R2.id.iv_eye, R2.id.btn_register, R2.id.btn_getCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
+    @OnClick({R2.id.btn_register, R2.id.btn_getCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.iv_eye == id) {
-            changePassword();
-        } else if (R.id.btn_register == id) {
+        if (R.id.btn_register == id) {
             mPresenter.registerAndLogin(userPhone, userPsd, userCode);
         } else if (R.id.btn_getCode == id) {
             mPresenter.getCode(userPhone);
@@ -129,28 +120,6 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             jumpToRegisterAndUseAgreement();
         } else if (R.id.tv_agreement02 == id) {
             jumpToPrivateAgreement();
-        }
-    }
-
-    private void changePassword() {
-        if (isEyeOpen) {
-            isEyeOpen = false;
-            ivEye.setImageResource(R.mipmap.uikit_icon_password_eye_close);
-            // 显示为密码
-            etPassword.setInputType(InputType.TYPE_CLASS_TEXT
-                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            // 使光标始终在最后位置
-            Editable etable = etPassword.getText();
-            Selection.setSelection(etable, etable.length());
-        } else {
-            isEyeOpen = true;
-            ivEye.setImageResource(R.mipmap.uikit_icon_password_eye_open);
-
-            // 显示为普通文本
-            etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            // 使光标始终在最后位置
-            Editable etable = etPassword.getText();
-            Selection.setSelection(etable, etable.length());
         }
     }
 

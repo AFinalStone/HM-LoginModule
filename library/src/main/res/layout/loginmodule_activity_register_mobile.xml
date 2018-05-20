@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_mobile_black" />
+            android:src="@mipmap/loginmodule_icon_mobile_black" />
 
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_register_message" />
+            android:src="@mipmap/loginmodule_icon_register_message" />
 
         <EditText
             android:id="@+id/et_code"
@@ -101,25 +101,16 @@
             android:scaleType="centerInside"
             android:src="@mipmap/uikit_icon_password" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
+        <com.hm.iou.uikit.HMPasswordEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="1">
-
-            <EditText
-                android:id="@+id/et_password"
-                style="@style/UikitEditText.Password"
-                android:inputType="textVisiblePassword" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/iv_eye"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/uikit_icon_password_eye_open" />
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/uikit_edit_text_input_password_hint"
+            android:inputType="textPassword"
+            app:disableIconAlpha="true"
+            app:hoverShowsPw="true" />
 
     </LinearLayout>
 

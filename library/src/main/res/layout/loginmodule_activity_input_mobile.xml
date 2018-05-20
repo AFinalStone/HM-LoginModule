@@ -35,7 +35,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_mobile_black" />
+            android:src="@mipmap/loginmodule_icon_mobile_black" />
 
         <com.hm.iou.uikit.ClearEditText
             android:id="@+id/et_phone"

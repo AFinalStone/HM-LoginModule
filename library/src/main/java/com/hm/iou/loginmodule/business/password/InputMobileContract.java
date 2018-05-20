@@ -6,7 +6,7 @@ import com.hm.iou.base.mvp.BaseContract;
 /**
  * 输入手机号，获取找回密码的途径
  *
- * @author AFinalStone
+ * @author syl
  * @time 2018/5/17 下午1:54
  */
 public interface InputMobileContract {

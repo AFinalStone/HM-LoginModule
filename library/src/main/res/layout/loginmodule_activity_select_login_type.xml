@@ -3,7 +3,7 @@
     android:id="@+id/ll_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/background_login_type_select_02"
+    android:background="@mipmap/loginmodule_background_login_type_select_02"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="18dp">
@@ -18,14 +18,14 @@
         android:layout_width="305dp"
         android:layout_height="48dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/shape_common_btn_inblack"
+        android:background="@drawable/loginmodule_shape_common_btn_inblack"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_loginByWX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_login_wx_chat" />
+            android:src="@mipmap/loginmodule_icon_login_wx_chat" />
 
         <TextView
             android:id="@+id/tv_loginByWx"
@@ -41,14 +41,14 @@
         android:id="@+id/ll_loginByMobile"
         android:layout_width="305dp"
         android:layout_height="48dp"
-        android:background="@drawable/shape_common_btn_intrans_outblack"
+        android:background="@drawable/loginmodule_shape_common_btn_intrans_outblack"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_loginByMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mobile_black" />
+            android:src="@mipmap/loginmodule_icon_mobile_black" />
 
         <TextView
             android:id="@+id/tv_loginByMobile"

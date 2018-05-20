@@ -4,7 +4,7 @@ package com.hm.iou.loginmodule.business.password;
 import com.hm.iou.base.mvp.BaseContract;
 
 /**
- * Created by AFinalStone on 2016/8/2.
+ * Created by syl on 2016/8/2.
  */
 public interface ResetLoginPsdContract {
 

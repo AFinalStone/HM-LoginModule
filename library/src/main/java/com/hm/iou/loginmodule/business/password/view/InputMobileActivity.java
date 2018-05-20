@@ -19,7 +19,7 @@ import io.reactivex.functions.Consumer;
 /**
  * 输入手机号获取找回密码使用什么途径
  *
- * @author AFinalStone
+ * @author syl
  * @time 2018/4/23 上午11:10
  */
 public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
@@ -36,7 +36,7 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_find_login_psd_input_phone;
+        return R.layout.loginmodule_activity_find_input_mobile;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class FindByEmailPresenter extends MvpActivityPresenter<FindByEmailContra
     }
 
     @Override
-    public void sendResetPswdCheckCodeMail() {
+    public void sendEmailCheckCode(String email) {
 
     }
 }
