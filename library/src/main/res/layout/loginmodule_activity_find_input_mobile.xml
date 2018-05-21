@@ -8,11 +8,9 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
-        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false"
-        app:titleText="" />
+        app:bottomDividerIsShow="false" />
 
     <TextView
         style="@style/UikitTextView"
@@ -42,8 +40,8 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1">
 
-            <com.shi.androidstudy.widget.ClearEditText
-                android:id="@+id/et_phone"
+            <com.hm.iou.uikit.ClearEditText
+                android:id="@+id/et_mobile"
                 style="@style/UikitEditText.InputMobile" />
 
         </android.support.design.widget.TextInputLayout>
@@ -56,7 +54,7 @@
         android:layout_marginRight="35dp" />
 
     <TextView
-        android:id="@+id/btn_find"
+        android:id="@+id/tv_find"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="149dp"
         android:enabled="false"

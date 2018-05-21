@@ -31,7 +31,7 @@
             android:id="@+id/tv_loginByWx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loginType_chat"
+            android:text="@string/uikit_login_type_by_wx_chat"
             android:textColor="@color/white"
             android:textSize="@dimen/textFontSize_18" />
 
@@ -54,7 +54,7 @@
             android:id="@+id/tv_loginByMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loginType_mobile"
+            android:text="@string/uikit_login_type_by_mobile"
             android:textColor="#FF111111"
             android:textSize="@dimen/textFontSize_18" />
 
@@ -67,7 +67,7 @@
         android:layout_marginTop="14dp"
         android:minHeight="22dp"
         android:minWidth="64dp"
-        android:text="@string/loginType_onlyLook"
+        android:text="@string/uikit_login_type_only_look"
         android:textColor="#ff222222"
         android:textSize="@dimen/textFontSize_16"
         android:visibility="gone" />

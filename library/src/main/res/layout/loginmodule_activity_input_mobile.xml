@@ -8,15 +8,13 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
-        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false"
-        app:titleText="" />
+        app:bottomDividerIsShow="false" />
 
     <TextView
         style="@style/UikitTextView"
-        android:text="@string/inputPhone_title"
+        android:text="@string/uikit_input_mobile_title"
         android:textSize="@dimen/textFontSize_22"
         android:textStyle="bold" />
 
@@ -38,7 +36,7 @@
             android:src="@mipmap/loginmodule_icon_mobile_black" />
 
         <com.hm.iou.uikit.ClearEditText
-            android:id="@+id/et_phone"
+            android:id="@+id/et_mobile"
             style="@style/UikitEditText.InputMobile" />
 
     </LinearLayout>
@@ -49,10 +47,10 @@
         android:layout_marginRight="35dp" />
 
     <TextView
-        android:id="@+id/btn_next"
+        android:id="@+id/tv_next"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="149dp"
-        android:text="@string/inputPhone_btn_next" />
+        android:text="@string/uikit_input_mobile_btn_next" />
 
 
 </LinearLayout>

@@ -14,8 +14,8 @@ public interface RegisterByMobileContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-        void getCode(String phoneNumber);
+        void getCode(String mobile);
 
-        void registerAndLogin(String loginName, String queryPswd, String checkCode);
+        void registerAndLogin(String mobile, String loginPsd, String smsCheckCode);
     }
 }

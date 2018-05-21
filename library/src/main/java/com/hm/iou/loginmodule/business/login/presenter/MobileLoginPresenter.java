@@ -13,6 +13,7 @@ import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
+import com.hm.iou.tools.Md5Util;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**

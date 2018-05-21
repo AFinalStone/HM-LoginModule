@@ -2,9 +2,13 @@ package com.hm.iou.loginmodule.api;
 
 import com.hm.iou.loginmodule.bean.IsWXExistResp;
 import com.hm.iou.loginmodule.bean.ResetPsdMethodBean;
+import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
+import com.hm.iou.loginmodule.bean.req.MobileRegLoginReqBean;
+import com.hm.iou.loginmodule.bean.req.TokenLoginReqBean;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
+import com.hm.iou.tools.Md5Util;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,11 +27,24 @@ public class LoginModuleApi {
     /**
      * 判断手机号是否存在
      *
-     * @param mobile 手机号码
-     * @return int    >0表示已注册，=0表示未注册
+     * @param mobile 手机号
+     * @return
      */
-    public static Flowable<BaseResponse<Integer>> isAccountExist(String mobile) {
+    public static Flowable<BaseResponse<Boolean>> isAccountExist(String mobile) {
         return getService().isAccountExist(mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 通过手机号进行登录
+     *
+     * @param mobile   手机号
+     * @param loginPsd 登录密码
+     * @return
+     */
+    public static Flowable<BaseResponse<UserInfo>> mobileLogin(String mobile, String loginPsd) {
+        String psdMd5 = Md5Util.getMd5ByString(loginPsd);
+        MobileLoginReqBean mobileLoginReqBean = new MobileLoginReqBean(mobile, psdMd5);
+        return getService().mobileLogin(mobileLoginReqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -36,8 +53,21 @@ public class LoginModuleApi {
      * @param mobile 手机号
      * @return
      */
-    public static Flowable<BaseResponse<Integer>> sendSmsCheckCode(String mobile) {
+    public static Flowable<BaseResponse<Boolean>> sendSmsCheckCode(String mobile) {
         return getService().sendSmsCheckCode(mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 1.发送微信注册使用的短信验证码
+     * 2.发送微信绑定使用的短信验证码
+     * 3.发送重置登录密码的短信验证码
+     *
+     * @param mobile 手机号
+     * @return
+     */
+    public static Flowable<BaseResponse<String>> sendResetPswdCheckCodeSMS(String mobile) {
+        String psdType = "QueryPswd";
+        return getService().sendResetPswdCheckCodeSMS(psdType, mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
@@ -49,18 +79,14 @@ public class LoginModuleApi {
      * @return 成功返回用户信息
      */
     public static Flowable<BaseResponse<UserInfo>> mobileRegLogin(String mobile, String loginPsd, String checkCode) {
-        return getService().mobileRegLogin(mobile, loginPsd, checkCode).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        String psdMd5 = Md5Util.getMd5ByString(loginPsd);
+        MobileRegLoginReqBean mobileRegLoginReqBean = new MobileRegLoginReqBean(mobile, psdMd5, checkCode);
+        return getService().mobileRegLogin(mobileRegLoginReqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    /**
-     * 通过手机号进行登录
-     *
-     * @param mobile 手机号
-     * @param loginPsd  登录密码
-     * @return
-     */
-    public static Flowable<BaseResponse<UserInfo>> mobileLogin(String mobile, String loginPsd) {
-        return getService().mobileLogin(mobile, loginPsd).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    public static Flowable<BaseResponse<UserInfo>> tokenLogin(String token, String userId) {
+        TokenLoginReqBean tokenLoginReqBean = new TokenLoginReqBean(token, userId);
+        return getService().tokenLogin(tokenLoginReqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

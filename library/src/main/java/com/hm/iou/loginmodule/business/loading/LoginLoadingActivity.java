@@ -74,23 +74,4 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
         }
     }
 
-
-    private void toLoginSelectView() {
-//        startActivity(new Intent(this, LoginSelectActivity.class));
-//        finish();
-    }
-
-    private void toLoginByPhoneView() {
-//        Intent intent = new Intent(this, LoginByPhoneActivity.class);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, getIntent().getStringExtra(Constants.INTENT_MOBILE_NUMBER));
-//        startActivity(intent);
-//        finish();
-    }
-
-    public void toMainView() {
-//        startNewActivity(MainActivity.class);
-//        finish();
-    }
-
-
 }

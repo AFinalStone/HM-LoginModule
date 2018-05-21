@@ -2,40 +2,50 @@ package com.hm.iou.loginmodule.api;
 
 import com.hm.iou.loginmodule.bean.IsWXExistResp;
 import com.hm.iou.loginmodule.bean.ResetPsdMethodBean;
+import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
+import com.hm.iou.loginmodule.bean.req.MobileRegLoginReqBean;
+import com.hm.iou.loginmodule.bean.req.TokenLoginReqBean;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 
 import io.reactivex.Flowable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-/**
- * Created by hjy on 18/4/27.<br>
- */
 
+/**
+ * @author syl
+ * @time 2018/5/21 下午4:50
+ */
 public interface LoginModuleService {
 
-    @GET("/acct/isAccountExist")
-    Flowable<BaseResponse<Integer>> isAccountExist(@Query("loginName") String loginName);
+    @GET("/api/iou/user/v1/isAccountExist")
+    Flowable<BaseResponse<Boolean>> isAccountExist(@Query("mobile") String mobile);
+
+    @POST("/api/iou/user/v1/mobileLogin")
+    Flowable<BaseResponse<UserInfo>> mobileLogin(@Body MobileLoginReqBean mobileLoginReqBean);
+
+    @POST("/api/iou/user/v1/mobileRegLogin")
+    Flowable<BaseResponse<UserInfo>> mobileRegLogin(@Body MobileRegLoginReqBean mobileRegLoginReqBean);
+
+    @POST("/api/iou/user/v1/tokenLogin")
+    Flowable<BaseResponse<UserInfo>> tokenLogin(@Body TokenLoginReqBean tokenLoginReqBean);
 
     @POST("/mmc/sendSmsCheckCode")
     @FormUrlEncoded
-    Flowable<BaseResponse<Integer>> sendSmsCheckCode(@Field("mobile") String mobile);
+    Flowable<BaseResponse<Boolean>> sendSmsCheckCode(@Field("mobile") String mobile);
 
-    @POST("/acct/mobileRegLogin")
+    @POST("/mmc/sendResetPswdCheckCodeSMS")
     @FormUrlEncoded
-    Flowable<BaseResponse<UserInfo>> mobileRegLogin(@Field("loginName") String loginName
-            , @Field("queryPswd") String queryPswd, @Field("checkCode") String checkCode);
-
-    @POST("/acct/mobileLogin")
-    @FormUrlEncoded
-    Flowable<BaseResponse<UserInfo>> mobileLogin(@Field("loginName") String userPhone, @Field("queryPswd") String queryPswd);
+    Flowable<BaseResponse<String>> sendResetPswdCheckCodeSMS(@Field("pswdType") String pswdType, @Field("mobile") String mobile);
 
     @GET("/acct/isWXExist")
     Flowable<BaseResponse<IsWXExistResp>> isWXExist(@Query("code") String code);
+
 
     @POST("/acct/wxLogin")
     @FormUrlEncoded

@@ -14,6 +14,7 @@ public class LoginLoadingPresenter extends MvpActivityPresenter<LoginLoadingCont
 
     @Override
     public void tokenLogin() {
+
     }
 
     @Override

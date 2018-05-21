@@ -4,7 +4,17 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.hm.iou.base.mvp.MvpActivityPresenter;
+import com.hm.iou.base.utils.CommSubscriber;
+import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.R;
+import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
+import com.hm.iou.network.HttpReqManager;
+import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.sharedata.model.UserInfo;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
  * 通过手机号进行注册
@@ -20,12 +30,47 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
     }
 
     @Override
-    public void getCode(String phoneNumber) {
+    public void getCode(String mobile) {
+
+        LoginModuleApi.sendSmsCheckCode(mobile)
+                .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Boolean>handleResponse())
+                .subscribeWith(new CommSubscriber<Boolean>(mView) {
+                    @Override
+                    public void handleResult(Boolean flag) {
+                        if (flag) {
+                            mView.toastMessage(R.string.uikit_get_check_code_success);
+                        } else {
+                            mView.toastMessage(R.string.uikit_get_check_code_failed);
+                        }
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+
+                    }
+                });
 
     }
 
     @Override
-    public void registerAndLogin(String loginName, String queryPswd, String checkCode) {
+    public void registerAndLogin(String mobile, String loginPsd, String smsCheckCode) {
+        LoginModuleApi.mobileRegLogin(mobile, loginPsd, smsCheckCode)
+                .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<UserInfo>handleResponse())
+                .subscribeWith(new CommSubscriber<UserInfo>(mView) {
+                    @Override
+                    public void handleResult(UserInfo userInfo) {
+                        UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
+                        HttpReqManager.getInstance().setUserId(userInfo.getUserId());
+                        HttpReqManager.getInstance().setToken(userInfo.getToken());
+                        NavigationHelper.toLoginLoading(mContext);
+                    }
 
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+
+                    }
+                });
     }
 }

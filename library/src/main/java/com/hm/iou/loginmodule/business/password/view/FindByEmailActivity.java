@@ -39,8 +39,8 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
     EditText mEtEmailCode;
     String mStrEtEmailCode = "";
 
-    @BindView(R2.id.tv_getEmailCode)
-    TextView mTvGetEmailCode;
+    @BindView(R2.id.btn_getEmailCode)
+    TextView mBtnGetEmailCode;
 
     @BindView(R2.id.tv_find)
     TextView mTvFind;
@@ -65,16 +65,11 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
             public void accept(CharSequence charSequence) throws Exception {
                 mStrEmail = String.valueOf(charSequence);
                 if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER)) {
-                    String strGmEtEmailCode = mTvGetEmailCode.getText().toString();
-                    if (getString(R.string.uikit_btn_get_check_code).equals(strGmEtEmailCode)) {
-                        mTvGetEmailCode.setEnabled(true);
-                    }
                     if (mEtEmailCode.length() > 0) {
-                        mTvGetEmailCode.setEnabled(true);
+                        mBtnGetEmailCode.setEnabled(true);
                     }
                 } else {
-                    mTvGetEmailCode.setEnabled(false);
-                    mTvGetEmailCode.setEnabled(false);
+                    mBtnGetEmailCode.setEnabled(false);
                 }
             }
         });
@@ -98,10 +93,10 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
         mEtEmail.setHint(strEmail);
     }
 
-    @OnClick({R2.id.tv_getEmailCode, R2.id.tv_find})
+    @OnClick({R2.id.btn_getEmailCode, R2.id.tv_find})
     public void onClick(View view) {
         int id = view.getId();
-        if (R.id.tv_getEmailCode == id) {
+        if (R.id.btn_getEmailCode == id) {
             mPresenter.sendEmailCheckCode(mStrEmail);
         } else if (R.id.tv_find == id) {
             jumpToLoginResetPsdView();

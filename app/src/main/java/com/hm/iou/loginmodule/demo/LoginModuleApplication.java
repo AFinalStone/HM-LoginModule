@@ -28,7 +28,7 @@ public class LoginModuleApplication extends Application {
                 .setAppChannel("yyb")
                 .setAppVersion("1.0.2")
                 .setDeviceId("123abc123")
-                .setBaseUrl("http://192.168.1.254")
+                .setBaseUrl("http://192.168.1.254:8071")
                 .build();
         HttpReqManager.init(config);
     }

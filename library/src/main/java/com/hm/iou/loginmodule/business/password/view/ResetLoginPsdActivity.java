@@ -10,7 +10,7 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.ResetLoginPsdContract;
 import com.hm.iou.loginmodule.business.password.presenter.ResetLoginPsdPresenter;
-import com.hm.iou.uikit.HMPasswordEditText;
+import com.hm.iou.uikit.ShowHidePasswordEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -42,25 +42,25 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
 
 
     @BindView(R2.id.et_password)
-    HMPasswordEditText mEtPsd;
+    ShowHidePasswordEditText mEtPsd;
     private String mStrPsd;
 
-    @BindView(R2.id.tv_queryOk)
-    TextView mTvQueryOk;
+    @BindView(R2.id.tv_ok)
+    TextView mTvOk;
 
     boolean isEyeOpen = false;
     //短信验证码
-    String mSMSCheckCode;
+    private String mSMSCheckCode;
     //手机号
-    String mMobile;
+    private String mMobile;
     //身份证号码
-    String mUserIDCard;
+    private String mUserIDCard;
     //邮箱
-    String mEmail;
+    private String mEmail;
     //活体校验的流水号
-    String mOCRLivingSn;
+    private String mOCRLivingSn;
     //重置密码的方式
-    String mResetPsdType;
+    private String mResetPsdType;
 
 
     @Override
@@ -91,16 +91,16 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mStrPsd = String.valueOf(charSequence);
-                mTvQueryOk.setEnabled(false);
+                mTvOk.setEnabled(false);
                 if (mStrPsd.length() >= 6) {
-                    mTvQueryOk.setEnabled(true);
+                    mTvOk.setEnabled(true);
                 }
             }
         });
         showSoftKeyboard();
     }
 
-    @OnClick({R2.id.tv_queryOk})
+    @OnClick({R2.id.tv_ok})
     public void onClick(View view) {
         resetPsd();
     }

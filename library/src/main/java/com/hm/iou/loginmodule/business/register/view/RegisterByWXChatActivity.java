@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,23 +47,16 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     ClearEditText mEtMobile;
     String mUserMobile = "";
 
-    @BindView(R2.id.et_code)
-    EditText mEtCode;
-    String mUserCode = "";
+    @BindView(R2.id.et_smsCheckCode)
+    EditText mEtSMSCheckCode;
+    String mStrSMSCheckCode = "";
 
     @BindView(R2.id.et_password)
     EditText mEtPassword;
-    String mUserPsd = "";
+    String mStrPsd = "";
 
-    @BindView(R2.id.iv_eye)
-    ImageView mIvEye;
-    boolean isEyeOpen = true;
-
-    @BindView(R2.id.btn_bindMobile)
-    TextView mBtnBindMobile;
-
-    @BindView(R2.id.btn_getCode)
-    TextView mBtnGettCode;
+    @BindView(R2.id.tv_bindMobile)
+    TextView mTvBindMobile;
 
     //判断当前微信是否存绑定过手机的交易流水号
     String mWXChatSN;
@@ -90,12 +84,9 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             public void accept(CharSequence charSequence) throws Exception {
                 mUserMobile = String.valueOf(charSequence);
                 if (StringUtil.matchRegex(mUserMobile, REGEXP_PHOTO_NUMBER)) {
-                    String strGmEtCode = mBtnGettCode.getText().toString();
-                    if (getString(R.string.uikit_btn_get_check_code).equals(strGmEtCode)) {
-                        mBtnGettCode.setEnabled(true);
-                    }
+                    String strGmEtCode = mTvBindMobile.getText().toString();
                 } else {
-                    mBtnGettCode.setEnabled(false);
+                    mTvBindMobile.setEnabled(false);
                 }
                 checkValue();
             }
@@ -104,15 +95,15 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         RxTextView.textChanges(mEtPassword).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mUserPsd = String.valueOf(charSequence);
+                mStrPsd = String.valueOf(charSequence);
                 checkValue();
             }
         });
 
-        RxTextView.textChanges(mEtCode).subscribe(new Consumer<CharSequence>() {
+        RxTextView.textChanges(mEtSMSCheckCode).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mUserCode = String.valueOf(charSequence);
+                mStrSMSCheckCode = String.valueOf(charSequence);
                 checkValue();
             }
         });
@@ -121,44 +112,20 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     }
 
 
-    @OnClick({R2.id.iv_eye, R2.id.btn_bindMobile, R2.id.btn_getCode})
+    @OnClick({R2.id.tv_bindMobile, R2.id.btn_getSMSCheckCode})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.iv_eye == id) {
-            changePassword();
-        } else if (R.id.btn_bindMobile == id) {
-            mPresenter.bindWX(mUserMobile, mUserCode, mUserPsd, mWXChatSN);
-        } else if (R.id.btn_getCode == id) {
+        if (R.id.tv_bindMobile == id) {
+            mPresenter.bindWX(mUserMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
+        } else if (R.id.btn_getSMSCheckCode == id) {
             mPresenter.isBindWX(mUserMobile);
         }
     }
 
     private void checkValue() {
-        mBtnBindMobile.setEnabled(false);
-        if (mUserMobile.length() > 0 && mUserCode.length() > 0 && mUserPsd.length() >= 6) {
-            mBtnBindMobile.setEnabled(true);
-        }
-    }
-
-    private void changePassword() {
-        if (isEyeOpen) {
-            isEyeOpen = false;
-            mIvEye.setImageResource(R.mipmap.uikit_icon_password_eye_close);
-            // 显示为密码
-            mEtPassword.setInputType(InputType.TYPE_CLASS_TEXT
-                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            // 使光标始终在最后位置
-            Editable etable = mEtPassword.getText();
-            Selection.setSelection(etable, etable.length());
-        } else {
-            isEyeOpen = true;
-            mIvEye.setImageResource(R.mipmap.uikit_icon_password_eye_open);
-
-            // 显示为普通文本
-            mEtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            // 使光标始终在最后位置
-            Editable etable = mEtPassword.getText();
-            Selection.setSelection(etable, etable.length());
+        mTvBindMobile.setEnabled(false);
+        if (mUserMobile.length() > 0 && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
+            mTvBindMobile.setEnabled(true);
         }
     }
 

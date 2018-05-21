@@ -22,16 +22,16 @@ import io.reactivex.functions.Consumer;
  * @author syl
  * @time 2018/4/23 上午11:10
  */
-public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
+public class FindByInputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
 
-    @BindView(R2.id.et_phone)
-    ClearEditText etPhone;
-    String userMobile;
+    @BindView(R2.id.et_mobile)
+    ClearEditText mEtMobile;
+    private String mStrMobile;
 
-    @BindView(R2.id.btn_find)
-    TextView btnFind;
+    @BindView(R2.id.tv_find)
+    TextView mTvFind;
 
 
     @Override
@@ -47,25 +47,23 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
 
-        RxTextView.textChanges(etPhone).subscribe(new Consumer<CharSequence>() {
+        RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                userMobile = String.valueOf(charSequence);
-                btnFind.setEnabled(false);
-                if (userMobile.length() == 11) {
-                    btnFind.setEnabled(true);
+                mStrMobile = String.valueOf(charSequence);
+                mTvFind.setEnabled(false);
+                if (mStrMobile.length() == 11) {
+                    mTvFind.setEnabled(true);
                 }
             }
         });
-        userMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        etPhone.setText(userMobile);
+        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        mEtMobile.setText(mStrMobile);
     }
 
-    @OnClick({R2.id.btn_find})
+    @OnClick({R2.id.tv_find})
     public void onViewClicked(View view) {
-        if (R.id.btn_find == view.getId()) {
-            mPresenter.getResetPwsMethod(userMobile);
-        }
+        mPresenter.getResetPwsMethod(mStrMobile);
     }
 
 

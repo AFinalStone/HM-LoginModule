@@ -26,12 +26,12 @@ import io.reactivex.functions.Consumer;
  */
 public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
 
-    @BindView(R2.id.et_phone)
-    ClearEditText etPhone;
-    String userMobile;
+    @BindView(R2.id.et_mobile)
+    ClearEditText mEtMobile;
+    String mMobile;
 
-    @BindView(R2.id.btn_next)
-    TextView btnNext;
+    @BindView(R2.id.tv_next)
+    TextView mTvNext;
 
 
     @Override
@@ -46,40 +46,22 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        RxTextView.textChanges(etPhone).subscribe(new Consumer<CharSequence>() {
+        RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                userMobile = String.valueOf(charSequence);
-                btnNext.setEnabled(false);
-                if (userMobile.length() == 11) {
-                    btnNext.setEnabled(true);
+                mMobile = String.valueOf(charSequence);
+                mTvNext.setEnabled(false);
+                if (mMobile.length() == 11) {
+                    mTvNext.setEnabled(true);
                 }
             }
         });
         showSoftKeyboard();
     }
 
-    private void checkPhone() {
-//        mPresenter.checkAccountIsExist(userMobile);
-    }
-
-    public void jumpToLoginByPhoneView() {
-//        Intent intent = new Intent(this, LoginByPhoneActivity.class);
-//        intent.putExtra(Constants.INTENT_INPUT_PHONE, userMobile);
-//        startActivity(intent);
-    }
-
-    public void jumpToRegisterView() {
-//        Intent intent = new Intent(this, RegisterByMobileActivity.class);
-//        intent.putExtra(Constants.INTENT_INPUT_PHONE, userMobile);
-//        startActivity(intent);
-    }
-
-    @OnClick({R2.id.btn_next})
+    @OnClick({R2.id.tv_next})
     public void onViewClicked(View view) {
-        if (R.id.btn_next == view.getId()) {
-            mPresenter.checkAccountIsExist(userMobile);
-        }
+        mPresenter.checkAccountIsExist(mMobile);
     }
 
 

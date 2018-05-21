@@ -9,7 +9,7 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.MobileLoginContract;
 import com.hm.iou.loginmodule.business.login.presenter.MobileLoginPresenter;
-import com.hm.iou.uikit.HMPasswordEditText;
+import com.hm.iou.uikit.ShowHidePasswordEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -24,16 +24,17 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
 
-    @BindView(R2.id.et_phone)
-    TextView etUserPhone;
-    String userPhone = "";
+    @BindView(R2.id.et_mobile)
+    TextView mTvMobile;
 
     @BindView(R2.id.et_password)
-    HMPasswordEditText etPassword;
-    String userPsd = "";
+    ShowHidePasswordEditText etPassword;
 
-    @BindView(R2.id.btn_login)
-    TextView btnLogin;
+    @BindView(R2.id.tv_login)
+    TextView mTvLogin;
+
+    private String mStrMobile = "";
+    private String mStrPsd = "";
 
     @Override
     protected int getLayoutId() {
@@ -50,30 +51,30 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
         RxTextView.textChanges(etPassword).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                userPsd = String.valueOf(charSequence);
-                btnLogin.setEnabled(false);
-                if (userPsd.length() >= 6) {
-                    btnLogin.setEnabled(true);
+                mStrPsd = String.valueOf(charSequence);
+                mTvLogin.setEnabled(false);
+                if (mStrPsd.length() >= 6) {
+                    mTvLogin.setEnabled(true);
                 }
             }
         });
         showSoftKeyboard();
-        userPhone = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        etUserPhone.setText(userPhone);
+        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        mTvMobile.setText(mStrMobile);
     }
 
     private void toFindPswView() {
 //        Intent intent = new Intent(mContext, FindLoginPsdInputPhoneActivity.class);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, userPhone);
+//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, mStrMobile);
 //        startActivity(intent);
     }
 
 
-    @OnClick({R2.id.btn_login, R2.id.tv_forgetPassword})
+    @OnClick({R2.id.tv_login, R2.id.tv_forgetPassword})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.btn_login == id) {
-            mPresenter.login(userPhone, userPsd);
+        if (R.id.tv_login == id) {
+            mPresenter.login(mStrMobile, mStrPsd);
         } else if (R.id.tv_forgetPassword == id) {
             toFindPswView();
         }

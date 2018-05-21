@@ -8,11 +8,9 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
-        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false"
-        app:titleText="" />
+        app:bottomDividerIsShow="false" />
 
 
     <TextView
@@ -40,10 +38,9 @@
 
 
         <TextView
-            android:id="@+id/et_phone"
+            android:id="@+id/et_mobile"
             style="@style/UikitEditText.InputMobile"
             android:layout_marginStart="10dp"
-            android:enabled="false"
             android:textSize="@dimen/textFontSize_14" />
 
     </LinearLayout>
@@ -70,12 +67,12 @@
             android:src="@mipmap/loginmodule_icon_register_message" />
 
         <EditText
-            android:id="@+id/et_code"
-            style="@style/UikitEditText.SMSCheckCode" />
+            android:id="@+id/et_smsCheckCode"
+            style="@style/UikitEditText.CheckCode" />
 
-        <TextView
-            android:id="@+id/btn_getCode"
-            style="@style/UikitButton.SMSCheckCode"
+        <com.hm.iou.uikit.HMCountDownButton
+            android:id="@+id/btn_getSmsCheckCode"
+            style="@style/UikitButton.CheckCode"
             android:enabled="true" />
 
     </LinearLayout>
@@ -101,16 +98,14 @@
             android:scaleType="centerInside"
             android:src="@mipmap/uikit_icon_password" />
 
-        <com.hm.iou.uikit.HMPasswordEditText
-            android:id="@+id/et_password"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/uikit_edit_text_input_password_hint"
-            android:inputType="textPassword"
-            app:disableIconAlpha="true"
-            app:hoverShowsPw="true" />
+            android:layout_height="wrap_content">
+
+            <com.hm.iou.uikit.ShowHidePasswordEditText
+                android:id="@+id/et_password"
+                style="@style/UikitEditText.Password" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -121,7 +116,7 @@
 
 
     <TextView
-        android:id="@+id/btn_register"
+        android:id="@+id/tv_register"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="30dp"
         android:text="@string/register_btn_reg" />
@@ -136,7 +131,7 @@
         <TextView
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="@string/register_txt_desc"
+            android:text="@string/register_tv_desc"
             android:textColor="#878787"
             android:textSize="@dimen/textFontSize_13" />
 
@@ -144,14 +139,14 @@
             android:id="@+id/tv_agreement01"
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="@string/register_txt_agreement01"
+            android:text="@string/register_tv_agreement01"
             android:textColor="#262626"
             android:textSize="@dimen/textFontSize_13" />
 
         <TextView
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="@string/register_txt_and"
+            android:text="@string/register_tv_and"
             android:textColor="#878787"
             android:textSize="@dimen/textFontSize_13" />
 
@@ -159,7 +154,7 @@
             android:id="@+id/tv_agreement02"
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="@string/register_txt_agreement02"
+            android:text="@string/register_tv_agreement02"
             android:textColor="#262626"
             android:textSize="@dimen/textFontSize_13" />
     </LinearLayout>

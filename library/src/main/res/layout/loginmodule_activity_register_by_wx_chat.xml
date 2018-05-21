@@ -8,11 +8,9 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
-        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false"
-        app:titleText="" />
+        app:bottomDividerIsShow="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,16 +74,13 @@
             android:scaleType="centerInside"
             android:src="@mipmap/loginmodule_icon_register_message" />
 
-
         <EditText
-            android:id="@+id/et_code"
-            style="@style/UikitEditText.SMSCheckCode"
-            android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:id="@+id/et_smsCheckCode"
+            style="@style/UikitEditText.CheckCode" />
 
-        <TextView
-            android:id="@+id/btn_getCode"
-            style="@style/UikitButton.SMSCheckCode"
+        <com.hm.iou.uikit.HMCountDownButton
+            android:id="@+id/btn_getSMSCheckCode"
+            style="@style/UikitButton.CheckCode"
             android:enabled="false" />
 
     </LinearLayout>
@@ -107,32 +102,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:scaleType="centerInside"
             android:src="@mipmap/uikit_icon_password" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            app:passwordToggleEnabled="false">
-
-            <EditText
+            <com.hm.iou.uikit.ShowHideShowHidePasswordEditText
                 android:id="@+id/et_password"
-                style="@style/UikitEditText.Password"
                 android:hint="@string/bind_mobile_et_passwordHint"
-                android:inputType="textVisiblePassword" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/iv_eye"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/uikit_icon_password_eye_open" />
+                android:inputType="textVisiblePassword"
+                style="@style/UikitEditText.Password" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -143,7 +125,7 @@
 
 
     <TextView
-        android:id="@+id/btn_bindMobile"
+        android:id="@+id/tv_bindMobile"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="32dp"
         android:text="@string/loginmobile_bind_mobile" />

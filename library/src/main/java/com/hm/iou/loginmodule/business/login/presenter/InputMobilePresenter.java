@@ -21,9 +21,6 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  */
 public class InputMobilePresenter extends MvpActivityPresenter<InputMobileContract.View> implements InputMobileContract.Presenter {
 
-    //账号不存在
-    private static final int MOBILE_NOT_EXIST = 0;
-
     public InputMobilePresenter(@NonNull Context context, @NonNull InputMobileContract.View view) {
         super(context, view);
     }
@@ -37,15 +34,15 @@ public class InputMobilePresenter extends MvpActivityPresenter<InputMobileContra
     @Override
     public void checkAccountIsExist(final String mobile) {
         LoginModuleApi.isAccountExist(mobile)
-                .compose(getProvider().<BaseResponse<Integer>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<Integer>handleResponse())
-                .subscribeWith(new CommSubscriber<Integer>(mView) {
+                .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Boolean>handleResponse())
+                .subscribeWith(new CommSubscriber<Boolean>(mView) {
                     @Override
-                    public void handleResult(Integer integer) {
-                        if (MOBILE_NOT_EXIST == integer) {
-                            NavigationHelper.toRegisterByMobile(mContext, mobile);
-                        } else {
+                    public void handleResult(Boolean flag) {
+                        if (flag) {
                             NavigationHelper.toMobileLogin(mContext, mobile);
+                        } else {
+                            NavigationHelper.toRegisterByMobile(mContext, mobile);
                         }
                     }
 

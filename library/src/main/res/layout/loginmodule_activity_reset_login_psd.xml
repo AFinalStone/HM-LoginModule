@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
-        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
         app:bottomDividerIsShow="false" />
@@ -34,21 +33,19 @@
             android:scaleType="centerInside"
             android:src="@mipmap/uikit_icon_password" />
 
-        <com.hm.iou.uikit.HMPasswordEditText
-            android:id="@+id/et_password"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/uikit_edit_text_input_password_hint"
-            android:inputType="textPassword"
-            app:disableIconAlpha="true"
-            app:hoverShowsPw="true" />
+            android:layout_height="wrap_content">
+
+            <com.hm.iou.uikit.ShowHidePasswordEditText
+                android:id="@+id/et_password"
+                style="@style/UikitEditText.Password" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_queryOk"
+        android:id="@+id/tv_ok"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="119dp"
         android:text="@string/findPasswordBySMS_queryOK" />

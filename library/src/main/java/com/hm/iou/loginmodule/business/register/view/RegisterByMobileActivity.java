@@ -6,11 +6,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByMobilePresenter;
-import com.hm.iou.uikit.HMPasswordEditText;
+import com.hm.iou.uikit.ShowHidePasswordEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -27,23 +28,18 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
 
-    @BindView(R2.id.et_phone)
-    TextView etPhone;
-    String userPhone = "";
-
-    @BindView(R2.id.et_code)
-    EditText etCode;
-    String userCode = "";
-
+    @BindView(R2.id.et_mobile)
+    TextView mEtMobile;
+    @BindView(R2.id.et_smsCheckCode)
+    EditText mEtSMSCheckCode;
     @BindView(R2.id.et_password)
-    HMPasswordEditText etPassword;
-    String userPsd = "";
+    ShowHidePasswordEditText mEtPsd;
+    @BindView(R2.id.tv_register)
+    TextView mTvRegister;
 
-    @BindView(R2.id.btn_register)
-    TextView btnRegister;
-
-    @BindView(R2.id.btn_getCode)
-    TextView btnGetCode;
+    private String mStrSmsCheckCode = "";
+    private String mStrMobile = "";
+    private String mStrPsd = "";
 
     @Override
     protected int getLayoutId() {
@@ -57,87 +53,43 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        RxTextView.textChanges(etPassword).subscribe(new Consumer<CharSequence>() {
+        RxTextView.textChanges(mEtPsd).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                userPsd = String.valueOf(charSequence);
+                mStrPsd = String.valueOf(charSequence);
                 checkValue();
             }
         });
-        RxTextView.textChanges(etCode).subscribe(new Consumer<CharSequence>() {
+        RxTextView.textChanges(mEtSMSCheckCode).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                userCode = String.valueOf(charSequence);
+                mStrSmsCheckCode = String.valueOf(charSequence);
                 checkValue();
             }
         });
-        userPhone = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        etPhone.setText(userPhone);
+        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        mEtMobile.setText(mStrMobile);
     }
 
     private void checkValue() {
-        btnRegister.setEnabled(false);
-        if (userPsd.length() >= 6 && userCode.length() > 0) {
-            btnRegister.setEnabled(true);
+        mTvRegister.setEnabled(false);
+        if (mStrPsd.length() >= 6 && mStrSmsCheckCode.length() > 0) {
+            mTvRegister.setEnabled(true);
         }
     }
 
-    private void toLoginLoadingView() {
-//        Intent intent = new Intent(mContext, LoginLoadingActivity.class);
-//        intent.putExtra(Constants.INTENT_LOGIN_LOADING_TYPE, LoginTypeEnum.loginByRegister);
-//        startActivity(intent);
-//        finish();
-    }
-
-//    @Override
-//    public void registerAndLoginSuccess() {
-//        toLoginLoadingView();
-//    }
-//
-//    @Override
-//    public void getCodeSuccess() {
-//        String desc = getString(R.string.getCode_success);
-//        showSuccessMsg(desc);
-//        timeCountDown();
-//    }
-//
-//
-//    @Override
-//    public void showRegisterResult() {
-//        String desc = getString(R.string.register_registerSuccess);
-//        showSuccessMsg(desc);
-//    }
-
-
-    @OnClick({R2.id.btn_register, R2.id.btn_getCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
+    @OnClick({R2.id.tv_register, R2.id.btn_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.btn_register == id) {
-            mPresenter.registerAndLogin(userPhone, userPsd, userCode);
-        } else if (R.id.btn_getCode == id) {
-            mPresenter.getCode(userPhone);
+        if (R.id.tv_register == id) {
+            mPresenter.registerAndLogin(mStrMobile, mStrPsd, mStrSmsCheckCode);
+        } else if (R.id.btn_getSmsCheckCode == id) {
+            mPresenter.getCode(mStrMobile);
         } else if (R.id.tv_agreement01 == id) {
-            jumpToRegisterAndUseAgreement();
+            NavigationHelper.ToRegisterAndUseAgreement(mContext);
         } else if (R.id.tv_agreement02 == id) {
-            jumpToPrivateAgreement();
+            NavigationHelper.toPrivateAgreement(mContext);
         }
-    }
-
-
-    private void jumpToRegisterAndUseAgreement() {
-//        Intent intent = new Intent(this, WebViewH5Activity.class);
-//        String title = getString(R.string.webViewHtml5_titleRegisterAndUseAgreement);
-//        intent.putExtra(Constants.INTENT_TITLE, title);
-//        intent.putExtra(Constants.INTENT_WEB_URL, Constants.WEB_H5_URL_IOU_AGREEMENT);
-//        startActivity(intent);
-    }
-
-    private void jumpToPrivateAgreement() {
-//        Intent intent = new Intent(this, WebViewH5Activity.class);
-//        String title = getString(R.string.webViewHtml5_titlePrivateAgreement);
-//        intent.putExtra(Constants.INTENT_TITLE, title);
-//        intent.putExtra(Constants.INTENT_WEB_URL, Constants.WEB_H5_URL_PRIVACY_AGREEMENT);
-//        startActivity(intent);
     }
 
 }
