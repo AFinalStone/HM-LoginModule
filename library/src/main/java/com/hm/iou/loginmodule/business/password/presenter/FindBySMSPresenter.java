@@ -8,6 +8,7 @@ import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.login.MobileLoginContract;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
 import com.hm.iou.network.HttpReqManager;
@@ -22,7 +23,7 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  * @author syl
  * @time 2018/5/19 下午4:54
  */
-public class FindBySMSPresenter extends MvpActivityPresenter<FindBySMSContract.View> implements FindBySMSContract.Present {
+public class FindBySMSPresenter extends BaseLoginModulePresenter<FindBySMSContract.View> implements FindBySMSContract.Present {
 
 
     public FindBySMSPresenter(@NonNull Context context, @NonNull FindBySMSContract.View view) {

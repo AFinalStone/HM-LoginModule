@@ -43,13 +43,15 @@ public class RegisterByWXChatPresenter extends MvpActivityPresenter<RegisterByWX
     }
 
     @Override
-    public void isBindWX(String mobile) {
+    public void isMobileHaveBindWX(String mobile) {
+        mView.showLoadingView();
         LoginModuleApi.isBindWX(mobile)
                 .compose(getProvider().<BaseResponse<Integer>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<Integer>handleResponse())
                 .subscribeWith(new CommSubscriber<Integer>(mView) {
                     @Override
                     public void handleResult(Integer type) {
+                        mView.dismissLoadingView();
                         if (MOBILE_HAVE_BIND_WX == type) {
 
                         } else if (MOBILE_NOT_EXIST == type) {
@@ -61,7 +63,7 @@ public class RegisterByWXChatPresenter extends MvpActivityPresenter<RegisterByWX
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
+                        mView.dismissLoadingView();
                     }
                 });
     }

@@ -118,10 +118,10 @@ public class NavigationHelper {
      * 跳转到通过邮箱获取重置登录密码的邮箱验证码页面
      *
      * @param context
-     * @param email
      * @param mobile
+     * @param email
      */
-    public static void toFindByEmail(Context context, String email, String mobile) {
+    public static void toFindByEmail(Context context, String mobile, String email) {
         Intent intent = new Intent(context, FindByEmailActivity.class);
         intent.putExtra(FindByEmailActivity.EXTRA_KEY_EMAIL, email);
         intent.putExtra(FindByEmailActivity.EXTRA_KEY_MOBILE, mobile);
@@ -162,7 +162,12 @@ public class NavigationHelper {
      * @param context
      */
     public static void toMain(Context context) {
-//        context.startActivity(new Intent(context,Main));
+        try {
+            Class MainActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.MainActivity");
+            context.startActivity(new Intent(context, MainActivity));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -173,7 +178,7 @@ public class NavigationHelper {
      */
     public static void toRegisterByWXChat(Context context, String wxSn) {
         Intent intent = new Intent(context, RegisterByWXChatActivity.class);
-        intent.putExtra(RegisterByWXChatActivity.EXTRA_KEY_WXCHAT_SN, wxSn);
+        intent.putExtra(RegisterByWXChatActivity.EXTRA_KEY_WX_CHAT_SN, wxSn);
         context.startActivity(intent);
     }
 

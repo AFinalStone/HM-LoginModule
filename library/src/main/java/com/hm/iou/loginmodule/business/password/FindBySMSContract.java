@@ -18,8 +18,12 @@ public interface FindBySMSContract {
 
     interface Present extends BaseContract.BasePresenter {
 
-        //发送重置密码的验证码到对应的手机号上面
-        void sendResetPsdCheckCodeSMS(String userMobile);
+        /**
+         * 发送重置登录密码的验证码到对应的手机号上面
+         *
+         * @param mobile
+         */
+        void sendResetPsdCheckCodeSMS(String mobile);
     }
 
 }

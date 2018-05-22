@@ -19,7 +19,12 @@ public interface FindByEmailContract {
     }
 
     interface Present extends BaseContract.BasePresenter {
-        //发送重置密码的验证码到对应的邮箱上面
+
+        /**
+         * 发送重置登录密码的验证码到对应的邮箱上面
+         *
+         * @param email
+         */
         void sendEmailCheckCode(String email);
     }
 

@@ -8,8 +8,10 @@ import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.socialshare.ShareManager;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
@@ -19,26 +21,23 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  * @author syl
  * @time 2018/5/17 下午5:26
  */
-public class InputMobilePresenter extends MvpActivityPresenter<InputMobileContract.View> implements InputMobileContract.Presenter {
+public class InputMobilePresenter extends BaseLoginModulePresenter<InputMobileContract.View> implements InputMobileContract.Presenter {
 
     public InputMobilePresenter(@NonNull Context context, @NonNull InputMobileContract.View view) {
         super(context, view);
     }
 
-    @Override
-    public void onDestroy() {
-
-    }
-
 
     @Override
     public void checkAccountIsExist(final String mobile) {
+        mView.showLoadingView();
         LoginModuleApi.isAccountExist(mobile)
                 .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<Boolean>handleResponse())
                 .subscribeWith(new CommSubscriber<Boolean>(mView) {
                     @Override
                     public void handleResult(Boolean flag) {
+                        mView.dismissLoadingView();
                         if (flag) {
                             NavigationHelper.toMobileLogin(mContext, mobile);
                         } else {
@@ -48,7 +47,7 @@ public class InputMobilePresenter extends MvpActivityPresenter<InputMobileContra
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
+                        mView.dismissLoadingView();
                     }
                 });
     }

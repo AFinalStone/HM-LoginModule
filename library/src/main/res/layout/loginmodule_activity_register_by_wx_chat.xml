@@ -78,7 +78,7 @@
             android:id="@+id/et_smsCheckCode"
             style="@style/UikitEditText.CheckCode" />
 
-        <com.hm.iou.uikit.HMCountDownButton
+        <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/btn_getSMSCheckCode"
             style="@style/UikitButton.CheckCode"
             android:enabled="false" />
@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.hm.iou.uikit.ShowHideShowHidePasswordEditText
+            <com.hm.iou.uikit.ShowHidePasswordEditText
                 android:id="@+id/et_password"
                 android:hint="@string/bind_mobile_et_passwordHint"
                 android:inputType="textVisiblePassword"

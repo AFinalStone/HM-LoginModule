@@ -14,8 +14,20 @@ public interface RegisterByMobileContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-        void getCode(String mobile);
+        /**
+         * 发送短信验证码
+         *
+         * @param mobile
+         */
+        void getSMSCode(String mobile);
 
-        void registerAndLogin(String mobile, String loginPsd, String smsCheckCode);
+        /**
+         * 通过手机号进行账号注册
+         *
+         * @param mobile
+         * @param loginPsd
+         * @param smsCheckCode
+         */
+        void registerByMobileAndLogin(String mobile, String loginPsd, String smsCheckCode);
     }
 }

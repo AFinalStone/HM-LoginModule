@@ -81,7 +81,7 @@
             android:id="@+id/et_emailCode"
             style="@style/UikitEditText.CheckCode" />
 
-        <com.hm.iou.uikit.HMCountDownButton
+        <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/btn_getEmailCode"
             style="@style/UikitButton.CheckCode" />
 

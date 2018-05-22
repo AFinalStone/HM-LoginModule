@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.hm.iou.base.mvp.MvpActivityPresenter;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.password.FindByEmailContract;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
 
@@ -13,7 +14,7 @@ import com.hm.iou.loginmodule.business.password.FindBySMSContract;
  * @author syl
  * @time 2018/5/19 下午4:54
  */
-public class FindByEmailPresenter extends MvpActivityPresenter<FindByEmailContract.View> implements FindByEmailContract.Present {
+public class FindByEmailPresenter extends BaseLoginModulePresenter<FindByEmailContract.View> implements FindByEmailContract.Present {
 
 
     public FindByEmailPresenter(@NonNull Context context, @NonNull FindByEmailContract.View view) {

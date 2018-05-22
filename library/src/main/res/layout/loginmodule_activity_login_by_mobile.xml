@@ -15,6 +15,7 @@
     <TextView
         style="@style/UikitTextView"
         android:text="@string/uikit_login_by_mobile_title"
+        android:textColor="#FF222222"
         android:textSize="@dimen/textFontSize_22"
         android:textStyle="bold" />
 

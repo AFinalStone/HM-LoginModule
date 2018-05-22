@@ -48,29 +48,6 @@ public class LoginModuleApi {
     }
 
     /**
-     * 发送注册使用的短信验证码
-     *
-     * @param mobile 手机号
-     * @return
-     */
-    public static Flowable<BaseResponse<Boolean>> sendSmsCheckCode(String mobile) {
-        return getService().sendSmsCheckCode(mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
-     * 1.发送微信注册使用的短信验证码
-     * 2.发送微信绑定使用的短信验证码
-     * 3.发送重置登录密码的短信验证码
-     *
-     * @param mobile 手机号
-     * @return
-     */
-    public static Flowable<BaseResponse<String>> sendResetPswdCheckCodeSMS(String mobile) {
-        String psdType = "QueryPswd";
-        return getService().sendResetPswdCheckCodeSMS(psdType, mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
      * 通过手机号注册并登陆
      *
      * @param mobile    手机号
@@ -84,8 +61,8 @@ public class LoginModuleApi {
         return getService().mobileRegLogin(mobileRegLoginReqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Flowable<BaseResponse<UserInfo>> tokenLogin(String token, String userId) {
-        TokenLoginReqBean tokenLoginReqBean = new TokenLoginReqBean(token, userId);
+    public static Flowable<BaseResponse<UserInfo>> tokenLogin(String userId, String token) {
+        TokenLoginReqBean tokenLoginReqBean = new TokenLoginReqBean(userId, token);
         return getService().tokenLogin(tokenLoginReqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -136,12 +113,34 @@ public class LoginModuleApi {
      * 获取重置密码的途径
      *
      * @param mobile 手机号
-     * @return method
-     * <p>
+     * @return ResetPsdMethodBean
      * Mail(邮箱), Real(人脸), Sms(短信);
      * field 额外辅助字段
      */
     public static Flowable<BaseResponse<ResetPsdMethodBean>> getResetPswdMethod(String mobile) {
-        return getService().getResetPswdMethod("QueryPswd", mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return getService().getResetPswdMethod("TradePswd", mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 发送注册使用的短信验证码
+     *
+     * @param mobile 手机号
+     * @return
+     */
+    public static Flowable<BaseResponse<Boolean>> sendSmsCheckCode(String mobile) {
+        return getService().sendSmsCheckCode(mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 1.发送微信注册使用的短信验证码
+     * 2.发送微信绑定使用的短信验证码
+     * 3.发送重置登录密码的短信验证码
+     *
+     * @param mobile 手机号
+     * @return
+     */
+    public static Flowable<BaseResponse<String>> sendResetPswdCheckCodeSMS(String mobile) {
+        String psdType = "QueryPswd";
+        return getService().sendResetPswdCheckCodeSMS(psdType, mobile).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

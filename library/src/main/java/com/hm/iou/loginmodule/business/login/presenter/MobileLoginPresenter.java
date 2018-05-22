@@ -8,6 +8,7 @@ import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.login.MobileLoginContract;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.UserManager;
@@ -22,21 +23,24 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  * @author syl
  * @time 2018/5/19 下午4:54
  */
-public class MobileLoginPresenter extends MvpActivityPresenter<MobileLoginContract.View> implements MobileLoginContract.Presenter {
+public class MobileLoginPresenter extends BaseLoginModulePresenter<MobileLoginContract.View> implements MobileLoginContract.Presenter {
 
 
     public MobileLoginPresenter(@NonNull Context context, @NonNull MobileLoginContract.View view) {
         super(context, view);
     }
 
+
     @Override
-    public void login(String mobile, String loginPsd) {
+    public void mobileLogin(String mobile, String loginPsd) {
+        mView.showLoadingView();
         LoginModuleApi.mobileLogin(mobile, loginPsd)
                 .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<UserInfo>handleResponse())
                 .subscribeWith(new CommSubscriber<UserInfo>(mView) {
                     @Override
                     public void handleResult(UserInfo userInfo) {
+                        mView.dismissLoadingView();
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
@@ -45,9 +49,8 @@ public class MobileLoginPresenter extends MvpActivityPresenter<MobileLoginContra
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
+                        mView.dismissLoadingView();
                     }
                 });
-
     }
 }

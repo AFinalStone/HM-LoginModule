@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.MobileLoginContract;
@@ -63,29 +64,15 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
         mTvMobile.setText(mStrMobile);
     }
 
-    private void toFindPswView() {
-//        Intent intent = new Intent(mContext, FindLoginPsdInputPhoneActivity.class);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, mStrMobile);
-//        startActivity(intent);
-    }
-
 
     @OnClick({R2.id.tv_login, R2.id.tv_forgetPassword})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_login == id) {
-            mPresenter.login(mStrMobile, mStrPsd);
+            mPresenter.mobileLogin(mStrMobile, mStrPsd);
         } else if (R.id.tv_forgetPassword == id) {
-            toFindPswView();
+            NavigationHelper.toFindByInputMobile(mContext, mStrMobile);
         }
-    }
-
-
-    private void toLoginLoadingView() {
-//        Intent intent = new Intent(mContext, LoginLoadingActivity.class);
-//        intent.putExtra(Constants.INTENT_LOGIN_LOADING_TYPE, LoginTypeEnum.loginByPhone);
-//        startActivity(intent);
-//        finish();
     }
 
 

@@ -9,6 +9,7 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.loginmodule.business.login.presenter.InputMobilePresenter;
+import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -26,12 +27,14 @@ import io.reactivex.functions.Consumer;
  */
 public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
 
+    private static final String REGEXP_MOBILE_NUMBER = "^[1][0-9]{10}$";
+
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
-    String mMobile;
-
     @BindView(R2.id.tv_next)
     TextView mTvNext;
+
+    String mStrMobile;
 
 
     @Override
@@ -49,9 +52,9 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mMobile = String.valueOf(charSequence);
+                mStrMobile = String.valueOf(charSequence);
                 mTvNext.setEnabled(false);
-                if (mMobile.length() == 11) {
+                if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
                     mTvNext.setEnabled(true);
                 }
             }
@@ -61,7 +64,7 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
 
     @OnClick({R2.id.tv_next})
     public void onViewClicked(View view) {
-        mPresenter.checkAccountIsExist(mMobile);
+        mPresenter.checkAccountIsExist(mStrMobile);
     }
 
 

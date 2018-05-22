@@ -56,10 +56,10 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
 
 
     private void initHeaderAndNickName() {
-        UserInfo userDataBean = UserManager.getInstance(this).getUserInfo();
-        if (userDataBean != null) {
+        UserInfo userInfo = UserManager.getInstance(this).getUserInfo();
+        if (userInfo != null) {
             //头像
-            String sexEnum = userDataBean.getSex();
+            String sexEnum = userInfo.getSex();
             int imageResId = R.mipmap.uikit_icon_header_unknow;
             if ("MALE".equals(sexEnum)) {
                 imageResId = R.mipmap.uikit_icon_header_man;
@@ -67,9 +67,9 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
                 imageResId = R.mipmap.uikit_icon_header_wuman;
             }
             ivHeader.setImageResource(imageResId);
-            String urlHeader = userDataBean.getAvatarUrl();
+            String urlHeader = userInfo.getAvatarUrl();
             ImageLoader.getInstance(mContext).displayImage(urlHeader, ivHeader, imageResId, imageResId);
-            String nickName = userDataBean.getNickName();
+            String nickName = userInfo.getNickName();
             tvNickName.setText(nickName);
         }
     }

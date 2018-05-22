@@ -14,7 +14,13 @@ public interface MobileLoginContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-        void login(String userPhone, String userPassword);
+        /**
+         * 通过手机号和密码进行登录
+         *
+         * @param mobile
+         * @param loginPsd
+         */
+        void mobileLogin(String mobile, String loginPsd);
 
     }
 }

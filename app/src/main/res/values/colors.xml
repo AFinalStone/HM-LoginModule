@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--标题栏的颜色-->
+    <color name="colorPrimary">#FFFFD200</color>
+    <!--状态栏的颜色-->
+    <color name="colorPrimaryDark">#FFFFC000</color>
+    <!--控件的选中颜色，即checked或selected状态的颜色。-->
+    <color name="colorAccent">#3B99DF</color>
 </resources>

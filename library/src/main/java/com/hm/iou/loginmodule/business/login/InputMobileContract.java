@@ -16,6 +16,12 @@ public interface InputMobileContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter {
-        void checkAccountIsExist(String phone);
+
+        /**
+         * 校验手机号是否已经注册
+         *
+         * @param mobile
+         */
+        void checkAccountIsExist(String mobile);
     }
 }

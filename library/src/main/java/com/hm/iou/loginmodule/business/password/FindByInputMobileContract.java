@@ -9,11 +9,8 @@ import com.hm.iou.base.mvp.BaseContract;
  * @author syl
  * @time 2018/5/17 下午1:54
  */
-public interface InputMobileContract {
+public interface FindByInputMobileContract {
 
-    /**
-     * 输入手机号，判断找回密码的方式
-     **/
     interface View extends BaseContract.BaseView {
 
 
@@ -21,8 +18,12 @@ public interface InputMobileContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-        //获取找回密码的方式
-        void getResetPwsMethod(String userPhone);
+        /**
+         * 获取找回密码的方式
+         *
+         * @param mobile
+         */
+        void getResetPsdMethod(String mobile);
     }
 
 

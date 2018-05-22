@@ -78,13 +78,13 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         }
     }
 
-    @OnClick({R2.id.tv_register, R2.id.btn_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
+    @OnClick({R2.id.tv_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_register == id) {
-            mPresenter.registerAndLogin(mStrMobile, mStrPsd, mStrSmsCheckCode);
-        } else if (R.id.btn_getSmsCheckCode == id) {
-            mPresenter.getCode(mStrMobile);
+            mPresenter.registerByMobileAndLogin(mStrMobile, mStrPsd, mStrSmsCheckCode);
+        } else if (R.id.tv_getSmsCheckCode == id) {
+            mPresenter.getSMSCode(mStrMobile);
         } else if (R.id.tv_agreement01 == id) {
             NavigationHelper.ToRegisterAndUseAgreement(mContext);
         } else if (R.id.tv_agreement02 == id) {

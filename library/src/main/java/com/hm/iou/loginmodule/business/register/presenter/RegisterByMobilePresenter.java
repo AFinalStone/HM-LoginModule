@@ -30,14 +30,15 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
     }
 
     @Override
-    public void getCode(String mobile) {
-
+    public void getSMSCode(String mobile) {
+        mView.showLoadingView();
         LoginModuleApi.sendSmsCheckCode(mobile)
                 .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<Boolean>handleResponse())
                 .subscribeWith(new CommSubscriber<Boolean>(mView) {
                     @Override
                     public void handleResult(Boolean flag) {
+                        mView.dismissLoadingView();
                         if (flag) {
                             mView.toastMessage(R.string.uikit_get_check_code_success);
                         } else {
@@ -47,20 +48,21 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
+                        mView.dismissLoadingView();
                     }
                 });
-
     }
 
     @Override
-    public void registerAndLogin(String mobile, String loginPsd, String smsCheckCode) {
+    public void registerByMobileAndLogin(String mobile, String loginPsd, String smsCheckCode) {
+        mView.showLoadingView();
         LoginModuleApi.mobileRegLogin(mobile, loginPsd, smsCheckCode)
                 .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<UserInfo>handleResponse())
                 .subscribeWith(new CommSubscriber<UserInfo>(mView) {
                     @Override
                     public void handleResult(UserInfo userInfo) {
+                        mView.dismissLoadingView();
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
@@ -69,7 +71,7 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
+                        mView.dismissLoadingView();
                     }
                 });
     }

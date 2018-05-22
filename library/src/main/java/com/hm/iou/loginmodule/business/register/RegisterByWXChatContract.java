@@ -5,6 +5,7 @@ import com.hm.iou.base.mvp.BaseContract;
 
 /**
  * 微信注册或者绑定
+ *
  * @author syl
  * @time 2018/5/17 下午5:53
  */
@@ -25,19 +26,8 @@ public interface RegisterByWXChatContract {
          *
          * @param desc 提示信息
          */
-        void warnDialogMobileNotBindWX(String desc);
+        void warnMobileNotBindWX(String desc);
 
-        /**
-         * 显示当前倒计时时间
-         *
-         * @param currentDesc
-         */
-        void showTimeCountDown(String currentDesc);
-
-        /**
-         * 关闭倒计时
-         */
-        void closeTimeCountDown();
     }
 
     interface Presenter extends BaseContract.BasePresenter {
@@ -50,11 +40,11 @@ public interface RegisterByWXChatContract {
         void getSmsCode(String mobile);
 
         /**
-         * 查询手机号是否绑定微信
+         * 查询手机号是否绑定过微信
          *
          * @param mobile
          */
-        void isBindWX(String mobile);
+        void isMobileHaveBindWX(String mobile);
 
         /**
          * 通过微信进行绑定或者注册

@@ -7,8 +7,9 @@ import android.widget.TextView;
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
-import com.hm.iou.loginmodule.business.password.InputMobileContract;
-import com.hm.iou.loginmodule.business.password.presenter.InputMobilePresenter;
+import com.hm.iou.loginmodule.business.password.FindByInputMobileContract;
+import com.hm.iou.loginmodule.business.password.presenter.FindByInputMobilePresenter;
+import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -22,17 +23,17 @@ import io.reactivex.functions.Consumer;
  * @author syl
  * @time 2018/4/23 上午11:10
  */
-public class FindByInputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
+public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePresenter> implements FindByInputMobileContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
+    private static final String REGEXP_MOBILE_NUMBER = "^[1][0-9]{10}$";
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
-    private String mStrMobile;
-
     @BindView(R2.id.tv_find)
     TextView mTvFind;
 
+    private String mStrMobile;
 
     @Override
     protected int getLayoutId() {
@@ -40,8 +41,8 @@ public class FindByInputMobileActivity extends BaseActivity<InputMobilePresenter
     }
 
     @Override
-    protected InputMobilePresenter initPresenter() {
-        return new InputMobilePresenter(this, this);
+    protected FindByInputMobilePresenter initPresenter() {
+        return new FindByInputMobilePresenter(this, this);
     }
 
     @Override
@@ -52,72 +53,22 @@ public class FindByInputMobileActivity extends BaseActivity<InputMobilePresenter
             public void accept(CharSequence charSequence) throws Exception {
                 mStrMobile = String.valueOf(charSequence);
                 mTvFind.setEnabled(false);
-                if (mStrMobile.length() == 11) {
+                if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
                     mTvFind.setEnabled(true);
                 }
             }
         });
         mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
         mEtMobile.setText(mStrMobile);
+        if (!StringUtil.isEmpty(mStrMobile)) {
+            mEtMobile.setSelection(mStrMobile.length());
+        }
+        showSoftKeyboard();
     }
 
     @OnClick({R2.id.tv_find})
     public void onViewClicked(View view) {
-        mPresenter.getResetPwsMethod(mStrMobile);
+        mPresenter.getResetPsdMethod(mStrMobile);
     }
 
-
-    //通过手机号找回密码
-    private void toFindLoginPsdBySMS() {
-//        Intent intent = new Intent(mContext, FindLoginPsdBySendCheckCodeActivity.class);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, userPhone);
-//        startActivity(intent);
-    }
-
-
-    //通过邮箱实现重置登录密码
-    public void toFindLoginPsdByEmailView(String email) {
-//        Intent intent = new Intent(this, BindEmailAndResetPsdActivity.class);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, userPhone);
-//        intent.putExtra(Constants.INTENT_EMAIL_NUMBER, email);
-//        intent.putExtra(Constants.INTENT_BIND_EMAIL_AND_RESET_PSD, BindEmailAndResetPsdEnum.ResetPsdByEmail);
-//        startActivity(intent);
-    }
-
-    //进行活体校验实现重置登录密码
-    public void toFindPswByFaceView() {
-//        Intent intent = new Intent(this, LivingCheckActivity.class);
-//        intent.putExtra(Constants.INTENT_LIVINIG_CHECK_RESET_PSD_TYPE, LivingCheckResetPsdTypeEnum.LivingCheckResetLoginPsd);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, userPhone);
-//        startActivityForResult(intent, Constants.REQUEST_TO_LIVING_CHECK);
-    }
-
-//    @Override
-//    public void getResetPwsMethodSuccess(ResetPsdMethodBean resetPsdMethodBean) {
-//        Logger.e(resetPsdMethodBean.toString());
-//        ResetPswdMethodEnum resetPswdMethodEnum = resetPsdMethodBean.getMethod();
-//        String field = resetPsdMethodBean.getField();
-//        switch (resetPswdMethodEnum) {
-//            case Real:
-//                toFindPswByFaceView();
-//                break;
-//            case Mail:
-//                toFindLoginPsdByEmailView(field);
-//                break;
-//            case Sms:
-//                toFindLoginPsdBySMS();
-//                break;
-//        }
-//    }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        //如果用户进行活体校验成功找密码，关闭当前页面
-//        if (Constants.REQUEST_TO_LIVING_CHECK == requestCode) {
-//            if (RESULT_OK == resultCode) {
-//                finish();
-//            }
-//        }
-//    }
 }

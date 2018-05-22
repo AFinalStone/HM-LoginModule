@@ -3,8 +3,7 @@ package com.hm.iou.loginmodule.business.password.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
-import com.hm.iou.loginmodule.business.password.InputMobileContract;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.password.ResetLoginPsdContract;
 
 /**
@@ -13,7 +12,7 @@ import com.hm.iou.loginmodule.business.password.ResetLoginPsdContract;
  * @author syl
  * @time 2018/5/19 下午4:54
  */
-public class ResetLoginPsdPresenter extends MvpActivityPresenter<ResetLoginPsdContract.View> implements ResetLoginPsdContract.Presenter {
+public class ResetLoginPsdPresenter extends BaseLoginModulePresenter<ResetLoginPsdContract.View> implements ResetLoginPsdContract.Presenter {
 
 
     public ResetLoginPsdPresenter(@NonNull Context context, @NonNull ResetLoginPsdContract.View view) {

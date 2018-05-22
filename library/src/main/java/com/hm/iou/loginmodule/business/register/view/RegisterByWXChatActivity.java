@@ -36,27 +36,22 @@ import io.reactivex.functions.Consumer;
  */
 public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPresenter> implements RegisterByWXChatContract.View {
 
-    public static final String EXTRA_KEY_WXCHAT_SN = "wxchat_sn";
+    public static final String EXTRA_KEY_WX_CHAT_SN = "wx_chat_sn";
 
-    private static final String REGEXP_PHOTO_NUMBER = "^[1][0-9]{10}$";
-
-    @BindView(R2.id.topbar)
-    HMTopBarView mTopbar;
+    private static final String REGEXP_MOBILE_NUMBER = "^[1][0-9]{10}$";
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
-    String mUserMobile = "";
-
     @BindView(R2.id.et_smsCheckCode)
     EditText mEtSMSCheckCode;
-    String mStrSMSCheckCode = "";
-
     @BindView(R2.id.et_password)
     EditText mEtPassword;
-    String mStrPsd = "";
-
     @BindView(R2.id.tv_bindMobile)
     TextView mTvBindMobile;
+
+    String mStrSMSCheckCode = "";
+    String mStrMobile = "";
+    String mStrPsd = "";
 
     //判断当前微信是否存绑定过手机的交易流水号
     String mWXChatSN;
@@ -73,20 +68,13 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        mTopbar.setOnBackClickListener(new HMTopBarView.OnTopBarBackClickListener() {
-            @Override
-            public void onClickBack() {
-                finish();
-            }
-        });
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mUserMobile = String.valueOf(charSequence);
-                if (StringUtil.matchRegex(mUserMobile, REGEXP_PHOTO_NUMBER)) {
-                    String strGmEtCode = mTvBindMobile.getText().toString();
-                } else {
-                    mTvBindMobile.setEnabled(false);
+                mStrMobile = String.valueOf(charSequence);
+                mTvBindMobile.setEnabled(false);
+                if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
+                    mTvBindMobile.setEnabled(true);
                 }
                 checkValue();
             }
@@ -108,7 +96,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             }
         });
         showSoftKeyboard();
-        mWXChatSN = getIntent().getStringExtra(EXTRA_KEY_WXCHAT_SN);
+        mWXChatSN = getIntent().getStringExtra(EXTRA_KEY_WX_CHAT_SN);
     }
 
 
@@ -116,44 +104,21 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_bindMobile == id) {
-            mPresenter.bindWX(mUserMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
+            mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
         } else if (R.id.btn_getSMSCheckCode == id) {
-            mPresenter.isBindWX(mUserMobile);
+            mPresenter.isMobileHaveBindWX(mStrMobile);
         }
     }
 
     private void checkValue() {
         mTvBindMobile.setEnabled(false);
-        if (mUserMobile.length() > 0 && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
+        if (mStrMobile.length() > 0 && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
             mTvBindMobile.setEnabled(true);
         }
     }
 
-    private void showDialogMobileHaveBindWX() {
-        String title = getString(R.string.bind_mobile_dialog01_title);
-        String msg = getString(R.string.bind_mobile_dialog01_msg);
-        String cancel = getString(R.string.base_cancel);
-        String ok = getString(R.string.bind_mobile_dialog01_ok);
-        new IOSAlertDialog.Builder(mContext)
-                .setTitle(title)
-                .setMessage(msg)
-                .setNegativeButton(cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton(ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        NavigationHelper.toMobileLogin(mContext, mUserMobile);
-                        finish();
-                    }
-                }).show();
-    }
-
-    private void showDialogMobileHaveExist() {
+    @Override
+    public void warnMobileHaveBindWX(String desc) {
         String title = getString(R.string.bind_mobile_dialog02_title);
         String msg = getString(R.string.bind_mobile_dialog02_msg);
         String cancel = getString(R.string.base_cancel);
@@ -171,29 +136,44 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        mPresenter.getSmsCode(mUserMobile);
+                        mPresenter.getSmsCode(mStrMobile);
                     }
                 }).show();
     }
 
-
     @Override
-    public void warnMobileHaveBindWX(String desc) {
+    public void warnMobileNotBindWX(String desc) {
+        String title = getString(R.string.bind_mobile_dialog01_title);
+        String msg = getString(R.string.bind_mobile_dialog01_msg);
+        String cancel = getString(R.string.base_cancel);
+        String ok = getString(R.string.bind_mobile_dialog01_ok);
+        new IOSAlertDialog.Builder(mContext)
+                .setTitle(title)
+                .setMessage(msg)
+                .setNegativeButton(cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton(ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        NavigationHelper.toMobileLogin(mContext, mStrMobile);
+                        finish();
+                    }
+                }).show();
 
     }
 
-    @Override
-    public void warnDialogMobileNotBindWX(String desc) {
-
-    }
-
-    @Override
-    public void showTimeCountDown(String currentDesc) {
-
-    }
-
-    @Override
-    public void closeTimeCountDown() {
-
-    }
+//    @Override
+//    public void showTimeCountDown(String currentDesc) {
+//
+//    }
+//
+//    @Override
+//    public void closeTimeCountDown() {
+//
+//    }
 }

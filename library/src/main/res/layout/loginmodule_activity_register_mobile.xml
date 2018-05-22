@@ -70,8 +70,8 @@
             android:id="@+id/et_smsCheckCode"
             style="@style/UikitEditText.CheckCode" />
 
-        <com.hm.iou.uikit.HMCountDownButton
-            android:id="@+id/btn_getSmsCheckCode"
+        <com.hm.iou.uikit.HMCountDownTextView
+            android:id="@+id/tv_getSmsCheckCode"
             style="@style/UikitButton.CheckCode"
             android:enabled="true" />
 
