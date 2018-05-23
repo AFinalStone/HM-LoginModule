@@ -7,6 +7,7 @@ import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.login.MobileLoginContract;
@@ -25,13 +26,30 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  */
 public class FindBySMSPresenter extends BaseLoginModulePresenter<FindBySMSContract.View> implements FindBySMSContract.Present {
 
+    //重置登录密码
+    private final int SMS_TYPE_RESET_LOGIN_PSD = 2;
 
     public FindBySMSPresenter(@NonNull Context context, @NonNull FindBySMSContract.View view) {
         super(context, view);
     }
 
     @Override
-    public void sendResetPsdCheckCodeSMS(String userMobile) {
+    public void sendResetPsdBySMSCheckCode(String mobile) {
+        mView.showLoadingView();
+        LoginModuleApi.sendMessage(SMS_TYPE_RESET_LOGIN_PSD, mobile)
+                .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Object>handleResponse())
+                .subscribeWith(new CommSubscriber<Object>(mView) {
+                    @Override
+                    public void handleResult(Object o) {
+                        mView.dismissLoadingView();
+                        mView.toastMessage(R.string.uikit_get_check_code_success);
+                    }
 
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+                        mView.dismissLoadingView();
+                    }
+                });
     }
 }

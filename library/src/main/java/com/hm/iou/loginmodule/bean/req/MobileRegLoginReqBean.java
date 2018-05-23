@@ -1,10 +1,13 @@
 package com.hm.iou.loginmodule.bean.req;
 
+import lombok.Data;
+
 /**
  * @author : syl
  * @Date : 2018/5/21 16:49
  * @E-Mail : shiyaolei@dafy.com
  */
+@Data
 public class MobileRegLoginReqBean {
 
     /**
@@ -17,9 +20,5 @@ public class MobileRegLoginReqBean {
     private String queryPswd;
     private String checkCode;
 
-    public MobileRegLoginReqBean(String mobile, String queryPswd, String checkCode) {
-        this.mobile = mobile;
-        this.queryPswd = queryPswd;
-        this.checkCode = checkCode;
-    }
+
 }

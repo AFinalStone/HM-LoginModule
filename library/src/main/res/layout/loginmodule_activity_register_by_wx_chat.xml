@@ -79,7 +79,7 @@
             style="@style/UikitEditText.CheckCode" />
 
         <com.hm.iou.uikit.HMCountDownTextView
-            android:id="@+id/btn_getSMSCheckCode"
+            android:id="@+id/tv_getSMSCheckCode"
             style="@style/UikitButton.CheckCode"
             android:enabled="false" />
 

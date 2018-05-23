@@ -9,6 +9,7 @@ import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.UserManager;
@@ -22,8 +23,9 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  * @author syl
  * @time 2018/5/19 下午5:21
  */
-public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMobileContract.View> implements RegisterByMobileContract.Presenter {
+public class RegisterByMobilePresenter extends BaseLoginModulePresenter<RegisterByMobileContract.View> implements RegisterByMobileContract.Presenter {
 
+    private final int SMS_TYPE_REGISTER = 1;
 
     public RegisterByMobilePresenter(@NonNull Context context, @NonNull RegisterByMobileContract.View view) {
         super(context, view);
@@ -32,18 +34,14 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
     @Override
     public void getSMSCode(String mobile) {
         mView.showLoadingView();
-        LoginModuleApi.sendSmsCheckCode(mobile)
-                .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<Boolean>handleResponse())
-                .subscribeWith(new CommSubscriber<Boolean>(mView) {
+        LoginModuleApi.sendMessage(SMS_TYPE_REGISTER, mobile)
+                .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Object>handleResponse())
+                .subscribeWith(new CommSubscriber<Object>(mView) {
                     @Override
-                    public void handleResult(Boolean flag) {
+                    public void handleResult(Object o) {
                         mView.dismissLoadingView();
-                        if (flag) {
-                            mView.toastMessage(R.string.uikit_get_check_code_success);
-                        } else {
-                            mView.toastMessage(R.string.uikit_get_check_code_failed);
-                        }
+                        mView.toastMessage(R.string.uikit_get_check_code_success);
                     }
 
                     @Override
@@ -51,6 +49,26 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
                         mView.dismissLoadingView();
                     }
                 });
+
+//        LoginModuleApi.sendSmsCheckCode(mobile)
+//                .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
+//                .map(RxUtil.<Boolean>handleResponse())
+//                .subscribeWith(new CommSubscriber<Boolean>(mView) {
+//                    @Override
+//                    public void handleResult(Boolean flag) {
+//                        mView.dismissLoadingView();
+//                        if (flag) {
+//                            mView.toastMessage(R.string.uikit_get_check_code_success);
+//                        } else {
+//                            mView.toastMessage(R.string.uikit_get_check_code_failed);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void handleException(Throwable throwable, String s, String s1) {
+//                        mView.dismissLoadingView();
+//                    }
+//                });
     }
 
     @Override
@@ -66,7 +84,7 @@ public class RegisterByMobilePresenter extends MvpActivityPresenter<RegisterByMo
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext);
+                        NavigationHelper.toLoginLoading(mContext,false);
                     }
 
                     @Override

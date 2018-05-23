@@ -23,7 +23,7 @@ public interface FindBySMSContract {
          *
          * @param mobile
          */
-        void sendResetPsdCheckCodeSMS(String mobile);
+        void sendResetPsdBySMSCheckCode(String mobile);
     }
 
 }

@@ -9,7 +9,7 @@ import lombok.Data;
  */
 
 @Data
-public class ResetPsdMethodBean {
+public class GetResetPsdMethodRespBean {
 
     //1(邮箱), 2(人脸), 3(短信);
     int method;

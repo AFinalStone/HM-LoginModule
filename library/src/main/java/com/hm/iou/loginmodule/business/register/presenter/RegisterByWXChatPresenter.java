@@ -6,9 +6,16 @@ import android.support.annotation.NonNull;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.register.RegisterByWXChatContract;
+import com.hm.iou.network.HttpReqManager;
+import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
@@ -18,14 +25,16 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  * @author syl
  * @time 2018/5/17 下午5:26
  */
-public class RegisterByWXChatPresenter extends MvpActivityPresenter<RegisterByWXChatContract.View> implements RegisterByWXChatContract.Presenter {
+public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<RegisterByWXChatContract.View> implements RegisterByWXChatContract.Presenter {
 
     //手机号不存在
-    private static final int MOBILE_NOT_EXIST = 7004;
+    private static final int MOBILE_NOT_EXIST = -1;
     //手机号存在但是没有绑定微信
-    private static final int MOBILE_NOT_BIND_WX = 7011;
+    private static final int MOBILE_NOT_BIND_WX = 0;
     //手机号存在且已经绑定微信
-    private static final int MOBILE_HAVE_BIND_WX = 7010;
+    private static final int MOBILE_HAVE_BIND_WX = 1;
+
+    private final int SMS_TYPE_REGISTER = 1;
 
 
     public RegisterByWXChatPresenter(@NonNull Context context, @NonNull RegisterByWXChatContract.View view) {
@@ -33,31 +42,43 @@ public class RegisterByWXChatPresenter extends MvpActivityPresenter<RegisterByWX
     }
 
     @Override
-    public void onDestroy() {
-
-    }
-
-    @Override
     public void getSmsCode(String mobile) {
+        mView.showLoadingView();
+        LoginModuleApi.sendMessage(SMS_TYPE_REGISTER, mobile)
+                .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Object>handleResponse())
+                .subscribeWith(new CommSubscriber<Object>(mView) {
+                    @Override
+                    public void handleResult(Object o) {
+                        mView.dismissLoadingView();
+                        mView.toastMessage(R.string.uikit_get_check_code_success);
+                    }
 
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+                        mView.dismissLoadingView();
+                    }
+                });
     }
 
     @Override
-    public void isMobileHaveBindWX(String mobile) {
+    public void isMobileHaveBindWX(final String mobile) {
         mView.showLoadingView();
         LoginModuleApi.isBindWX(mobile)
-                .compose(getProvider().<BaseResponse<Integer>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<Integer>handleResponse())
-                .subscribeWith(new CommSubscriber<Integer>(mView) {
+                .compose(getProvider().<BaseResponse<IsBindWXRespBean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<IsBindWXRespBean>handleResponse())
+                .subscribeWith(new CommSubscriber<IsBindWXRespBean>(mView) {
                     @Override
-                    public void handleResult(Integer type) {
-                        mView.dismissLoadingView();
+                    public void handleResult(IsBindWXRespBean respBean) {
+                        int type = respBean.getCount();
                         if (MOBILE_HAVE_BIND_WX == type) {
-
-                        } else if (MOBILE_NOT_EXIST == type) {
-
+                            mView.dismissLoadingView();
+                            mView.warnMobileHaveBindWX(null);
                         } else if (MOBILE_NOT_BIND_WX == type) {
-
+                            mView.dismissLoadingView();
+                            mView.warnMobileNotBindWX(null);
+                        } else if (MOBILE_NOT_EXIST == type) {
+                            getSmsCode(mobile);
                         }
                     }
 
@@ -70,7 +91,25 @@ public class RegisterByWXChatPresenter extends MvpActivityPresenter<RegisterByWX
 
     @Override
     public void bindWX(String mobile, String checkCode, String loginPsd, String wxSn) {
+        mView.showLoadingView();
+        LoginModuleApi.bindWX(mobile, checkCode, loginPsd, wxSn)
+                .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<UserInfo>handleResponse())
+                .subscribeWith(new CommSubscriber<UserInfo>(mView) {
+                    @Override
+                    public void handleResult(UserInfo userInfo) {
+                        mView.dismissLoadingView();
+                        UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
+                        HttpReqManager.getInstance().setUserId(userInfo.getUserId());
+                        HttpReqManager.getInstance().setToken(userInfo.getToken());
+                        NavigationHelper.toLoginLoading(mContext, false);
+                    }
 
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+                        mView.dismissLoadingView();
+                    }
+                });
     }
 
 

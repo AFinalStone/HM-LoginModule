@@ -7,11 +7,10 @@ import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
-import com.hm.iou.loginmodule.bean.ResetPsdMethodBean;
+import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.password.FindByInputMobileContract;
 import com.hm.iou.sharedata.model.BaseResponse;
-import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
@@ -23,8 +22,8 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 public class FindByInputMobilePresenter extends BaseLoginModulePresenter<FindByInputMobileContract.View> implements FindByInputMobileContract.Presenter {
 
     private final int RESET_PSD_BY_METHOD_MAIL = 1;
-    private final int RESET_PSD_BY_METHOD_REAL = 2;
-    private final int RESET_PSD_BY_METHOD_SMS = 3;
+    private final int RESET_PSD_BY_METHOD_REAL = 3;
+    private final int RESET_PSD_BY_METHOD_SMS = 2;
 
     public FindByInputMobilePresenter(@NonNull Context context, @NonNull FindByInputMobileContract.View view) {
         super(context, view);
@@ -34,24 +33,24 @@ public class FindByInputMobilePresenter extends BaseLoginModulePresenter<FindByI
     public void getResetPsdMethod(final String mobile) {
         mView.showLoadingView();
         LoginModuleApi.getResetPswdMethod(mobile)
-                .compose(getProvider().<BaseResponse<ResetPsdMethodBean>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<ResetPsdMethodBean>handleResponse())
-                .subscribeWith(new CommSubscriber<ResetPsdMethodBean>(mView) {
+                .compose(getProvider().<BaseResponse<GetResetPsdMethodRespBean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<GetResetPsdMethodRespBean>handleResponse())
+                .subscribeWith(new CommSubscriber<GetResetPsdMethodRespBean>(mView) {
                     @Override
-                    public void handleResult(ResetPsdMethodBean resetPsdMethodBean) {
+                    public void handleResult(GetResetPsdMethodRespBean getResetPsdMethodRespBean) {
                         mView.dismissLoadingView();
-                        int method = resetPsdMethodBean.getMethod();
+                        int method = getResetPsdMethodRespBean.getMethod();
                         if (RESET_PSD_BY_METHOD_MAIL == method) {
                             //通过邮箱验证码实现重置登录密码
-                            String email = resetPsdMethodBean.getField();
+                            String email = getResetPsdMethodRespBean.getField();
                             NavigationHelper.toFindByEmail(mContext, mobile, email);
                         } else if (RESET_PSD_BY_METHOD_REAL == method) {
                             //通过活体校验重置登录密码
-                            String idCard = resetPsdMethodBean.getField();
+                            String idCard = getResetPsdMethodRespBean.getField();
                             NavigationHelper.toFindByFace(mContext, idCard);
                         } else if (RESET_PSD_BY_METHOD_SMS == method) {
                             //通过手机号验证码重置登录密码
-                            String idCard = resetPsdMethodBean.getField();
+                            String idCard = getResetPsdMethodRespBean.getField();
                             NavigationHelper.toFindByFace(mContext, idCard);
                         }
                     }

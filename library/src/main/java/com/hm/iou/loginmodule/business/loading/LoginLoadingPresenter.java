@@ -46,7 +46,7 @@ public class LoginLoadingPresenter extends BaseLoginModulePresenter<LoginLoading
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toMain(mContext);
+                        getHomeData();
                     }
 
                     @Override

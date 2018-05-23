@@ -9,7 +9,7 @@ import com.hm.iou.base.utils.RxJavaStopException;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
-import com.hm.iou.loginmodule.bean.IsWXExistResp;
+import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.UserManager;
@@ -19,7 +19,6 @@ import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.wxapi.WXEntryActivity;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.reactivestreams.Publisher;
@@ -46,11 +45,11 @@ public class SelectLoginTypePresenter extends BaseLoginModulePresenter<SelectLog
     private void isWXAccountHaveBindMobile(String code) {
         mView.showLoadingView();
         LoginModuleApi.isWXExist(code)
-                .compose(getProvider().<BaseResponse<IsWXExistResp>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<IsWXExistResp>handleResponse())
-                .flatMap(new Function<IsWXExistResp, Publisher<BaseResponse<UserInfo>>>() {
+                .compose(getProvider().<BaseResponse<IsWXExistRespBean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<IsWXExistRespBean>handleResponse())
+                .flatMap(new Function<IsWXExistRespBean, Publisher<BaseResponse<UserInfo>>>() {
                     @Override
-                    public Publisher<BaseResponse<UserInfo>> apply(IsWXExistResp resp) throws Exception {
+                    public Publisher<BaseResponse<UserInfo>> apply(IsWXExistRespBean resp) throws Exception {
                         String wxSn = resp.getSn();
                         if (resp.getCount() == 0) {
                             mView.dismissLoadingView();
@@ -70,7 +69,7 @@ public class SelectLoginTypePresenter extends BaseLoginModulePresenter<SelectLog
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext);
+                        NavigationHelper.toLoginLoading(mContext, false);
                     }
 
                     @Override

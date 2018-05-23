@@ -27,12 +27,12 @@ public interface ResetLoginPsdContract {
         /**
          * 通过活体校验重置登录密码
          *
-         * @param loginName
+         * @param mobile
          * @param idCardNum
          * @param newPsd
          * @param livenessIdnumberVerificationSn
          */
-        void resetQueryPswdWithLiveness(String loginName, String idCardNum, String newPsd, String livenessIdnumberVerificationSn);
+        void resetQueryPswdWithLiveness(String mobile, String idCardNum, String newPsd, String livenessIdnumberVerificationSn);
 
         /**
          * 通过邮箱重置登录密码
@@ -47,10 +47,10 @@ public interface ResetLoginPsdContract {
         /**
          * 手机登录
          *
-         * @param userPhone
-         * @param userPassword
+         * @param mobile
+         * @param loginPsd
          */
-        void mobileLogin(String userPhone, String userPassword);
+        void mobileLogin(String mobile, String loginPsd);
 
     }
 }

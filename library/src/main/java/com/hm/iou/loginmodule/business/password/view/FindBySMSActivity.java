@@ -1,5 +1,6 @@
 package com.hm.iou.loginmodule.business.password.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,6 +8,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
@@ -79,7 +81,7 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
                     for (int i = 0; i < 6; i++) {
                         currentCheckCode += mTvList[i].getText().toString().trim();
                     }
-                    jumpToFindLoginPsdByPhone02View(currentCheckCode);
+                    jumpToFindLoginPsdByPhoneView(currentCheckCode);
                 }
             }
         });
@@ -123,25 +125,26 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
         });
         mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
         mTvMobile.setText(mStrMobile);
-        mPresenter.sendResetPsdCheckCodeSMS(mStrMobile);
+        mPresenter.sendResetPsdBySMSCheckCode(mStrMobile);
     }
 
 
     @OnClick({R2.id.tv_retryCode})
     public void onClick(View view) {
         if (R.id.tv_retryCode == view.getId()) {
-            mPresenter.sendResetPsdCheckCodeSMS(mStrMobile);
+            mPresenter.sendResetPsdBySMSCheckCode(mStrMobile);
         }
     }
 
 
     //通过手机验证码实现重置登录密码
-    public void jumpToFindLoginPsdByPhone02View(String currentCheckCode) {
-//        Intent intent = new Intent(this, ResetLoginPsdActivity.class);
-//        intent.putExtra(Constants.INTENT_RESET_LOGIN_PSD_TYPE, LoginResetPsdTypeEnum.LoginResetPsdBySMS);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, mStrMobile);
-//        intent.putExtra(Constants.INTENT_CHECK_CODE, currentCheckCode);
-//        startActivity(intent);
+    public void jumpToFindLoginPsdByPhoneView(String currentCheckCode) {
+        Intent intent = new Intent(this, ResetLoginPsdActivity.class);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_SMS);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mStrMobile);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_SMS_CHECK_CODE, currentCheckCode);
+        startActivity(intent);
+//        NavigationHelper.toResetLoginPsd(mContext, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_SMS, mStrMobile);
     }
 
 }

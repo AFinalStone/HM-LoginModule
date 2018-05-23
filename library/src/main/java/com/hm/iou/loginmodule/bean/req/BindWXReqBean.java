@@ -8,13 +8,18 @@ import lombok.Data;
  * @E-Mail : shiyaolei@dafy.com
  */
 @Data
-public class MobileLoginReqBean {
+public class BindWXReqBean {
 
     /**
-     * mobile : 15267163669
-     * queryPswd : 123456
+     * checkCode : string
+     * mobile : string
+     * queryPswd : string
+     * wxSn : string
      */
 
+    private String checkCode;
     private String mobile;
     private String queryPswd;
+    private String wxSn;
+
 }

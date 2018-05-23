@@ -187,8 +187,11 @@ public class NavigationHelper {
      *
      * @param context
      */
-    public static void toLoginLoading(Context context) {
+    public static void toLoginLoading(Context context, boolean isTokenLogin) {
         Intent intent = new Intent(context, LoginLoadingActivity.class);
+        if (isTokenLogin) {
+            intent.putExtra(LoginLoadingActivity.EXTRA_LOADING_TYPE, LoginLoadingActivity.LOADING_TYPE_TOKEN_LOGIN);
+        }
         context.startActivity(intent);
     }
 

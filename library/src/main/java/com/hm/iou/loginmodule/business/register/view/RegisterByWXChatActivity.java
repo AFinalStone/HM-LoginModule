@@ -46,6 +46,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     EditText mEtSMSCheckCode;
     @BindView(R2.id.et_password)
     EditText mEtPassword;
+    @BindView(R2.id.tv_getSMSCheckCode)
+    TextView mTvGetSMSCheckCode;
     @BindView(R2.id.tv_bindMobile)
     TextView mTvBindMobile;
 
@@ -72,9 +74,9 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mStrMobile = String.valueOf(charSequence);
-                mTvBindMobile.setEnabled(false);
+                mTvGetSMSCheckCode.setEnabled(false);
                 if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
-                    mTvBindMobile.setEnabled(true);
+                    mTvGetSMSCheckCode.setEnabled(true);
                 }
                 checkValue();
             }
@@ -100,13 +102,13 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     }
 
 
-    @OnClick({R2.id.tv_bindMobile, R2.id.btn_getSMSCheckCode})
+    @OnClick({R2.id.tv_bindMobile, R2.id.tv_getSMSCheckCode})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.tv_bindMobile == id) {
-            mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
-        } else if (R.id.btn_getSMSCheckCode == id) {
+        if (R.id.tv_getSMSCheckCode == id) {
             mPresenter.isMobileHaveBindWX(mStrMobile);
+        } else if (R.id.tv_bindMobile == id) {
+            mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
         }
     }
 
@@ -167,13 +169,4 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     }
 
-//    @Override
-//    public void showTimeCountDown(String currentDesc) {
-//
-//    }
-//
-//    @Override
-//    public void closeTimeCountDown() {
-//
-//    }
 }
