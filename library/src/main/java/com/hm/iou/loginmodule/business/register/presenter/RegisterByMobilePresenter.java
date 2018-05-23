@@ -25,7 +25,8 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  */
 public class RegisterByMobilePresenter extends BaseLoginModulePresenter<RegisterByMobileContract.View> implements RegisterByMobileContract.Presenter {
 
-    private final int SMS_TYPE_REGISTER = 1;
+    //注册
+    private final int PURPOSE_TYPE_REGISTER_BY_SMS = 1;
 
     public RegisterByMobilePresenter(@NonNull Context context, @NonNull RegisterByMobileContract.View view) {
         super(context, view);
@@ -34,14 +35,15 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
     @Override
     public void getSMSCode(String mobile) {
         mView.showLoadingView();
-        LoginModuleApi.sendMessage(SMS_TYPE_REGISTER, mobile)
-                .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<Object>handleResponse())
-                .subscribeWith(new CommSubscriber<Object>(mView) {
+        LoginModuleApi.sendMessage(PURPOSE_TYPE_REGISTER_BY_SMS, mobile)
+                .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<String>handleResponse())
+                .subscribeWith(new CommSubscriber<String>(mView) {
                     @Override
-                    public void handleResult(Object o) {
+                    public void handleResult(String str) {
                         mView.dismissLoadingView();
                         mView.toastMessage(R.string.uikit_get_check_code_success);
+                        mView.startCountDown();
                     }
 
                     @Override
@@ -84,7 +86,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext,false);
+                        NavigationHelper.toLoginLoading(mContext, false);
                     }
 
                     @Override

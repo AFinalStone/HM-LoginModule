@@ -24,4 +24,10 @@
         android:onClick="onClickResetPsdBySMS"
         android:text="通过手机验证码重置登录密码" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickBindEmail"
+        android:text="绑定邮箱" />
+
 </LinearLayout>

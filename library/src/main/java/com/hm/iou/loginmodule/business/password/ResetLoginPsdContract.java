@@ -14,7 +14,6 @@ public interface ResetLoginPsdContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-
         /**
          * 通过短信验证码重置登录密码
          *
@@ -22,7 +21,7 @@ public interface ResetLoginPsdContract {
          * @param checkCode
          * @param newPsd
          */
-        void resetQueryPsdBySMS(String mobile, String checkCode, String newPsd);
+        void resetLoginPsdBySMS(String mobile, String checkCode, String newPsd);
 
         /**
          * 通过活体校验重置登录密码
@@ -30,19 +29,19 @@ public interface ResetLoginPsdContract {
          * @param mobile
          * @param idCardNum
          * @param newPsd
-         * @param livenessIdnumberVerificationSn
+         * @param livingCheckSn
          */
-        void resetQueryPswdWithLiveness(String mobile, String idCardNum, String newPsd, String livenessIdnumberVerificationSn);
+        void resetLoginPsdByFace(String mobile, String idCardNum, String newPsd, String livingCheckSn);
 
         /**
-         * 通过邮箱重置登录密码
+         * 通过邮箱验证码重置登录密码
          *
-         * @param mobile
-         * @param mailAddress
+         * @param email
          * @param checkCode
+         * @param sn
          * @param newPsd
          */
-        void resetQueryPswdByMail(String mobile, String mailAddress, String checkCode, String newPsd);
+        void resetLoginPsdByEMail(String mobile, String email, String checkCode, String sn, String newPsd);
 
         /**
          * 手机登录

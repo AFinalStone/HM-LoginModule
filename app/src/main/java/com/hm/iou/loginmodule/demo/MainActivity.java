@@ -1,14 +1,10 @@
 package com.hm.iou.loginmodule.demo;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.hm.iou.loginmodule.NavigationHelper;
-import com.hm.iou.loginmodule.business.login.view.MobileLoginActivity;
-import com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity;
-import com.hm.iou.loginmodule.business.type.SelectLoginTypeContract;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,5 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickResetPsdBySMS(View view) {
         NavigationHelper.toFindBySMS(this, "15267163669");
+    }
+
+    public void onClickBindEmail(View view) {
+        NavigationHelper.toBindEmail(this);
     }
 }

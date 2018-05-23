@@ -15,9 +15,14 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 /**
- * 通过手机号进行登录
- *
  * @author syl
  * @time 2018/5/19 下午4:54
  */
@@ -29,35 +34,53 @@ public class ResetLoginPsdPresenter extends BaseLoginModulePresenter<ResetLoginP
     }
 
     @Override
-    public void resetQueryPsdBySMS(final String mobile, String checkCode, final String newPswd) {
-        LoginModuleApi.resetQueryPswdBySMS(mobile, checkCode, newPswd)
+    public void resetLoginPsdBySMS(final String mobile, String checkCode, final String newPswd) {
+        mView.showLoadingView();
+        LoginModuleApi.resetLoginPsdBySMS(mobile, checkCode, newPswd)
                 .compose(getProvider().<BaseResponse<Integer>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<Integer>handleResponse())
                 .subscribeWith(new CommSubscriber<Integer>(mView) {
                     @Override
                     public void handleResult(Integer integer) {
+                        mView.dismissLoadingView();
                         mobileLogin(mobile, newPswd);
                     }
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
+                        mView.dismissLoadingView();
                     }
                 });
     }
 
     @Override
-    public void resetQueryPswdWithLiveness(String loginName, String idCardNum, String transPswd, String livenessIdnumberVerificationSn) {
+    public void resetLoginPsdByFace(String mobile, String idCardNum, String newPsd, String livingCheckSn) {
 
     }
 
     @Override
-    public void resetQueryPswdByMail(String mobile, String mailAddr, String checkCode, String newPswd) {
+    public void resetLoginPsdByEMail(final String mobile, String email, String checkCode, String sn, final String newPsd) {
+        mView.showLoadingView();
+        LoginModuleApi.resetLoginPsdByEmail(email, checkCode, sn, newPsd)
+                .compose(getProvider().<BaseResponse<Integer>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Integer>handleResponse())
+                .subscribeWith(new CommSubscriber<Integer>(mView) {
+                    @Override
+                    public void handleResult(Integer integer) {
+                        mView.dismissLoadingView();
+                        mobileLogin(mobile, newPsd);
+                    }
 
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+                        mView.dismissLoadingView();
+                    }
+                });
     }
 
+
     @Override
-    public void mobileLogin(String mobile, String loginPsd) {
+    public void mobileLogin(final String mobile, String loginPsd) {
         mView.showLoadingView();
         LoginModuleApi.mobileLogin(mobile, loginPsd)
                 .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
@@ -75,6 +98,7 @@ public class ResetLoginPsdPresenter extends BaseLoginModulePresenter<ResetLoginP
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
                         mView.dismissLoadingView();
+                        NavigationHelper.toMobileLogin(mContext, mobile);
                     }
                 });
     }

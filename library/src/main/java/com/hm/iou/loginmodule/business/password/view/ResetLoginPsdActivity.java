@@ -32,7 +32,8 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
     public static final String EXTRA_SMS_CHECK_CODE = "sms_check_code";
     public static final String EXTRA_EMAIL = "email";
     public static final String EXTRA_EMAIL_CHECK_CODE = "email_check_code";
-    public static final String EXTRA_OCR_LIVING_SN = "ocr_living_sn";
+    public static final String EXTRA_EMAIL_CHECK_CODE_SN = "email_check_code_sn";
+    public static final String EXTRA_LIVING_CHECK_SN = "living_check_sn";
     public static final String EXTRA_USER_ID_CARD = "user_id_card";
 
 
@@ -43,12 +44,9 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
 
     @BindView(R2.id.et_password)
     ShowHidePasswordEditText mEtPsd;
-    private String mStrPsd;
-
     @BindView(R2.id.tv_ok)
     TextView mTvOk;
 
-    boolean isEyeOpen = false;
     //短信验证码
     private String mSMSCheckCode;
     //手机号
@@ -57,10 +55,16 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
     private String mUserIDCard;
     //邮箱
     private String mEmail;
+    //邮箱验证码
+    private String mEmailCheckCode;
+    //校验邮箱验证码是否合法的交易流水号
+    private String mEmailCheckCodeSN;
     //活体校验的流水号
-    private String mOCRLivingSn;
+    private String mOCRLivingSN;
     //重置密码的方式
     private String mResetPsdType;
+    //新密码
+    private String mStrPsd;
 
 
     @Override
@@ -82,9 +86,10 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             mSMSCheckCode = intent.getStringExtra(EXTRA_SMS_CHECK_CODE);
         } else if (RESET_PSD_TYPE_BY_EMAIL.equals(mResetPsdType)) {
             mEmail = intent.getStringExtra(EXTRA_EMAIL);
-            mSMSCheckCode = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE);
+            mEmailCheckCode = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE);
+            mEmailCheckCodeSN = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE_SN);
         } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
-            mOCRLivingSn = intent.getStringExtra(EXTRA_OCR_LIVING_SN);
+            mOCRLivingSN = intent.getStringExtra(EXTRA_LIVING_CHECK_SN);
             mUserIDCard = intent.getStringExtra(EXTRA_USER_ID_CARD);
         }
         RxTextView.textChanges(mEtPsd).subscribe(new Consumer<CharSequence>() {
@@ -107,20 +112,13 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
 
     private void resetPsd() {
         if (RESET_PSD_TYPE_BY_SMS.equals(mResetPsdType)) {
-            mPresenter.resetQueryPsdBySMS(mMobile, mSMSCheckCode, mStrPsd);
+            mPresenter.resetLoginPsdBySMS(mMobile, mSMSCheckCode, mStrPsd);
         } else if (RESET_PSD_TYPE_BY_EMAIL.equals(mResetPsdType)) {
-            mPresenter.resetQueryPswdByMail(mMobile, mEmail, mSMSCheckCode, mStrPsd);
+            mPresenter.resetLoginPsdByEMail(mMobile, mEmail, mEmailCheckCode, mEmailCheckCodeSN, mStrPsd);
 
         } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
-            mPresenter.resetQueryPswdWithLiveness(mMobile, mUserIDCard, mStrPsd, mOCRLivingSn);
+            mPresenter.resetLoginPsdByFace(mMobile, mUserIDCard, mStrPsd, mOCRLivingSN);
         }
-    }
-
-    private void toLoginLoadingView() {
-//        Intent intent = new Intent(mContext, LoginLoadingActivity.class);
-//        intent.putExtra(Constants.INTENT_LOGIN_LOADING_TYPE, LoginTypeEnum.loginByResetLoginPsd);
-//        startActivity(intent);
-//        finish();
     }
 
 }

@@ -51,7 +51,19 @@ public class LoginLoadingPresenter extends BaseLoginModulePresenter<LoginLoading
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
+                        UserManager.getInstance(mContext).logout();
+                        NavigationHelper.toSelectLoginType(mContext);
+                        mView.closeCurrPage();
+                    }
 
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isShowCommError() {
+                        return false;
                     }
                 });
     }

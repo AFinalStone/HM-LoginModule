@@ -43,6 +43,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@null"
+            android:hint="@string/loginmodule_bind_email_et_hint"
             android:textSize="@dimen/textFontSize_14" />
 
     </LinearLayout>
@@ -85,10 +86,10 @@
         android:layout_marginRight="35dp" />
 
     <TextView
-        android:id="@+id/tv_find"
+        android:id="@+id/tv_bindEmail"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="90dp"
-        android:text="@string/loginmodule_find_psd_btn_find" />
+        android:text="@string/loginmodule_bind_email_btn_bind" />
 
 
 </LinearLayout>

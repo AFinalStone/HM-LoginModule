@@ -19,6 +19,7 @@ import com.hm.iou.loginmodule.business.register.RegisterByWXChatContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByWXChatPresenter;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
+import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -44,10 +45,10 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     ClearEditText mEtMobile;
     @BindView(R2.id.et_smsCheckCode)
     EditText mEtSMSCheckCode;
+    @BindView(R2.id.tv_getSMSCheckCode)
+    HMCountDownTextView mTvGetSMSCheckCode;
     @BindView(R2.id.et_password)
     EditText mEtPassword;
-    @BindView(R2.id.tv_getSMSCheckCode)
-    TextView mTvGetSMSCheckCode;
     @BindView(R2.id.tv_bindMobile)
     TextView mTvBindMobile;
 
@@ -81,19 +82,17 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                 checkValue();
             }
         });
-
-        RxTextView.textChanges(mEtPassword).subscribe(new Consumer<CharSequence>() {
-            @Override
-            public void accept(CharSequence charSequence) throws Exception {
-                mStrPsd = String.valueOf(charSequence);
-                checkValue();
-            }
-        });
-
         RxTextView.textChanges(mEtSMSCheckCode).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mStrSMSCheckCode = String.valueOf(charSequence);
+                checkValue();
+            }
+        });
+        RxTextView.textChanges(mEtPassword).subscribe(new Consumer<CharSequence>() {
+            @Override
+            public void accept(CharSequence charSequence) throws Exception {
+                mStrPsd = String.valueOf(charSequence);
                 checkValue();
             }
         });
@@ -114,13 +113,38 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     private void checkValue() {
         mTvBindMobile.setEnabled(false);
-        if (mStrMobile.length() > 0 && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
+        if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER) && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
             mTvBindMobile.setEnabled(true);
         }
     }
 
     @Override
     public void warnMobileHaveBindWX(String desc) {
+        String title = getString(R.string.bind_mobile_dialog01_title);
+        String msg = getString(R.string.bind_mobile_dialog01_msg);
+        String cancel = getString(R.string.base_cancel);
+        String ok = getString(R.string.bind_mobile_dialog01_ok);
+        new IOSAlertDialog.Builder(mContext)
+                .setTitle(title)
+                .setMessage(msg)
+                .setNegativeButton(cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton(ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        NavigationHelper.toMobileLogin(mContext, mStrMobile);
+                        finish();
+                    }
+                }).show();
+    }
+
+    @Override
+    public void warnMobileNotBindWX(String desc) {
         String title = getString(R.string.bind_mobile_dialog02_title);
         String msg = getString(R.string.bind_mobile_dialog02_msg);
         String cancel = getString(R.string.base_cancel);
@@ -144,29 +168,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     }
 
     @Override
-    public void warnMobileNotBindWX(String desc) {
-        String title = getString(R.string.bind_mobile_dialog01_title);
-        String msg = getString(R.string.bind_mobile_dialog01_msg);
-        String cancel = getString(R.string.base_cancel);
-        String ok = getString(R.string.bind_mobile_dialog01_ok);
-        new IOSAlertDialog.Builder(mContext)
-                .setTitle(title)
-                .setMessage(msg)
-                .setNegativeButton(cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton(ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        NavigationHelper.toMobileLogin(mContext, mStrMobile);
-                        finish();
-                    }
-                }).show();
-
+    public void startCountDown() {
+        mTvGetSMSCheckCode.startCountDown();
     }
 
 }

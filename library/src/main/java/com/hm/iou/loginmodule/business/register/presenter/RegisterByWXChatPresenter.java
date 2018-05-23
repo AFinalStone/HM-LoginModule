@@ -33,8 +33,8 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
     private static final int MOBILE_NOT_BIND_WX = 0;
     //手机号存在且已经绑定微信
     private static final int MOBILE_HAVE_BIND_WX = 1;
-
-    private final int SMS_TYPE_REGISTER = 1;
+    //绑定微信
+    private final int PURPOSE_TYPE_BIND_WX_BY_SMS = 2;
 
 
     public RegisterByWXChatPresenter(@NonNull Context context, @NonNull RegisterByWXChatContract.View view) {
@@ -44,14 +44,15 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
     @Override
     public void getSmsCode(String mobile) {
         mView.showLoadingView();
-        LoginModuleApi.sendMessage(SMS_TYPE_REGISTER, mobile)
-                .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
-                .map(RxUtil.<Object>handleResponse())
-                .subscribeWith(new CommSubscriber<Object>(mView) {
+        LoginModuleApi.sendMessage(PURPOSE_TYPE_BIND_WX_BY_SMS, mobile)
+                .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<String>handleResponse())
+                .subscribeWith(new CommSubscriber<String>(mView) {
                     @Override
-                    public void handleResult(Object o) {
+                    public void handleResult(String str) {
                         mView.dismissLoadingView();
                         mView.toastMessage(R.string.uikit_get_check_code_success);
+                        mView.startCountDown();
                     }
 
                     @Override

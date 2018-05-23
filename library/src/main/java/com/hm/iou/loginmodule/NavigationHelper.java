@@ -2,7 +2,9 @@ package com.hm.iou.loginmodule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
+import com.hm.iou.loginmodule.business.email.BindEmailActivity;
 import com.hm.iou.loginmodule.business.loading.LoginLoadingActivity;
 import com.hm.iou.loginmodule.business.login.view.InputMobileActivity;
 import com.hm.iou.loginmodule.business.login.view.MobileLoginActivity;
@@ -57,11 +59,16 @@ public class NavigationHelper {
      * @param context
      */
     public static void ToRegisterAndUseAgreement(Context context) {
-//        Intent intent = new Intent(this, WebViewH5Activity.class);
-//        String title = getString(R.string.webViewHtml5_titleRegisterAndUseAgreement);
-//        intent.putExtra(Constants.INTENT_TITLE, title);
-//        intent.putExtra(Constants.INTENT_WEB_URL, Constants.WEB_H5_URL_IOU_AGREEMENT);
-//        context.startActivity(intent);
+        try {
+            Class WebViewH5Activity = Class.forName("com.hm.iou.hmreceipt.ui.activity.html5.WebViewH5Activity");
+            Intent intent = new Intent(context, WebViewH5Activity);
+            String title = "注册与使用协议";
+            intent.putExtra("title", title);
+            intent.putExtra("web_url", "file:///android_asset/APPH5/IOUAgreement/IOUAgreement.html");
+            context.startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -70,11 +77,16 @@ public class NavigationHelper {
      * @param context
      */
     public static void toPrivateAgreement(Context context) {
-//        Intent intent = new Intent(this, WebViewH5Activity.class);
-//        String title = getString(R.string.webViewHtml5_titlePrivateAgreement);
-//        intent.putExtra(Constants.INTENT_TITLE, title);
-//        intent.putExtra(Constants.INTENT_WEB_URL, Constants.WEB_H5_URL_PRIVACY_AGREEMENT);
-//        startActivity(intent);
+        try {
+            Class WebViewH5Activity = Class.forName("com.hm.iou.hmreceipt.ui.activity.html5.WebViewH5Activity");
+            Intent intent = new Intent(context, WebViewH5Activity);
+            String title = "隐私协议";
+            intent.putExtra("title", title);
+            intent.putExtra("web_url", "file:///android_asset/APPH5/PrivacyAgreement/PrivacyAgreement.html");
+            context.startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -123,36 +135,93 @@ public class NavigationHelper {
      */
     public static void toFindByEmail(Context context, String mobile, String email) {
         Intent intent = new Intent(context, FindByEmailActivity.class);
-        intent.putExtra(FindByEmailActivity.EXTRA_KEY_EMAIL, email);
+        intent.putExtra(FindByEmailActivity.EXTRA_KEY_TIP_EMAIL, email);
         intent.putExtra(FindByEmailActivity.EXTRA_KEY_MOBILE, mobile);
         context.startActivity(intent);
     }
 
     /**
-     * 跳转到活体校验
+     * 跳转到通过人脸识别找回密码的页面
      *
      * @param context
-     * @param idCard
+     * @param mobile
+     * @param userName
      */
-    public static void toFindByFace(Context context, String idCard) {
-//        Intent intent = new Intent(context, FindByEmailActivity.class);
-//        intent.putExtra(FindByEmailActivity.EXTRA_KEY_EMAIL, idCard);
-//        intent.putExtra(FindByEmailActivity.EXTRA_KEY_MOBILE, mobile);
-//        context.startActivity(intent);
+    public static void toFindByFace(Context context, String mobile, String userName) {
+        try {
+            Class LivingCheckActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.FindByFaceActivity");
+            Intent intent = new Intent(context, LivingCheckActivity);
+            intent.putExtra("mobile", mobile);
+            intent.putExtra("name", userName);
+            context.startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 活体校验失败
+     *
+     * @param context
+     * @param remainder
+     */
+    public static void toLivingCheckFailed(Context context, String remainder) {
+        try {
+            Class LivingCheckActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.LivingCheckFailedActivity");
+            Intent intent = new Intent(context, LivingCheckActivity);
+            intent.putExtra("living_remainder", remainder);
+            context.startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * 跳转到重置登录密码
+     * 短信验证码校验成功，跳转到重置登录密码
      *
      * @param context
      * @param mobile
      */
-    public static void toResetLoginPsd(Context context, String resetPsdType, String mobile) {
+    public static void toResetLoginPsdBySMS(Context context, String mobile, String checkCode) {
         Intent intent = new Intent(context, ResetLoginPsdActivity.class);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, resetPsdType);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_SMS);
         intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mobile);
-//        intent.putExtra(Constants.INTENT_EMAIL_NUMBER, mStrEmail);
-//        intent.putExtra(Constants.INTENT_CHECK_CODE, mEtEmailCode);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_SMS_CHECK_CODE, checkCode);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 邮箱验证码校验成功，跳转到重置登录密码
+     *
+     * @param context
+     * @param mobile
+     * @param email
+     * @param checkCode
+     * @param sn        邮箱验证码校验的交易流水号
+     */
+    public static void toResetLoginPsdByEmail(Context context, String mobile, String email, String checkCode, String sn) {
+        Intent intent = new Intent(context, ResetLoginPsdActivity.class);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_EMAIL);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mobile);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_EMAIL, email);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_EMAIL_CHECK_CODE, checkCode);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_EMAIL_CHECK_CODE_SN, sn);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 活体校验校验成功，跳转到重置登录密码
+     *
+     * @param context
+     * @param mobile
+     */
+    public static void toResetLoginPsdByFace(Context context, String mobile, String idCardNum, String livingCheckSN) {
+        Intent intent = new Intent(context, ResetLoginPsdActivity.class);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_FACE);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mobile);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_LIVING_CHECK_SN, livingCheckSN);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_USER_ID_CARD, idCardNum);
         context.startActivity(intent);
     }
 
@@ -196,4 +265,13 @@ public class NavigationHelper {
     }
 
 
+    /**
+     * 跳转到邮箱绑定页面
+     *
+     * @param context
+     */
+    public static void toBindEmail(Context context) {
+        Intent intent = new Intent(context, BindEmailActivity.class);
+        context.startActivity(intent);
+    }
 }

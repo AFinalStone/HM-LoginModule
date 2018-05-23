@@ -28,6 +28,11 @@ public interface RegisterByWXChatContract {
          */
         void warnMobileNotBindWX(String desc);
 
+        /**
+         * 开始倒计时
+         */
+        void startCountDown();
+
     }
 
     interface Presenter extends BaseContract.BasePresenter {

@@ -8,6 +8,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -16,14 +17,21 @@ import com.hm.iou.loginmodule.business.password.presenter.FindBySMSPresenter;
 import com.hm.iou.uikit.keyboard.HMKeyBoardAdapter;
 import com.hm.iou.uikit.keyboard.HMKeyBoardView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 通过短信验证码找回登录密码
@@ -36,19 +44,19 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
 
     @BindView(R2.id.tv_mobile)
     TextView mTvMobile;
-    private String mStrMobile;
 
     @BindView(R2.id.tv_retryCode)
     TextView mTvRetryCode;
 
-    private TextView[] mTvList = new TextView[6];//用数组保存6个TextView
-    private int mCurrentIndex = -1;
-
     @BindView(R2.id.keyboardView)
     HMKeyBoardView mHMKeyBoardView;
+
     private GridView mGridView;
     private ArrayList<Map<String, String>> mListValue;
 
+    private String mStrMobile;
+    private TextView[] mTvList = new TextView[6];//用数组保存6个TextView
+    private int mCurrentIndex = -1;
 
     @Override
     protected int getLayoutId() {
@@ -76,12 +84,11 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
                 String lastCode = String.valueOf(charSequence);
                 if (lastCode.length() == 1) {
 
-                    String currentCheckCode = "";     //每次触发都要先将strPassword置空，再重新获取，避免由于输入删除再输入造成混乱
-
+                    String smsCheckCode = "";     //每次触发都要先将strPassword置空，再重新获取，避免由于输入删除再输入造成混乱
                     for (int i = 0; i < 6; i++) {
-                        currentCheckCode += mTvList[i].getText().toString().trim();
+                        smsCheckCode += mTvList[i].getText().toString().trim();
                     }
-                    jumpToFindLoginPsdByPhoneView(currentCheckCode);
+                    mPresenter.compareSMSCheckCode(mStrMobile, smsCheckCode);
                 }
             }
         });
@@ -125,26 +132,22 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
         });
         mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
         mTvMobile.setText(mStrMobile);
-        mPresenter.sendResetPsdBySMSCheckCode(mStrMobile);
+        mPresenter.sendSMSCheckCode(mStrMobile);
     }
 
 
     @OnClick({R2.id.tv_retryCode})
     public void onClick(View view) {
         if (R.id.tv_retryCode == view.getId()) {
-            mPresenter.sendResetPsdBySMSCheckCode(mStrMobile);
+            mPresenter.sendSMSCheckCode(mStrMobile);
         }
     }
 
-
-    //通过手机验证码实现重置登录密码
-    public void jumpToFindLoginPsdByPhoneView(String currentCheckCode) {
-        Intent intent = new Intent(this, ResetLoginPsdActivity.class);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_SMS);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mStrMobile);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_SMS_CHECK_CODE, currentCheckCode);
-        startActivity(intent);
-//        NavigationHelper.toResetLoginPsd(mContext, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_SMS, mStrMobile);
+    @Override
+    public void setGetSMSBtnText(boolean enable, String text) {
+        mTvRetryCode.setEnabled(enable);
+        mTvRetryCode.setText(text);
     }
+
 
 }

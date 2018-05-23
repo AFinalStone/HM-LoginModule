@@ -14,16 +14,15 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
- * 通过手机号进行登录
- *
  * @author syl
  * @time 2018/5/19 下午4:54
  */
 public class FindByInputMobilePresenter extends BaseLoginModulePresenter<FindByInputMobileContract.View> implements FindByInputMobileContract.Presenter {
 
-    private final int RESET_PSD_BY_METHOD_MAIL = 1;
-    private final int RESET_PSD_BY_METHOD_REAL = 3;
-    private final int RESET_PSD_BY_METHOD_SMS = 2;
+    //Mail(1:邮件方式), Real(2:人脸识别方式), Sms(3:短信方式)
+    private final int RESET_PSD_METHOD_BY_MAIL = 1;
+    private final int RESET_PSD_METHOD_BY_FACE = 2;
+    private final int RESET_PSD_METHOD_BY_SMS = 3;
 
     public FindByInputMobilePresenter(@NonNull Context context, @NonNull FindByInputMobileContract.View view) {
         super(context, view);
@@ -40,18 +39,17 @@ public class FindByInputMobilePresenter extends BaseLoginModulePresenter<FindByI
                     public void handleResult(GetResetPsdMethodRespBean getResetPsdMethodRespBean) {
                         mView.dismissLoadingView();
                         int method = getResetPsdMethodRespBean.getMethod();
-                        if (RESET_PSD_BY_METHOD_MAIL == method) {
+                        if (RESET_PSD_METHOD_BY_MAIL == method) {
                             //通过邮箱验证码实现重置登录密码
                             String email = getResetPsdMethodRespBean.getField();
                             NavigationHelper.toFindByEmail(mContext, mobile, email);
-                        } else if (RESET_PSD_BY_METHOD_REAL == method) {
+                        } else if (RESET_PSD_METHOD_BY_FACE == method) {
                             //通过活体校验重置登录密码
-                            String idCard = getResetPsdMethodRespBean.getField();
-                            NavigationHelper.toFindByFace(mContext, idCard);
-                        } else if (RESET_PSD_BY_METHOD_SMS == method) {
+                            String userName = getResetPsdMethodRespBean.getField();
+                            NavigationHelper.toFindByFace(mContext, mobile, userName);
+                        } else if (RESET_PSD_METHOD_BY_SMS == method) {
                             //通过手机号验证码重置登录密码
-                            String idCard = getResetPsdMethodRespBean.getField();
-                            NavigationHelper.toFindByFace(mContext, idCard);
+                            NavigationHelper.toFindBySMS(mContext, mobile);
                         }
                     }
 

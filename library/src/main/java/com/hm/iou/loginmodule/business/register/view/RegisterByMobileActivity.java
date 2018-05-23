@@ -11,6 +11,7 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByMobilePresenter;
+import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.ShowHidePasswordEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -32,6 +33,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     TextView mEtMobile;
     @BindView(R2.id.et_smsCheckCode)
     EditText mEtSMSCheckCode;
+    @BindView(R2.id.tv_getSmsCheckCode)
+    HMCountDownTextView mTvGetSmsCheckCode;
     @BindView(R2.id.et_password)
     ShowHidePasswordEditText mEtPsd;
     @BindView(R2.id.tv_register)
@@ -71,13 +74,6 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         mEtMobile.setText(mStrMobile);
     }
 
-    private void checkValue() {
-        mTvRegister.setEnabled(false);
-        if (mStrPsd.length() >= 6 && mStrSmsCheckCode.length() > 0) {
-            mTvRegister.setEnabled(true);
-        }
-    }
-
     @OnClick({R2.id.tv_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
@@ -92,4 +88,15 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         }
     }
 
+    private void checkValue() {
+        mTvRegister.setEnabled(false);
+        if (mStrPsd.length() >= 6 && mStrSmsCheckCode.length() > 0) {
+            mTvRegister.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void startCountDown() {
+        mTvGetSmsCheckCode.startCountDown();
+    }
 }

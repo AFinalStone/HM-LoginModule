@@ -9,7 +9,10 @@ import com.hm.iou.base.mvp.BaseContract;
 public interface RegisterByMobileContract {
 
     interface View extends BaseContract.BaseView {
-
+        /**
+         * 开始倒计时
+         */
+        void startCountDown();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

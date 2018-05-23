@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.password.view;
+package com.hm.iou.loginmodule.business.email;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,10 +25,9 @@ import io.reactivex.functions.Consumer;
  *
  * @author syl
  */
-public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> implements FindByEmailContract.View {
+public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implements BindEmailContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
-    public static final String EXTRA_KEY_TIP_EMAIL = "tip_email";
 
     private static String REGEXP_EMAIL_NUMBER = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
@@ -38,22 +37,21 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
     EditText mEtEmailCode;
     @BindView(R2.id.tv_getEmailCode)
     HMCountDownTextView mTvGetEmailCode;
-    @BindView(R2.id.tv_find)
-    TextView mTvFind;
+    @BindView(R2.id.tv_bindEmail)
+    TextView mTvBindEmail;
 
     private String mStrEmail = "";
-    private String mStrEmailCode = "";
-    private String mTipEmail = "";
+    private String mStrEmailCheckCode = "";
     private String mMobile = "";
 
     @Override
     protected int getLayoutId() {
-        return R.layout.loginmodule_activity_find_by_email;
+        return R.layout.loginmodule_activity_bind_email;
     }
 
     @Override
-    protected FindByEmailPresenter initPresenter() {
-        return new FindByEmailPresenter(this, this);
+    protected BindEmailPresenter initPresenter() {
+        return new BindEmailPresenter(this, this);
     }
 
     @Override
@@ -73,33 +71,40 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
         RxTextView.textChanges(mEtEmailCode).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mStrEmailCode = String.valueOf(charSequence);
+                mStrEmailCheckCode = String.valueOf(charSequence);
                 checkValue();
             }
         });
         showSoftKeyboard();
         Intent intent = getIntent();
         mMobile = intent.getStringExtra(EXTRA_KEY_MOBILE);
-        mTipEmail = intent.getStringExtra(EXTRA_KEY_TIP_EMAIL);
-        String strEmail = getString(R.string.bindEmailAndResetPsd_etEmailLeft) + mTipEmail + getString(R.string.bindEmailAndResetPsd_etEmailRight);
-        mEtEmail.setHint(strEmail);
     }
 
-    @OnClick({R2.id.tv_getEmailCode, R2.id.tv_find})
+    @OnClick({R2.id.tv_getEmailCode, R2.id.tv_bindEmail})
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.tv_getEmailCode == id) {
             mPresenter.sendEmailCheckCode(mStrEmail);
-        } else if (R.id.tv_find == id) {
-            mPresenter.compareEmailCheckCode(mMobile, mStrEmail, mStrEmailCode);
+        } else if (R.id.tv_bindEmail == id) {
+            mPresenter.bindEmail(mStrEmail, mStrEmailCheckCode);
         }
     }
 
     private void checkValue() {
-        mTvFind.setEnabled(false);
-        if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER) && mStrEmailCode.length() > 0) {
-            mTvFind.setEnabled(true);
+        mTvBindEmail.setEnabled(false);
+        if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER) && mStrEmailCheckCode.length() > 0) {
+            mTvBindEmail.setEnabled(true);
         }
+    }
+
+
+    private void jumpToLoginResetPsdView() {
+//        Intent intent = new Intent(mContext, ResetLoginPsdActivity.class);
+//        intent.putExtra(Constants.INTENT_RESET_LOGIN_PSD_TYPE, LoginResetPsdTypeEnum.LoginResetPsdByEmail);
+//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, mMobile);
+//        intent.putExtra(Constants.INTENT_EMAIL_NUMBER, mStrEmail);
+//        intent.putExtra(Constants.INTENT_CHECK_CODE, mEtEmailCode);
+//        startActivity(intent);
     }
 
     @Override

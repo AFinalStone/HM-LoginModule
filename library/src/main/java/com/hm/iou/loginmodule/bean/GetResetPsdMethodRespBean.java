@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class GetResetPsdMethodRespBean {
 
-    //1(邮箱), 2(人脸), 3(短信);
+    //Mail(1:邮件方式), Real(2:人脸识别方式), Sms(3:短信方式)
     int method;
     String field;
 

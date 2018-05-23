@@ -1,6 +1,8 @@
 package com.hm.iou.loginmodule.business.password;
 
 
+import android.support.annotation.StringRes;
+
 import com.hm.iou.base.mvp.BaseContract;
 
 /**
@@ -14,6 +16,13 @@ public interface FindBySMSContract {
 
     interface View extends BaseContract.BaseView {
 
+        /**
+         * 修改获取验证码按钮的状态和内容
+         *
+         * @param enable
+         * @param text   文字资源的id
+         */
+        void setGetSMSBtnText(boolean enable, String text);
     }
 
     interface Present extends BaseContract.BasePresenter {
@@ -23,7 +32,15 @@ public interface FindBySMSContract {
          *
          * @param mobile
          */
-        void sendResetPsdBySMSCheckCode(String mobile);
+        void sendSMSCheckCode(String mobile);
+
+        /**
+         * 短信重置密码前,短信验证码的比对
+         *
+         * @param mobile
+         * @param checkCode
+         */
+        void compareSMSCheckCode(String mobile, String checkCode);
     }
 
 }
