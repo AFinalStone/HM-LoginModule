@@ -283,9 +283,9 @@ public class LoginModuleApi {
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         //创建`MultipartBody.Part`，其中需要注意第一个参数`file`需要与服务器对应,也就是`键`
         MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        RequestBody bodyMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
-        RequestBody bodyIdCardNum = RequestBody.create(MediaType.parse("text/plain"), idCard);
-        return getService().livenessIdnumberVerificationWithoutLogin(partFile, bodyMobile, bodyIdCardNum).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+//        RequestBody bodyMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
+//        RequestBody bodyIdCardNum = RequestBody.create(MediaType.parse("text/plain"), idCard);
+        return getService().livenessIdnumberVerificationWithoutLogin(partFile, mobile, idCard).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

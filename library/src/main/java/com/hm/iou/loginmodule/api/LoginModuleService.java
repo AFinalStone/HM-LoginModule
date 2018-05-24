@@ -24,6 +24,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
@@ -73,9 +74,10 @@ public interface LoginModuleService {
     @POST("/api/iou/user/v1/checkIdCardNumWithoutLogin")
     Flowable<BaseResponse<Boolean>> checkIdCardNumWithoutLogin(@Body CheckIDCardReqBean checkIDCardReqBean);
 
+    @Multipart
     @POST("/api/iou/user/v1/livenessIdnumberVerificationWithoutLogin")
-    Flowable<BaseResponse<String>> livenessIdnumberVerificationWithoutLogin(@Part MultipartBody.Part file, @Part("mobile") RequestBody mobile
-            , @Part("idCardNum") RequestBody idCardNum);
+    Flowable<BaseResponse<String>> livenessIdnumberVerificationWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
+            , @Query("idCardNum") String idCardNum);
 
     @POST("/api/iou/user/v1/compareCheckCode")
     Flowable<BaseResponse<Integer>> compareSMSCheckCode(@Body CompareSMSCheckCodeReqBean compareSMSCheckCodeReqBean);

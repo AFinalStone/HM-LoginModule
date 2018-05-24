@@ -60,7 +60,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
     //校验邮箱验证码是否合法的交易流水号
     private String mEmailCheckCodeSN;
     //活体校验的流水号
-    private String mOCRLivingSN;
+    private String mFaceCheckSN;
     //重置密码的方式
     private String mResetPsdType;
     //新密码
@@ -89,7 +89,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             mEmailCheckCode = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE);
             mEmailCheckCodeSN = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE_SN);
         } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
-            mOCRLivingSN = intent.getStringExtra(EXTRA_FACE_CHECK_SN);
+            mFaceCheckSN = intent.getStringExtra(EXTRA_FACE_CHECK_SN);
             mUserIDCard = intent.getStringExtra(EXTRA_USER_ID_CARD);
         }
         RxTextView.textChanges(mEtPsd).subscribe(new Consumer<CharSequence>() {
@@ -116,7 +116,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
         } else if (RESET_PSD_TYPE_BY_EMAIL.equals(mResetPsdType)) {
             mPresenter.resetLoginPsdByEMail(mMobile, mEmail, mEmailCheckCode, mEmailCheckCodeSN, mStrPsd);
         } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
-            mPresenter.resetLoginPsdByFace(mMobile, mUserIDCard, mStrPsd, mOCRLivingSN);
+            mPresenter.resetLoginPsdByFace(mMobile, mUserIDCard, mFaceCheckSN, mStrPsd);
         }
     }
 
