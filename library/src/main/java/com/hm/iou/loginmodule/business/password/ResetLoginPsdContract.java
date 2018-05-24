@@ -27,11 +27,11 @@ public interface ResetLoginPsdContract {
          * 通过活体校验重置登录密码
          *
          * @param mobile
-         * @param idCardNum
+         * @param idCardNum   身份证前六位
+         * @param faceCheckSn 活体校验的流水号
          * @param newPsd
-         * @param livingCheckSn
          */
-        void resetLoginPsdByFace(String mobile, String idCardNum, String newPsd, String livingCheckSn);
+        void resetLoginPsdByFace(String mobile, String idCardNum, String faceCheckSn, String newPsd);
 
         /**
          * 通过邮箱验证码重置登录密码

@@ -33,7 +33,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
     public static final String EXTRA_EMAIL = "email";
     public static final String EXTRA_EMAIL_CHECK_CODE = "email_check_code";
     public static final String EXTRA_EMAIL_CHECK_CODE_SN = "email_check_code_sn";
-    public static final String EXTRA_LIVING_CHECK_SN = "living_check_sn";
+    public static final String EXTRA_FACE_CHECK_SN = "face_check_sn";
     public static final String EXTRA_USER_ID_CARD = "user_id_card";
 
 
@@ -51,7 +51,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
     private String mSMSCheckCode;
     //手机号
     private String mMobile;
-    //身份证号码
+    //身份证号码的前六位
     private String mUserIDCard;
     //邮箱
     private String mEmail;
@@ -89,7 +89,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             mEmailCheckCode = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE);
             mEmailCheckCodeSN = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE_SN);
         } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
-            mOCRLivingSN = intent.getStringExtra(EXTRA_LIVING_CHECK_SN);
+            mOCRLivingSN = intent.getStringExtra(EXTRA_FACE_CHECK_SN);
             mUserIDCard = intent.getStringExtra(EXTRA_USER_ID_CARD);
         }
         RxTextView.textChanges(mEtPsd).subscribe(new Consumer<CharSequence>() {
@@ -115,7 +115,6 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             mPresenter.resetLoginPsdBySMS(mMobile, mSMSCheckCode, mStrPsd);
         } else if (RESET_PSD_TYPE_BY_EMAIL.equals(mResetPsdType)) {
             mPresenter.resetLoginPsdByEMail(mMobile, mEmail, mEmailCheckCode, mEmailCheckCodeSN, mStrPsd);
-
         } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
             mPresenter.resetLoginPsdByFace(mMobile, mUserIDCard, mStrPsd, mOCRLivingSN);
         }

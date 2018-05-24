@@ -149,8 +149,8 @@ public class NavigationHelper {
      */
     public static void toFindByFace(Context context, String mobile, String userName) {
         try {
-            Class LivingCheckActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.FindByFaceActivity");
-            Intent intent = new Intent(context, LivingCheckActivity);
+            Class FaceCheckFindLoginPsdActivity = Class.forName("com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFindLoginPsdActivity");
+            Intent intent = new Intent(context, FaceCheckFindLoginPsdActivity);
             intent.putExtra("mobile", mobile);
             intent.putExtra("name", userName);
             context.startActivity(intent);
@@ -164,13 +164,13 @@ public class NavigationHelper {
      * 活体校验失败
      *
      * @param context
-     * @param remainder
+     * @param remainderNumber 剩余次数
      */
-    public static void toLivingCheckFailed(Context context, String remainder) {
+    public static void toLivingCheckFailed(Context context, String remainderNumber) {
         try {
-            Class LivingCheckActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.LivingCheckFailedActivity");
-            Intent intent = new Intent(context, LivingCheckActivity);
-            intent.putExtra("living_remainder", remainder);
+            Class FaceCheckFailedActivity = Class.forName("com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFailedActivity");
+            Intent intent = new Intent(context, FaceCheckFailedActivity);
+            intent.putExtra("face_check_remainder_number", remainderNumber);
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -215,13 +215,15 @@ public class NavigationHelper {
      *
      * @param context
      * @param mobile
+     * @param idCard
+     * @param faceCheckSN
      */
-    public static void toResetLoginPsdByFace(Context context, String mobile, String idCardNum, String livingCheckSN) {
+    public static void toResetLoginPsdByFace(Context context, String mobile, String idCard, String faceCheckSN) {
         Intent intent = new Intent(context, ResetLoginPsdActivity.class);
         intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_FACE);
         intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mobile);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_LIVING_CHECK_SN, livingCheckSN);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_USER_ID_CARD, idCardNum);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_USER_ID_CARD, idCard);
+        intent.putExtra(ResetLoginPsdActivity.EXTRA_FACE_CHECK_SN, faceCheckSN);
         context.startActivity(intent);
     }
 

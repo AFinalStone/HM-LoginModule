@@ -8,6 +8,7 @@ import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.model.SexEnum;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.ImageLoader;
 
@@ -59,16 +60,16 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
         UserInfo userInfo = UserManager.getInstance(this).getUserInfo();
         if (userInfo != null) {
             //头像
-            String sexEnum = userInfo.getSex();
-            int imageResId = R.mipmap.uikit_icon_header_unknow;
-            if ("MALE".equals(sexEnum)) {
-                imageResId = R.mipmap.uikit_icon_header_man;
-            } else if ("FEMALE".equals(sexEnum)) {
-                imageResId = R.mipmap.uikit_icon_header_wuman;
+            int sexEnum = userInfo.getSex();
+            int resIdHeader = R.mipmap.uikit_icon_header_unknow;
+            if (sexEnum == SexEnum.MALE.getValue()) {
+                resIdHeader = R.mipmap.uikit_icon_header_man;
+            } else if (sexEnum == SexEnum.FEMALE.getValue()) {
+                resIdHeader = R.mipmap.uikit_icon_header_wuman;
             }
-            ivHeader.setImageResource(imageResId);
+            ivHeader.setImageResource(resIdHeader);
             String urlHeader = userInfo.getAvatarUrl();
-            ImageLoader.getInstance(mContext).displayImage(urlHeader, ivHeader, imageResId, imageResId);
+            ImageLoader.getInstance(mContext).displayImage(urlHeader, ivHeader, resIdHeader, resIdHeader);
             String nickName = userInfo.getNickName();
             tvNickName.setText(nickName);
         }

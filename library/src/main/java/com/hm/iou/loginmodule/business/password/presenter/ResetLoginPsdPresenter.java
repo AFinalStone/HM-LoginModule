@@ -54,9 +54,25 @@ public class ResetLoginPsdPresenter extends BaseLoginModulePresenter<ResetLoginP
     }
 
     @Override
-    public void resetLoginPsdByFace(String mobile, String idCardNum, String newPsd, String livingCheckSn) {
+    public void resetLoginPsdByFace(final String mobile, String idCardNum, String faceCheckSn, final String newPsd) {
+        mView.showLoadingView();
+        LoginModuleApi.resetLoginPsdByFace(mobile, idCardNum, faceCheckSn, newPsd)
+                .compose(getProvider().<BaseResponse<Integer>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<Integer>handleResponse())
+                .subscribeWith(new CommSubscriber<Integer>(mView) {
+                    @Override
+                    public void handleResult(Integer integer) {
+                        mView.dismissLoadingView();
+                        mobileLogin(mobile, newPsd);
+                    }
 
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+                        mView.dismissLoadingView();
+                    }
+                });
     }
+
 
     @Override
     public void resetLoginPsdByEMail(final String mobile, String email, String checkCode, String sn, final String newPsd) {

@@ -75,9 +75,9 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                 .map(RxUtil.<String>handleResponse())
                 .subscribeWith(new CommSubscriber<String>(mView) {
                     @Override
-                    public void handleResult(String livingCheckSN) {
+                    public void handleResult(String faceCheckSN) {
                         mView.dismissLoadingView();
-                        NavigationHelper.toResetLoginPsdByFace(mContext, mobile, idCardNum, livingCheckSN);
+                        NavigationHelper.toResetLoginPsdByFace(mContext, mobile, idCardNum, faceCheckSN);
                     }
 
                     @Override

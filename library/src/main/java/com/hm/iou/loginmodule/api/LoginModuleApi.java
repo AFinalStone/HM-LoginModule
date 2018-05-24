@@ -11,6 +11,7 @@ import com.hm.iou.loginmodule.bean.req.CompareSMSCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileRegLoginReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
+import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByFaceReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdBySMSReqBean;
 import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
 import com.hm.iou.loginmodule.bean.req.TokenLoginReqBean;
@@ -199,6 +200,23 @@ public class LoginModuleApi {
     }
 
     /**
+     * 通过手机验证码重置登录密码
+     *
+     * @param mobile
+     * @param checkCode 短信验证码
+     * @param newPsd
+     * @return
+     */
+    public static Flowable<BaseResponse<Integer>> resetLoginPsdBySMS(String mobile, String checkCode, String newPsd) {
+        ResetLoginPsdBySMSReqBean reqBean = new ResetLoginPsdBySMSReqBean();
+        reqBean.setMobile(mobile);
+        reqBean.setCheckCode(checkCode);
+        String psdMd5 = Md5Util.getMd5ByString(newPsd);
+        reqBean.setNewPswd(psdMd5);
+        return getService().resetLoginPsdBySMS(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
      * 通过邮箱重置登录密码
      *
      * @param email
@@ -216,20 +234,22 @@ public class LoginModuleApi {
     }
 
     /**
-     * 通过手机验证码重置登录密码
+     * 通过活体检验重置登录密码
      *
-     * @param mobile
-     * @param checkCode 短信验证码
-     * @param newPsd
+     * @param mobile      当前手机号
+     * @param idCard      身份证ID的前6位
+     * @param faceCheckSn 活体校验的流水号
+     * @param newPsd      新的密码
      * @return
      */
-    public static Flowable<BaseResponse<Integer>> resetLoginPsdBySMS(String mobile, String checkCode, String newPsd) {
-        ResetLoginPsdBySMSReqBean reqBean = new ResetLoginPsdBySMSReqBean();
+    public static Flowable<BaseResponse<Integer>> resetLoginPsdByFace(String mobile, String idCard, String faceCheckSn, String newPsd) {
+        ResetLoginPsdByFaceReqBean reqBean = new ResetLoginPsdByFaceReqBean();
         reqBean.setMobile(mobile);
-        reqBean.setCheckCode(checkCode);
-        String psdMd5 = Md5Util.getMd5ByString(newPsd);
-        reqBean.setNewPswd(psdMd5);
-        return getService().resetLoginPsdBySMS(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        reqBean.setIdCardNum(idCard);
+        reqBean.setLivenessIdnumberVerificationSn(faceCheckSn);
+        String psdMD5 = Md5Util.getMd5ByString(newPsd);
+        reqBean.setQueryPswd(psdMD5);
+        return getService().resetLoginPsdByFace(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

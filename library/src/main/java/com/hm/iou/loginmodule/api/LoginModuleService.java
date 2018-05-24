@@ -10,6 +10,7 @@ import com.hm.iou.loginmodule.bean.req.CompareEmailCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareSMSCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileRegLoginReqBean;
+import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByFaceReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdBySMSReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
@@ -58,9 +59,6 @@ public interface LoginModuleService {
     @GET("/api/iou/user/acct/getResetPswdMethod")
     Flowable<BaseResponse<GetResetPsdMethodRespBean>> getResetPswdMethod(@Query("pswdType") String pswdType, @Query("mobile") String mobile);
 
-    @POST("/api/iou/user/v1/resetQueryPswdBySMS")
-    Flowable<BaseResponse<Integer>> resetLoginPsdBySMS(@Body ResetLoginPsdBySMSReqBean resetLoginPsdBySMSReqBean);
-
     @GET("/api/iou/user/v1/wxLogin")
     Flowable<BaseResponse<UserInfo>> wxLogin(@Query("wxSn") String wxSn);
 
@@ -92,7 +90,14 @@ public interface LoginModuleService {
     @POST("/api/iou/user/v1/checkMailWithVCode")
     Flowable<BaseResponse<String>> compareEmailCheckCode(@Body CompareEmailCheckCodeReqBean compareEmailCheckCodeReqBean);
 
+
+    @POST("/api/iou/user/v1/resetQueryPswdBySMS")
+    Flowable<BaseResponse<Integer>> resetLoginPsdBySMS(@Body ResetLoginPsdBySMSReqBean resetLoginPsdBySMSReqBean);
+
     @POST("/api/iou/user/v1/resetPWDByEmail")
     Flowable<BaseResponse<Integer>> resetLoginPsdByEmail(@Body ResetLoginPsdByEmailReqBean resetLoginPsdByEmailReqBean);
+
+    @POST("/api/iou/user/v1/resetQueryPswdWithLiveness")
+    Flowable<BaseResponse<Integer>> resetLoginPsdByFace(@Body ResetLoginPsdByFaceReqBean resetLoginPsdByFaceReqBean);
 
 }
