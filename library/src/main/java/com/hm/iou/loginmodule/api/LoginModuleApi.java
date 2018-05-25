@@ -5,7 +5,6 @@ import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
-import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareEmailCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareSMSCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
@@ -14,20 +13,14 @@ import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByFaceReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdBySMSReqBean;
 import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
-import com.hm.iou.loginmodule.bean.req.TokenLoginReqBean;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.Md5Util;
 
-import java.io.File;
-
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * @author syl
@@ -144,7 +137,7 @@ public class LoginModuleApi {
     }
 
     /**
-     * 获取重置密码的途径
+     * 获取重置密码的途径，如果是活体校验，超过3次，返回特殊的错误码203025
      *
      * @param mobile 手机号
      * @return GetResetPsdMethodRespBean
@@ -250,42 +243,6 @@ public class LoginModuleApi {
         String psdMD5 = Md5Util.getMd5ByString(newPsd);
         reqBean.setQueryPswd(psdMD5);
         return getService().resetLoginPsdByFace(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
-     * 校验身份证ID前6位
-     *
-     * @param mobile 手机号
-     * @param idCard 身份证前6位
-     * @return
-     */
-    public static Flowable<BaseResponse<Boolean>> checkIDCard(String mobile, String idCard) {
-        CheckIDCardReqBean reqBean = new CheckIDCardReqBean();
-        reqBean.setMobile(mobile);
-        reqBean.setIdCardNum(idCard);
-        return getService().checkIdCardNumWithoutLogin(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
-     * 活体校验
-     *
-     * @param mobile
-     * @param idCard
-     * @param file
-     * @return String
-     * 一、返回: 流水号
-     * 二、错误码：
-     * 203009错误码时，retMsg中携带剩余次数;
-     * 203005错误码时，表示还剩余0次，今日失败达到上限
-     */
-    public static Flowable<BaseResponse<String>> livingCheckWithoutLogin(String mobile, String idCard, File file) {
-        //封装
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        //创建`MultipartBody.Part`，其中需要注意第一个参数`file`需要与服务器对应,也就是`键`
-        MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-//        RequestBody bodyMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
-//        RequestBody bodyIdCardNum = RequestBody.create(MediaType.parse("text/plain"), idCard);
-        return getService().livenessIdnumberVerificationWithoutLogin(partFile, mobile, idCard).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

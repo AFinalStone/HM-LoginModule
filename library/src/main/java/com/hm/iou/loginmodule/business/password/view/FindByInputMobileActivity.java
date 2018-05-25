@@ -33,7 +33,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
     @BindView(R2.id.tv_find)
     TextView mTvFind;
 
-    private String mStrMobile;
+    private String mMobile;
 
     @Override
     protected int getLayoutId() {
@@ -51,24 +51,33 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mStrMobile = String.valueOf(charSequence);
+                mMobile = String.valueOf(charSequence);
                 mTvFind.setEnabled(false);
-                if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
+                if (StringUtil.matchRegex(mMobile, REGEXP_MOBILE_NUMBER)) {
                     mTvFind.setEnabled(true);
                 }
             }
         });
-        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        mEtMobile.setText(mStrMobile);
-        if (!StringUtil.isEmpty(mStrMobile)) {
-            mEtMobile.setSelection(mStrMobile.length());
+        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        if (savedInstanceState != null) {
+            savedInstanceState.putString(EXTRA_KEY_MOBILE, mMobile);
+        }
+        if (!StringUtil.isEmpty(mMobile)) {
+            mEtMobile.setText(mMobile);
+            mEtMobile.setSelection(mMobile.length());
         }
         showSoftKeyboard();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_MOBILE, mMobile);
+    }
+
     @OnClick({R2.id.tv_find})
     public void onViewClicked(View view) {
-        mPresenter.getResetPsdMethod(mStrMobile);
+        mPresenter.getResetPsdMethod(mMobile);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.hm.iou.loginmodule.business.email;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
-import com.hm.iou.loginmodule.business.password.FindByEmailContract;
-import com.hm.iou.loginmodule.business.password.presenter.FindByEmailPresenter;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
@@ -21,7 +18,7 @@ import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
 /**
- * 获取邮箱验证码
+ * 绑定邮箱
  *
  * @author syl
  */
@@ -76,8 +73,16 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
             }
         });
         showSoftKeyboard();
-        Intent intent = getIntent();
-        mMobile = intent.getStringExtra(EXTRA_KEY_MOBILE);
+        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        if (savedInstanceState != null) {
+            mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
     @OnClick({R2.id.tv_getEmailCode, R2.id.tv_bindEmail})

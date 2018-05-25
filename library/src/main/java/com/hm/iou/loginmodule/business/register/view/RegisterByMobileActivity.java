@@ -41,7 +41,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     TextView mTvRegister;
 
     private String mStrSmsCheckCode = "";
-    private String mStrMobile = "";
+    private String mMobile = "";
     private String mStrPsd = "";
 
     @Override
@@ -70,17 +70,26 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
                 checkValue();
             }
         });
-        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        mEtMobile.setText(mStrMobile);
+        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        if (savedInstanceState != null) {
+            mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
+        }
+        mEtMobile.setText(mMobile);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
     @OnClick({R2.id.tv_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_register == id) {
-            mPresenter.registerByMobileAndLogin(mStrMobile, mStrPsd, mStrSmsCheckCode);
+            mPresenter.registerByMobileAndLogin(mMobile, mStrPsd, mStrSmsCheckCode);
         } else if (R.id.tv_getSmsCheckCode == id) {
-            mPresenter.getSMSCode(mStrMobile);
+            mPresenter.getSMSCode(mMobile);
         } else if (R.id.tv_agreement01 == id) {
             NavigationHelper.ToRegisterAndUseAgreement(mContext);
         } else if (R.id.tv_agreement02 == id) {

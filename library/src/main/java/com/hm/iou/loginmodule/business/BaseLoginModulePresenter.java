@@ -35,7 +35,7 @@ public abstract class BaseLoginModulePresenter<T extends BaseView> extends MvpAc
      * @param loginSucceedEvent
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvenBusOpenWXResult(LoginSuccEvent loginSucceedEvent) {
+    public void onEvenLoginSuccess(LoginSuccEvent loginSucceedEvent) {
         mView.closeCurrPage();
     }
 }

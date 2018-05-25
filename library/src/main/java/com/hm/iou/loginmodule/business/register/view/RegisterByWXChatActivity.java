@@ -98,8 +98,16 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         });
         showSoftKeyboard();
         mWXChatSN = getIntent().getStringExtra(EXTRA_KEY_WX_CHAT_SN);
+        if (savedInstanceState != null) {
+            mWXChatSN = savedInstanceState.getString(EXTRA_KEY_WX_CHAT_SN);
+        }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_WX_CHAT_SN, mWXChatSN);
+    }
 
     @OnClick({R2.id.tv_bindMobile, R2.id.tv_getSMSCheckCode})
     public void onViewClicked(View view) {
@@ -138,7 +146,6 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         NavigationHelper.toMobileLogin(mContext, mStrMobile);
-                        finish();
                     }
                 }).show();
     }

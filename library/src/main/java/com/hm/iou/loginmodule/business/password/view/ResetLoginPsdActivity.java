@@ -79,19 +79,6 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        Intent intent = getIntent();
-        mResetPsdType = intent.getStringExtra(EXTRA_RESET_PSD_TYPE);
-        mMobile = intent.getStringExtra(EXTRA_MOBILE);
-        if (RESET_PSD_TYPE_BY_SMS.equals(mResetPsdType)) {
-            mSMSCheckCode = intent.getStringExtra(EXTRA_SMS_CHECK_CODE);
-        } else if (RESET_PSD_TYPE_BY_EMAIL.equals(mResetPsdType)) {
-            mEmail = intent.getStringExtra(EXTRA_EMAIL);
-            mEmailCheckCode = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE);
-            mEmailCheckCodeSN = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE_SN);
-        } else if (RESET_PSD_TYPE_BY_FACE.equals(mResetPsdType)) {
-            mFaceCheckSN = intent.getStringExtra(EXTRA_FACE_CHECK_SN);
-            mUserIDCard = intent.getStringExtra(EXTRA_USER_ID_CARD);
-        }
         RxTextView.textChanges(mEtPsd).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
@@ -103,6 +90,41 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             }
         });
         showSoftKeyboard();
+        Intent intent = getIntent();
+        mResetPsdType = intent.getStringExtra(EXTRA_RESET_PSD_TYPE);
+        mMobile = intent.getStringExtra(EXTRA_MOBILE);
+        //短信验证码
+        mSMSCheckCode = intent.getStringExtra(EXTRA_SMS_CHECK_CODE);
+        //邮箱
+        mEmail = intent.getStringExtra(EXTRA_EMAIL);
+        mEmailCheckCode = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE);
+        mEmailCheckCodeSN = intent.getStringExtra(EXTRA_EMAIL_CHECK_CODE_SN);
+        //活体校验的流水号和身份证ID
+        mFaceCheckSN = intent.getStringExtra(EXTRA_FACE_CHECK_SN);
+        mUserIDCard = intent.getStringExtra(EXTRA_USER_ID_CARD);
+        if (savedInstanceState != null) {
+            mResetPsdType = savedInstanceState.getString(EXTRA_RESET_PSD_TYPE);
+            mMobile = savedInstanceState.getString(EXTRA_MOBILE);
+            mSMSCheckCode = savedInstanceState.getString(EXTRA_SMS_CHECK_CODE);
+            mEmail = savedInstanceState.getString(EXTRA_EMAIL);
+            mEmailCheckCode = savedInstanceState.getString(EXTRA_EMAIL_CHECK_CODE);
+            mEmailCheckCodeSN = savedInstanceState.getString(EXTRA_EMAIL_CHECK_CODE_SN);
+            mFaceCheckSN = savedInstanceState.getString(EXTRA_FACE_CHECK_SN);
+            mUserIDCard = savedInstanceState.getString(EXTRA_USER_ID_CARD);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_RESET_PSD_TYPE, mResetPsdType);
+        outState.putString(EXTRA_MOBILE, mMobile);
+        outState.putString(EXTRA_SMS_CHECK_CODE, mSMSCheckCode);
+        outState.putString(EXTRA_EMAIL, mEmail);
+        outState.putString(EXTRA_EMAIL_CHECK_CODE, mEmailCheckCode);
+        outState.putString(EXTRA_EMAIL_CHECK_CODE_SN, mEmailCheckCodeSN);
+        outState.putString(EXTRA_FACE_CHECK_SN, mFaceCheckSN);
+        outState.putString(EXTRA_USER_ID_CARD, mUserIDCard);
     }
 
     @OnClick({R2.id.tv_ok})

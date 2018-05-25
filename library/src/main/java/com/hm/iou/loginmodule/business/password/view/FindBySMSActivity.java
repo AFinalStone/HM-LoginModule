@@ -1,6 +1,5 @@
 package com.hm.iou.loginmodule.business.password.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,8 +7,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
-import com.hm.iou.base.utils.CommSubscriber;
-import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
@@ -17,21 +14,14 @@ import com.hm.iou.loginmodule.business.password.presenter.FindBySMSPresenter;
 import com.hm.iou.uikit.keyboard.HMKeyBoardAdapter;
 import com.hm.iou.uikit.keyboard.HMKeyBoardView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 通过短信验证码找回登录密码
@@ -54,7 +44,7 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
     private GridView mGridView;
     private ArrayList<Map<String, String>> mListValue;
 
-    private String mStrMobile;
+    private String mMobile;
     private TextView[] mTvList = new TextView[6];//用数组保存6个TextView
     private int mCurrentIndex = -1;
 
@@ -88,7 +78,7 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
                     for (int i = 0; i < 6; i++) {
                         smsCheckCode += mTvList[i].getText().toString().trim();
                     }
-                    mPresenter.compareSMSCheckCode(mStrMobile, smsCheckCode);
+                    mPresenter.compareSMSCheckCode(mMobile, smsCheckCode);
                 }
             }
         });
@@ -130,16 +120,24 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
                 }
             }
         });
-        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        mTvMobile.setText(mStrMobile);
-        mPresenter.sendSMSCheckCode(mStrMobile);
+        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        if (savedInstanceState != null) {
+            mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
+        }
+        mTvMobile.setText(mMobile);
+        mPresenter.sendSMSCheckCode(mMobile);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_MOBILE, mMobile);
+    }
 
     @OnClick({R2.id.tv_retryCode})
     public void onClick(View view) {
         if (R.id.tv_retryCode == view.getId()) {
-            mPresenter.sendSMSCheckCode(mStrMobile);
+            mPresenter.sendSMSCheckCode(mMobile);
         }
     }
 

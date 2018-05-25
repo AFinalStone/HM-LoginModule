@@ -34,7 +34,7 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
     @BindView(R2.id.tv_login)
     TextView mTvLogin;
 
-    private String mStrMobile = "";
+    private String mMobile = "";
     private String mStrPsd = "";
 
     @Override
@@ -60,18 +60,26 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
             }
         });
         showSoftKeyboard();
-        mStrMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        mTvMobile.setText(mStrMobile);
+        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        if (savedInstanceState != null) {
+            mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
+        }
+        mTvMobile.setText(mMobile);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_MOBILE, mMobile);
+    }
 
     @OnClick({R2.id.tv_login, R2.id.tv_forgetPassword})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_login == id) {
-            mPresenter.mobileLogin(mStrMobile, mStrPsd);
+            mPresenter.mobileLogin(mMobile, mStrPsd);
         } else if (R.id.tv_forgetPassword == id) {
-            NavigationHelper.toFindByInputMobile(mContext, mStrMobile);
+            NavigationHelper.toFindByInputMobile(mContext, mMobile);
         }
     }
 

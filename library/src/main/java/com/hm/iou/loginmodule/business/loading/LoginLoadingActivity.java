@@ -17,11 +17,7 @@ import butterknife.BindView;
 
 /**
  * Created by syl on 2017/11/10.
- * 1.用户从手机登录页面进入这个页面，根据手机号和密码进行登录
  * 2.用户通过token进行登录
- * 3.用户通过微信进行登录
- * 4.用户通过微信进行注册并绑定手机号并登录
- * 5.用户通过微信登录，输入手机号之后判断手机号已经存在，这里只是进行手机号和微信的绑定，然后登陆
  */
 public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> implements LoginLoadingContract.View {
 
@@ -33,6 +29,7 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
 
     @BindView(R2.id.tv_nickName)
     TextView tvNickName;
+    private String mLoadingType;
 
     @Override
     protected int getLayoutId() {
@@ -47,14 +44,22 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
         initHeaderAndNickName();
-        String loadingType = getIntent().getStringExtra(EXTRA_LOADING_TYPE);
-        if (LOADING_TYPE_TOKEN_LOGIN.equals(loadingType)) {
+        mLoadingType = getIntent().getStringExtra(EXTRA_LOADING_TYPE);
+        if (savedInstanceState != null) {
+            mLoadingType = savedInstanceState.getString(EXTRA_LOADING_TYPE);
+        }
+        if (LOADING_TYPE_TOKEN_LOGIN.equals(mLoadingType)) {
             mPresenter.tokenLogin();
             return;
         }
         mPresenter.getHomeData();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.getString(EXTRA_LOADING_TYPE, mLoadingType);
+    }
 
     private void initHeaderAndNickName() {
         UserInfo userInfo = UserManager.getInstance(this).getUserInfo();

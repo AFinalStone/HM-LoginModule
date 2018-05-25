@@ -64,11 +64,6 @@
     <string name="loginmodule_bind_email_et_hint">请输入您需要绑定的邮箱</string>
     <string name="loginmodule_bind_email_btn_bind">绑定</string>
 
-    <!--输入身份证-->
-    <string name="loginmodule_find_by_living_check_title">请输入%S\n身份证前6位数字</string>
-    <string name="loginmodule_current_user_name">当前用户</string>
-    <string name="loginmodule_check_Id_card_failed">身份证校验失败</string>
-
     <!--首页预加载页面-->
     <string name="loginLoading_loading">小管家正在加载内容</string>
     <string name="loginLoading_loginFailed">登录失败</string>

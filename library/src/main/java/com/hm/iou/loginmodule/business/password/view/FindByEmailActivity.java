@@ -81,8 +81,19 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
         Intent intent = getIntent();
         mMobile = intent.getStringExtra(EXTRA_KEY_MOBILE);
         mTipEmail = intent.getStringExtra(EXTRA_KEY_TIP_EMAIL);
+        if (savedInstanceState != null) {
+            mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
+            mTipEmail = savedInstanceState.getString(EXTRA_KEY_TIP_EMAIL);
+        }
         String strEmail = getString(R.string.bindEmailAndResetPsd_etEmailLeft) + mTipEmail + getString(R.string.bindEmailAndResetPsd_etEmailRight);
         mEtEmail.setHint(strEmail);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_MOBILE, mMobile);
+        outState.putString(EXTRA_KEY_TIP_EMAIL, mTipEmail);
     }
 
     @OnClick({R2.id.tv_getEmailCode, R2.id.tv_find})

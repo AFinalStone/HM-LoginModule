@@ -5,28 +5,23 @@ import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
-import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareEmailCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareSMSCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileRegLoginReqBean;
+import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByFaceReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdBySMSReqBean;
-import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 
 import io.reactivex.Flowable;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 
@@ -70,14 +65,6 @@ public interface LoginModuleService {
 
     @POST("/api/base/msg/v1/sendMessage")
     Flowable<BaseResponse<String>> sendMessage(@Body SendMessageReqBean sendMessageReqBean);
-
-    @POST("/api/iou/user/v1/checkIdCardNumWithoutLogin")
-    Flowable<BaseResponse<Boolean>> checkIdCardNumWithoutLogin(@Body CheckIDCardReqBean checkIDCardReqBean);
-
-    @Multipart
-    @POST("/api/iou/user/v1/livenessIdnumberVerificationWithoutLogin")
-    Flowable<BaseResponse<String>> livenessIdnumberVerificationWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
-            , @Query("idCardNum") String idCardNum);
 
     @POST("/api/iou/user/v1/compareCheckCode")
     Flowable<BaseResponse<Integer>> compareSMSCheckCode(@Body CompareSMSCheckCodeReqBean compareSMSCheckCodeReqBean);

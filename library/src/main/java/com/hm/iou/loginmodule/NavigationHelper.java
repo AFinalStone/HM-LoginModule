@@ -60,11 +60,13 @@ public class NavigationHelper {
      */
     public static void ToRegisterAndUseAgreement(Context context) {
         try {
-            Class WebViewH5Activity = Class.forName("com.hm.iou.hmreceipt.ui.activity.html5.WebViewH5Activity");
+            Class WebViewH5Activity = Class.forName("com.hm.iou.base.webview.BaseWebviewActivity");
             Intent intent = new Intent(context, WebViewH5Activity);
             String title = "注册与使用协议";
             intent.putExtra("title", title);
-            intent.putExtra("web_url", "file:///android_asset/APPH5/IOUAgreement/IOUAgreement.html");
+            intent.putExtra("url", "file:///android_asset/APPH5/IOUAgreement/IOUAgreement.html");
+            intent.putExtra("showtitle", "true");
+            intent.putExtra("showdivider", "true");
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -78,11 +80,13 @@ public class NavigationHelper {
      */
     public static void toPrivateAgreement(Context context) {
         try {
-            Class WebViewH5Activity = Class.forName("com.hm.iou.hmreceipt.ui.activity.html5.WebViewH5Activity");
+            Class WebViewH5Activity = Class.forName("com.hm.iou.base.webview.BaseWebviewActivity");
             Intent intent = new Intent(context, WebViewH5Activity);
-            String title = "隐私协议";
+            String title = "隐私条款";
             intent.putExtra("title", title);
-            intent.putExtra("web_url", "file:///android_asset/APPH5/PrivacyAgreement/PrivacyAgreement.html");
+            intent.putExtra("url", "file:///android_asset/APPH5/PrivacyAgreement/PrivacyAgreement.html");
+            intent.putExtra("showtitle", "true");
+            intent.putExtra("showdivider", "true");
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -161,23 +165,6 @@ public class NavigationHelper {
 
 
     /**
-     * 活体校验失败
-     *
-     * @param context
-     * @param remainderNumber 剩余次数
-     */
-    public static void toLivingCheckFailed(Context context, String remainderNumber) {
-        try {
-            Class FaceCheckFailedActivity = Class.forName("com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFailedActivity");
-            Intent intent = new Intent(context, FaceCheckFailedActivity);
-            intent.putExtra("face_check_remainder_number", remainderNumber);
-            context.startActivity(intent);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * 短信验证码校验成功，跳转到重置登录密码
      *
      * @param context
@@ -207,23 +194,6 @@ public class NavigationHelper {
         intent.putExtra(ResetLoginPsdActivity.EXTRA_EMAIL, email);
         intent.putExtra(ResetLoginPsdActivity.EXTRA_EMAIL_CHECK_CODE, checkCode);
         intent.putExtra(ResetLoginPsdActivity.EXTRA_EMAIL_CHECK_CODE_SN, sn);
-        context.startActivity(intent);
-    }
-
-    /**
-     * 活体校验校验成功，跳转到重置登录密码
-     *
-     * @param context
-     * @param mobile
-     * @param idCard
-     * @param faceCheckSN
-     */
-    public static void toResetLoginPsdByFace(Context context, String mobile, String idCard, String faceCheckSN) {
-        Intent intent = new Intent(context, ResetLoginPsdActivity.class);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_RESET_PSD_TYPE, ResetLoginPsdActivity.RESET_PSD_TYPE_BY_FACE);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_MOBILE, mobile);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_USER_ID_CARD, idCard);
-        intent.putExtra(ResetLoginPsdActivity.EXTRA_FACE_CHECK_SN, faceCheckSN);
         context.startActivity(intent);
     }
 
