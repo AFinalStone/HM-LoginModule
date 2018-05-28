@@ -6,10 +6,9 @@ import android.support.annotation.NonNull;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.loginmodule.EventBusHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
-import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
-import com.hm.iou.loginmodule.business.password.FindByEmailContract;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -61,6 +60,7 @@ public class BindEmailPresenter extends MvpActivityPresenter<BindEmailContract.V
                     public void handleResult(String integer) {
                         mView.dismissLoadingView();
                         mView.toastMessage("邮箱绑定成功");
+                        EventBusHelper.postBindEmailEvent();
                         mView.closeCurrPage();
                     }
 

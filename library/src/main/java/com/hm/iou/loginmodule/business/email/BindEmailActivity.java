@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.tools.StringUtil;
@@ -25,8 +26,6 @@ import io.reactivex.functions.Consumer;
 public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implements BindEmailContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
-
-    private static String REGEXP_EMAIL_NUMBER = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
     @BindView(R2.id.et_email)
     ClearEditText mEtEmail;
@@ -58,7 +57,7 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
             public void accept(CharSequence charSequence) throws Exception {
                 mStrEmail = String.valueOf(charSequence);
                 mTvGetEmailCode.setEnabled(false);
-                if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER)) {
+                if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER)) {
                     mTvGetEmailCode.setEnabled(true);
                 }
                 checkValue();
@@ -97,7 +96,7 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
 
     private void checkValue() {
         mTvBindEmail.setEnabled(false);
-        if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER) && mStrEmailCheckCode.length() > 0) {
+        if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCheckCode.length() > 0) {
             mTvBindEmail.setEnabled(true);
         }
     }

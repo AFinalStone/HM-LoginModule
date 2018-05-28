@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindByInputMobileContract;
@@ -26,7 +27,6 @@ import io.reactivex.functions.Consumer;
 public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePresenter> implements FindByInputMobileContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
-    private static final String REGEXP_MOBILE_NUMBER = "^[1][0-9]{10}$";
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
@@ -53,7 +53,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
             public void accept(CharSequence charSequence) throws Exception {
                 mMobile = String.valueOf(charSequence);
                 mTvFind.setEnabled(false);
-                if (StringUtil.matchRegex(mMobile, REGEXP_MOBILE_NUMBER)) {
+                if (StringUtil.matchRegex(mMobile, HMConstants.REG_MOBILE)) {
                     mTvFind.setEnabled(true);
                 }
             }

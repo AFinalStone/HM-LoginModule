@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -38,8 +39,6 @@ import io.reactivex.functions.Consumer;
 public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPresenter> implements RegisterByWXChatContract.View {
 
     public static final String EXTRA_KEY_WX_CHAT_SN = "wx_chat_sn";
-
-    private static final String REGEXP_MOBILE_NUMBER = "^[1][0-9]{10}$";
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
@@ -76,7 +75,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             public void accept(CharSequence charSequence) throws Exception {
                 mStrMobile = String.valueOf(charSequence);
                 mTvGetSMSCheckCode.setEnabled(false);
-                if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
+                if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE)) {
                     mTvGetSMSCheckCode.setEnabled(true);
                 }
                 checkValue();
@@ -121,7 +120,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     private void checkValue() {
         mTvBindMobile.setEnabled(false);
-        if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER) && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
+        if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE) && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
             mTvBindMobile.setEnabled(true);
         }
     }

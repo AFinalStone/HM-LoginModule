@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
@@ -26,8 +27,6 @@ import io.reactivex.functions.Consumer;
  * @time 2018/4/23 上午11:10
  */
 public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
-
-    private static final String REGEXP_MOBILE_NUMBER = "^[1][0-9]{10}$";
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
@@ -54,7 +53,7 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
             public void accept(CharSequence charSequence) throws Exception {
                 mStrMobile = String.valueOf(charSequence);
                 mTvNext.setEnabled(false);
-                if (StringUtil.matchRegex(mStrMobile, REGEXP_MOBILE_NUMBER)) {
+                if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE)) {
                     mTvNext.setEnabled(true);
                 }
             }
