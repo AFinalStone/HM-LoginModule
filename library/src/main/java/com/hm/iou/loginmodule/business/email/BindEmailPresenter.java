@@ -9,7 +9,10 @@ import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.EventBusHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.sharedata.model.CustomerTypeEnum;
+import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
@@ -50,7 +53,7 @@ public class BindEmailPresenter extends MvpActivityPresenter<BindEmailContract.V
     }
 
     @Override
-    public void bindEmail(String email, String checkCode) {
+    public void bindEmail(final String email, String checkCode) {
         mView.showLoadingView();
         LoginModuleApi.bindEmail(email, checkCode)
                 .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
@@ -60,7 +63,16 @@ public class BindEmailPresenter extends MvpActivityPresenter<BindEmailContract.V
                     public void handleResult(String integer) {
                         mView.dismissLoadingView();
                         mView.toastMessage("邮箱绑定成功");
-                        EventBusHelper.postBindEmailEvent();
+                        UserInfo userInfo = UserManager.getInstance(mContext).getUserInfo();
+                        userInfo.setMailAddr(email);
+                        int type = userInfo.getType();
+                        if (CustomerTypeEnum.BPlus.getValue() == type) {
+                            type = CustomerTypeEnum.CPlus.getValue();
+                        } else if (CustomerTypeEnum.BSub.getValue() == type) {
+                            type = CustomerTypeEnum.CSub.getValue();
+                        }
+                        userInfo.setType(type);
+                        UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         mView.closeCurrPage();
                     }
 
