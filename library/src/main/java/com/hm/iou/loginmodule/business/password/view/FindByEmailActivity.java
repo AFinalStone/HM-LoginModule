@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindByEmailContract;
@@ -29,8 +30,6 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
     public static final String EXTRA_KEY_TIP_EMAIL = "tip_email";
-
-    private static String REGEXP_EMAIL_NUMBER = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
     @BindView(R2.id.et_email)
     ClearEditText mEtEmail;
@@ -63,7 +62,7 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
             public void accept(CharSequence charSequence) throws Exception {
                 mStrEmail = String.valueOf(charSequence);
                 mTvGetEmailCode.setEnabled(false);
-                if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER)) {
+                if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER)) {
                     mTvGetEmailCode.setEnabled(true);
                 }
                 checkValue();
@@ -108,7 +107,7 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
 
     private void checkValue() {
         mTvFind.setEnabled(false);
-        if (StringUtil.matchRegex(mStrEmail, REGEXP_EMAIL_NUMBER) && mStrEmailCode.length() > 0) {
+        if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCode.length() > 0) {
             mTvFind.setEnabled(true);
         }
     }

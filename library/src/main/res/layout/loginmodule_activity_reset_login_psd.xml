@@ -39,7 +39,8 @@
 
             <com.hm.iou.uikit.ShowHidePasswordEditText
                 android:id="@+id/et_password"
-                style="@style/UikitEditText.Password" />
+                style="@style/UikitEditText.Password"
+                android:inputType="textVisiblePassword" />
         </LinearLayout>
 
     </LinearLayout>

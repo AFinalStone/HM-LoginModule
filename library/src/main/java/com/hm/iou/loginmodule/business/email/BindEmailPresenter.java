@@ -67,9 +67,9 @@ public class BindEmailPresenter extends MvpActivityPresenter<BindEmailContract.V
                         userInfo.setMailAddr(email);
                         int type = userInfo.getType();
                         if (CustomerTypeEnum.BPlus.getValue() == type) {
-                            type = CustomerTypeEnum.CPlus.getValue();
+                            type = CustomerTypeEnum.APlus.getValue();
                         } else if (CustomerTypeEnum.BSub.getValue() == type) {
-                            type = CustomerTypeEnum.CSub.getValue();
+                            type = CustomerTypeEnum.ASub.getValue();
                         }
                         userInfo.setType(type);
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
