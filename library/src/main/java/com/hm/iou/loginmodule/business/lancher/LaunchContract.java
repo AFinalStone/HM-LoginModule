@@ -16,9 +16,17 @@ public interface LaunchContract {
         /**
          * 显示广告
          *
-         * @param imageUrl
+         * @param imageUrl 广告图片地址
+         * @param linkUrl  广告详情地址
          */
-        void showAdvertisement(String imageUrl);
+        void showAdvertisement(String imageUrl, String linkUrl);
+
+        /**
+         * 设置倒计时按钮的文字描述
+         *
+         * @param desc
+         */
+        void setJumpBtnText(String desc);
 
     }
 
@@ -30,9 +38,9 @@ public interface LaunchContract {
         void init();
 
         /**
-         * 开始倒计时
+         * 校验用户是否成功登陆过
          */
-        void startCountDown();
+        void checkUserHaveLogin();
 
     }
 }

@@ -1,5 +1,6 @@
 package com.hm.iou.loginmodule.api;
 
+import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
@@ -16,6 +17,8 @@ import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 
+import java.util.List;
+
 import io.reactivex.Flowable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -30,6 +33,9 @@ import retrofit2.http.Query;
  * @time 2018/5/21 下午4:50
  */
 public interface LoginModuleService {
+
+    @GET("/api/adActivity/v1/getStartPics")
+    Flowable<BaseResponse<List<AdvertisementRespBean>>> getAdvertisement();
 
     @GET("/api/iou/user/v1/isAccountExist")
     Flowable<BaseResponse<Boolean>> isAccountExist(@Query("mobile") String mobile);

@@ -1,5 +1,6 @@
 package com.hm.iou.loginmodule.api;
 
+import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
@@ -18,6 +19,8 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.Md5Util;
 
+import java.util.List;
+
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -30,6 +33,16 @@ public class LoginModuleApi {
 
     private static LoginModuleService getService() {
         return HttpReqManager.getInstance().getService(LoginModuleService.class);
+    }
+
+
+    /**
+     * 获取启动页的广告
+     *
+     * @return
+     */
+    public static Flowable<BaseResponse<List<AdvertisementRespBean>>> getAdvertisement() {
+        return getService().getAdvertisement().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

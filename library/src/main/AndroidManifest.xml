@@ -1,9 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hm.iou.loginmodule">
 
-
     <application>
 
+        <activity
+            android:name=".business.lancher.LaunchActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".business.guide.view.GuideActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".business.type.SelectLoginTypeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.hm.iou.loginmodule.business.email.BindEmailActivity;
+import com.hm.iou.loginmodule.business.guide.view.GuideActivity;
 import com.hm.iou.loginmodule.business.loading.LoginLoadingActivity;
 import com.hm.iou.loginmodule.business.login.view.InputMobileActivity;
 import com.hm.iou.loginmodule.business.login.view.MobileLoginActivity;
@@ -21,6 +22,15 @@ import com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity;
  * @time 2018/5/19 下午2:59
  */
 public class NavigationHelper {
+
+    /**
+     * 跳转到引导页
+     *
+     * @param context
+     */
+    public static void toGuide(Context context) {
+        context.startActivity(new Intent(context, GuideActivity.class));
+    }
 
     /**
      * 跳转到登录方式选择页面
