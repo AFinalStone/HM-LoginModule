@@ -38,9 +38,15 @@ public interface LaunchContract {
         void init();
 
         /**
-         * 校验用户是否成功登陆过
+         * 进入广告详情页面
+         *
+         * @param linkUrl
          */
-        void checkUserHaveLogin();
+        void toAdDetail(String linkUrl);
 
+        /**
+         * 跳转到首页
+         */
+        void toMain();
     }
 }

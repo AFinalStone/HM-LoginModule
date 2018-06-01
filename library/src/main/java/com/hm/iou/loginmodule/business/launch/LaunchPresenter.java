@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
@@ -22,13 +23,19 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * 初始化
+ * 1.用户没有登录过，直接跳转到引导页
+ * 2.用户已经成功登录过，校验本地是否有广告缓存，没有，直接进入首页
+ * 3.如果本地有广告缓存，显示广告，并进行倒计时
+ * 获取广告并进行本地缓存
+ *
  * @author syl
  * @time 2018/5/31 下午3:01
  */
 public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> implements LaunchContract.Presenter {
 
-    private Boolean mHaveLogin = false;
-    private int countDownTime = 3;
+    private int mCountDownTime = 3;
+    private boolean mIsHaveOpenMain = false;
 
     public LaunchPresenter(@NonNull Context context, @NonNull LaunchContract.View view) {
         super(context, view);
@@ -39,20 +46,20 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
      */
     public void startCountDown() {
         Flowable.interval(0, 1, TimeUnit.SECONDS)
-                .take(countDownTime)
+                .take(mCountDownTime)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(getProvider().<Long>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
-                        return countDownTime - aLong;
+                        return mCountDownTime - aLong;
                     }
                 })
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        checkUserHaveLogin();
+                        toMain();
                     }
                 })
                 .subscribeWith(new CommSubscriber<Long>(mView) {
@@ -64,7 +71,7 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-                        checkUserHaveLogin();
+                        toMain();
                     }
 
                     @Override
@@ -78,16 +85,9 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
                     }
                 });
 
-
     }
 
-    /**
-     * 初始化
-     * 1.用户没有登录过，直接跳转到引导页
-     * 2.用户已经成功登录过，校验本地是否有广告缓存，没有，直接进入首页
-     * 3.如果本地有广告缓存，显示广告，并进行倒计时
-     * 获取广告并进行本地缓存
-     */
+
     @Override
     public void init() {
         LoginModuleApi.getAdvertisement()
@@ -100,7 +100,6 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-
                     }
 
                     @Override
@@ -119,27 +118,31 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
                 startCountDown();
             } else {
-                NavigationHelper.toMain(mContext);
-                mView.closeCurrPage();
+                toMain();
             }
         } else {
-             NavigationHelper.toGuide(mContext);
+            NavigationHelper.toGuide(mContext);
             mView.closeCurrPage();
         }
     }
 
     @Override
-    public synchronized void checkUserHaveLogin() {
-        if (mHaveLogin) {
-            return;
-        }
-        mHaveLogin = true;
-        if (UserManager.getInstance(mContext).isLogin()) {
+    public synchronized void toMain() {
+        if (!mIsHaveOpenMain) {
+            mIsHaveOpenMain = true;
             NavigationHelper.toMain(mContext);
-        } else {
-            NavigationHelper.toGuide(mContext);
+            if (mView != null) {
+                mView.closeCurrPage();
+            }
         }
+    }
+
+    @Override
+    public void toAdDetail(String linkUrl) {
+        mIsHaveOpenMain = true;
+        NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
         mView.closeCurrPage();
     }
+
 
 }

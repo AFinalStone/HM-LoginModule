@@ -52,7 +52,7 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
 
     @OnClick(R2.id.tv_jump)
     public void onClick() {
-        mPresenter.checkUserHaveLogin();
+        mPresenter.toMain();
     }
 
 
@@ -63,8 +63,7 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
         ivAdvertisement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
-                finish();
+                mPresenter.toAdDetail(linkUrl);
             }
         });
     }
