@@ -58,6 +58,18 @@ public class NavigationHelper {
                 .navigation(context);
     }
 
+    /**
+     * 跳转到首页
+     *
+     * @param context
+     */
+    public static void toMain(Context context) {
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/main/index")
+                .navigation(context);
+
+    }
+
 
     /**
      * 跳转到输入手机号的页面
@@ -224,19 +236,6 @@ public class NavigationHelper {
         context.startActivity(intent);
     }
 
-    /**
-     * 跳转到首页
-     *
-     * @param context
-     */
-    public static void toMain(Context context) {
-        try {
-            Class MainActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.LaunchAdvertisementDetailActivity");
-            context.startActivity(new Intent(context, MainActivity));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 通过微信进行注册或者绑定操作

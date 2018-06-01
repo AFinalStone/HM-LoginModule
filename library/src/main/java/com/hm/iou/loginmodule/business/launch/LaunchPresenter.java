@@ -123,7 +123,7 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
                 mView.closeCurrPage();
             }
         } else {
-            NavigationHelper.toGuide(mContext);
+             NavigationHelper.toGuide(mContext);
             mView.closeCurrPage();
         }
     }

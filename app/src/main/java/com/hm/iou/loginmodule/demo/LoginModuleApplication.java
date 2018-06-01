@@ -5,6 +5,7 @@ import android.app.Application;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.network.HttpRequestConfig;
+import com.hm.iou.router.Router;
 
 
 /**
@@ -16,6 +17,7 @@ public class LoginModuleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Router.init(this);
         Logger.init(this, true);
         initNetwork();
     }

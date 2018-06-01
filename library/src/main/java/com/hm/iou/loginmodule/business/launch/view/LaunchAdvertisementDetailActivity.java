@@ -7,8 +7,8 @@ public class LaunchAdvertisementDetailActivity extends BaseWebviewActivity {
 
     @Override
     public void finish() {
-        super.finish();
         NavigationHelper.toMain(mContext);
+        super.finish();
     }
 
 }

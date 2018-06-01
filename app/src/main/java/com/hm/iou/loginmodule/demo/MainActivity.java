@@ -33,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationHelper.toSelectLoginType(this);
     }
 
-    public void onClickTokenLogin(View view) {
-        NavigationHelper.toLoginLoading(this, true);
-    }
-
     public void onClickResetPsdBySMS(View view) {
         NavigationHelper.toFindBySMS(this, "15267163669");
     }

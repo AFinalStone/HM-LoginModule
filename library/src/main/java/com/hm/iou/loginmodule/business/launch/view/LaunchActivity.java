@@ -18,12 +18,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 闪屏页
- * 1.判断本地是否有广告，有则开启倒计时进行加载
- * 2.获取最新的版本信息，并保存最新的版本信息
- * 3.倒计时结束，判断用户是否已经登录过
- * 4.判断应用是否是第一次打开
- * 5.用户直接点击跳转按钮
+ * 启动页
  *
  * @author AFinalStone
  * @time 2018/3/9 下午2:55
