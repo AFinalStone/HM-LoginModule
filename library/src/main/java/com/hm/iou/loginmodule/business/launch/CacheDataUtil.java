@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.lancher;
+package com.hm.iou.loginmodule.business.launch;
 
 import android.content.Context;
 

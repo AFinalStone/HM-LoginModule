@@ -1,6 +1,5 @@
-package com.hm.iou.loginmodule.business.lancher;
+package com.hm.iou.loginmodule.business.launch.view;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,16 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
-import com.hm.iou.router.Router;
+import com.hm.iou.loginmodule.business.launch.LaunchContract;
+import com.hm.iou.loginmodule.business.launch.LaunchPresenter;
 import com.hm.iou.tools.ImageLoader;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * 闪屏页
@@ -55,22 +53,6 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
             return;
         }
         mPresenter.init();
-//        RxPermissions rxPermissions = new RxPermissions(this);
-//        rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION
-//                , Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
-//                .doOnComplete(new Action() {
-//                    @Override
-//                    public void run() throws Exception {
-//                    }
-//                })
-//                .subscribe(new Consumer<Boolean>() {
-//                    @Override
-//                    public void accept(Boolean aBoolean) throws Exception {
-//                        if (!aBoolean) {
-//                            toastMessage("请求权限被拒绝，软件部分功能受限");
-//                        }
-//                    }
-//                });
     }
 
     @OnClick(R2.id.tv_jump)
@@ -86,9 +68,8 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
         ivAdvertisement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/webview/index")
-                        .withString("url", linkUrl)
-                        .navigation(mContext);
+                NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
+                finish();
             }
         });
     }

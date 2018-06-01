@@ -44,7 +44,7 @@ public class MobileLoginPresenter extends BaseLoginModulePresenter<MobileLoginCo
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext,false);
+                        NavigationHelper.toLoginLoading(mContext);
                     }
 
                     @Override

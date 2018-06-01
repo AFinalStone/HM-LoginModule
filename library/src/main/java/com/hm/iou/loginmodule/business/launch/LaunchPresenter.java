@@ -1,4 +1,4 @@
-package com.hm.iou.loginmodule.business.lancher;
+package com.hm.iou.loginmodule.business.launch;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -64,22 +64,32 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-                        throwable.printStackTrace();
+                        checkUserHaveLogin();
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isShowCommError() {
+                        return false;
                     }
                 });
 
 
     }
 
+    /**
+     * 初始化
+     * 1.用户没有登录过，直接跳转到引导页
+     * 2.用户已经成功登录过，校验本地是否有广告缓存，没有，直接进入首页
+     * 3.如果本地有广告缓存，显示广告，并进行倒计时
+     * 获取广告并进行本地缓存
+     */
     @Override
     public void init() {
-        AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext);
-        if (adBean != null) {
-            mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
-            startCountDown();
-        } else {
-            checkUserHaveLogin();
-        }
         LoginModuleApi.getAdvertisement()
                 .map(RxUtil.<List<AdvertisementRespBean>>handleResponse())
                 .subscribeWith(new CommSubscriber<List<AdvertisementRespBean>>(mView) {
@@ -103,16 +113,29 @@ public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> i
                         return false;
                     }
                 });
+        if (UserManager.getInstance(mContext).isLogin()) {
+            AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext);
+            if (adBean != null) {
+                mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
+                startCountDown();
+            } else {
+                NavigationHelper.toMain(mContext);
+                mView.closeCurrPage();
+            }
+        } else {
+            NavigationHelper.toGuide(mContext);
+            mView.closeCurrPage();
+        }
     }
 
     @Override
-    public void checkUserHaveLogin() {
+    public synchronized void checkUserHaveLogin() {
         if (mHaveLogin) {
             return;
         }
         mHaveLogin = true;
         if (UserManager.getInstance(mContext).isLogin()) {
-            NavigationHelper.toLoginLoading(mContext, true);
+            NavigationHelper.toMain(mContext);
         } else {
             NavigationHelper.toGuide(mContext);
         }

@@ -16,6 +16,7 @@ import com.hm.iou.loginmodule.business.password.view.ResetLoginPsdActivity;
 import com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity;
 import com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity;
 import com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity;
+import com.hm.iou.router.Router;
 
 /**
  * @author syl
@@ -29,7 +30,21 @@ public class NavigationHelper {
      * @param context
      */
     public static void toGuide(Context context) {
-        context.startActivity(new Intent(context, GuideActivity.class));
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/login/guide")
+                .navigation(context);
+    }
+
+    /**
+     * 跳转到启动页广告详情
+     *
+     * @param context
+     */
+    public static void toLaunchAdvertisement(Context context, String url) {
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/login/launchAdvertisementDetail")
+                .withString("url", url)
+                .navigation(context);
     }
 
     /**
@@ -38,7 +53,9 @@ public class NavigationHelper {
      * @param context
      */
     public static void toSelectLoginType(Context context) {
-        context.startActivity(new Intent(context, SelectLoginTypeActivity.class));
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/login/selecttype")
+                .navigation(context);
     }
 
 
@@ -214,7 +231,7 @@ public class NavigationHelper {
      */
     public static void toMain(Context context) {
         try {
-            Class MainActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.MainActivity");
+            Class MainActivity = Class.forName("com.hm.iou.hmreceipt.ui.activity.LaunchAdvertisementDetailActivity");
             context.startActivity(new Intent(context, MainActivity));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -238,12 +255,9 @@ public class NavigationHelper {
      *
      * @param context
      */
-    public static void toLoginLoading(Context context, boolean isTokenLogin) {
-        Intent intent = new Intent(context, LoginLoadingActivity.class);
-        if (isTokenLogin) {
-            intent.putExtra(LoginLoadingActivity.EXTRA_LOADING_TYPE, LoginLoadingActivity.LOADING_TYPE_TOKEN_LOGIN);
-        }
-        context.startActivity(intent);
+    public static void toLoginLoading(Context context) {
+        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/login/loading")
+                .navigation(context);
     }
 
 

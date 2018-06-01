@@ -11,6 +11,21 @@
       "url": "hmiou://m.54jietiao.com/login/selecttype",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/guide",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.guide.view.GuideActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/loading",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.loading.LoginLoadingActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/launchAdvertisementDetail?url=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.launch.view.LaunchAdvertisementDetailActivity"
     }
   ],
   "city": [

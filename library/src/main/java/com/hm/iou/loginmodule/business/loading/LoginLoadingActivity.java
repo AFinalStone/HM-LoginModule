@@ -21,15 +21,11 @@ import butterknife.BindView;
  */
 public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> implements LoginLoadingContract.View {
 
-    public static final String EXTRA_LOADING_TYPE = "loading_type";
-    public static final String LOADING_TYPE_TOKEN_LOGIN = "token_login";
-
     @BindView(R2.id.iv_header)
     ImageView ivHeader;
 
     @BindView(R2.id.tv_nickName)
     TextView tvNickName;
-    private String mLoadingType;
 
     @Override
     protected int getLayoutId() {
@@ -44,21 +40,7 @@ public class LoginLoadingActivity extends BaseActivity<LoginLoadingPresenter> im
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
         initHeaderAndNickName();
-        mLoadingType = getIntent().getStringExtra(EXTRA_LOADING_TYPE);
-        if (savedInstanceState != null) {
-            mLoadingType = savedInstanceState.getString(EXTRA_LOADING_TYPE);
-        }
-        if (LOADING_TYPE_TOKEN_LOGIN.equals(mLoadingType)) {
-            mPresenter.tokenLogin();
-            return;
-        }
         mPresenter.getHomeData();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.getString(EXTRA_LOADING_TYPE, mLoadingType);
     }
 
     private void initHeaderAndNickName() {
