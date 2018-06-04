@@ -35,6 +35,33 @@
       "aclass": "com.hm.iou.cityselect.CitySelectActivity"
     }
   ],
+  "facecheck": [
+    {
+      "url": "hmiou://m.54jietiao.com/facecheck/authentication",
+      "iclass": "",
+      "aclass": "com.hm.iou.hmreceipt.facecheck.business.view.AuthenticationActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/facecheck/facecheckfailed?face_check_remainder_number=",
+      "iclass": "",
+      "aclass": "com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFailedActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/facecheck/facecheckfindloginpsd?mobile=*&name=",
+      "iclass": "",
+      "aclass": "com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFindLoginPsdActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/facecheck/facecheckfindsignpsd",
+      "iclass": "",
+      "aclass": "com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFindSignPsdActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/facecheck/notadult",
+      "iclass": "",
+      "aclass": "com.hm.iou.hmreceipt.facecheck.business.view.NotAdultActivity"
+    }
+  ],
   "main": [
     {
       "url": "hmiou://m.54jietiao.com/main/index?url=*",

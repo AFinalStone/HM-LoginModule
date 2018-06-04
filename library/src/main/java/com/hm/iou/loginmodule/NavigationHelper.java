@@ -2,12 +2,9 @@ package com.hm.iou.loginmodule;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.loginmodule.business.email.BindEmailActivity;
-import com.hm.iou.loginmodule.business.guide.view.GuideActivity;
-import com.hm.iou.loginmodule.business.loading.LoginLoadingActivity;
 import com.hm.iou.loginmodule.business.login.view.InputMobileActivity;
 import com.hm.iou.loginmodule.business.login.view.MobileLoginActivity;
 import com.hm.iou.loginmodule.business.password.view.FindByEmailActivity;
@@ -16,7 +13,6 @@ import com.hm.iou.loginmodule.business.password.view.FindBySMSActivity;
 import com.hm.iou.loginmodule.business.password.view.ResetLoginPsdActivity;
 import com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity;
 import com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity;
-import com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity;
 import com.hm.iou.router.Router;
 
 /**
@@ -99,14 +95,10 @@ public class NavigationHelper {
      * @param context
      */
     public static void ToRegisterAndUseAgreement(Context context) {
-        try {
-            Class WebViewH5Activity = Class.forName("com.hm.iou.base.webview.BaseWebviewActivity");
-            Intent intent = new Intent(context, WebViewH5Activity);
-            intent.putExtra("url", BaseBizAppLike.getInstance().getH5Server() + "/IOUAgreement/IOUAgreement.html");
-            context.startActivity(intent);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/webview/index")
+                .withString("url", BaseBizAppLike.getInstance().getH5Server() + "/IOUAgreement/IOUAgreement.html")
+                .navigation(context);
     }
 
     /**
@@ -115,14 +107,10 @@ public class NavigationHelper {
      * @param context
      */
     public static void toPrivateAgreement(Context context) {
-        try {
-            Class WebViewH5Activity = Class.forName("com.hm.iou.base.webview.BaseWebviewActivity");
-            Intent intent = new Intent(context, WebViewH5Activity);
-            intent.putExtra("url", BaseBizAppLike.getInstance().getH5Server() + "/PrivacyAgreement/PrivacyAgreement.html");
-            context.startActivity(intent);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/webview/index")
+                .withString("url", BaseBizAppLike.getInstance().getH5Server() + "/PrivacyAgreement/PrivacyAgreement.html")
+                .navigation(context);
     }
 
 
@@ -184,15 +172,11 @@ public class NavigationHelper {
      * @param userName
      */
     public static void toFindByFace(Context context, String mobile, String userName) {
-        try {
-            Class FaceCheckFindLoginPsdActivity = Class.forName("com.hm.iou.hmreceipt.facecheck.business.view.FaceCheckFindLoginPsdActivity");
-            Intent intent = new Intent(context, FaceCheckFindLoginPsdActivity);
-            intent.putExtra("mobile", mobile);
-            intent.putExtra("name", userName);
-            context.startActivity(intent);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Router.getInstance()
+                .buildWithUrl("hmiou://m.54jietiao.com/facecheck/facecheckfindloginpsd")
+                .withString("mobile", mobile)
+                .withString("name", userName)
+                .navigation(context);
     }
 
 
