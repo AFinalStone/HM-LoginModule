@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.loginmodule.business.email.BindEmailActivity;
 import com.hm.iou.loginmodule.business.guide.view.GuideActivity;
 import com.hm.iou.loginmodule.business.loading.LoginLoadingActivity;
@@ -101,11 +102,7 @@ public class NavigationHelper {
         try {
             Class WebViewH5Activity = Class.forName("com.hm.iou.base.webview.BaseWebviewActivity");
             Intent intent = new Intent(context, WebViewH5Activity);
-            String title = "注册与使用协议";
-            intent.putExtra("title", title);
-            intent.putExtra("url", "file:///android_asset/APPH5/IOUAgreement/IOUAgreement.html");
-            intent.putExtra("showtitle", "true");
-            intent.putExtra("showdivider", "true");
+            intent.putExtra("url", BaseBizAppLike.getInstance().getH5Server() + "/IOUAgreement/IOUAgreement.html");
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -121,11 +118,7 @@ public class NavigationHelper {
         try {
             Class WebViewH5Activity = Class.forName("com.hm.iou.base.webview.BaseWebviewActivity");
             Intent intent = new Intent(context, WebViewH5Activity);
-            String title = "隐私条款";
-            intent.putExtra("title", title);
-            intent.putExtra("url", "file:///android_asset/APPH5/PrivacyAgreement/PrivacyAgreement.html");
-            intent.putExtra("showtitle", "true");
-            intent.putExtra("showdivider", "true");
+            intent.putExtra("url", BaseBizAppLike.getInstance().getH5Server() + "/PrivacyAgreement/PrivacyAgreement.html");
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
