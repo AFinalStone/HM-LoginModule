@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.demo;
 
 import android.app.Application;
 
+import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.network.HttpRequestConfig;
@@ -19,6 +20,11 @@ public class LoginModuleApplication extends Application {
         super.onCreate();
         Router.init(this);
         Logger.init(this, true);
+
+        BaseBizAppLike baseBizAppLike = new BaseBizAppLike();
+        baseBizAppLike.onCreate(this);
+        baseBizAppLike.initServer("http://192.168.1.254", "http://192.168.1.254",
+                "http://192.168.1.254");
         initNetwork();
     }
 
