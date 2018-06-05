@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/loginmodule_background_login_type_select_02"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingBottom="18dp">
+    android:background="@mipmap/loginmodule_background_login_type_select"
+    android:paddingBottom="40dp">
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <LinearLayout
-        android:id="@+id/ll_loginByChat"
-        android:layout_width="305dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/loginmodule_shape_common_btn_inblack"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/iv_loginByWX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/loginmodule_icon_login_wx_chat" />
-
-        <TextView
-            android:id="@+id/tv_loginByWx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/uikit_login_type_by_wx_chat"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textFontSize_18" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_loginByMobile"
-        android:layout_width="305dp"
-        android:layout_height="48dp"
-        android:background="@drawable/loginmodule_shape_common_btn_intrans_outblack"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/iv_loginByMobile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/loginmodule_icon_mobile_black" />
-
-        <TextView
-            android:id="@+id/tv_loginByMobile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/uikit_login_type_by_mobile"
-            android:textColor="#FF111111"
-            android:textSize="@dimen/textFontSize_18" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_onlyLook"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:minHeight="22dp"
-        android:minWidth="64dp"
-        android:text="@string/uikit_login_type_only_look"
-        android:textColor="#ff222222"
-        android:textSize="@dimen/textFontSize_16"
-        android:visibility="gone" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_loginByChat"
+            android:layout_width="132dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/loginmodule_shape_common_btn_inblack"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_loginByWX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/loginmodule_icon_login_wx_chat" />
+
+            <TextView
+                android:id="@+id/tv_loginByWx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/uikit_login_type_by_wx_chat"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textFontSize_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_loginByMobile"
+            android:layout_width="132dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/loginmodule_shape_common_btn_intrans_outblack"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_loginByMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/loginmodule_icon_mobile_black" />
+
+            <TextView
+                android:id="@+id/tv_loginByMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/uikit_login_type_by_mobile"
+                android:textColor="#FF111111"
+                android:textSize="@dimen/textFontSize_16" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
 

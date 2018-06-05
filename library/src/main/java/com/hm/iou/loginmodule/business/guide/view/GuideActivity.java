@@ -29,9 +29,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @BindView(R2.id.indicator)
     CircleIndicator mIndicator;
 
-    GuidePagerAdapter mAdapter;
-    boolean mIsFirstEnter = false;
-    boolean mHaveFinishView = false;
+    private GuidePagerAdapter mAdapter;
+    private boolean mIsFirstEnter = false;
+    private boolean mHaveFinishView = false;
 
     @Override
     protected int getLayoutId() {
@@ -46,6 +46,13 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @Override
     protected void initEventAndData(Bundle bundle) {
         mPresenter.init();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mIsFirstEnter = false;
+        mHaveFinishView = false;
     }
 
     @Override
@@ -80,4 +87,5 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         });
         mIndicator.setViewPager(mViewPager);
     }
+
 }

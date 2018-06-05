@@ -3,10 +3,10 @@ package com.hm.iou.loginmodule.business.type;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.NavigationHelper;
@@ -24,17 +24,11 @@ import butterknife.OnClick;
  */
 public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresenter> implements SelectLoginTypeContract.View {
 
-    @BindView(R2.id.ll_background)
-    LinearLayout mLlBackground;
+    private float mXDown = 0;
+    private float mXUp = 0;
 
     @BindView(R2.id.ll_loginByChat)
     LinearLayout mLlLoginByChat;
-
-    @BindView(R2.id.iv_loginByMobile)
-    ImageView mIvLoginByMobile;
-
-    @BindView(R2.id.tv_loginByMobile)
-    TextView mTvLoginByMobile;
 
     @BindView(R2.id.ll_loginByMobile)
     LinearLayout mLlLoginByMobile;
@@ -54,26 +48,36 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
         mPresenter.isInstalledWxChatAPP();
     }
 
-    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile, R2.id.tv_onlyLook})
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //继承了Activity的onTouchEvent方法，直接监听点击事件
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            //当手指按下的时候
+            mXDown = event.getX();
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            //当手指离开的时候
+            mXUp = event.getX();
+            if (mXUp - mXDown > 50) {
+                finish();
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile})
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.ll_loginByChat == id) {
             mPresenter.getWxCode();
         } else if (R.id.ll_loginByMobile == id) {
             NavigationHelper.toInputMobile(mContext);
-        } else if (R.id.tv_onlyLook == id) {
-            NavigationHelper.toMain(mContext);
         }
     }
 
-
     @Override
     public void hideButtonForLoginByWx() {
-        mLlBackground.setBackground(getResources().getDrawable(R.mipmap.loginmodule_background_login_type_select_01));
-        mLlLoginByChat.setVisibility(View.INVISIBLE);
-        mLlLoginByMobile.setBackground(getResources().getDrawable(R.drawable.loginmodule_shape_common_btn_inblack));
-        mIvLoginByMobile.setImageResource(R.mipmap.loginmodule_icon_mobile_white);
-        mTvLoginByMobile.setTextColor(Color.WHITE);
+        mLlLoginByChat.setVisibility(View.GONE);
     }
 
 }
