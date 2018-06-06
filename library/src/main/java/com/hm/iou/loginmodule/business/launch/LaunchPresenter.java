@@ -10,6 +10,7 @@ import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.sharedata.UserManager;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -32,7 +33,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author syl
  * @time 2018/5/31 下午3:01
  */
-public class LaunchPresenter extends MvpActivityPresenter<LaunchContract.View> implements LaunchContract.Presenter {
+public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.View> implements LaunchContract.Presenter {
 
     private int mCountDownTime = 3;
     private boolean mIsHaveOpenMain = false;

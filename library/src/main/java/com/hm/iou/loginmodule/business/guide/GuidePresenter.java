@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.loginmodule.R;
+import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author syl
  * @time 2018/5/31 下午3:01
  */
-public class GuidePresenter extends MvpActivityPresenter<GuideContract.View> implements GuideContract.Presenter {
+public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View> implements GuideContract.Presenter {
 
     private List<Integer> mPicListData;
 
