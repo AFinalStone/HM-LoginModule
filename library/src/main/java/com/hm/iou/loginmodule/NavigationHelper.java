@@ -232,7 +232,7 @@ public class NavigationHelper {
      * @param context
      */
     public static void toLoginLoading(Context context) {
-        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/login/loading")
+        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/iou/loading")
                 .navigation(context);
     }
 
