@@ -1,6 +1,7 @@
 package com.hm.iou.loginmodule.business.password.view;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -62,7 +63,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
         if (savedInstanceState != null) {
             savedInstanceState.putString(EXTRA_KEY_MOBILE, mMobile);
         }
-        if (!StringUtil.isEmpty(mMobile)) {
+        if (!TextUtils.isEmpty(mMobile)) {
             mEtMobile.setText(mMobile);
             mEtMobile.setSelection(mMobile.length());
         }

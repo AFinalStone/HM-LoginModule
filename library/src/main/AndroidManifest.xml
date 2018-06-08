@@ -14,14 +14,17 @@
         <activity
             android:name=".business.type.SelectLoginTypeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".business.login.view.InputMobileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".business.login.view.MobileLoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".business.register.view.RegisterByWXChatActivity"

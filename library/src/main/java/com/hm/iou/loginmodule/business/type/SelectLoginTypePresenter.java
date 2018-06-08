@@ -69,7 +69,7 @@ public class SelectLoginTypePresenter extends BaseLoginModulePresenter<SelectLog
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext);
+                        NavigationHelper.toLoginLoading(mContext,"hmiou://m.54jietiao.com/login/selecttype");
                     }
 
                     @Override

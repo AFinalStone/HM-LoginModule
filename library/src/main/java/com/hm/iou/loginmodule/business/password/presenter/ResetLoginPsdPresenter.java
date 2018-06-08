@@ -108,7 +108,7 @@ public class ResetLoginPsdPresenter extends BaseLoginModulePresenter<ResetLoginP
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext);
+                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
                     }
 
                     @Override

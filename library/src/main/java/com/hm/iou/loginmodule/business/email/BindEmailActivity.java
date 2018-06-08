@@ -25,8 +25,6 @@ import io.reactivex.functions.Consumer;
  */
 public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implements BindEmailContract.View {
 
-    public static final String EXTRA_KEY_MOBILE = "mobile";
-
     @BindView(R2.id.et_email)
     ClearEditText mEtEmail;
     @BindView(R2.id.et_emailCode)
@@ -72,17 +70,8 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
             }
         });
         showSoftKeyboard();
-        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        if (savedInstanceState != null) {
-            mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
-        }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(EXTRA_KEY_MOBILE, mMobile);
-    }
 
     @OnClick({R2.id.tv_getEmailCode, R2.id.tv_bindEmail})
     public void onClick(View view) {
@@ -99,16 +88,6 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
         if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCheckCode.length() > 0) {
             mTvBindEmail.setEnabled(true);
         }
-    }
-
-
-    private void jumpToLoginResetPsdView() {
-//        Intent intent = new Intent(mContext, ResetLoginPsdActivity.class);
-//        intent.putExtra(Constants.INTENT_RESET_LOGIN_PSD_TYPE, LoginResetPsdTypeEnum.LoginResetPsdByEmail);
-//        intent.putExtra(Constants.INTENT_MOBILE_NUMBER, mMobile);
-//        intent.putExtra(Constants.INTENT_EMAIL_NUMBER, mStrEmail);
-//        intent.putExtra(Constants.INTENT_CHECK_CODE, mEtEmailCode);
-//        startActivity(intent);
     }
 
     @Override

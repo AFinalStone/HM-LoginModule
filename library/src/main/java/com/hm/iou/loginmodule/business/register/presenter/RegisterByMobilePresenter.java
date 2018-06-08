@@ -74,7 +74,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
     }
 
     @Override
-    public void registerByMobileAndLogin(String mobile, String loginPsd, String smsCheckCode) {
+    public void registerByMobileAndLogin(final String mobile, String loginPsd, String smsCheckCode) {
         mView.showLoadingView();
         LoginModuleApi.mobileRegLogin(mobile, loginPsd, smsCheckCode)
                 .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
@@ -86,7 +86,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext);
+                        NavigationHelper.toLoginLoading(mContext,"hmiou://m.54jietiao.com/login/mobilelogin?mobile="+mobile);
                     }
 
                     @Override

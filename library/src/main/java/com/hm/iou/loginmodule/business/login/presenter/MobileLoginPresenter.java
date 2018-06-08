@@ -32,7 +32,7 @@ public class MobileLoginPresenter extends BaseLoginModulePresenter<MobileLoginCo
 
 
     @Override
-    public void mobileLogin(String mobile, String loginPsd) {
+    public void mobileLogin(final String mobile, String loginPsd) {
         mView.showLoadingView();
         LoginModuleApi.mobileLogin(mobile, loginPsd)
                 .compose(getProvider().<BaseResponse<UserInfo>>bindUntilEvent(ActivityEvent.DESTROY))
@@ -44,7 +44,7 @@ public class MobileLoginPresenter extends BaseLoginModulePresenter<MobileLoginCo
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext);
+                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
                     }
 
                     @Override

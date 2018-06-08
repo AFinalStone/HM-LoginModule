@@ -1,16 +1,9 @@
 {
-  "splash": [
-    {
-      "url": "hmiou://m.54jietiao.com/splash?url=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.hmreceipt.ui.activity.SplashActivity"
-    }
-  ],
   "login": [
     {
-      "url": "hmiou://m.54jietiao.com/login/selecttype",
+      "url": "hmiou://m.54jietiao.com/login/launchAdvertisementDetail?url=*",
       "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity"
+      "aclass": "com.hm.iou.loginmodule.business.launch.view.LaunchAdvertisementDetailActivity"
     },
     {
       "url": "hmiou://m.54jietiao.com/login/guide",
@@ -18,9 +11,54 @@
       "aclass": "com.hm.iou.loginmodule.business.guide.view.GuideActivity"
     },
     {
-      "url": "hmiou://m.54jietiao.com/login/launchAdvertisementDetail?url=*",
+      "url": "hmiou://m.54jietiao.com/login/selecttype",
       "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.launch.view.LaunchAdvertisementDetailActivity"
+      "aclass": "com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/inputmobile",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.login.view.InputMobileActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/mobilelogin?mobile=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.login.view.MobileLoginActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/bindemail",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.email.BindEmailActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/find_by_input_mobile?mobile=",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.password.view.FindByInputMobileActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/find_by_email?mobile=*&tip_email=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.password.view.FindByEmailActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/find_by_sms?mobile=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.password.view.FindBySMSActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/reset_login_psd?reset_psd_type=*&mobile=*&sms_check_code=&email=&email_check_code=&email_check_code_sn=&face_check_sn=&user_id_card=&",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.password.view.ResetLoginPsdActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/register_by_mobile?mobile=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/register_by_wx_chat?wx_chat_sn=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
     }
   ],
   "city": [
@@ -128,45 +166,12 @@
       "aclass": "com.hm.iou.hmreceipt.person.business.view.ChangeEmailCompleteActivity"
     }
   ],
-  "message": [
-    {
-      "url": "hmiou://m.54jietiao.com/message/msgcenter",
-      "iclass": "",
-      "aclass": "com.hm.iou.msg.business.message.view.MsgCenterActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/message/helpcenter",
-      "iclass": "",
-      "aclass": "com.hm.iou.msg.business.HelpCenterActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/message/feedback?type=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.msg.business.feedback.view.FeedbackActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/message/feedback_history",
-      "iclass": "",
-      "aclass": "com.hm.iou.msg.business.feedback.view.HistoryFeedbackActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/message/feedback_detail?feedback_id=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.msg.business.feedback.view.FeedbackDetailActivity"
-    }
-  ],
+  ,
   "webview": [
     {
       "url": "hmiou://m.54jietiao.com/webview/index?title=*&url=*&showtitle=*&showdivider=*&showtitlebar=*",
       "iclass": "",
       "aclass": "com.hm.iou.base.webview.BaseWebviewActivity"
-    }
-  ],
-  "calculator": [
-    {
-      "url": "hmiou://m.54jietiao.com/calculator/index",
-      "iclass": "",
-      "aclass": "com.hm.iou.calculator.business.view.CalculatorMainActivity"
     }
   ]
 }
