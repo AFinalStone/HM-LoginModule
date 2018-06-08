@@ -166,7 +166,6 @@
       "aclass": "com.hm.iou.hmreceipt.person.business.view.ChangeEmailCompleteActivity"
     }
   ],
-  ,
   "webview": [
     {
       "url": "hmiou://m.54jietiao.com/webview/index?title=*&url=*&showtitle=*&showdivider=*&showtitlebar=*",

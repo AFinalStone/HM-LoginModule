@@ -105,7 +105,7 @@ public class NavigationHelper {
     public static void ToRegisterAndUseAgreement(Context context) {
         Router.getInstance()
                 .buildWithUrl("hmiou://m.54jietiao.com/webview/index")
-                .withString("url", BaseBizAppLike.getInstance().getH5Server() + LoginModuleConstants.H5_REGISTER_AGREEMENT)
+                .withString("url", BaseBizAppLike.getInstance().getH5Server() + LoginModuleConstants.H5_URL_REGISTER_AGREEMENT)
                 .navigation(context);
     }
 
@@ -117,7 +117,7 @@ public class NavigationHelper {
     public static void toPrivateAgreement(Context context) {
         Router.getInstance()
                 .buildWithUrl("hmiou://m.54jietiao.com/webview/index")
-                .withString("url", BaseBizAppLike.getInstance().getH5Server() + LoginModuleConstants.H5_PRIVACYAGREEMENT)
+                .withString("url", BaseBizAppLike.getInstance().getH5Server() + LoginModuleConstants.H5_URL_PRIVACY_AGREEMENT)
                 .navigation(context);
     }
 
