@@ -3,7 +3,6 @@ package com.hm.iou.loginmodule.business.login.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
@@ -11,7 +10,6 @@ import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.sharedata.model.BaseResponse;
-import com.hm.iou.socialshare.ShareManager;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
