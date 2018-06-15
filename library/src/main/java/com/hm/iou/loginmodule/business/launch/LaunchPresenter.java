@@ -147,7 +147,7 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
     }
 
     private void delayToMainPage() {
-        Flowable.just(0).delay(800, TimeUnit.MILLISECONDS)
+        Flowable.just(0).delay(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Integer>() {
