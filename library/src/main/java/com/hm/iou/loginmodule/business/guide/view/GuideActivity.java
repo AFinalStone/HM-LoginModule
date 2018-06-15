@@ -9,11 +9,11 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.guide.GuideContract;
 import com.hm.iou.loginmodule.business.guide.GuidePresenter;
+import com.hm.iou.loginmodule.widget.CircleIndicator;
 
 import java.util.List;
 
 import butterknife.BindView;
-import me.relex.circleindicator.CircleIndicator;
 
 /**
  * 引导页
