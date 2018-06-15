@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="15dp">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,9 +41,8 @@
 
     <ImageView
         android:id="@+id/backgroundSplash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="127dip"
+        android:scaleType="centerInside"
         android:src="@mipmap/loginmodule_background_launch" />
 </LinearLayout>

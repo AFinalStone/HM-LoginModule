@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -119,7 +120,7 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
                 startCountDown();
             } else {
-                toMain();
+                delayToMainPage();
             }
         } else {
             NavigationHelper.toGuide(mContext);
@@ -145,5 +146,21 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
         mView.closeCurrPage();
     }
 
+    private void delayToMainPage() {
+        Flowable.just(0).delay(800, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        toMain();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+    }
 
 }
