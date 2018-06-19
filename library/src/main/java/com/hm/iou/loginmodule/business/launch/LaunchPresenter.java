@@ -67,7 +67,7 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                 .subscribeWith(new CommSubscriber<Long>(mView) {
                     @Override
                     public void handleResult(Long aLong) {
-                        String desc = "跳过（" + (aLong - 1) + "）";
+                        String desc = "跳过（" + aLong + "）";
                         mView.setJumpBtnText(desc);
                     }
 
