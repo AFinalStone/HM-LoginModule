@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.launch.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +29,8 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
     @BindView(R2.id.iv_advertisement)
     ImageView ivAdvertisement;
 
-    @BindView(R2.id.tv_jump)
-    TextView tvJump;
+    @BindView(R2.id.btn_jump)
+    Button btnJump;
 
     @Override
     protected int getLayoutId() {
@@ -50,7 +51,7 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
         mPresenter.init();
     }
 
-    @OnClick(R2.id.tv_jump)
+    @OnClick(R2.id.btn_jump)
     public void onClick() {
         mPresenter.toMain();
     }
@@ -70,7 +71,7 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements Lau
 
     @Override
     public void setJumpBtnText(String desc) {
-        tvJump.setVisibility(View.VISIBLE);
-        tvJump.setText(desc);
+        btnJump.setVisibility(View.VISIBLE);
+        btnJump.setText(desc);
     }
 }
