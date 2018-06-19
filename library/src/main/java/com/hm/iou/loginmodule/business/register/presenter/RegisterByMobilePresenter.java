@@ -35,6 +35,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
     @Override
     public void getSMSCode(String mobile) {
         mView.showLoadingView();
+        final String mobileLastNum = mobile.substring(mobile.length() - 4, mobile.length());
         LoginModuleApi.sendMessage(PURPOSE_TYPE_REGISTER_BY_SMS, mobile)
                 .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<String>handleResponse())
@@ -42,7 +43,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                     @Override
                     public void handleResult(String str) {
                         mView.dismissLoadingView();
-                        mView.toastMessage(R.string.uikit_get_check_code_success);
+                        mView.toastMessage("验证码已成功发送至尾号" + mobileLastNum + "手机号上");
                         mView.startCountDown();
                     }
 
@@ -60,9 +61,9 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
 //                    public void handleResult(Boolean flag) {
 //                        mView.dismissLoadingView();
 //                        if (flag) {
-//                            mView.toastMessage(R.string.uikit_get_check_code_success);
+//                            mView.toastMessage(R.string.loginmodule_get_check_code_success);
 //                        } else {
-//                            mView.toastMessage(R.string.uikit_get_check_code_failed);
+//                            mView.toastMessage(R.string.loginmodule_get_check_code_failed);
 //                        }
 //                    }
 //
@@ -86,7 +87,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext,"hmiou://m.54jietiao.com/login/mobilelogin?mobile="+mobile);
+                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
                     }
 
                     @Override

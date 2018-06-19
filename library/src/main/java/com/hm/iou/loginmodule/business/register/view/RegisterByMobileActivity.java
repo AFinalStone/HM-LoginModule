@@ -11,7 +11,9 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByMobilePresenter;
+import com.hm.iou.router.Router;
 import com.hm.iou.uikit.HMCountDownTextView;
+import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.ShowHidePasswordEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -29,6 +31,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
 
+    @BindView(R2.id.topBar)
+    HMTopBarView mTopBar;
     @BindView(R2.id.et_mobile)
     TextView mEtMobile;
     @BindView(R2.id.et_smsCheckCode)
@@ -56,6 +60,19 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
+            @Override
+            public void onClickTextMenu() {
+                Router.getInstance()
+                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
+                        .navigation(mContext);
+            }
+
+            @Override
+            public void onClickImageMenu() {
+
+            }
+        });
         RxTextView.textChanges(mEtPsd).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {

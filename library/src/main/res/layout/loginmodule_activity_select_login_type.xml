@@ -8,9 +8,10 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/loginmodule_background_login_type_select"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        />
+        android:src="@mipmap/loginmodule_background_login_type_select" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="40dp"
+        android:paddingBottom="53dp"
         >
 
         <LinearLayout
@@ -42,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="@string/uikit_login_type_by_wx_chat"
+                android:text="@string/loginmodule_login_type_by_wx_chat"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textFontSize_16" />
 
@@ -69,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="@string/uikit_login_type_by_mobile"
+                android:text="@string/loginmodule_login_type_by_mobile"
                 android:textColor="#FF111111"
                 android:textSize="@dimen/textFontSize_16" />
 

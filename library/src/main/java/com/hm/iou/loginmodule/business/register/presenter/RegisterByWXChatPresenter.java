@@ -44,6 +44,7 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
     @Override
     public void getSmsCode(String mobile) {
         mView.showLoadingView();
+        final String mobileLastNum = mobile.substring(mobile.length() - 4, mobile.length());
         LoginModuleApi.sendMessage(PURPOSE_TYPE_BIND_WX_BY_SMS, mobile)
                 .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<String>handleResponse())
@@ -51,7 +52,7 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                     @Override
                     public void handleResult(String str) {
                         mView.dismissLoadingView();
-                        mView.toastMessage(R.string.uikit_get_check_code_success);
+                        mView.toastMessage("验证码已成功发送至尾号" + mobileLastNum + "手机号上");
                         mView.startCountDown();
                     }
 
@@ -103,7 +104,7 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext,"hmiou://m.54jietiao.com/login/selecttype");
+                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/selecttype");
                     }
 
                     @Override

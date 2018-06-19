@@ -26,7 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/loginmodule_shape_background_launch"
+            android:background="@drawable/loginmodule_shape_launch_time_count_down"
             android:minHeight="30dp"
             android:minWidth="66dp"
             android:paddingLeft="10dp"

@@ -68,6 +68,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                             if (!mHaveFinishView) {
                                 mHaveFinishView = true;
                                 NavigationHelper.toSelectLoginType(mContext);
+                                overridePendingTransition(R.anim.uikit_activity_open_from_right, R.anim.uikit_activity_to_left);
                             }
                         } else {
                             mIsFirstEnter = true;

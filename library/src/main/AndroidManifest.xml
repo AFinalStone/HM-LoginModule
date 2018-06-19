@@ -53,6 +53,10 @@
             android:name=".business.password.view.ResetLoginPsdActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".business.service.CustomerServiceActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
 
     </application>
 

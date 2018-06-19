@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/uikit_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.hm.iou.uikit.HMTopBarView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uikit_topbar_height"
+        app:bottomDividerIsShow="false"
+        app:titleText="客服" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:minHeight="229dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/UikitTextView"
+            android:minHeight="20dp"
+            android:minWidth="210dp"
+            android:text="有问题请联系客服，客服微信号："
+            android:textColor="#ff666666"
+            android:textSize="14sp" />
+
+        <TextView
+            style="@style/UikitTextView"
+            android:layout_marginTop="22dp"
+            android:minHeight="26dp"
+            android:minWidth="190dp"
+            android:text="@string/base_customer_service_code"
+            android:textColor="#ff111111"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_copyWeiXin"
+            style="@style/UikitButton.Bottom"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="36dp"
+            android:minWidth="205dp"
+            android:text="复制微信号" />
+    </LinearLayout>
+
+</LinearLayout>

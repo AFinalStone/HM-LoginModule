@@ -11,6 +11,8 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
 import com.hm.iou.loginmodule.business.password.presenter.FindBySMSPresenter;
+import com.hm.iou.router.Router;
+import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.keyboard.HMKeyBoardAdapter;
 import com.hm.iou.uikit.keyboard.HMKeyBoardView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -31,6 +33,9 @@ import io.reactivex.functions.Consumer;
 public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implements FindBySMSContract.View {
 
     public static final String EXTRA_KEY_MOBILE = "mobile";
+
+    @BindView(R2.id.topBar)
+    HMTopBarView mTopBar;
 
     @BindView(R2.id.tv_mobile)
     TextView mTvMobile;
@@ -60,6 +65,19 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
+            @Override
+            public void onClickTextMenu() {
+                Router.getInstance()
+                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
+                        .navigation(mContext);
+            }
+
+            @Override
+            public void onClickImageMenu() {
+
+            }
+        });
 
         mTvList[0] = findViewById(R.id.tv_code1);
         mTvList[1] = findViewById(R.id.tv_code2);

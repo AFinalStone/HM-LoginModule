@@ -14,7 +14,7 @@
     <TextView
         style="@style/UikitTextView"
         android:minHeight="30dp"
-        android:text="@string/findPassword_resetPsd"
+        android:text="@string/loginmodule_findPassword_resetPsd"
         android:textSize="@dimen/textFontSize_22" />
 
     <LinearLayout
@@ -49,5 +49,5 @@
         android:id="@+id/tv_ok"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="119dp"
-        android:text="@string/findPasswordBySMS_queryOK" />
+        android:text="@string/loginmodule_findPassword_btn_ok" />
 </LinearLayout>

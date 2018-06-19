@@ -8,13 +8,15 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false" />
+        app:bottomDividerIsShow="false"
+        app:titleBackground="@color/transparent" />
 
     <TextView
         style="@style/UikitTextView"
-        android:text="@string/findPasswordBySMS_title"
+        android:text="@string/loginmodule_findPassword_title"
         android:textColor="#FF222222"
         android:textSize="@dimen/textFontSize_22" />
 
@@ -51,7 +53,7 @@
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="149dp"
         android:enabled="false"
-        android:text="@string/findPasswordBySMS_btn_find" />
+        android:text="@string/loginmodule_findPassword_btn_find" />
 
 
 </LinearLayout>

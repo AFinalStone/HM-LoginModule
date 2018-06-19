@@ -2,70 +2,65 @@
 
 
     <!--登录方式选择-->
-    <string name="uikit_login_type_by_mobile">手机号</string>
-    <string name="uikit_login_type_by_wx_chat">微信号</string>
-    <string name="uikit_login_type_only_look">随便看看</string>
+    <string name="loginmodule_login_type_by_mobile">手机号</string>
+    <string name="loginmodule_login_type_by_wx_chat">微信号</string>
+    <string name="loginmodule_login_type_only_look">随便看看</string>
 
     <!--请输入手机号-->
-    <string name="uikit_input_mobile_title">输入手机号登录/注册</string>
-    <string name="uikit_input_mobile_et_mobileHint">请使用11位手机号</string>
-    <string name="uikit_input_mobile_btn_next">下一步</string>
-    <string name="uikit_input_mobile_et_mobileError">请输入正确的手机号码</string>
+    <string name="loginmodule_input_mobile_title">输入手机号登录/注册</string>
+    <string name="loginmodule_input_mobile_et_mobileHint">请使用11位手机号</string>
+    <string name="loginmodule_input_mobile_btn_next">下一步</string>
+    <string name="loginmodule_input_mobile_et_mobileError">请输入正确的手机号码</string>
 
     <!--手机号登录-->
-    <string name="uikit_login_by_mobile_title">输入登录密码</string>
-    <string name="uikit_login_by_mobile_et_passwordHint">请输入密码</string>
-    <string name="uikit_login_by_mobile_tv_forgetPassword">忘记密码？</string>
-    <string name="uikit_login_by_mobile_btn_login">登录</string>
-    <string name="uikit_login_by_mobile_tv_desc">登录即表示同意</string>
-    <string name="uikit_login_by_mobile_tv_agreement">《用户协议》</string>
+    <string name="loginmodule_login_by_mobile_title">输入登录密码</string>
+    <string name="loginmodule_login_by_mobile_et_passwordHint">请输入密码</string>
+    <string name="loginmodule_login_by_mobile_tv_forgetPassword">忘记密码？</string>
+    <string name="loginmodule_login_by_mobile_btn_login">登录</string>
+    <string name="loginmodule_login_by_mobile_tv_desc">登录即表示同意</string>
+    <string name="loginmodule_login_by_mobile_tv_agreement">《用户协议》</string>
 
     <!--手机号注册-->
-    <string name="register_title">Hi，请注册</string>
-    <string name="register_et_passwordHint">输入6-16位密码</string>
-    <string name="register_btn_reg">注册</string>
-    <string name="register_tv_desc">注册即同意</string>
-    <string name="register_tv_agreement01">《注册与使用协议》</string>
-    <string name="register_tv_and">及</string>
-    <string name="register_tv_agreement02">《隐私条款》</string>
-    <string name="register_registerSuccess">注册成功</string>
-    <string name="register_registerFailed">注册失败</string>
+    <string name="loginmodule_register_title">Hi,请注册</string>
+    <string name="loginmodule_register_btn_reg">注册</string>
+    <string name="loginmodule_register_tv_desc">注册即同意</string>
+    <string name="loginmodule_register_tv_agreement01">《注册与使用协议》</string>
+    <string name="loginmodule_register_tv_and">及</string>
+    <string name="loginmodule_register_tv_agreement02">《隐私条款》</string>
+    <string name="loginmodule_register_registerSuccess">注册成功</string>
+    <string name="loginmodule_register_registerFailed">注册失败</string>
 
     <!--绑定手机号-->
-    <string name="bind_mobile_title">Hi，请绑定下手机号</string>
-    <string name="bind_mobile_et_mobileHint">请使用11位手机号</string>
-    <string name="bind_mobile_et_passwordHint">输入6-16位的新密码</string>
+    <string name="loginmodule_bind_mobile_title">Hi，请绑定下手机号</string>
+    <string name="loginmodule_bind_mobile_et_mobileHint">请使用11位手机号</string>
+    <string name="loginmodule_bind_mobile_et_passwordHint">输入6-16位的新密码</string>
     <string name="loginmobile_bind_mobile">绑定手机号</string>
-    <string name="bind_mobile_have_bind_wx">该手机号已经绑定了微信账号</string>
-    <string name="bind_mobile_loginFailed">账号注册成功，自动登录失败，请尝试手动登录</string>
-    <string name="bind_mobile_check_mobile_failed">手机号校验失败</string>
-    <string name="bind_mobile_dialog01_title">该号码已绑定过【微信】</string>
-    <string name="bind_mobile_dialog01_msg">该手机号已经绑定过微信，请通过手机号登录</string>
-    <string name="bind_mobile_dialog01_ok">手机登录</string>
-    <string name="bind_mobile_dialog02_title">该号码已有【账户】</string>
-    <string name="bind_mobile_dialog02_msg">该手机号已经注册，如果是您本人，请继续完成绑定</string>
-    <string name="bind_mobile_dialog02_ok">继续</string>
+    <string name="loginmodule_bind_mobile_have_bind_wx">该手机号已经绑定了微信账号</string>
+    <string name="loginmodule_bind_mobile_loginFailed">账号注册成功，自动登录失败，请尝试手动登录</string>
+    <string name="loginmodule_bind_mobile_check_mobile_failed">手机号校验失败</string>
+    <string name="loginmodule_bind_mobile_dialog01_title">该号码已绑定过【微信】</string>
+    <string name="loginmodule_bind_mobile_dialog01_msg">该手机号已经绑定过微信，请通过手机号登录</string>
+    <string name="loginmodule_bind_mobile_dialog01_ok">手机号登录</string>
+    <string name="loginmodule_bind_mobile_dialog02_title">该号码已有【账户】</string>
+    <string name="loginmodule_bind_mobile_dialog02_msg">该手机号已经注册，如果是您本人，请继续完成绑定</string>
+    <string name="loginmodule_bind_mobile_dialog02_ok">继续</string>
 
     <!--找回密码-->
-    <string name="findPassword_resetPsd">重置密码</string>
-    <string name="findPassword_pleaseInputNewPsd">请输入6到16位的新密码</string>
-    <string name="findPasswordBySMS_title">请输入手机号</string>
-    <string name="findPasswordBySMS_btn_find">找回密码</string>
-    <string name="findPasswordBySMS_queryOK">确定</string>
+    <string name="loginmodule_findPassword_resetPsd">重置密码</string>
+    <string name="loginmodule_findPassword_pleaseInputNewPsd">请输入6到16位的新密码</string>
+    <string name="loginmodule_findPassword_title">请输入手机号</string>
+    <string name="loginmodule_findPassword_btn_find">找回密码</string>
+    <string name="loginmodule_findPassword_btn_ok">确定</string>
 
     <!--短信验证码-->
-    <string name="inputCode_title">验证码已发送至</string>
-    <string name="tv_retry_code">重发验证码</string>
+    <string name="loginmodule_input_id_card_code_title">验证码已发送至</string>
+    <string name="loginmodule_input_id_card_code_try_again">重发验证码</string>
     <!--邮箱验证码-->
-    <string name="bindEmailAndResetPsd_title">请输入绑定的邮箱</string>
-    <string name="bindEmailAndResetPsd_etEmailLeft">提示</string>
-    <string name="bindEmailAndResetPsd_etEmailRight">邮箱</string>
-    <string name="loginmodule_find_psd_btn_find">通过邮箱找回</string>
-    <string name="loginmodule_bind_email_et_hint">请输入您需要绑定的邮箱</string>
-    <string name="loginmodule_bind_email_btn_bind">绑定</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_title">请输入绑定的邮箱</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_tip">提示</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_email">邮箱</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_btn_find">通过邮箱找回</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_input_email">请输入您需要绑定的邮箱</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_bind">绑定</string>
 
-    <!--首页预加载页面-->
-    <string name="loginLoading_loading">小管家正在加载内容</string>
-    <string name="loginLoading_loginFailed">登录失败</string>
-    <string name="loginLoading_bindWXFailed">绑定失败</string>
 </resources>

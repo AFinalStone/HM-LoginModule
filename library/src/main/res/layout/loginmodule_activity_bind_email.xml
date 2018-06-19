@@ -8,13 +8,16 @@
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false" />
+        app:bottomDividerIsShow="false"
+        app:rightText="@string/base_customer_service"
+        app:titleBackground="@color/transparent" />
 
     <TextView
         style="@style/UikitTextView"
-        android:text="@string/bindEmailAndResetPsd_title"
+        android:text="@string/loginmodule_bind_email_or_reset_login_psd_title"
         android:textColor="#FF222222"
         android:textSize="@dimen/textFontSize_22"
         android:textStyle="bold" />
@@ -43,7 +46,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@null"
-            android:hint="@string/loginmodule_bind_email_et_hint"
+            android:hint="@string/loginmodule_bind_email_or_reset_login_psd_input_email"
             android:textSize="@dimen/textFontSize_14" />
 
     </LinearLayout>
@@ -89,7 +92,7 @@
         android:id="@+id/tv_bindEmail"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="90dp"
-        android:text="@string/loginmodule_bind_email_btn_bind" />
+        android:text="@string/loginmodule_bind_email_or_reset_login_psd_bind" />
 
 
 </LinearLayout>

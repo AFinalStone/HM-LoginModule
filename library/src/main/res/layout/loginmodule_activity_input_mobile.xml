@@ -14,7 +14,7 @@
 
     <TextView
         style="@style/UikitTextView"
-        android:text="@string/uikit_input_mobile_title"
+        android:text="@string/loginmodule_input_mobile_title"
         android:textColor="#FF222222"
         android:textSize="@dimen/textFontSize_22"
         android:textStyle="bold" />
@@ -51,7 +51,7 @@
         android:id="@+id/tv_next"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="149dp"
-        android:text="@string/uikit_input_mobile_btn_next" />
+        android:text="@string/loginmodule_input_mobile_btn_next" />
 
 
 </LinearLayout>

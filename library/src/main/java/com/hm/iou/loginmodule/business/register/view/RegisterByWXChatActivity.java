@@ -18,6 +18,7 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByWXChatContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByWXChatPresenter;
+import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
@@ -40,6 +41,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     public static final String EXTRA_KEY_WX_CHAT_SN = "wx_chat_sn";
 
+    @BindView(R2.id.topBar)
+    HMTopBarView mTopBar;
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
     @BindView(R2.id.et_smsCheckCode)
@@ -48,8 +51,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     HMCountDownTextView mTvGetSMSCheckCode;
     @BindView(R2.id.et_password)
     EditText mEtPassword;
-    @BindView(R2.id.tv_bindMobile)
-    TextView mTvBindMobile;
+    @BindView(R2.id.btn_next)
+    Button mBtnNext;
 
     String mStrSMSCheckCode = "";
     String mStrMobile = "";
@@ -70,6 +73,19 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
+            @Override
+            public void onClickTextMenu() {
+                Router.getInstance()
+                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
+                        .navigation(mContext);
+            }
+
+            @Override
+            public void onClickImageMenu() {
+
+            }
+        });
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
@@ -108,29 +124,33 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         outState.putString(EXTRA_KEY_WX_CHAT_SN, mWXChatSN);
     }
 
-    @OnClick({R2.id.tv_bindMobile, R2.id.tv_getSMSCheckCode})
+    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_getSMSCheckCode == id) {
             mPresenter.isMobileHaveBindWX(mStrMobile);
-        } else if (R.id.tv_bindMobile == id) {
+        } else if (R.id.btn_next == id) {
             mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
+        } else if (R.id.tv_agreement01 == id) {
+            NavigationHelper.ToRegisterAndUseAgreement(mContext);
+        } else if (R.id.tv_agreement02 == id) {
+            NavigationHelper.toPrivateAgreement(mContext);
         }
     }
 
     private void checkValue() {
-        mTvBindMobile.setEnabled(false);
+        mBtnNext.setEnabled(false);
         if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE) && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
-            mTvBindMobile.setEnabled(true);
+            mBtnNext.setEnabled(true);
         }
     }
 
     @Override
     public void warnMobileHaveBindWX(String desc) {
-        String title = getString(R.string.bind_mobile_dialog01_title);
-        String msg = getString(R.string.bind_mobile_dialog01_msg);
+        String title = getString(R.string.loginmodule_bind_mobile_dialog01_title);
+        String msg = getString(R.string.loginmodule_bind_mobile_dialog01_msg);
         String cancel = getString(R.string.base_cancel);
-        String ok = getString(R.string.bind_mobile_dialog01_ok);
+        String ok = getString(R.string.loginmodule_bind_mobile_dialog01_ok);
         new IOSAlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(msg)
@@ -151,10 +171,10 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     @Override
     public void warnMobileNotBindWX(String desc) {
-        String title = getString(R.string.bind_mobile_dialog02_title);
-        String msg = getString(R.string.bind_mobile_dialog02_msg);
+        String title = getString(R.string.loginmodule_bind_mobile_dialog02_title);
+        String msg = getString(R.string.loginmodule_bind_mobile_dialog02_msg);
         String cancel = getString(R.string.base_cancel);
-        String ok = getString(R.string.bind_mobile_dialog02_ok);
+        String ok = getString(R.string.loginmodule_bind_mobile_dialog02_ok);
         new IOSAlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(msg)

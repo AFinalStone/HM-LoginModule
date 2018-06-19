@@ -12,9 +12,11 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindByEmailContract;
 import com.hm.iou.loginmodule.business.password.presenter.FindByEmailPresenter;
+import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
+import com.hm.iou.uikit.HMTopBarView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -31,12 +33,18 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
     public static final String EXTRA_KEY_MOBILE = "mobile";
     public static final String EXTRA_KEY_TIP_EMAIL = "tip_email";
 
+    @BindView(R2.id.topBar)
+    HMTopBarView mTopBar;
+
     @BindView(R2.id.et_email)
     ClearEditText mEtEmail;
+
     @BindView(R2.id.et_emailCode)
     EditText mEtEmailCode;
+
     @BindView(R2.id.tv_getEmailCode)
     HMCountDownTextView mTvGetEmailCode;
+
     @BindView(R2.id.tv_find)
     TextView mTvFind;
 
@@ -57,6 +65,20 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
+            @Override
+            public void onClickTextMenu() {
+                Router.getInstance()
+                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
+                        .navigation(mContext);
+            }
+
+            @Override
+            public void onClickImageMenu() {
+
+            }
+        });
+
         RxTextView.textChanges(mEtEmail).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
@@ -84,7 +106,7 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
             mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
             mTipEmail = savedInstanceState.getString(EXTRA_KEY_TIP_EMAIL);
         }
-        String strEmail = getString(R.string.bindEmailAndResetPsd_etEmailLeft) + mTipEmail + getString(R.string.bindEmailAndResetPsd_etEmailRight);
+        String strEmail = getString(R.string.loginmodule_bind_email_or_reset_login_psd_tip) + mTipEmail + getString(R.string.loginmodule_bind_email_or_reset_login_psd_email);
         mEtEmail.setHint(strEmail);
     }
 
