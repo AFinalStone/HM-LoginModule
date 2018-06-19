@@ -2,11 +2,10 @@ package com.hm.iou.loginmodule.business.launch;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
-import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
@@ -61,19 +60,19 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        toMain();
+                        delayToMainPage();
                     }
                 })
                 .subscribeWith(new CommSubscriber<Long>(mView) {
                     @Override
                     public void handleResult(Long aLong) {
-                        String desc = "跳过（" + aLong + "）";
+                        String desc = aLong + " 跳过";
                         mView.setJumpBtnText(desc);
                     }
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-                        toMain();
+                        delayToMainPage();
                     }
 
                     @Override
@@ -141,9 +140,11 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
 
     @Override
     public void toAdDetail(String linkUrl) {
-        mIsHaveOpenMain = true;
-        NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
-        mView.closeCurrPage();
+        if (!TextUtils.isEmpty(linkUrl)) {
+            mIsHaveOpenMain = true;
+            NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
+            mView.closeCurrPage();
+        }
     }
 
     private void delayToMainPage() {
@@ -158,7 +159,7 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        toMain();
                     }
                 });
     }
