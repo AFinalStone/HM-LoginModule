@@ -7,7 +7,7 @@
     <string name="loginmodule_login_type_only_look">随便看看</string>
 
     <!--请输入手机号-->
-    <string name="loginmodule_input_mobile_title">输入手机号登录/注册</string>
+    <string name="loginmodule_input_mobile_title">登录/注册</string>
     <string name="loginmodule_input_mobile_et_mobileHint">请使用11位手机号</string>
     <string name="loginmodule_input_mobile_btn_next">下一步</string>
     <string name="loginmodule_input_mobile_et_mobileError">请输入正确的手机号码</string>

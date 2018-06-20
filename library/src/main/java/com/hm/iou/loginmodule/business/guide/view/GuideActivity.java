@@ -49,6 +49,10 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     }
 
     @Override
+    public void onBackPressed() {
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         mIsFirstEnter = false;

@@ -72,7 +72,7 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
-                        delayToMainPage();
+                        toMain();
                     }
 
                     @Override
@@ -122,13 +122,12 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                 delayToMainPage();
             }
         } else {
-            NavigationHelper.toGuide(mContext);
-            mView.closeCurrPage();
+            delayToGuidePage();
         }
     }
 
     @Override
-    public synchronized void toMain() {
+    public void toMain() {
         if (!mIsHaveOpenMain) {
             mIsHaveOpenMain = true;
             NavigationHelper.toMain(mContext);
@@ -147,10 +146,14 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
         }
     }
 
+    /**
+     * 延时跳转到首页
+     */
     private void delayToMainPage() {
         Flowable.just(0).delay(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(getProvider().<Integer>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
@@ -160,6 +163,29 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         toMain();
+                    }
+                });
+    }
+
+    /**
+     * 延时跳转到引导页
+     */
+    private void delayToGuidePage() {
+        Flowable.just(0).delay(1000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(getProvider().<Integer>bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        NavigationHelper.toGuide(mContext);
+                        mView.closeCurrPage();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        NavigationHelper.toGuide(mContext);
+                        mView.closeCurrPage();
                     }
                 });
     }
