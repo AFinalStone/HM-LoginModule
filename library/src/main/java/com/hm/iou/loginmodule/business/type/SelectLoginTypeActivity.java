@@ -65,6 +65,12 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
         return super.onTouchEvent(event);
     }
 
+    @Override
+    protected void onDestroy() {
+        overridePendingTransition(0, R.anim.uikit_activity_to_right);
+        super.onDestroy();
+    }
+
     @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile})
     public void onClick(View view) {
         int id = view.getId();
