@@ -1,5 +1,6 @@
 package com.hm.iou.loginmodule.business.guide.view;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
@@ -10,10 +11,13 @@ import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.guide.GuideContract;
 import com.hm.iou.loginmodule.business.guide.GuidePresenter;
 import com.hm.iou.loginmodule.widget.CircleIndicator;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.functions.Consumer;
 
 /**
  * 引导页
@@ -46,6 +50,16 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @Override
     protected void initEventAndData(Bundle bundle) {
         mPresenter.init();
+
+        //请求日历权限
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.requestEach(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(Permission permission) throws Exception {
+
+                    }
+                });
     }
 
     @Override
