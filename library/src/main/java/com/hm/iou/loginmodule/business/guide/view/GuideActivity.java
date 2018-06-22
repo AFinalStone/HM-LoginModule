@@ -67,8 +67,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         mIsFirstEnter = false;
         mHaveFinishView = false;
     }
@@ -92,6 +92,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                             mIsFirstEnter = true;
                         }
                     }
+                } else {
+                    mIsFirstEnter = false;
+                    mHaveFinishView = false;
                 }
             }
 
