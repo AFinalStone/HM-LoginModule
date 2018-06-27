@@ -17,8 +17,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="30dp"
-        app:ci_drawable="@drawable/uikit_indicator_radius_color_white"
-        app:ci_drawable_unselected="@drawable/uikit_indicator_radius_color_white"
+        app:ci_drawable="@drawable/uikit_circle_indicator_radius_color_white"
+        app:ci_drawable_unselected="@drawable/uikit_circle_indicator_radius_color_white"
         app:ci_height="6dp"
         app:ci_width="6dp" />
 
