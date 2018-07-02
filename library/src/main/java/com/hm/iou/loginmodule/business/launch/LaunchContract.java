@@ -38,6 +38,11 @@ public interface LaunchContract {
         void init();
 
         /**
+         * 暂停倒计时
+         */
+        void pauseCountDown();
+
+        /**
          * 进入广告详情页面
          *
          * @param linkUrl

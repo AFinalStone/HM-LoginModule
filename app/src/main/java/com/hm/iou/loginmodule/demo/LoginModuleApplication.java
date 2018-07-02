@@ -25,6 +25,8 @@ public class LoginModuleApplication extends Application {
         baseBizAppLike.onCreate(this);
         baseBizAppLike.initServer("http://192.168.1.254", "http://192.168.1.254",
                 "http://192.168.1.254");
+//        baseBizAppLike.initServer("http://api.54jietiao.com", "http://upload.54jietiao.com",
+//                "http://h5.54jietiao.com");
         initNetwork();
     }
 
@@ -36,7 +38,7 @@ public class LoginModuleApplication extends Application {
                 .setAppChannel("yyb")
                 .setAppVersion("1.0.2")
                 .setDeviceId("123abc123")
-                .setBaseUrl("http://192.168.1.254")
+                .setBaseUrl(BaseBizAppLike.getInstance().getApiServer())
                 .build();
         HttpReqManager.init(config);
     }

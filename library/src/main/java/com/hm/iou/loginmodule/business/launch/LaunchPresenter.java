@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -35,8 +36,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.View> implements LaunchContract.Presenter {
 
-    private int mCountDownTime = 3;
+    private long mCountDownTime = 3;
     private boolean mIsHaveOpenMain = false;
+    private Disposable mCountDownDisposable;
+
 
     public LaunchPresenter(@NonNull Context context, @NonNull LaunchContract.View view) {
         super(context, view);
@@ -46,7 +49,10 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
      * 开启倒计时
      */
     public void startCountDown() {
-        Flowable.interval(0, 1, TimeUnit.SECONDS)
+        if (mCountDownDisposable != null && !mCountDownDisposable.isDisposed()) {
+            mCountDownDisposable.dispose();
+        }
+        mCountDownDisposable = Flowable.interval(0, 1, TimeUnit.SECONDS)
                 .take(mCountDownTime)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -88,7 +94,6 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
 
     }
 
-
     @Override
     public void init() {
         LoginModuleApi.getAdvertisement()
@@ -123,6 +128,13 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
             }
         } else {
             delayToGuidePage();
+        }
+    }
+
+    @Override
+    public void pauseCountDown() {
+        if (mCountDownDisposable != null && !mCountDownDisposable.isDisposed()) {
+            mCountDownDisposable.dispose();
         }
     }
 
