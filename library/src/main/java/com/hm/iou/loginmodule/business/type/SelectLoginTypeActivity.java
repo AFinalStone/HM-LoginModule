@@ -46,6 +46,7 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
         mPresenter.isInstalledWxChatAPP();
+        mPresenter.checkVersion();
     }
 
     @Override
