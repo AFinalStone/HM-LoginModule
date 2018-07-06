@@ -31,5 +31,6 @@ public interface SelectLoginTypeContract {
          */
         void getWxCode();
 
+        void checkVersion();
     }
 }

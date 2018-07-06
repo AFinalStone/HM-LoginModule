@@ -2,16 +2,20 @@ package com.hm.iou.loginmodule.business.type;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.hm.iou.base.event.OpenWxResultEvent;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxJavaStopException;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.base.version.CheckVersionResBean;
+import com.hm.iou.base.version.VersionApi;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.network.HttpReqManager;
+import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
@@ -80,6 +84,45 @@ public class SelectLoginTypePresenter extends BaseLoginModulePresenter<SelectLog
                 });
     }
 
+    @Override
+    public void checkVersion() {
+        VersionApi.checkVersion()
+                .compose(getProvider().<BaseResponse<CheckVersionResBean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<CheckVersionResBean>handleResponse())
+                .subscribeWith(new CommSubscriber<CheckVersionResBean>(mView) {
+                    @Override
+                    public void handleResult(CheckVersionResBean data) {
+                        if (data == null || TextUtils.isEmpty(data.getDownloadUrl())) {
+                            return;
+                        }
+                        if (data.getType() != 2 && data.getType() != 3) {
+                            return;
+                        }
+                        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/homedialog")
+                                .withString("dialog_type", data.getType() + "")
+                                .withString("dialog_title", data.getTitile())
+                                .withString("dialog_content", data.getContent())
+                                .withString("dialog_sub_content", data.getSubContent())
+                                .withString("dialog_file_down_url", data.getDownloadUrl())
+                                .withString("dialog_file_md5", data.getFileMD5())
+                                .navigation(mContext);
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String code, String msg) {
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isShowCommError() {
+                        return false;
+                    }
+                });
+    }
 
     /**
      * 打开微信,获取code
