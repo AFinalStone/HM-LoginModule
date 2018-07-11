@@ -34,29 +34,35 @@ import io.reactivex.schedulers.Schedulers;
  * @author syl
  * @time 2018/5/31 下午3:01
  */
-public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.View> implements LaunchContract.Presenter {
+public class LaunchPresenter implements LaunchContract.Presenter {
+
+    private Context mContext;
+    private LaunchContract.View mView;
 
     private long mCountDownTime = 3;
     private boolean mIsHaveOpenMain = false;
     private Disposable mCountDownDisposable;
 
-
     public LaunchPresenter(@NonNull Context context, @NonNull LaunchContract.View view) {
-        super(context, view);
+        mContext = context.getApplicationContext();
+        mView = view;
+    }
+
+    @Override
+    public void onDestroy() {
+        pauseCountDown();
+        mView = null;
     }
 
     /**
      * 开启倒计时
      */
     public void startCountDown() {
-        if (mCountDownDisposable != null && !mCountDownDisposable.isDisposed()) {
-            mCountDownDisposable.dispose();
-        }
+        pauseCountDown();
         mCountDownDisposable = Flowable.interval(0, 1, TimeUnit.SECONDS)
                 .take(mCountDownTime)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(getProvider().<Long>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
@@ -69,26 +75,18 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
                         delayToMainPage();
                     }
                 })
-                .subscribeWith(new CommSubscriber<Long>(mView) {
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public void handleResult(Long aLong) {
+                    public void accept(Long aLong) throws Exception {
                         String desc = aLong + " 跳过";
-                        mView.setJumpBtnText(desc);
+                        if (mView != null) {
+                            mView.setJumpBtnText(desc);
+                        }
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
+                    public void accept(Throwable throwable) throws Exception {
                         toMain();
-                    }
-
-                    @Override
-                    public boolean isShowBusinessError() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean isShowCommError() {
-                        return false;
                     }
                 });
 
@@ -98,28 +96,20 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
     public void init() {
         LoginModuleApi.getAdvertisement()
                 .map(RxUtil.<List<AdvertisementRespBean>>handleResponse())
-                .subscribeWith(new CommSubscriber<List<AdvertisementRespBean>>(mView) {
+                .subscribe(new Consumer<List<AdvertisementRespBean>>() {
                     @Override
-                    public void handleResult(List<AdvertisementRespBean> list) {
-                        CacheDataUtil.cacheAdvertisementList(mContext, list);
+                    public void accept(List<AdvertisementRespBean> list) throws Exception {
+                        CacheDataUtil.cacheAdvertisementList(mContext.getApplicationContext(), list);
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
-                    }
+                    public void accept(Throwable throwable) throws Exception {
 
-                    @Override
-                    public boolean isShowCommError() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean isShowBusinessError() {
-                        return false;
                     }
                 });
+
         if (UserManager.getInstance(mContext).isLogin()) {
-            AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext);
+            AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext.getApplicationContext());
             if (adBean != null) {
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
                 startCountDown();
@@ -165,7 +155,6 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
         Flowable.just(0).delay(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(getProvider().<Integer>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
@@ -186,18 +175,21 @@ public class LaunchPresenter extends BaseLoginModulePresenter<LaunchContract.Vie
         Flowable.just(0).delay(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(getProvider().<Integer>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
                         NavigationHelper.toGuide(mContext);
-                        mView.closeCurrPage();
+                        if (mView != null) {
+                            mView.closeCurrPage();
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         NavigationHelper.toGuide(mContext);
-                        mView.closeCurrPage();
+                        if (mView != null) {
+                            mView.closeCurrPage();
+                        }
                     }
                 });
     }

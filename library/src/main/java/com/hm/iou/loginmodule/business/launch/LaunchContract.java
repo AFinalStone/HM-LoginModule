@@ -1,8 +1,5 @@
 package com.hm.iou.loginmodule.business.launch;
 
-
-import com.hm.iou.base.mvp.BaseContract;
-
 /**
  * 启动页
  *
@@ -11,7 +8,7 @@ import com.hm.iou.base.mvp.BaseContract;
  */
 public interface LaunchContract {
 
-    interface View extends BaseContract.BaseView {
+    interface View {
 
         /**
          * 显示广告
@@ -28,9 +25,10 @@ public interface LaunchContract {
          */
         void setJumpBtnText(String desc);
 
+        void closeCurrPage();
     }
 
-    interface Presenter extends BaseContract.BasePresenter {
+    interface Presenter {
 
         /**
          * 初始化，获取广告
@@ -53,5 +51,7 @@ public interface LaunchContract {
          * 跳转到首页
          */
         void toMain();
+
+        void onDestroy();
     }
 }
