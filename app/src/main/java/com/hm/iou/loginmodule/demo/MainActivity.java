@@ -1,10 +1,12 @@
 package com.hm.iou.loginmodule.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.business.launch.view.LaunchActivity;
 import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.tools.ToastUtil;
 
@@ -21,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
+
+        findViewById(R.id.btn_open_launch).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LaunchActivity.class));
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">--><!--<item>--><!--<color android:color="#ffffff" />--><!--</item>--><!--<item android:bottom="40dp">--><!--<bitmap--><!--android:gravity="center_horizontal|bottom"--><!--android:src="@mipmap/startup_lunch_logo" />--><!--</item>--><!--</layer-list>-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="#ffffffff" />
+    </item>
+    <item android:bottom="30dip">
+        <bitmap
+            android:gravity="center_horizontal|bottom"
+            android:src="@mipmap/loginmodule_background_launch" />
+    </item>
+</layer-list>

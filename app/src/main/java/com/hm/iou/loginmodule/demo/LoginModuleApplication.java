@@ -28,6 +28,12 @@ public class LoginModuleApplication extends Application {
 //        baseBizAppLike.initServer("http://api.54jietiao.com", "http://upload.54jietiao.com",
 //                "http://h5.54jietiao.com");
         initNetwork();
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

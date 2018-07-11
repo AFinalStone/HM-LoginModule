@@ -1,11 +1,8 @@
 <resources>
 
     <style name="LoginModuleLaunchTheme" parent="UikitAppTheme">
-        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowBackground">@drawable/loginmodule_launch_layerlist</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:activityOpenEnterAnimation">@anim/loginmodule_activity_open_from_alpha
-        </item>
     </style>
 
 </resources>
