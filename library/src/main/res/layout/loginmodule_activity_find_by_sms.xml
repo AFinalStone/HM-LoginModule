@@ -80,11 +80,11 @@
 
         <TextView
             android:id="@+id/tv_retryCode"
-            android:layout_width="292dp"
-            android:layout_height="18dp"
+            style="@style/UikitTextView"
             android:layout_marginTop="12dp"
+            android:minHeight="18dp"
+            android:minWidth="292dp"
             android:text="@string/loginmodule_input_id_card_code_try_again"
-            android:textColor="#FFF1C238"
             android:textSize="@dimen/textFontSize_13" />
 
 

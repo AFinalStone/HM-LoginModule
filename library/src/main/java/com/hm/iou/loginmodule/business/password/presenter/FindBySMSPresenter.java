@@ -57,7 +57,7 @@ public class FindBySMSPresenter extends BaseLoginModulePresenter<FindBySMSContra
                     public void onComplete() {
                         super.onComplete();
                         if (mView != null) {
-                            String getCode = mContext.getString(R.string.uikit_get_check_code);
+                            String getCode = "重发验证码";
                             mView.setGetSMSBtnText(true, getCode);
                         }
                     }
@@ -65,7 +65,7 @@ public class FindBySMSPresenter extends BaseLoginModulePresenter<FindBySMSContra
                     @Override
                     public void handleResult(Long time) {
                         if (mView != null) {
-                            String countDownDesc = mContext.getString(R.string.uikit_get_check_code_count_down) + "后重试";
+                            String countDownDesc = "%S秒后重试";
                             countDownDesc = String.format(countDownDesc, time);
                             mView.setGetSMSBtnText(false, countDownDesc);
                         }
