@@ -1,8 +1,9 @@
 <resources>
 
-    <style name="LoginModuleLaunchTheme" parent="UikitAppTheme">
+    <style name="LoginModuleLaunchTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/loginmodule_launch_layerlist</item>
         <item name="android:windowFullscreen">true</item>
+
     </style>
 
 </resources>
