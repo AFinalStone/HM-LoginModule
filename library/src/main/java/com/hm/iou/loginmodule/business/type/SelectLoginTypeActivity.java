@@ -1,14 +1,15 @@
 package com.hm.iou.loginmodule.business.type;
 
 
-import android.graphics.Color;
+import android.Manifest;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.PermissionUtil;
+import com.hm.iou.cityselect.location.LocationManager;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -47,6 +48,12 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
     protected void initEventAndData(Bundle savedInstanceState) {
         mPresenter.isInstalledWxChatAPP();
         mPresenter.checkVersion();
+
+        //如果有定位权限，则请求定位
+        if (PermissionUtil.isPermissionGranted(this, Manifest.permission.ACCESS_FINE_LOCATION) &&
+                PermissionUtil.isPermissionGranted(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            LocationManager.getInstance(this).requestLocation();
+        }
     }
 
     @Override

@@ -51,9 +51,10 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     protected void initEventAndData(Bundle bundle) {
         mPresenter.init();
 
-        //请求日历权限
+        //请求权限：定位权限、日历读写权限
         RxPermissions rxPermissions = new RxPermissions(this);
-        rxPermissions.requestEach(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
+        rxPermissions.requestEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {

@@ -29,7 +29,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     //lombok插件
@@ -40,6 +39,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     compile 'com.heima.iou:hmbasebizlocal:1.0.0'
+    compile 'com.heima.iou:hmcityselectlocal:1.0.0'
 }
 apply from: './maven_local.gradle'
 
