@@ -1,6 +1,6 @@
 #### LoginModule
 
-集成了启动引导模块，登录，注册，忘记密码，邮箱绑定相关功能
+集成了启动页，引导页，登录，注册，忘记密码，邮箱绑定等相关功能模块
 
 #### 功能介绍
 - 启动页，引导页
@@ -42,20 +42,20 @@ allprojects {
 支持的路由
 
 | 页面 | 路由url | 备注 |
-| ------ | ------ | ------ |
-| 启动页 | hmiou://m.54jietiao.com/login/launchAdvertisementDetail?url=* |  |
-| 引导页 | hmiou://m.54jietiao.com/login/guide |  |
-| 登录方式选择页面 | hmiou://m.54jietiao.com/login/selecttype |  |
-| 输入手机号码判断手机号是否存在的页面 | hmiou://m.54jietiao.com/login/inputmobile |  |
-| 手机号登陆页面 | hmiou://m.54jietiao.com/login/mobilelogin?mobile=* |  |
-| 通过手机号注册页面 | hmiou://m.54jietiao.com/login/register_by_mobile?mobile=* |  |
-| 通过微信注册页面 | hmiou://m.54jietiao.com/login/register_by_wx_chat?wx_chat_sn=* |  |
-| 绑定邮箱页面 | hmiou://m.54jietiao.com/login/bindemail?mobile=* |  |
+| :------: | :------ | :------ |
+| 启动页 | hmiou://m.54jietiao.com/login/launchAdvertisementDetail?url=* | url(广告链接地址) |
+| 引导页 | hmiou://m.54jietiao.com/login/guide | 暂无参数 |
+| 登录方式选择页面 | hmiou://m.54jietiao.com/login/selecttype | 暂无参数 |
+| 输入手机号码判断手机号是否存在的页面 | hmiou://m.54jietiao.com/login/inputmobile | 暂无参数 |
+| 手机号登陆页面 | hmiou://m.54jietiao.com/login/mobilelogin?mobile=* |mobile(需要登陆的手机号)|
+| 通过手机号注册页面 | hmiou://m.54jietiao.com/login/register_by_mobile?mobile=* | mobile(需要注册的手机号) |
+| 通过微信注册页面 | hmiou://m.54jietiao.com/login/register_by_wx_chat?wx_chat_sn=* | 通过微信sdk获取本地微信code,再根据code调用服务端接口判断微信是否已经存在，判断是否存在会返回交易流水号wx_chat_sn |
+| 绑定邮箱页面 | hmiou://m.54jietiao.com/login/bindemail| 暂无参数 |
 | 通过手机号找回密码页面 | hmiou://m.54jietiao.com/login/find_by_input_mobile |  |
-| 通过邮箱找回密码页面 | hmiou://m.54jietiao.com/login/find_by_email?mobile=*&tip_email=* |  |
-| 通过短信找回密码页面 | hmiou://m.54jietiao.com/login/find_by_sms?mobile=* |  |
-| 重置登陆密码页面 | hmiou://m.54jietiao.com/login/reset_login_psd?mobile=* |  |
-| 客服页面 | hmiou://m.54jietiao.com/login/customer_service |  |
+| 通过邮箱找回密码页面 | hmiou://m.54jietiao.com/login/find_by_email?mobile=*&tip_email=* | mobile(手机号)，tip_email(邮箱提示语) |
+| 通过短信找回密码页面 | hmiou://m.54jietiao.com/login/find_by_sms?mobile=* |mobile(手机号)  |
+| 重置登陆密码页面 | hmiou://m.54jietiao.com/login/reset_login_psd?mobile=* | mobile(手机号) |
+| 客服页面 | hmiou://m.54jietiao.com/login/customer_service | 暂无参数 |
 
 路由文件
 

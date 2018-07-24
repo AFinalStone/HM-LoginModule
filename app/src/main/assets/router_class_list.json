@@ -36,7 +36,7 @@
       "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
     },
     {
-      "url": "hmiou://m.54jietiao.com/login/bindemail?mobile=*",
+      "url": "hmiou://m.54jietiao.com/login/bindemail",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.email.BindEmailActivity"
     },
