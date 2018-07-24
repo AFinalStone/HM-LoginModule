@@ -7,6 +7,7 @@
 - 手机号注册，登录
 - 微信账号注册，登录
 - 忘记密码，通过手机号，活体校验，邮箱验证找回密码
+- 绑定邮箱
 
 #### 安装
 
@@ -47,9 +48,14 @@ allprojects {
 | 登录方式选择页面 | hmiou://m.54jietiao.com/login/selecttype |  |
 | 输入手机号码判断手机号是否存在的页面 | hmiou://m.54jietiao.com/login/inputmobile |  |
 | 手机号登陆页面 | hmiou://m.54jietiao.com/login/mobilelogin?mobile=* |  |
-| 手机号注册页面 | hmiou://m.54jietiao.com/login/register_by_mobile?mobile=* |  |
-| 手机号注册页面 | hmiou://m.54jietiao.com/login/register_by_mobile?mobile=* |  |
-| 通过微信注册页面 | hmiou://m.54jietiao.com/login/register_by_wx?wx_chat_sn=* |  |
+| 通过手机号注册页面 | hmiou://m.54jietiao.com/login/register_by_mobile?mobile=* |  |
+| 通过微信注册页面 | hmiou://m.54jietiao.com/login/register_by_wx_chat?wx_chat_sn=* |  |
+| 绑定邮箱页面 | hmiou://m.54jietiao.com/login/bindemail?mobile=* |  |
+| 通过手机号找回密码页面 | hmiou://m.54jietiao.com/login/find_by_input_mobile |  |
+| 通过邮箱找回密码页面 | hmiou://m.54jietiao.com/login/find_by_email?mobile=*&tip_email=* |  |
+| 通过短信找回密码页面 | hmiou://m.54jietiao.com/login/find_by_sms?mobile=* |  |
+| 重置登陆密码页面 | hmiou://m.54jietiao.com/login/reset_login_psd?mobile=* |  |
+| 客服页面 | hmiou://m.54jietiao.com/login/customer_service |  |
 
 路由文件
 
@@ -82,6 +88,16 @@ allprojects {
       "aclass": "com.hm.iou.loginmodule.business.login.view.MobileLoginActivity"
     },
     {
+      "url": "hmiou://m.54jietiao.com/login/register_by_mobile?mobile=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/register_by_wx_chat?mobile=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
+    },
+    {
       "url": "hmiou://m.54jietiao.com/login/bindemail?mobile=*",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.email.BindEmailActivity"
@@ -107,16 +123,6 @@ allprojects {
       "aclass": "com.hm.iou.loginmodule.business.password.view.ResetLoginPsdActivity"
     },
     {
-      "url": "hmiou://m.54jietiao.com/login/register_by_mobile?mobile=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/login/register_by_wx_chat?mobile=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
-    },
-    {
       "url": "hmiou://m.54jietiao.com/login/customer_service",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.service.CustomerServiceActivity"
@@ -127,7 +133,8 @@ allprojects {
 
 #### 集成说明
 
-
+集成本模块之前，需要保证一下模块已经初始化：
+HM-Network（网络框架），HM-Router（路由模块），Logger（日志记录）
 
 #### Author
 

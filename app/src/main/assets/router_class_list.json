@@ -31,7 +31,7 @@
       "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity"
     },
     {
-      "url": "hmiou://m.54jietiao.com/login/register_by_wx?wx_chat_sn=*",
+      "url": "hmiou://m.54jietiao.com/login/register_by_wx_chat?mobile=*",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
     },
@@ -59,16 +59,6 @@
       "url": "hmiou://m.54jietiao.com/login/reset_login_psd?mobile=*",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.password.view.ResetLoginPsdActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/login/register_by_mobile?mobile=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity"
-    },
-    {
-      "url": "hmiou://m.54jietiao.com/login/register_by_wx_chat?mobile=*",
-      "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
     },
     {
       "url": "hmiou://m.54jietiao.com/login/customer_service",
