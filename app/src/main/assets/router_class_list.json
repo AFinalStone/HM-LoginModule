@@ -26,6 +26,16 @@
       "aclass": "com.hm.iou.loginmodule.business.login.view.MobileLoginActivity"
     },
     {
+      "url": "hmiou://m.54jietiao.com/login/register_by_mobile?mobile=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/login/register_by_wx?wx_chat_sn=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity"
+    },
+    {
       "url": "hmiou://m.54jietiao.com/login/bindemail?mobile=*",
       "iclass": "",
       "aclass": "com.hm.iou.loginmodule.business.email.BindEmailActivity"
