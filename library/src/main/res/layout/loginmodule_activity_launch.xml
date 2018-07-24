@@ -39,11 +39,10 @@
 
     <ImageView
         android:id="@+id/backgroundSplash"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:src="@mipmap/loginmodule_background_launch"
-        android:paddingTop="30dip"
         android:paddingBottom="30dip"
-        />
+        android:paddingTop="30dip"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/loginmodule_background_launch" />
 </LinearLayout>
