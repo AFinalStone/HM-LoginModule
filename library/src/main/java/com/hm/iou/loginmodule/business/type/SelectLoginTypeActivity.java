@@ -13,6 +13,7 @@ import com.hm.iou.cityselect.location.LocationManager;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
+import com.hm.iou.wxapi.WXEntryActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -77,6 +78,7 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
     protected void onDestroy() {
         overridePendingTransition(0, R.anim.uikit_activity_to_right);
         super.onDestroy();
+        WXEntryActivity.cleanWXLeak();
     }
 
     @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile})
