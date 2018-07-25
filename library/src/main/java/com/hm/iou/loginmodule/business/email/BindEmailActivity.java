@@ -40,7 +40,6 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
 
     private String mStrEmail = "";
     private String mStrEmailCheckCode = "";
-    private String mMobile = "";
 
     @Override
     protected int getLayoutId() {
