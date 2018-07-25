@@ -52,7 +52,7 @@ allprojects {
 | 通过微信注册页面 | hmiou://m.54jietiao.com/login/register_by_wx_chat?wx_chat_sn=* | 通过微信sdk获取本地微信code,再根据code调用服务端接口判断微信是否已经存在，判断是否存在会返回交易流水号wx_chat_sn |
 | 绑定邮箱页面 | hmiou://m.54jietiao.com/login/bindemail| 暂无参数 |
 | 通过手机号找回密码页面 | hmiou://m.54jietiao.com/login/find_by_input_mobile |  |
-| 通过邮箱找回密码页面 | hmiou://m.54jietiao.com/login/find_by_email?mobile=*&tip_email=* | mobile(手机号)，tip_email(邮箱提示语) |
+| 通过邮箱找回密码页面 | hmiou://m.54jietiao.com/login/find_by_email?mobile=* &tip_email=* | mobile(手机号)，tip_email(邮箱提示语) |
 | 通过短信找回密码页面 | hmiou://m.54jietiao.com/login/find_by_sms?mobile=* |mobile(手机号)  |
 | 重置登陆密码页面 | hmiou://m.54jietiao.com/login/reset_login_psd?mobile=* | mobile(手机号) |
 | 客服页面 | hmiou://m.54jietiao.com/login/customer_service | 暂无参数 |
@@ -134,8 +134,9 @@ allprojects {
 #### 集成说明
 
 集成本模块之前，需要保证一下模块已经初始化：
-HM-Network（网络框架），HM-Router（路由模块），Logger（日志记录）
+
+HM-BaseBiz初始化(基础业务模块)，HM-Network（网络框架），HM-Router（路由模块），Logger（日志记录）
 
 #### Author
 
-石磊
+syl
