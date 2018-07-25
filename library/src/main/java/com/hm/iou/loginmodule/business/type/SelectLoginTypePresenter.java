@@ -21,6 +21,7 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.wxapi.WXEntryActivity;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -42,8 +43,19 @@ public class SelectLoginTypePresenter extends BaseLoginModulePresenter<SelectLog
     private static final String PACKAGE_NAME_OF_WX_CHAT = "com.tencent.mm";
     private static final String KEY_OPEN_WX_CHAT_GET_COE = "loginmodule.selectLoginType";
 
+    private IWXAPI mWXApi;
+
     public SelectLoginTypePresenter(@NonNull Context context, @NonNull SelectLoginTypeContract.View view) {
         super(context, view);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mWXApi != null) {
+            mWXApi.detach();
+            mWXApi = null;
+        }
     }
 
     private void isWXAccountHaveBindMobile(String code) {
@@ -129,9 +141,11 @@ public class SelectLoginTypePresenter extends BaseLoginModulePresenter<SelectLog
      */
     @Override
     public void getWxCode() {
-        WXEntryActivity.openWx(mContext, KEY_OPEN_WX_CHAT_GET_COE);
+        if (mWXApi != null) {
+            mWXApi.detach();
+        }
+        mWXApi = WXEntryActivity.openWxAuth(mContext, KEY_OPEN_WX_CHAT_GET_COE);
     }
-
 
     @Override
     public void isInstalledWxChatAPP() {
