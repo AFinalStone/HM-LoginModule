@@ -12,20 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
         app:bottomDividerIsShow="false"
-        app:titleBackground="@color/transparent" />
-
-    <TextView
-        style="@style/UikitTextView"
-        android:text="@string/loginmodule_findPassword_title"
-        android:textColor="#FF222222"
-        android:textSize="@dimen/textFontSize_22" />
+        app:titleBackground="@color/transparent"
+        app:titleText="@string/loginmodule_find_password_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -48,12 +42,12 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp" />
 
-    <TextView
-        android:id="@+id/tv_find"
+    <Button
+        android:id="@+id/btn_find"
         style="@style/UikitButton.Bottom"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="60dp"
         android:enabled="false"
-        android:text="@string/loginmodule_findPassword_btn_find" />
+        android:text="@string/loginmodule_find_password_btn_find" />
 
 
 </LinearLayout>

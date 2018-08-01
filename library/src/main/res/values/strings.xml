@@ -7,54 +7,53 @@
     <string name="loginmodule_login_type_only_look">随便看看</string>
 
     <!--请输入手机号-->
-    <string name="loginmodule_input_mobile_title">登录/注册</string>
+    <string name="loginmodule_input_mobile_title">注册/登录</string>
     <string name="loginmodule_input_mobile_et_mobileHint">请使用11位手机号</string>
     <string name="loginmodule_input_mobile_btn_next">下一步</string>
-    <string name="loginmodule_input_mobile_et_mobileError">请输入正确的手机号码</string>
 
     <!--手机号登录-->
-    <string name="loginmodule_login_by_mobile_title">输入登录密码</string>
+    <string name="loginmodule_login_by_mobile_title">欢迎老朋友</string>
     <string name="loginmodule_login_by_mobile_et_passwordHint">请输入密码</string>
     <string name="loginmodule_login_by_mobile_tv_forgetPassword">忘记密码？</string>
     <string name="loginmodule_login_by_mobile_btn_login">登录</string>
-    <string name="loginmodule_login_by_mobile_tv_desc">登录即表示同意</string>
-    <string name="loginmodule_login_by_mobile_tv_agreement">《用户协议》</string>
 
     <!--手机号注册-->
-    <string name="loginmodule_register_title">Hi,请注册</string>
-    <string name="loginmodule_register_btn_reg">注册</string>
-    <string name="loginmodule_register_tv_desc">注册即同意</string>
-    <string name="loginmodule_register_tv_agreement01">《注册与使用协议》</string>
-    <string name="loginmodule_register_tv_and">及</string>
-    <string name="loginmodule_register_tv_agreement02">《隐私条款》</string>
-    <string name="loginmodule_register_registerSuccess">注册成功</string>
-    <string name="loginmodule_register_registerFailed">注册失败</string>
+    <string name="loginmodule_register_by_mobile_title">新用户，您好！</string>
+    <string name="loginmodule_register_by_mobile_btn_reg">注册</string>
+
+    <!--注册协议-->
+    <string name="loginmodule_register_desc">注册即同意</string>
+    <string name="loginmodule_register_agreement01">《用户协议》</string>
+    <string name="loginmodule_register_and">及</string>
+    <string name="loginmodule_register_agreement02">《隐私条款》</string>
 
     <!--绑定手机号-->
-    <string name="loginmodule_bind_mobile_title">Hi，请绑定下手机号</string>
-    <string name="loginmodule_bind_mobile_et_mobileHint">请使用11位手机号</string>
-    <string name="loginmodule_bind_mobile_et_passwordHint">输入6-16位的新密码</string>
-    <string name="loginmobile_bind_mobile">绑定手机号</string>
-    <string name="loginmodule_bind_mobile_have_bind_wx">该手机号已经绑定了微信账号</string>
-    <string name="loginmodule_bind_mobile_loginFailed">账号注册成功，自动登录失败，请尝试手动登录</string>
-    <string name="loginmodule_bind_mobile_check_mobile_failed">手机号校验失败</string>
-    <string name="loginmodule_bind_mobile_dialog01_title">该号码已绑定过【微信】</string>
-    <string name="loginmodule_bind_mobile_dialog01_msg">该手机号已经绑定过微信，请通过手机号登录</string>
-    <string name="loginmodule_bind_mobile_dialog01_ok">手机号登录</string>
-    <string name="loginmodule_bind_mobile_dialog02_title">该号码已有【账户】</string>
-    <string name="loginmodule_bind_mobile_dialog02_msg">该手机号已经注册，如果是您本人，请继续完成绑定</string>
-    <string name="loginmodule_bind_mobile_dialog02_ok">继续</string>
+    <string name="loginmodule_register_by_wx_chat_title">新用户，您好！</string>
+    <string name="loginmodule_register_by_wx_chat_et_mobileHint">请使用11位手机号</string>
+    <string name="loginmodule_register_by_wx_chat_et_passwordHint">输入6-16位的新密码</string>
+    <string name="loginmodule_register_by_wx_chat_register">注册</string>
+    <string name="loginmodule_register_by_wx_chat_have_bind_wx">该手机号已经绑定了微信账号</string>
+    <string name="loginmodule_register_by_wx_chat_loginFailed">账号注册成功，自动登录失败，请尝试手动登录</string>
+    <string name="loginmodule_register_by_wx_chat_check_mobile_failed">手机号校验失败</string>
+    <string name="loginmodule_register_by_wx_chat_dialog01_title">该号码已绑定过【微信】</string>
+    <string name="loginmodule_register_by_wx_chat_dialog01_msg">该手机号已经绑定过微信，请通过手机号登录</string>
+    <string name="loginmodule_register_by_wx_chat_dialog01_ok">手机号登录</string>
+    <string name="loginmodule_register_by_wx_chat_dialog02_title">该号码已有【账户】</string>
+    <string name="loginmodule_register_by_wx_chat_dialog02_msg">该手机号已经注册，如果是您本人，请继续完成绑定</string>
+    <string name="loginmodule_register_by_wx_chat_dialog02_ok">继续</string>
 
     <!--找回密码-->
-    <string name="loginmodule_findPassword_resetPsd">重置密码</string>
-    <string name="loginmodule_findPassword_pleaseInputNewPsd">请输入6到16位的新密码</string>
-    <string name="loginmodule_findPassword_title">请输入手机号</string>
-    <string name="loginmodule_findPassword_btn_find">找回密码</string>
-    <string name="loginmodule_findPassword_btn_ok">确定</string>
+    <string name="loginmodule_find_password_resetPsd">重置密码</string>
+    <string name="loginmodule_find_password_pleaseInputNewPsd">请输入6到16位的新密码</string>
+    <string name="loginmodule_find_password_title">请输入手机号</string>
+    <string name="loginmodule_find_password_btn_find">找回密码</string>
+    <string name="loginmodule_find_password_btn_ok">确定</string>
 
     <!--短信验证码-->
-    <string name="loginmodule_input_id_card_code_title">验证码已发送至</string>
-    <string name="loginmodule_input_id_card_code_try_again">重发验证码</string>
+    <string name="loginmodule_input_phone_code_title">验证短信</string>
+    <string name="loginmodule_input_phone_code_send_code">验证码已发送至</string>
+    <string name="loginmodule_input_phone_code_try_again">重发验证码</string>
+
     <!--邮箱验证码-->
     <string name="loginmodule_bind_email_or_reset_login_psd_title">请输入绑定的邮箱</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_tip">提示</string>

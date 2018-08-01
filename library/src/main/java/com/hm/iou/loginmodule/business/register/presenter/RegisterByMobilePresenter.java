@@ -52,26 +52,6 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         mView.dismissLoadingView();
                     }
                 });
-
-//        LoginModuleApi.sendSmsCheckCode(mobile)
-//                .compose(getProvider().<BaseResponse<Boolean>>bindUntilEvent(ActivityEvent.DESTROY))
-//                .map(RxUtil.<Boolean>handleResponse())
-//                .subscribeWith(new CommSubscriber<Boolean>(mView) {
-//                    @Override
-//                    public void handleResult(Boolean flag) {
-//                        mView.dismissLoadingView();
-//                        if (flag) {
-//                            mView.toastMessage(R.string.loginmodule_get_check_code_success);
-//                        } else {
-//                            mView.toastMessage(R.string.loginmodule_get_check_code_failed);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void handleException(Throwable throwable, String s, String s1) {
-//                        mView.dismissLoadingView();
-//                    }
-//                });
     }
 
     @Override

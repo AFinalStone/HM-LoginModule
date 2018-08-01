@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.login.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -31,8 +32,8 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
     @BindView(R2.id.et_password)
     ShowHidePasswordEditText etPassword;
 
-    @BindView(R2.id.tv_login)
-    TextView mTvLogin;
+    @BindView(R2.id.btn_login)
+    Button mBtnLogin;
 
     private String mMobile = "";
     private String mStrPsd = "";
@@ -53,9 +54,9 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mStrPsd = String.valueOf(charSequence);
-                mTvLogin.setEnabled(false);
+                mBtnLogin.setEnabled(false);
                 if (mStrPsd.length() >= 6) {
-                    mTvLogin.setEnabled(true);
+                    mBtnLogin.setEnabled(true);
                 }
             }
         });
@@ -73,10 +74,10 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.tv_login, R2.id.tv_forgetPassword})
+    @OnClick({R2.id.btn_login, R2.id.tv_forgetPassword})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.tv_login == id) {
+        if (R.id.btn_login == id) {
             mPresenter.mobileLogin(mMobile, mStrPsd);
         } else if (R.id.tv_forgetPassword == id) {
             NavigationHelper.toFindByInputMobile(mContext, mMobile);

@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.password.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -45,8 +46,8 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
     @BindView(R2.id.tv_getEmailCode)
     HMCountDownTextView mTvGetEmailCode;
 
-    @BindView(R2.id.tv_find)
-    TextView mTvFind;
+    @BindView(R2.id.btn_find)
+    Button mBtnFind;
 
     private String mStrEmail = "";
     private String mStrEmailCode = "";
@@ -117,20 +118,20 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
         outState.putString(EXTRA_KEY_TIP_EMAIL, mTipEmail);
     }
 
-    @OnClick({R2.id.tv_getEmailCode, R2.id.tv_find})
+    @OnClick({R2.id.tv_getEmailCode, R2.id.btn_find})
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.tv_getEmailCode == id) {
             mPresenter.sendEmailCheckCode(mStrEmail);
-        } else if (R.id.tv_find == id) {
+        } else if (R.id.btn_find == id) {
             mPresenter.compareEmailCheckCode(mMobile, mStrEmail, mStrEmailCode);
         }
     }
 
     private void checkValue() {
-        mTvFind.setEnabled(false);
+        mBtnFind.setEnabled(false);
         if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCode.length() > 0) {
-            mTvFind.setEnabled(true);
+            mBtnFind.setEnabled(true);
         }
     }
 

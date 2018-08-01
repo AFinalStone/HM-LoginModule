@@ -9,13 +9,8 @@
     <com.hm.iou.uikit.HMTopBarView
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false" />
-
-    <TextView
-        style="@style/UikitTextView"
-        android:minHeight="30dp"
-        android:text="@string/loginmodule_findPassword_resetPsd"
-        android:textSize="@dimen/textFontSize_22" />
+        app:bottomDividerIsShow="false"
+        app:titleText="@string/loginmodule_find_password_resetPsd" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,9 +40,9 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_ok"
+    <Button
+        android:id="@+id/btn_ok"
         style="@style/UikitButton.Bottom"
-        android:layout_marginTop="119dp"
-        android:text="@string/loginmodule_findPassword_btn_ok" />
+        android:layout_marginTop="60dp"
+        android:text="@string/loginmodule_find_password_btn_ok" />
 </LinearLayout>

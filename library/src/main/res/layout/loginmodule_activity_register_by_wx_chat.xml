@@ -13,22 +13,14 @@
         android:layout_height="@dimen/uikit_topbar_height"
         app:bottomDividerIsShow="false"
         app:rightText="@string/base_customer_service"
-        app:titleBackground="@color/transparent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="@string/loginmodule_bind_mobile_title"
-        android:textColor="#FF222222"
-        android:textSize="@dimen/textFontSize_22"
-        android:textStyle="bold" />
+        app:titleBackground="@color/transparent"
+        app:titleText="@string/loginmodule_register_by_wx_chat_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -40,18 +32,13 @@
             android:src="@mipmap/loginmodule_icon_mobile_black" />
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.hm.iou.uikit.ClearEditText
+            android:id="@+id/et_mobile"
+            style="@style/UikitEditText.InputMobile"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <com.hm.iou.uikit.ClearEditText
-                android:id="@+id/et_mobile"
-                style="@style/UikitEditText.InputMobile" />
-
-        </android.support.design.widget.TextInputLayout>
+            android:layout_weight="1" />
 
 
     </LinearLayout>
@@ -116,7 +103,7 @@
             <com.hm.iou.uikit.ShowHidePasswordEditText
                 android:id="@+id/et_password"
                 style="@style/UikitEditText.Password"
-                android:hint="@string/loginmodule_bind_mobile_et_passwordHint"
+                android:hint="@string/loginmodule_register_by_wx_chat_et_passwordHint"
                 android:inputType="textVisiblePassword" />
         </LinearLayout>
 
@@ -132,7 +119,7 @@
         android:id="@+id/btn_next"
         style="@style/UikitButton.Bottom"
         android:layout_marginTop="32dp"
-        android:text="@string/loginmobile_bind_mobile" />
+        android:text="@string/loginmodule_register_by_wx_chat_register" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -143,7 +130,7 @@
         <TextView
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="@string/loginmodule_register_tv_desc"
+            android:text="@string/loginmodule_register_desc"
             android:textColor="#878787"
             android:textSize="@dimen/textFontSize_13" />
 
@@ -151,14 +138,14 @@
             android:id="@+id/tv_agreement01"
             style="@style/UikitTextView"
             android:minHeight="30dp"
-            android:text="@string/loginmodule_register_tv_agreement01"
+            android:text="@string/loginmodule_register_agreement01"
             android:textColor="#262626"
             android:textSize="@dimen/textFontSize_13" />
 
         <TextView
             style="@style/UikitTextView"
             android:minHeight="30dp"
-            android:text="@string/loginmodule_register_tv_and"
+            android:text="@string/loginmodule_register_and"
             android:textColor="#878787"
             android:textSize="@dimen/textFontSize_13" />
 
@@ -166,7 +153,7 @@
             android:id="@+id/tv_agreement02"
             style="@style/UikitTextView"
             android:minHeight="30dp"
-            android:text="@string/loginmodule_register_tv_agreement02"
+            android:text="@string/loginmodule_register_agreement02"
             android:textColor="#262626"
             android:textSize="@dimen/textFontSize_13" />
     </LinearLayout>

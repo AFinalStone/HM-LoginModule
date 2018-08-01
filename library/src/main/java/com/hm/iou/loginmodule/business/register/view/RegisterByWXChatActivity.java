@@ -39,7 +39,7 @@ import io.reactivex.functions.Consumer;
  */
 public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPresenter> implements RegisterByWXChatContract.View {
 
-    public static final String EXTRA_KEY_WX_CHAT_SN = "wx_chat_sn";
+    public static final String EXTRA_KEY_WX_CHAT_SN = " ";
 
     @BindView(R2.id.topBar)
     HMTopBarView mTopBar;
@@ -147,10 +147,10 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     @Override
     public void warnMobileHaveBindWX(String desc) {
-        String title = getString(R.string.loginmodule_bind_mobile_dialog01_title);
-        String msg = getString(R.string.loginmodule_bind_mobile_dialog01_msg);
+        String title = getString(R.string.loginmodule_register_by_wx_chat_dialog01_title);
+        String msg = getString(R.string.loginmodule_register_by_wx_chat_dialog01_msg);
         String cancel = getString(R.string.base_cancel);
-        String ok = getString(R.string.loginmodule_bind_mobile_dialog01_ok);
+        String ok = getString(R.string.loginmodule_register_by_wx_chat_dialog01_ok);
         new IOSAlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(msg)
@@ -171,10 +171,10 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     @Override
     public void warnMobileNotBindWX(String desc) {
-        String title = getString(R.string.loginmodule_bind_mobile_dialog02_title);
-        String msg = getString(R.string.loginmodule_bind_mobile_dialog02_msg);
+        String title = getString(R.string.loginmodule_register_by_wx_chat_dialog02_title);
+        String msg = getString(R.string.loginmodule_register_by_wx_chat_dialog02_msg);
         String cancel = getString(R.string.base_cancel);
-        String ok = getString(R.string.loginmodule_bind_mobile_dialog02_ok);
+        String ok = getString(R.string.loginmodule_register_by_wx_chat_dialog02_ok);
         new IOSAlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(msg)

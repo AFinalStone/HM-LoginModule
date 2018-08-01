@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.password.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -44,8 +45,8 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
 
     @BindView(R2.id.et_password)
     ShowHidePasswordEditText mEtPsd;
-    @BindView(R2.id.tv_ok)
-    TextView mTvOk;
+    @BindView(R2.id.btn_ok)
+    Button mBtnOk;
 
     //短信验证码
     private String mSMSCheckCode;
@@ -83,9 +84,9 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mStrPsd = String.valueOf(charSequence);
-                mTvOk.setEnabled(false);
+                mBtnOk.setEnabled(false);
                 if (mStrPsd.length() >= 6) {
-                    mTvOk.setEnabled(true);
+                    mBtnOk.setEnabled(true);
                 }
             }
         });
@@ -127,7 +128,7 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
         outState.putString(EXTRA_USER_ID_CARD, mUserIDCard);
     }
 
-    @OnClick({R2.id.tv_ok})
+    @OnClick({R2.id.btn_ok})
     public void onClick(View view) {
         resetPsd();
     }

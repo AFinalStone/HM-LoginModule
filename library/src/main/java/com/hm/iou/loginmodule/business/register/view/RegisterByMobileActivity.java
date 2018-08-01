@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.register.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,8 +42,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     HMCountDownTextView mTvGetSmsCheckCode;
     @BindView(R2.id.et_password)
     ShowHidePasswordEditText mEtPsd;
-    @BindView(R2.id.tv_register)
-    TextView mTvRegister;
+    @BindView(R2.id.btn_register)
+    Button mBtnRegister;
 
     private String mStrSmsCheckCode = "";
     private String mMobile = "";
@@ -50,7 +51,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     @Override
     protected int getLayoutId() {
-        return R.layout.loginmodule_activity_register_mobile;
+        return R.layout.loginmodule_activity_register_by_mobile;
     }
 
     @Override
@@ -100,10 +101,10 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.tv_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
+    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if (R.id.tv_register == id) {
+        if (R.id.btn_register == id) {
             mPresenter.registerByMobileAndLogin(mMobile, mStrPsd, mStrSmsCheckCode);
         } else if (R.id.tv_getSmsCheckCode == id) {
             mPresenter.getSMSCode(mMobile);
@@ -115,9 +116,9 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     }
 
     private void checkValue() {
-        mTvRegister.setEnabled(false);
+        mBtnRegister.setEnabled(false);
         if (mStrPsd.length() >= 6 && mStrSmsCheckCode.length() > 0) {
-            mTvRegister.setEnabled(true);
+            mBtnRegister.setEnabled(true);
         }
     }
 

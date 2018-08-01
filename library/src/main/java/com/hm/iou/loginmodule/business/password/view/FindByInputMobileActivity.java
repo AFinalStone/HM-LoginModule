@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.password.view;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -31,8 +32,8 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
-    @BindView(R2.id.tv_find)
-    TextView mTvFind;
+    @BindView(R2.id.btn_find)
+    Button mBtnFind;
 
     private String mMobile;
 
@@ -53,9 +54,9 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mMobile = String.valueOf(charSequence);
-                mTvFind.setEnabled(false);
+                mBtnFind.setEnabled(false);
                 if (StringUtil.matchRegex(mMobile, HMConstants.REG_MOBILE)) {
-                    mTvFind.setEnabled(true);
+                    mBtnFind.setEnabled(true);
                 }
             }
         });
@@ -76,7 +77,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.tv_find})
+    @OnClick({R2.id.btn_find})
     public void onViewClicked(View view) {
         mPresenter.getResetPsdMethod(mMobile);
     }

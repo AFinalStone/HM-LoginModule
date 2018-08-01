@@ -18,12 +18,13 @@
             android:layout_height="@dimen/uikit_topbar_height"
             app:bottomDividerIsShow="false"
             app:rightText="@string/base_customer_service"
-            app:titleBackground="@color/transparent" />
+            app:titleBackground="@color/transparent"
+            app:titleText="@string/loginmodule_input_phone_code_title" />
 
         <TextView
             style="@style/UikitTextView"
             android:minHeight="28dp"
-            android:text="@string/loginmodule_input_id_card_code_title"
+            android:text="@string/loginmodule_input_phone_code_send_code"
             android:textSize="@dimen/textFontSize_22"
             android:textStyle="bold" />
 
@@ -84,7 +85,7 @@
             android:layout_marginTop="12dp"
             android:minHeight="18dp"
             android:minWidth="292dp"
-            android:text="@string/loginmodule_input_id_card_code_try_again"
+            android:text="@string/loginmodule_input_phone_code_try_again"
             android:textSize="@dimen/textFontSize_13" />
 
 

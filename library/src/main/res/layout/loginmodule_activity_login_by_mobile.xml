@@ -10,21 +10,14 @@
     <com.hm.iou.uikit.HMTopBarView
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        app:bottomDividerIsShow="false" />
-
-    <TextView
-        style="@style/UikitTextView"
-        android:text="@string/loginmodule_login_by_mobile_title"
-        android:textColor="#FF222222"
-        android:textSize="@dimen/textFontSize_22"
-        android:textStyle="bold" />
+        app:bottomDividerIsShow="false"
+        app:titleText="@string/loginmodule_login_by_mobile_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -90,14 +83,13 @@
         android:layout_gravity="right"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:minHeight="40dp"
+        android:minHeight="60dp"
         android:text="@string/loginmodule_login_by_mobile_tv_forgetPassword"
         android:textSize="@dimen/textFontSize_14" />
 
-    <TextView
-        android:id="@+id/tv_login"
+    <Button
+        android:id="@+id/btn_login"
         style="@style/UikitButton.Bottom"
-        android:layout_marginTop="52dp"
         android:text="@string/loginmodule_login_by_mobile_btn_login" />
 
 </LinearLayout>

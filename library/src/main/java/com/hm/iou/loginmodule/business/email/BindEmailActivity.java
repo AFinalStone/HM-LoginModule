@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.email;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,8 +36,8 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
     EditText mEtEmailCode;
     @BindView(R2.id.tv_getEmailCode)
     HMCountDownTextView mTvGetEmailCode;
-    @BindView(R2.id.tv_bindEmail)
-    TextView mTvBindEmail;
+    @BindView(R2.id.btn_bindEmail)
+    Button mBtnBindEmail;
 
     private String mStrEmail = "";
     private String mStrEmailCheckCode = "";
@@ -89,20 +90,20 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
     }
 
 
-    @OnClick({R2.id.tv_getEmailCode, R2.id.tv_bindEmail})
+    @OnClick({R2.id.tv_getEmailCode, R2.id.btn_bindEmail})
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.tv_getEmailCode == id) {
             mPresenter.sendEmailCheckCode(mStrEmail);
-        } else if (R.id.tv_bindEmail == id) {
+        } else if (R.id.btn_bindEmail == id) {
             mPresenter.bindEmail(mStrEmail, mStrEmailCheckCode);
         }
     }
 
     private void checkValue() {
-        mTvBindEmail.setEnabled(false);
+        mBtnBindEmail.setEnabled(false);
         if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCheckCode.length() > 0) {
-            mTvBindEmail.setEnabled(true);
+            mBtnBindEmail.setEnabled(true);
         }
     }
 

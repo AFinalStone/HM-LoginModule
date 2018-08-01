@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.login.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -30,8 +31,8 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
 
     @BindView(R2.id.et_mobile)
     ClearEditText mEtMobile;
-    @BindView(R2.id.tv_next)
-    TextView mTvNext;
+    @BindView(R2.id.btn_next)
+    Button mBtnNext;
 
     String mStrMobile;
 
@@ -52,16 +53,16 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
             @Override
             public void accept(CharSequence charSequence) throws Exception {
                 mStrMobile = String.valueOf(charSequence);
-                mTvNext.setEnabled(false);
+                mBtnNext.setEnabled(false);
                 if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE)) {
-                    mTvNext.setEnabled(true);
+                    mBtnNext.setEnabled(true);
                 }
             }
         });
         showSoftKeyboard();
     }
 
-    @OnClick({R2.id.tv_next})
+    @OnClick({R2.id.btn_next})
     public void onViewClicked(View view) {
         mPresenter.checkAccountIsExist(mStrMobile);
     }
