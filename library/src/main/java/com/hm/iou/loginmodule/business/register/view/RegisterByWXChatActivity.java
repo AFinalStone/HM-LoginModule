@@ -39,7 +39,7 @@ import io.reactivex.functions.Consumer;
  */
 public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPresenter> implements RegisterByWXChatContract.View {
 
-    public static final String EXTRA_KEY_WX_CHAT_SN = " ";
+    public static final String EXTRA_KEY_WX_CHAT_SN = "wx_chat_sn";
 
     @BindView(R2.id.topBar)
     HMTopBarView mTopBar;
