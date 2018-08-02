@@ -23,6 +23,11 @@ public interface FindBySMSContract {
          * @param text   文字资源的id
          */
         void setGetSMSBtnText(boolean enable, String text);
+
+        /**
+         * 校验失败
+         */
+        void warnCheckFailed();
     }
 
     interface Present extends BaseContract.BasePresenter {

@@ -127,6 +127,7 @@ public class FindBySMSPresenter extends BaseLoginModulePresenter<FindBySMSContra
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
                         mView.dismissLoadingView();
+                        mView.warnCheckFailed();
                     }
                 });
     }
