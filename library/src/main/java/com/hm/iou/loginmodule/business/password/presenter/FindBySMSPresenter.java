@@ -14,9 +14,13 @@ import com.hm.iou.loginmodule.business.login.MobileLoginContract;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.TimeUnit;
 

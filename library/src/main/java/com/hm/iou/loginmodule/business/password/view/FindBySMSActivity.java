@@ -1,9 +1,8 @@
 package com.hm.iou.loginmodule.business.password.view;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -14,18 +13,11 @@ import com.hm.iou.loginmodule.business.password.presenter.FindBySMSPresenter;
 import com.hm.iou.router.Router;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.keyboard.HMInputNumberView;
-import com.hm.iou.uikit.keyboard.HMKeyBoardAdapter;
 import com.hm.iou.uikit.keyboard.HMKeyBoardView;
 import com.hm.iou.uikit.keyboard.OnInputCodeListener;
-import com.jakewharton.rxbinding2.widget.RxTextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 
 /**
  * 通过短信验证码找回登录密码
@@ -92,8 +84,19 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
         if (savedInstanceState != null) {
             mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
         }
-        mTvMobile.setText(mMobile);
-        mPresenter.sendSMSCheckCode(mMobile);
+        if (!TextUtils.isEmpty(mMobile) && mMobile.length() == 11) {
+            StringBuffer sbMobile = new StringBuffer();
+            sbMobile.append(mMobile.substring(0, 3));
+            sbMobile.append(" ");
+            sbMobile.append(mMobile.substring(3, 7));
+            sbMobile.append(" ");
+            sbMobile.append(mMobile.substring(7, 11));
+            mTvMobile.setText(sbMobile);
+            mPresenter.sendSMSCheckCode(mMobile);
+        } else {
+            finish();
+        }
+
     }
 
     @Override

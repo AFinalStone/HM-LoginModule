@@ -47,6 +47,7 @@ public class FindByInputMobilePresenter extends BaseLoginModulePresenter<FindByI
                             //通过活体校验重置登录密码
                             String userName = getResetPsdMethodRespBean.getField();
                             NavigationHelper.toFindByFace(mContext, mobile, userName);
+                            mView.closeCurrPage();
                         } else if (RESET_PSD_METHOD_BY_SMS == method) {
                             //通过手机号验证码重置登录密码
                             NavigationHelper.toFindBySMS(mContext, mobile);
