@@ -14,7 +14,7 @@
         app:bottomDividerIsShow="false"
         app:rightText="@string/base_customer_service"
         app:titleBackground="@color/transparent"
-        app:titleText="请输入绑定的邮箱" />
+        app:titleText="@string/loginmodule_reset_login_psd_by_email_title" />
 
     <LinearLayout
         android:layout_width="match_parent"

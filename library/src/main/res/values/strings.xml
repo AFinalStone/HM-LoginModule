@@ -47,16 +47,17 @@
     <string name="loginmodule_find_password_pleaseInputNewPsd">请输入6到16位的新密码</string>
     <string name="loginmodule_find_password_title">请输入手机号</string>
     <string name="loginmodule_find_password_btn_find">找回密码</string>
-    <string name="loginmodule_find_password_btn_ok">确定</string>
+    <string name="loginmodule_find_password_btn_ok">确认</string>
 
     <!--短信验证码-->
     <string name="loginmodule_input_phone_code_title">验证短信</string>
     <string name="loginmodule_input_phone_code_send_code">验证码已发送至</string>
     <string name="loginmodule_input_phone_code_try_again">重发验证码</string>
 
-    <!--邮箱验证码-->
-    <string name="loginmodule_bind_email_or_reset_login_psd_title">请输入绑定的邮箱</string>
-    <string name="loginmodule_bind_email_or_reset_login_psd_tip">提示</string>
+    <!--绑定邮箱，邮箱验证码-->
+    <string name="loginmodule_bind_email_title">请输入绑定的邮箱</string>
+    <string name="loginmodule_reset_login_psd_by_email_title">验证邮箱</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_tip">提示：</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_email">邮箱</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_btn_find">通过邮箱找回</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_input_email">请输入您需要绑定的邮箱</string>
