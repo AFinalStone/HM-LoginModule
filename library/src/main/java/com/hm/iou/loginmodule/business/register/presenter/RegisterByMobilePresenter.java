@@ -3,11 +3,10 @@ package com.hm.iou.loginmodule.business.register.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
-import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
@@ -68,6 +67,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
                         NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
+                        TraceUtil.onEvent(mContext, "mob_reg_succ");
                     }
 
                     @Override

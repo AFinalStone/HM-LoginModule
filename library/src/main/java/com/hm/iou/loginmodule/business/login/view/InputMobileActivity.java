@@ -3,10 +3,10 @@ package com.hm.iou.loginmodule.business.login.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.constants.HMConstants;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
@@ -64,6 +64,7 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
 
     @OnClick({R2.id.btn_next})
     public void onViewClicked(View view) {
+        TraceUtil.onEvent(this, "mob_next_click");
         mPresenter.checkAccountIsExist(mStrMobile);
     }
 

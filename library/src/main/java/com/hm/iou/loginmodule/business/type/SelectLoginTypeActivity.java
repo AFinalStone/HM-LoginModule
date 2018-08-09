@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.PermissionUtil;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.cityselect.location.LocationManager;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
@@ -47,6 +48,8 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        TraceUtil.onEvent(this, "guide_see_five");
+
         mPresenter.isInstalledWxChatAPP();
         mPresenter.checkVersion();
 
@@ -85,8 +88,10 @@ public class SelectLoginTypeActivity extends BaseActivity<SelectLoginTypePresent
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.ll_loginByChat == id) {
+            TraceUtil.onEvent(this, "guide_wx_click");
             mPresenter.getWxCode();
         } else if (R.id.ll_loginByMobile == id) {
+            TraceUtil.onEvent(this, "guide_mob_click");
             NavigationHelper.toInputMobile(mContext);
         }
     }

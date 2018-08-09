@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -61,9 +62,11 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        TraceUtil.onEvent(this, "mob_page_register");
         mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
             @Override
             public void onClickTextMenu() {
+                TraceUtil.onEvent(RegisterByMobileActivity.this, "mob_help_click");
                 Router.getInstance()
                         .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
                         .navigation(mContext);
@@ -105,12 +108,16 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.btn_register == id) {
+            TraceUtil.onEvent(this, "mob_reg_click");
             mPresenter.registerByMobileAndLogin(mMobile, mStrPsd, mStrSmsCheckCode);
         } else if (R.id.tv_getSmsCheckCode == id) {
+            TraceUtil.onEvent(this, "mob_code_click");
             mPresenter.getSMSCode(mMobile);
         } else if (R.id.tv_agreement01 == id) {
+            TraceUtil.onEvent(this, "web_useragreement");
             NavigationHelper.ToRegisterAndUseAgreement(mContext);
         } else if (R.id.tv_agreement02 == id) {
+            TraceUtil.onEvent(this, "web_privacy");
             NavigationHelper.toPrivateAgreement(mContext);
         }
     }

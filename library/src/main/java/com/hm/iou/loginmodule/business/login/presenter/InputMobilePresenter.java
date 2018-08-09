@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
@@ -46,6 +47,7 @@ public class InputMobilePresenter extends BaseLoginModulePresenter<InputMobileCo
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
                         mView.dismissLoadingView();
+                        TraceUtil.onEvent(mContext, "mob_next_err");
                     }
                 });
     }

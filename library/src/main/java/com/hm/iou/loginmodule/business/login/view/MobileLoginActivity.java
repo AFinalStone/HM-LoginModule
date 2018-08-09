@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -50,6 +51,7 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        TraceUtil.onEvent(this, "mob_page_login");
         RxTextView.textChanges(etPassword).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
@@ -78,6 +80,7 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.btn_login == id) {
+            TraceUtil.onEvent(this, "mob_login_click");
             mPresenter.mobileLogin(mMobile, mStrPsd);
         } else if (R.id.tv_forgetPassword == id) {
             NavigationHelper.toFindByInputMobile(mContext, mMobile);

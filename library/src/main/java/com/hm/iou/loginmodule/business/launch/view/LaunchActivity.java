@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.hm.iou.base.ActivityManager;
-import com.hm.iou.base.BaseActivity;
-import com.hm.iou.logger.Logger;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.launch.LaunchContract;
@@ -49,6 +48,8 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
         mUnbinder = ButterKnife.bind(this);
         mPresenter = initPresenter();
         initEventAndData(savedInstanceState);
+
+        TraceUtil.onEvent(this, "launch_enter");
     }
 
     protected int getLayoutId() {
@@ -92,6 +93,7 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
 
     @OnClick(R2.id.btn_jump)
     public void onClick() {
+        TraceUtil.onEvent(this, "launch_skip");
         mPresenter.toMain();
     }
 
@@ -108,6 +110,7 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
                     return true;
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    TraceUtil.onEvent(LaunchActivity.this, "launch_ad_click");
                     mPresenter.toAdDetail(linkUrl);
                     return true;
                 }

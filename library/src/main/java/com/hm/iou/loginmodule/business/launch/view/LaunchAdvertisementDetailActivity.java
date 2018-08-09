@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.launch.view;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.base.webview.BaseWebviewActivity;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.socialshare.bean.PlatFormBean;
@@ -46,6 +47,7 @@ public class LaunchAdvertisementDetailActivity extends BaseWebviewActivity {
             ToastUtil.showMessage(this, "当前网络不可用，请检查你的网络设置");
             return;
         }
+        TraceUtil.onEvent(this, "launch_add_share");
 
         String title = StringUtil.getUnnullString(mWebView.getTitle());
         if (TextUtils.isEmpty(title)) {

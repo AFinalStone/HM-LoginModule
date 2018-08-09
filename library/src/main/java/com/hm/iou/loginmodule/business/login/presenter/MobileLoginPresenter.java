@@ -3,9 +3,9 @@ package com.hm.iou.loginmodule.business.login.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
@@ -14,7 +14,6 @@ import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
-import com.hm.iou.tools.Md5Util;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 /**
@@ -45,6 +44,8 @@ public class MobileLoginPresenter extends BaseLoginModulePresenter<MobileLoginCo
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
                         NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
+
+                        TraceUtil.onEvent(mContext, "mob_login_succ");
                     }
 
                     @Override

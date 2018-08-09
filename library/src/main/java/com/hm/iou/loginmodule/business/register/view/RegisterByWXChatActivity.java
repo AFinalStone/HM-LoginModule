@@ -2,17 +2,13 @@ package com.hm.iou.loginmodule.business.register.view;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.Selection;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.constants.HMConstants;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -76,6 +72,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
             @Override
             public void onClickTextMenu() {
+                TraceUtil.onEvent(RegisterByWXChatActivity.this, "wx_help_click");
                 Router.getInstance()
                         .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
                         .navigation(mContext);
@@ -130,10 +127,13 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         if (R.id.tv_getSMSCheckCode == id) {
             mPresenter.isMobileHaveBindWX(mStrMobile);
         } else if (R.id.btn_next == id) {
+            TraceUtil.onEvent(this, "wx_bind_click");
             mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
         } else if (R.id.tv_agreement01 == id) {
+            TraceUtil.onEvent(this, "web_useragreement");
             NavigationHelper.ToRegisterAndUseAgreement(mContext);
         } else if (R.id.tv_agreement02 == id) {
+            TraceUtil.onEvent(this, "web_privacy");
             NavigationHelper.toPrivateAgreement(mContext);
         }
     }

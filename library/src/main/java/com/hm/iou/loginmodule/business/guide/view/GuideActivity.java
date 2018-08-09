@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -58,7 +59,13 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {
-
+                        if (Manifest.permission.READ_CALENDAR.equals(permission.name)) {
+                            if (permission.granted) {
+                                TraceUtil.onEvent(GuideActivity.this, "perm_calendar_allow");
+                            } else {
+                                TraceUtil.onEvent(GuideActivity.this, "perm_calendar_disallow");
+                            }
+                        }
                     }
                 });
     }
@@ -101,7 +108,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
             @Override
             public void onPageSelected(int position) {
-
+                if (position == 1) {
+                    TraceUtil.onEvent(GuideActivity.this, "guide_see_two");
+                }
             }
 
             @Override

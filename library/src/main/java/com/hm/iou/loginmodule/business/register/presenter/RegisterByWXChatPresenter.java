@@ -3,11 +3,10 @@ package com.hm.iou.loginmodule.business.register.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
-import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
@@ -35,7 +34,6 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
     private static final int MOBILE_HAVE_BIND_WX = 1;
     //绑定微信
     private final int PURPOSE_TYPE_BIND_WX_BY_SMS = 2;
-
 
     public RegisterByWXChatPresenter(@NonNull Context context, @NonNull RegisterByWXChatContract.View view) {
         super(context, view);
@@ -74,12 +72,15 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                     public void handleResult(IsBindWXRespBean respBean) {
                         int type = respBean.getCount();
                         if (MOBILE_HAVE_BIND_WX == type) {
+                            TraceUtil.onEvent(mContext, "wx_mob_bound_refuse");
                             mView.dismissLoadingView();
                             mView.warnMobileHaveBindWX(null);
                         } else if (MOBILE_NOT_BIND_WX == type) {
+                            TraceUtil.onEvent(mContext, "wx_mob_bound_continue");
                             mView.dismissLoadingView();
                             mView.warnMobileNotBindWX(null);
                         } else if (MOBILE_NOT_EXIST == type) {
+                            TraceUtil.onEvent(mContext, "wx_mob_bound_succ");
                             getSmsCode(mobile);
                         }
                     }
@@ -105,11 +106,15 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
                         NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/selecttype");
+
+                        TraceUtil.onEvent(mContext, "wx_bind_click_succ_count");
+                        TraceUtil.onEvent(mContext, "wx_bind_succ_count");
                     }
 
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
                         mView.dismissLoadingView();
+                        TraceUtil.onEvent(mContext, "wx_bind_fail_count");
                     }
                 });
     }
