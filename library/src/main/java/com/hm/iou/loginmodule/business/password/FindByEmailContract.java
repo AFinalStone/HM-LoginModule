@@ -28,7 +28,7 @@ public interface FindByEmailContract {
          *
          * @param email
          */
-        void sendEmailCheckCode(String email);
+        void sendEmailCheckCode(String mobile, String email);
 
         /**
          * 短信重置密码前,短信验证码的比对

@@ -122,7 +122,7 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.tv_getEmailCode == id) {
-            mPresenter.sendEmailCheckCode(mStrEmail);
+            mPresenter.sendEmailCheckCode(mMobile, mStrEmail);
         } else if (R.id.btn_find == id) {
             mPresenter.compareEmailCheckCode(mMobile, mStrEmail, mStrEmailCode);
         }

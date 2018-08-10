@@ -163,6 +163,22 @@ public class LoginModuleApi {
 
 
     /**
+     * 发送重置登陆密码的邮箱验证码
+     *
+     * @param email  邮箱地址
+     * @param mobile 手机号
+     * @return
+     */
+    public static Flowable<BaseResponse<String>> sendMessage(String mobile, String email) {
+        int PURPOSE_TYPE_RESET_LOGIN_PSD_BY_EMAIL = 6;
+        SendMessageReqBean reqBean = new SendMessageReqBean();
+        reqBean.setPurpose(PURPOSE_TYPE_RESET_LOGIN_PSD_BY_EMAIL);
+        reqBean.setMobile(mobile);
+        reqBean.setTo(email);
+        return getService().sendMessage(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
      * 发送短信验证码或者邮箱验证码
      *
      * @param type 用途--1:短信注册码，2:短信重置验证码，3:修改手机号，4:绑定邮箱，5:重置邮箱 ,6获取重置登陆密码的邮箱验证码

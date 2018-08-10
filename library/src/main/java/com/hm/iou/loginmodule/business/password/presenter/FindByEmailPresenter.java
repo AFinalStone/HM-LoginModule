@@ -3,7 +3,6 @@ package com.hm.iou.loginmodule.business.password.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
@@ -11,7 +10,6 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.password.FindByEmailContract;
-import com.hm.iou.loginmodule.business.password.FindBySMSContract;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -22,17 +20,15 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 public class FindByEmailPresenter extends BaseLoginModulePresenter<FindByEmailContract.View> implements FindByEmailContract.Present {
 
 
-    //重置登录密码
-    private final int PURPOSE_TYPE_RESET_LOGIN_PSD_BY_EMAIL = 6;
-
     public FindByEmailPresenter(@NonNull Context context, @NonNull FindByEmailContract.View view) {
         super(context, view);
     }
 
+
     @Override
-    public void sendEmailCheckCode(String email) {
+    public void sendEmailCheckCode(String mobile, String email) {
         mView.showLoadingView();
-        LoginModuleApi.sendMessage(PURPOSE_TYPE_RESET_LOGIN_PSD_BY_EMAIL, email)
+        LoginModuleApi.sendMessage(mobile, email)
                 .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<String>handleResponse())
                 .subscribeWith(new CommSubscriber<String>(mView) {

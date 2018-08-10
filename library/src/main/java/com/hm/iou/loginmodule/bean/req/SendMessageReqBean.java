@@ -19,4 +19,9 @@ public class SendMessageReqBean {
      */
     private String to;
 
+    /**
+     * 发送邮箱验证码的时候，需要用到这个参数
+     */
+    private String mobile;
+
 }
