@@ -17,7 +17,6 @@
         android:layout_height="60dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -39,6 +38,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        style="@style/UikitDivider.Horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
 
     <Button
         android:id="@+id/btn_ok"

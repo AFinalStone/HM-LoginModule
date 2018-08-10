@@ -36,14 +36,14 @@
                 android:id="@+id/iv_loginByWX"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="2dp"
                 android:src="@mipmap/loginmodule_icon_login_wx_chat" />
 
             <TextView
                 android:id="@+id/tv_loginByWx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="2dp"
                 android:text="@string/loginmodule_login_type_by_wx_chat"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textFontSize_16" />
@@ -64,14 +64,14 @@
                 android:id="@+id/iv_loginByMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="2dp"
                 android:src="@mipmap/loginmodule_icon_mobile_black" />
 
             <TextView
                 android:id="@+id/tv_loginByMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="2dp"
                 android:text="@string/loginmodule_login_type_by_mobile"
                 android:textColor="#FF111111"
                 android:textSize="@dimen/textFontSize_16" />
