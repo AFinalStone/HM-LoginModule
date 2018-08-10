@@ -36,7 +36,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     private Context mContext;
     private LaunchContract.View mView;
 
-    private long mCountDownTime = 2;
+    private long mCountDownTime = 3;
     private boolean mIsHaveOpenMain = false;
     private Disposable mCountDownDisposable;
 
@@ -57,7 +57,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     public void startCountDown() {
         pauseCountDown();
         if (mView != null) {
-            mView.setJumpBtnText("2 跳过");
+            mView.setJumpBtnText(mCountDownTime + " 跳过");
         }
         mCountDownDisposable = Flowable.interval(1, 1, TimeUnit.SECONDS)
                 .take(mCountDownTime)
@@ -111,7 +111,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
                     }
                 });
 
-        if (UserManager.getInstance(mContext).isLogin()) {
+        if (!UserManager.getInstance(mContext).isLogin()) {
             AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext.getApplicationContext());
             if (adBean != null) {
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
@@ -134,6 +134,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
 
     @Override
     public void resumeCountDown() {
+        mCountDownTime = 2;
         startCountDown();
     }
 
