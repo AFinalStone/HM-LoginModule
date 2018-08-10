@@ -111,7 +111,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
                     }
                 });
 
-        if (!UserManager.getInstance(mContext).isLogin()) {
+        if (UserManager.getInstance(mContext).isLogin()) {
             AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext.getApplicationContext());
             if (adBean != null) {
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
