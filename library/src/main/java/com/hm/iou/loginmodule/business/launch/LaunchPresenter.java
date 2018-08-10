@@ -36,11 +36,9 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     private Context mContext;
     private LaunchContract.View mView;
 
-    private long mCountDownTime = 3;
+    private long mCountDownTime = 2;
     private boolean mIsHaveOpenMain = false;
     private Disposable mCountDownDisposable;
-
-    private long mPauseCountDownTime;
 
     public LaunchPresenter(@NonNull Context context, @NonNull LaunchContract.View view) {
         mContext = context.getApplicationContext();
@@ -58,27 +56,31 @@ public class LaunchPresenter implements LaunchContract.Presenter {
      */
     public void startCountDown() {
         pauseCountDown();
-        mCountDownDisposable = Flowable.interval(0, 1, TimeUnit.SECONDS)
+        if (mView != null) {
+            mView.setJumpBtnText("2 跳过");
+        }
+        mCountDownDisposable = Flowable.interval(1, 1, TimeUnit.SECONDS)
                 .take(mCountDownTime)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
-                        return mCountDownTime - aLong;
+                        long i = mCountDownTime - aLong - 1;
+                        if (i == 0)
+                            i = 1;
+                        return i;
                     }
                 })
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        delayToMainPage();
+                        toMain();
                     }
                 })
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        mPauseCountDownTime = aLong;
-
                         String desc = aLong + " 跳过";
                         if (mView != null) {
                             mView.setJumpBtnText(desc);
@@ -132,7 +134,6 @@ public class LaunchPresenter implements LaunchContract.Presenter {
 
     @Override
     public void resumeCountDown() {
-        mCountDownTime = mPauseCountDownTime;
         startCountDown();
     }
 
