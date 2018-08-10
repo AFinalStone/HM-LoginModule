@@ -103,15 +103,25 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
         ImageLoader.getInstance(this).displayImage(imageUrl, ivAdvertisement
                 , R.drawable.uikit_bg_pic_loading_place, R.drawable.uikit_bg_pic_loading_error);
         ivAdvertisement.setOnTouchListener(new View.OnTouchListener() {
+
+            long touchStart;
+
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     mPresenter.pauseCountDown();
+                    touchStart = System.currentTimeMillis();
                     return true;
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     TraceUtil.onEvent(LaunchActivity.this, "launch_ad_click");
-                    mPresenter.toAdDetail(linkUrl);
+
+                    long now = System.currentTimeMillis();
+                    if (now - touchStart <= 500) {
+                        mPresenter.toAdDetail(linkUrl);
+                    } else {
+                        mPresenter.resumeCountDown();
+                    }
                     return true;
                 }
                 return false;
