@@ -4,14 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
-import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.sharedata.UserManager;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +39,8 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     private long mCountDownTime = 3;
     private boolean mIsHaveOpenMain = false;
     private Disposable mCountDownDisposable;
+
+    private long mPauseCountDownTime;
 
     public LaunchPresenter(@NonNull Context context, @NonNull LaunchContract.View view) {
         mContext = context.getApplicationContext();
@@ -78,6 +77,8 @@ public class LaunchPresenter implements LaunchContract.Presenter {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
+                        mPauseCountDownTime = aLong;
+
                         String desc = aLong + " 跳过";
                         if (mView != null) {
                             mView.setJumpBtnText(desc);
@@ -108,7 +109,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
                     }
                 });
 
-        if (UserManager.getInstance(mContext).isLogin()) {
+        if (!UserManager.getInstance(mContext).isLogin()) {
             AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext.getApplicationContext());
             if (adBean != null) {
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
@@ -125,7 +126,14 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     public void pauseCountDown() {
         if (mCountDownDisposable != null && !mCountDownDisposable.isDisposed()) {
             mCountDownDisposable.dispose();
+            mCountDownDisposable = null;
         }
+    }
+
+    @Override
+    public void resumeCountDown() {
+        mCountDownTime = mPauseCountDownTime;
+        startCountDown();
     }
 
     @Override

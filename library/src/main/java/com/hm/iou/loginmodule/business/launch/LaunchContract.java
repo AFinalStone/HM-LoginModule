@@ -41,6 +41,11 @@ public interface LaunchContract {
         void pauseCountDown();
 
         /**
+         * 重新开始倒计时
+         */
+        void resumeCountDown();
+
+        /**
          * 进入广告详情页面
          *
          * @param linkUrl
