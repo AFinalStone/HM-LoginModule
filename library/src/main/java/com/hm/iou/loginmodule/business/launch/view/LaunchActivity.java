@@ -84,7 +84,7 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(this.mPresenter != null) {
+        if (this.mPresenter != null) {
             this.mPresenter.onDestroy();
         }
         this.mUnbinder.unbind();

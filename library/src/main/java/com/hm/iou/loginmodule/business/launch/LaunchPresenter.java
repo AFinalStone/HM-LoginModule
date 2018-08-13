@@ -155,6 +155,8 @@ public class LaunchPresenter implements LaunchContract.Presenter {
             mIsHaveOpenMain = true;
             NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
             mView.closeCurrPage();
+        } else {
+            resumeCountDown();
         }
     }
 
