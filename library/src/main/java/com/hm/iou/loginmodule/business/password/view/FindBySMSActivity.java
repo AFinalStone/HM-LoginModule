@@ -12,9 +12,9 @@ import com.hm.iou.loginmodule.business.password.FindBySMSContract;
 import com.hm.iou.loginmodule.business.password.presenter.FindBySMSPresenter;
 import com.hm.iou.router.Router;
 import com.hm.iou.uikit.HMTopBarView;
-import com.hm.iou.uikit.keyboard.HMInputNumberView;
-import com.hm.iou.uikit.keyboard.HMKeyBoardView;
-import com.hm.iou.uikit.keyboard.OnInputCodeListener;
+import com.hm.iou.uikit.keyboard.input.HMInputCodeView;
+import com.hm.iou.uikit.keyboard.input.OnInputCodeListener;
+import com.hm.iou.uikit.keyboard.key.NumberKey;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,11 +37,8 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
     @BindView(R2.id.tv_retryCode)
     TextView mTvRetryCode;
 
-    @BindView(R2.id.inputNumView)
-    HMInputNumberView mInputNumView;
-
-    @BindView(R2.id.keyBoardView)
-    HMKeyBoardView mKeyBoardView;
+    @BindView(R2.id.inputCodeView)
+    HMInputCodeView mInputCodeView;
 
     private String mMobile;
 
@@ -71,12 +68,16 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
             }
         });
 
-        mInputNumView.bindKeyBoardView(mKeyBoardView);
-
-        mInputNumView.setOnInputCodeListener(new OnInputCodeListener() {
+        mInputCodeView.bindKeyBoardView(getWindow(), new NumberKey(mContext));
+        mInputCodeView.setOnInputCodeListener(new OnInputCodeListener() {
             @Override
             public void onInputCodeFinish(String smsCheckCode) {
                 mPresenter.compareSMSCheckCode(mMobile, smsCheckCode);
+            }
+
+            @Override
+            public void onDelete() {
+
             }
         });
 
@@ -120,8 +121,8 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
 
     @Override
     public void warnCheckFailed() {
-        mInputNumView.clearInputCode();
-        mInputNumView.setError();
+        mInputCodeView.clearInputCode();
+        mInputCodeView.setError();
     }
 
 
