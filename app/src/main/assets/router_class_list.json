@@ -13,7 +13,7 @@
     {
       "url": "hmiou://m.54jietiao.com/login/selecttype",
       "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.type.SelectLoginTypeActivity"
+      "aclass": "com.hm.iou.loginmodule.business.guide.view.GuideActivity"
     },
     {
       "url": "hmiou://m.54jietiao.com/login/inputmobile",

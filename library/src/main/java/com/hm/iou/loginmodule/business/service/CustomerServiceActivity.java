@@ -7,15 +7,11 @@ import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
-import com.hm.iou.loginmodule.business.type.SelectLoginTypeContract;
-import com.hm.iou.loginmodule.business.type.SelectLoginTypePresenter;
 import com.hm.iou.tools.ClipUtil;
 
 import butterknife.OnClick;
 
 /**
- * 1.判断当前手机是否有微信，有则显示微信登录，没有则不显示微信登录
- *
  * @author syl
  * @time 2018/3/30 下午4:36
  */

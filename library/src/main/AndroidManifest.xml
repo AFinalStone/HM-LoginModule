@@ -16,8 +16,10 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="hmiou" />
             </intent-filter>
 
@@ -30,11 +32,6 @@
         <activity
             android:name=".business.guide.view.GuideActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".business.type.SelectLoginTypeActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".business.login.view.InputMobileActivity"

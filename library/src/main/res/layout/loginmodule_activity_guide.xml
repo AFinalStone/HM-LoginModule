@@ -1,25 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.hm.iou.loginmodule.widget.CircleIndicator
+    <com.hm.iou.uikit.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp"
-        app:ci_drawable="@drawable/uikit_circle_indicator_radius_color_white"
-        app:ci_drawable_unselected="@drawable/uikit_circle_indicator_radius_color_white"
+        android:layout_marginBottom="90dp"
+        app:ci_drawable="@drawable/loginmodule_circle_indicator_radius_select"
+        app:ci_drawable_unselected="@drawable/loginmodule_circle_indicator_radius_unselect"
         app:ci_height="6dp"
         app:ci_width="6dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:id="@+id/ll_loginByChat"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/loginmodule_shape_login_by_wx"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_loginByWX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:src="@mipmap/loginmodule_icon_login_wx_chat" />
+
+            <TextView
+                android:id="@+id/tv_loginByWx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/loginmodule_login_type_by_wx_chat"
+                android:textColor="#FF111111"
+                android:textSize="@dimen/textFontSize_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_loginByMobile"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/loginmodule_shape_login_by_phone"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_loginByMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:src="@mipmap/loginmodule_icon_mobile_black" />
+
+            <TextView
+                android:id="@+id/tv_loginByMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/loginmodule_login_type_by_mobile"
+                android:textColor="#FF111111"
+                android:textSize="@dimen/textFontSize_16" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 </RelativeLayout>

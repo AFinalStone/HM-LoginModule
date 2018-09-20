@@ -29,7 +29,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:background="@drawable/loginmodule_shape_common_btn_inblack"
+            android:background="@drawable/loginmodule_shape_login_by_wx"
             android:gravity="center">
 
             <ImageView

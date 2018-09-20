@@ -1,23 +1,31 @@
 package com.hm.iou.loginmodule.business.guide.view;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.TraceUtil;
+import com.hm.iou.cityselect.location.LocationManager;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.guide.GuideContract;
 import com.hm.iou.loginmodule.business.guide.GuidePresenter;
-import com.hm.iou.loginmodule.widget.CircleIndicator;
+import com.hm.iou.uikit.CircleIndicator;
+import com.hm.iou.wxapi.WXEntryActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -34,9 +42,19 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @BindView(R2.id.indicator)
     CircleIndicator mIndicator;
 
+    @BindView(R2.id.iv_loginByWX)
+    ImageView mIvLoginByWx;
+
+    @BindView(R2.id.ll_loginByChat)
+    LinearLayout mLlLoginByChat;
+
+    @BindView(R2.id.ll_loginByMobile)
+    LinearLayout mLlLoginByMobile;
+
     private GuidePagerAdapter mAdapter;
-    private boolean mIsFirstEnter = false;
-    private boolean mHaveFinishView = false;
+
+    private boolean mAccessFineLocation;//定位
+    private boolean mAccessCoarseLocation;//定位
 
     @Override
     protected int getLayoutId() {
@@ -51,65 +69,86 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @Override
     protected void initEventAndData(Bundle bundle) {
         mPresenter.init();
-
         //请求权限：定位权限、日历读写权限
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.requestEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
+                .doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        //如果有定位权限，则请求定位
+                        if (mAccessFineLocation && mAccessCoarseLocation) {
+                            LocationManager.getInstance(mContext).requestLocation();
+                        }
+                    }
+                })
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {
-                        if (Manifest.permission.READ_CALENDAR.equals(permission.name)) {
+                        if (permission.name.equals(Manifest.permission.WRITE_CALENDAR)) {
                             if (permission.granted) {
                                 TraceUtil.onEvent(GuideActivity.this, "perm_calendar_allow");
                             } else {
                                 TraceUtil.onEvent(GuideActivity.this, "perm_calendar_disallow");
                             }
+                        } else if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                            if (permission.granted) {
+                                mAccessFineLocation = true;
+                            } else {
+                                mAccessFineLocation = false;
+                            }
+                        } else if (permission.name.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                            if (permission.granted) {
+                                mAccessCoarseLocation = true;
+                            } else {
+                                mAccessCoarseLocation = false;
+                            }
                         }
                     }
                 });
+        mIvLoginByWx.setColorFilter(Color.BLACK);
     }
 
     @Override
     public void onBackPressed() {
     }
 
+
     @Override
-    protected void onResume() {
-        super.onResume();
-        mIsFirstEnter = false;
-        mHaveFinishView = false;
+    protected void onDestroy() {
+        overridePendingTransition(0, R.anim.uikit_activity_to_right);
+        super.onDestroy();
+        WXEntryActivity.cleanWXLeak();
+    }
+
+    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile})
+    public void onClick(View view) {
+        int id = view.getId();
+        if (R.id.ll_loginByChat == id) {
+            TraceUtil.onEvent(this, "guide_wx_click");
+            mPresenter.getWxCode();
+        } else if (R.id.ll_loginByMobile == id) {
+            TraceUtil.onEvent(this, "guide_mob_click");
+            NavigationHelper.toInputMobile(mContext);
+        }
     }
 
     @Override
-    public void showViewPager(final List<Integer> list) {
+    public void showViewPager(List<IGuidePageItem> list) {
         mAdapter = new GuidePagerAdapter(mContext, list);
         mViewPager.setAdapter(mAdapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position == list.size() - 1) {
-                    if (positionOffset == 0 && positionOffsetPixels == 0) {
-                        if (mIsFirstEnter) {
-                            if (!mHaveFinishView) {
-                                mHaveFinishView = true;
-                                NavigationHelper.toSelectLoginType(mContext);
-                                overridePendingTransition(R.anim.uikit_activity_open_from_right, R.anim.uikit_activity_to_left);
-                            }
-                        } else {
-                            mIsFirstEnter = true;
-                        }
-                    }
-                } else {
-                    mIsFirstEnter = false;
-                    mHaveFinishView = false;
-                }
+
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
-                    TraceUtil.onEvent(GuideActivity.this, "guide_see_two");
+                    TraceUtil.onEvent(mContext, "guide_see_two");
+                } else if (position == 4) {
+                    TraceUtil.onEvent(mContext, "guide_see_five");
                 }
             }
 
@@ -118,6 +157,12 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
             }
         });
         mIndicator.setViewPager(mViewPager);
+
+    }
+
+    @Override
+    public void hideButtonForLoginByWx() {
+        mLlLoginByChat.setVisibility(View.GONE);
     }
 
 }
