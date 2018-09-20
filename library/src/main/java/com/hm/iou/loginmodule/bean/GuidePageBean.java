@@ -8,8 +8,4 @@ import lombok.Data;
 public class GuidePageBean {
 
     private String imageUrl;
-
-    private String title;
-
-    private String msg;
 }

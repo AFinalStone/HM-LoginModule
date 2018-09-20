@@ -8,8 +8,4 @@ public interface IGuidePageItem {
 
     String getImage();
 
-
-    String getTitle();
-
-    String getMsg();
 }

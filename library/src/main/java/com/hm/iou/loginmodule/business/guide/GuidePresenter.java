@@ -94,16 +94,6 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
                     public String getImage() {
                         return bean.getImageUrl();
                     }
-
-                    @Override
-                    public String getTitle() {
-                        return bean.getTitle();
-                    }
-
-                    @Override
-                    public String getMsg() {
-                        return bean.getMsg();
-                    }
                 };
                 listData.add(item);
                 ImageLoader.getInstance(mContext).fetchImage(bean.getImageUrl());
