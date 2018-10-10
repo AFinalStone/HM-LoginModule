@@ -64,11 +64,6 @@ public interface LoginModuleService {
     @GET("/api/iou/user/v1/wxLogin")
     Flowable<BaseResponse<UserInfo>> wxLogin(@Query("wxSn") String wxSn);
 
-    @POST("/acct/mobileRegBindWXLogin")
-    @FormUrlEncoded
-    Flowable<BaseResponse<UserInfo>> mobileRegBindWXLogin(@Field("loginName") String loginName
-            , @Field("queryPswd") String queryPswd, @Field("checkCode") String checkCode, @Field("wxSn") String wxSN);
-
     @POST("/api/base/msg/v1/sendMessage")
     Flowable<BaseResponse<String>> sendMessage(@Body SendMessageReqBean sendMessageReqBean);
 
