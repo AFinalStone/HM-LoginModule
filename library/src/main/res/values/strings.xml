@@ -28,9 +28,9 @@
     <string name="loginmodule_register_agreement02">《隐私条款》</string>
 
     <!--绑定手机号-->
-    <string name="loginmodule_register_by_wx_chat_title">新用户，您好！</string>
-    <string name="loginmodule_register_by_wx_chat_et_mobileHint">请使用11位手机号</string>
-    <string name="loginmodule_register_by_wx_chat_et_passwordHint">输入6-16位的新密码</string>
+    <string name="loginmodule_register_by_wx_chat_title">Hi，请绑定手机</string>
+    <string name="loginmodule_register_by_wx_chat_et_mobileHint">请输入您的手机号</string>
+    <string name="loginmodule_register_by_wx_chat_et_passwordHint">输入6-16位密码</string>
     <string name="loginmodule_register_by_wx_chat_register">注册</string>
     <string name="loginmodule_register_by_wx_chat_have_bind_wx">该手机号已经绑定了微信账号</string>
     <string name="loginmodule_register_by_wx_chat_loginFailed">账号注册成功，自动登录失败，请尝试手动登录</string>

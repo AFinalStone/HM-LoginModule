@@ -36,6 +36,7 @@
             android:id="@+id/et_mobile"
             style="@style/UikitEditText.InputMobile"
             android:layout_width="0dp"
+            android:hint="@string/loginmodule_register_by_wx_chat_et_mobileHint"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:layout_weight="1" />
