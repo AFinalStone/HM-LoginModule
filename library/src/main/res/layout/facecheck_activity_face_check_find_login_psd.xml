@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.hm.iou.uikit.HMTopBarView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uikit_topbar_height"
+        app:bottomDividerIsShow="false"
+        app:rightText="@string/base_customer_service"
+        app:titleBackground="@color/transparent"
+        app:titleText="@string/facecheck_face_check_check_id_card" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/facecheck_face_check_find_login_psd_input_id_card"
+        android:textColor="@color/uikit_blue"
+        android:textSize="@dimen/textFontSize_22" />
+
+    <com.hm.iou.uikit.keyboard.input.HMInputCodeView
+        android:id="@+id/inputCodeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" />
+
+</LinearLayout>

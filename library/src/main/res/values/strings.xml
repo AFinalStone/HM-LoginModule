@@ -49,6 +49,13 @@
     <string name="loginmodule_find_password_btn_find">找回密码</string>
     <string name="loginmodule_find_password_btn_ok">确认</string>
 
+    <!--通过活体校验找回密码-->
+    <string name="facecheck_face_check_check_id_card">验证身份证</string>
+    <string name="facecheck_face_check_find_login_psd_input_id_card">请输入%S\n身份证前6位数字</string>
+    <string name="facecheck_face_check_find_login_psd_current_user_name">当前用户</string>
+    <string name="facecheck_face_check_find_login_psd_check_Id_card_failed">身份证校验失败</string>
+
+
     <!--短信验证码-->
     <string name="loginmodule_input_phone_code_title">验证短信</string>
     <string name="loginmodule_input_phone_code_send_code">验证码已发送至</string>

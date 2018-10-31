@@ -1,11 +1,14 @@
 package com.hm.iou.loginmodule.api;
 
+import android.content.Context;
+
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
+import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareEmailCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.CompareSMSCheckCodeReqBean;
 import com.hm.iou.loginmodule.bean.req.MobileLoginReqBean;
@@ -19,11 +22,15 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.Md5Util;
 
+import java.io.File;
 import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * @author syl
@@ -296,6 +303,42 @@ public class LoginModuleApi {
      */
     public static Flowable<BaseResponse<Integer>> getValidateCode(String email) {
         return getService().getValidateCode(email).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 校验身份证ID前6位
+     *
+     * @param mobile 手机号
+     * @param idCard 身份证前6位
+     * @return
+     */
+    public static Flowable<BaseResponse<Boolean>> checkIdCardWithoutLogin(String mobile, String idCard) {
+        CheckIDCardReqBean reqBean = new CheckIDCardReqBean();
+        reqBean.setMobile(mobile);
+        reqBean.setIdCardNum(idCard);
+        return getService().checkIdCardWithoutLogin(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 活体校验
+     *
+     * @param context
+     * @param mobile
+     * @param idCard
+     * @param imagePath
+     * @return String
+     * 一、返回: 流水号
+     * 二、错误码：
+     * 203009错误码时，retMsg中携带剩余次数;
+     * 203005错误码时，表示还剩余0次，今日失败达到上限
+     */
+    public static Flowable<BaseResponse<String>> faceCheckWithoutLogin(Context context, String mobile, String idCard, String imagePath) {
+        File file = new File(imagePath);
+        //封装
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        //创建`MultipartBody.Part`，其中需要注意第一个参数`file`需要与服务器对应,也就是`键`
+        MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        return getService().faceCheckWithoutLogin(partFile, mobile, idCard).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
 
