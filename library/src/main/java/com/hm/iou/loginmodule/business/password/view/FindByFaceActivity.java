@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindByFaceContract;
@@ -91,9 +92,8 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
             ArrayList<String> listImagePath = data.getStringArrayListExtra("extra_result_list_image_path");
             if (listImagePath != null && listImagePath.size() > 0) {
                 String imagePath = listImagePath.get(0);
-                if (TextUtils.isEmpty(imagePath)) {
-                    mPresenter.faceCheckWithoutLogin(mMobile, mIDCardNum, imagePath);
-                }
+                Logger.d("照片地址" + imagePath);
+                mPresenter.faceCheckWithoutLogin(mMobile, mIDCardNum, imagePath);
             }
         }
     }
