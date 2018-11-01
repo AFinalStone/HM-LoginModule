@@ -112,17 +112,22 @@
     {
       "url": "hmiou://m.54jietiao.com/facecheck/facecheckfindloginpsd?mobile=*&name=",
       "iclass": "",
-      "aclass": "com.hm.iou.lflibrary.authen.business.view.FindLoginPsdActivity"
+      "aclass": "com.hm.iou.loginmodule.business.password.view.FindByFaceActivity"
     },
     {
       "url": "hmiou://m.54jietiao.com/facecheck/facecheckfindsignpsd",
       "iclass": "",
-      "aclass": "com.hm.iou.lflibrary.authen.business.view.FindSignPsdActivity"
+      "aclass": "com.hm.iou.signature.business.view.FindSignPsdActivity"
     },
     {
       "url": "hmiou://m.54jietiao.com/facecheck/notadult?no_adult_desc=*",
       "iclass": "",
       "aclass": "com.hm.iou.lflibrary.authen.business.view.NotAdultActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/facecheck/can_face_check?url=*",
+      "iclass": "",
+      "aclass": "com.hm.iou.lflibrary.authen.business.view.CanFaceCheckActivity"
     }
   ],
   "main": [
@@ -547,6 +552,11 @@
       "url": "hmiou://m.54jietiao.com/signature/signature_list_select",
       "iclass": "",
       "aclass": "com.hm.iou.signature.business.view.SignatureListSelectActivity"
+    },
+    {
+      "url": "hmiou://m.54jietiao.com/signature/find_signature_psd",
+      "iclass": "",
+      "aclass": "com.hm.iou.signature.business.view.FindSignPsdActivity"
     }
   ],
   "template": [

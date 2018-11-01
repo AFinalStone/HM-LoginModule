@@ -28,9 +28,9 @@ import org.greenrobot.eventbus.ThreadMode;
 public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceContract.View> implements FindByFaceContract.Present {
 
     //活体校验失败，今日次数已达上限
-    public static final String ERROR_CODE_FACE_CHECK_TODAY_NOTIME = "203005";
+    private static final String ERROR_CODE_FACE_CHECK_TODAY_NOTIME = "203005";
     //活体校验失败，retMsg中携带剩余次数
-    public static final String ERROR_CODE_FACE_CHECK_FAILED = "203009";
+    private static final String ERROR_CODE_FACE_CHECK_FAILED = "203009";
 
     public FindByFacePresenter(@NonNull Context context, @NonNull FindByFaceContract.View view) {
         super(context, view);
@@ -50,7 +50,7 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                             mView.toScanFace();
                         } else {
                             mView.warnCheckFailed();
-                            mView.toastMessage(R.string.facecheck_face_check_find_login_psd_check_Id_card_failed);
+                            mView.toastMessage(R.string.loginmodule_check_id_card_failed);
                         }
                     }
 

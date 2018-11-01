@@ -1,13 +1,11 @@
 package com.hm.iou.loginmodule.business.password.view;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
-import com.hm.iou.base.utils.PermissionUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindByFaceContract;
@@ -18,12 +16,10 @@ import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.keyboard.input.HMInputCodeView;
 import com.hm.iou.uikit.keyboard.input.OnInputCodeListener;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import io.reactivex.functions.Consumer;
 
 
 /**
@@ -40,7 +36,7 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
     /**
      * 活体认证，人脸识别请求码
      */
-    private static final int CODE_REQ_FACE_CHECK = 100;
+    private static final int CODE_REQ_SCAN_FACE = 100;
 
     @BindView(R2.id.topBar)
     HMTopBarView mTopBar;
@@ -91,7 +87,7 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
         if (data == null) {
             return;
         }
-        if (RESULT_OK == resultCode && CODE_REQ_FACE_CHECK == requestCode) {
+        if (RESULT_OK == resultCode && CODE_REQ_SCAN_FACE == requestCode) {
             ArrayList<String> listImagePath = data.getStringArrayListExtra("extra_result_list_image_path");
             if (listImagePath != null && listImagePath.size() > 0) {
                 String imagePath = listImagePath.get(0);
@@ -100,7 +96,6 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
                 }
             }
         }
-
     }
 
 
@@ -133,34 +128,18 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
             }
         });
 
-        String strTitle = getString(R.string.facecheck_face_check_find_login_psd_input_id_card);
+        String strTitle = getString(R.string.loginmodule_please_input_id_card_sub_six);
         if (StringUtil.isEmpty(mUserName)) {
-            mUserName = getString(R.string.facecheck_face_check_find_login_psd_current_user_name);
+            mUserName = getString(R.string.loginmodule_current_user_name);
         }
         strTitle = String.format(strTitle, mUserName);
         mTvTitle.setText(strTitle);
     }
 
-
-    private void toFaceCheck() {
-        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/face_check")
-                .navigation(mContext, CODE_REQ_FACE_CHECK);
-    }
-
     @Override
     public void toScanFace() {
-        RxPermissions rxPermissions = new RxPermissions(mContext);
-        rxPermissions.request(Manifest.permission.CAMERA)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        if (aBoolean) {
-                            toFaceCheck();
-                        } else {
-                            PermissionUtil.showCameraPermissionDialog(mContext);
-                        }
-                    }
-                });
+        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/scan_face")
+                .navigation(mContext, CODE_REQ_SCAN_FACE);
     }
 
     @Override
