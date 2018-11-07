@@ -89,10 +89,9 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
             return;
         }
         if (RESULT_OK == resultCode && CODE_REQ_SCAN_FACE == requestCode) {
-            ArrayList<String> listImagePath = data.getStringArrayListExtra("extra_result_list_image_path");
-            if (listImagePath != null && listImagePath.size() > 0) {
-                String imagePath = listImagePath.get(0);
-                Logger.d("照片地址" + imagePath);
+            String imagePath = data.getStringExtra("extra_result_image_path");
+            if (!TextUtils.isEmpty(imagePath)) {
+                Logger.d("imagePath===" + imagePath);
                 mPresenter.faceCheckWithoutLogin(mMobile, mIDCardNum, imagePath);
             }
         }
