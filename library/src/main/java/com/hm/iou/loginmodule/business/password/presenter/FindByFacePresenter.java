@@ -78,6 +78,7 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                                 .withString("user_id_card", idCardNum)
                                 .withString("face_check_sn", faceCheckSN)
                                 .navigation(mContext);
+                        mView.closeCurrPage();
                     }
 
                     @Override
@@ -95,9 +96,7 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                                     .navigation(mContext);
                         } else {
                             mView.toastMessage(msg);
-                            Router.getInstance()
-                                    .buildWithUrl("hmiou://m.54jietiao.com/facecheck/facecheckfailed")
-                                    .navigation(mContext);
+                            mView.warnCheckFailed();
                         }
 
                     }
