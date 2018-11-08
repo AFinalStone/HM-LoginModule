@@ -140,7 +140,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
 
     private void checkValue() {
         mBtnNext.setEnabled(false);
-        if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE) && mStrSMSCheckCode.length() > 0 && mStrPsd.length() >= 6) {
+        if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE) && mStrSMSCheckCode.length() >= 6 && mStrPsd.length() >= 6) {
             mBtnNext.setEnabled(true);
         }
     }

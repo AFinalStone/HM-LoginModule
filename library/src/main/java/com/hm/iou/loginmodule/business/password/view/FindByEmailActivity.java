@@ -130,7 +130,7 @@ public class FindByEmailActivity extends BaseActivity<FindByEmailPresenter> impl
 
     private void checkValue() {
         mBtnFind.setEnabled(false);
-        if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCode.length() > 0) {
+        if (StringUtil.matchRegex(mStrEmail, HMConstants.REG_EMAIL_NUMBER) && mStrEmailCode.length() >= 6) {
             mBtnFind.setEnabled(true);
         }
     }

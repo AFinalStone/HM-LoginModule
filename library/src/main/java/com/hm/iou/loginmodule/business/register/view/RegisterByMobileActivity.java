@@ -124,7 +124,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
     private void checkValue() {
         mBtnRegister.setEnabled(false);
-        if (mStrPsd.length() >= 6 && mStrSmsCheckCode.length() > 0) {
+        if (mStrPsd.length() >= 6 && mStrSmsCheckCode.length() >= 6) {
             mBtnRegister.setEnabled(true);
         }
     }
