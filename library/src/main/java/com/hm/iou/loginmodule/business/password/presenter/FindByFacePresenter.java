@@ -10,6 +10,7 @@ import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.password.FindByFaceContract;
 import com.hm.iou.router.Router;
+import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.sharedata.event.FaceCheckAgainEvent;
 import com.hm.iou.sharedata.event.LoginSuccEvent;
 import com.hm.iou.sharedata.model.BaseResponse;
@@ -124,12 +125,16 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
     }
 
     /**
-     * 用户成功登陆，关闭当前页面
+     * 关闭当前页面，用户实名认证失败，会发送这个evenbus
      *
-     * @param loginSucceedEvent
+     * @param commBizEvent
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvenLoginSuccess(LoginSuccEvent loginSucceedEvent) {
-        mView.closeCurrPage();
+    public void onEvenBusClosePage(CommBizEvent commBizEvent) {
+        if ("CloseFaceCheckAllPage".equals(commBizEvent.key)) {
+            mView.closeCurrPage();
+        }
     }
+
+
 }
