@@ -65,7 +65,7 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
     @Override
     public void faceCheckWithoutLogin(final String mobile, final String idCardNum, String imagePath) {
         mView.showLoadingView();
-        LoginModuleApi.faceCheckWithoutLogin(mContext, mobile, idCardNum, imagePath)
+        LoginModuleApi.faceCheckWithoutLogin(mobile, idCardNum, imagePath)
                 .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<String>handleResponse())
                 .subscribeWith(new CommSubscriber<String>(mView) {

@@ -1,7 +1,5 @@
 package com.hm.iou.loginmodule.api;
 
-import android.content.Context;
-
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
@@ -322,7 +320,6 @@ public class LoginModuleApi {
     /**
      * 活体校验
      *
-     * @param context
      * @param mobile
      * @param idCard
      * @param imagePath
@@ -332,7 +329,7 @@ public class LoginModuleApi {
      * 203009错误码时，retMsg中携带剩余次数;
      * 203005错误码时，表示还剩余0次，今日失败达到上限
      */
-    public static Flowable<BaseResponse<String>> faceCheckWithoutLogin(Context context, String mobile, String idCard, String imagePath) {
+    public static Flowable<BaseResponse<String>> faceCheckWithoutLogin(String mobile, String idCard, String imagePath) {
         File file = new File(imagePath);
         //封装
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);

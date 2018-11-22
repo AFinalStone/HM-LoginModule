@@ -18,8 +18,6 @@ import com.hm.iou.uikit.keyboard.input.HMInputCodeView;
 import com.hm.iou.uikit.keyboard.input.OnInputCodeListener;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 
 
@@ -138,7 +136,10 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
     @Override
     public void toScanFace() {
         Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/scan_face")
+                .withString("is_return_video", "false")
+                .withString("is_return_encrypted", "false")
                 .navigation(mContext, CODE_REQ_SCAN_FACE);
+
     }
 
     @Override

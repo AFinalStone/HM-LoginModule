@@ -99,7 +99,7 @@ public interface LoginModuleService {
     Flowable<BaseResponse<Boolean>> checkIdCardWithoutLogin(@Body CheckIDCardReqBean checkIDCardReqBean);
 
     @Multipart
-    @POST("/api/iou/user/v1/livenessIdnumberVerificationWithoutLogin")
+    @POST("/api/iou/user/v1/photoAndIDCardVerificationWithoutLogin")
     Flowable<BaseResponse<String>> faceCheckWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
             , @Query("idCardNum") String idCardNum);
 }
