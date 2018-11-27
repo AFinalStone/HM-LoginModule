@@ -122,14 +122,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/uikit_icon_check_green" />
 
         <TextView
             style="@style/UikitTextView"
             android:minHeight="18dp"
             android:text="已同意条管家"
             android:textColor="#878787"
-            android:textSize="@dimen/textFontSize_13" />
+            android:textSize="@dimen/textFontSize_13"
+            android:layout_marginLeft="10dip"
+            />
 
         <TextView
             android:id="@+id/tv_agreement01"
