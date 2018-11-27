@@ -46,5 +46,12 @@
         android:layout_marginTop="60dp"
         android:text="@string/loginmodule_input_mobile_btn_next" />
 
+    <Button
+        android:id="@+id/btn_switch_env"
+        style="@style/UikitButton.Bottom"
+        android:layout_marginTop="40dp"
+        android:text="切换API环境"
+        android:visibility="gone"
+        />
 
 </LinearLayout>

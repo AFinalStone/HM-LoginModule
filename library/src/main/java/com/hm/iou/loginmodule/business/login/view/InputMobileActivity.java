@@ -5,12 +5,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.loginmodule.business.login.presenter.InputMobilePresenter;
+import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -60,6 +62,19 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
             }
         });
         showSoftKeyboard();
+
+        if (BaseBizAppLike.getInstance().isDebug()) {
+            Button btnSwitch = findViewById(R.id.btn_switch_env);
+            btnSwitch.setVisibility(View.VISIBLE);
+            btnSwitch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Router.getInstance()
+                            .buildWithUrl("hmiou://m.54jietiao.com/environment_switch/index")
+                            .navigation(mContext);
+                }
+            });
+        }
     }
 
     @OnClick({R2.id.btn_next})
