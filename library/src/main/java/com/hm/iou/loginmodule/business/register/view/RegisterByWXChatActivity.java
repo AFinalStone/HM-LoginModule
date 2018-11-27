@@ -113,6 +113,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         if (savedInstanceState != null) {
             mWXChatSN = savedInstanceState.getString(EXTRA_KEY_WX_CHAT_SN);
         }
+
+        showUserAgreementDialog();
     }
 
     @Override
@@ -121,7 +123,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         outState.putString(EXTRA_KEY_WX_CHAT_SN, mWXChatSN);
     }
 
-    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
+    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_agreement01})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_getSMSCheckCode == id) {
@@ -131,10 +133,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
         } else if (R.id.tv_agreement01 == id) {
             TraceUtil.onEvent(this, "web_useragreement");
-            NavigationHelper.ToRegisterAndUseAgreement(mContext);
-        } else if (R.id.tv_agreement02 == id) {
-            TraceUtil.onEvent(this, "web_privacy");
-            NavigationHelper.toPrivateAgreement(mContext);
+            showUserAgreementDialog();
         }
     }
 
@@ -196,6 +195,24 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     @Override
     public void startCountDown() {
         mTvGetSMSCheckCode.startCountDown();
+    }
+
+    private void showUserAgreementDialog() {
+        UserAgreementDialog dialog = new UserAgreementDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnUserAgreementListener(new UserAgreementDialog.OnUserAgreementListener() {
+            @Override
+            public void onAgree() {
+
+            }
+
+            @Override
+            public void onDisagree() {
+                finish();
+            }
+        });
+        dialog.show();
     }
 
 }

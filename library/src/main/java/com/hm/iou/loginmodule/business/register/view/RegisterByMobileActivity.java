@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.TraceUtil;
-import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
@@ -96,6 +95,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
         }
         mEtMobile.setText(mMobile);
+
+        showUserAgreementDialog();
     }
 
     @Override
@@ -104,7 +105,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01, R2.id.tv_agreement02})
+    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.btn_register == id) {
@@ -115,10 +116,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             mPresenter.getSMSCode(mMobile);
         } else if (R.id.tv_agreement01 == id) {
             TraceUtil.onEvent(this, "web_useragreement");
-            NavigationHelper.ToRegisterAndUseAgreement(mContext);
-        } else if (R.id.tv_agreement02 == id) {
-            TraceUtil.onEvent(this, "web_privacy");
-            NavigationHelper.toPrivateAgreement(mContext);
+            showUserAgreementDialog();
         }
     }
 
@@ -133,4 +131,23 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     public void startCountDown() {
         mTvGetSmsCheckCode.startCountDown();
     }
+
+    private void showUserAgreementDialog() {
+        UserAgreementDialog dialog = new UserAgreementDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnUserAgreementListener(new UserAgreementDialog.OnUserAgreementListener() {
+            @Override
+            public void onAgree() {
+
+            }
+
+            @Override
+            public void onDisagree() {
+                finish();
+            }
+        });
+        dialog.show();
+    }
+
 }

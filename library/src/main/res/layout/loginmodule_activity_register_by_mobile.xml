@@ -127,7 +127,7 @@
         <TextView
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="@string/loginmodule_register_desc"
+            android:text="已同意条管家"
             android:textColor="#878787"
             android:textSize="@dimen/textFontSize_13" />
 
@@ -135,23 +135,9 @@
             android:id="@+id/tv_agreement01"
             style="@style/UikitTextView"
             android:minHeight="30dp"
-            android:text="@string/loginmodule_register_agreement01"
+            android:text="《注册协议》"
             android:textColor="#262626"
             android:textSize="@dimen/textFontSize_13" />
 
-        <TextView
-            style="@style/UikitTextView"
-            android:minHeight="30dp"
-            android:text="@string/loginmodule_register_and"
-            android:textColor="#878787"
-            android:textSize="@dimen/textFontSize_13" />
-
-        <TextView
-            android:id="@+id/tv_agreement02"
-            style="@style/UikitTextView"
-            android:minHeight="30dp"
-            android:text="@string/loginmodule_register_agreement02"
-            android:textColor="#262626"
-            android:textSize="@dimen/textFontSize_13" />
     </LinearLayout>
 </LinearLayout>

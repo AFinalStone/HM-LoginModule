@@ -69,4 +69,6 @@
     <string name="loginmodule_bind_email_or_reset_login_psd_input_email">请输入您需要绑定的邮箱</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_bind">绑定</string>
 
+    <string name="loginmodule_dialog_useragreement">感谢您信任并使用条管家！我们依据最新的法律法规、监管政策要求及业务情况，出具了《条管家用户注册服务协议》、《条管家用户隐私协议》、《条管家用户支付充值协议》、《CFCA数字证书服务协议》，特此向您推送本提示。\n请您务必仔细阅读并透彻理解相关条款内容，在确认充分理解并同意后使用条管家相关产品或服务。点击同意即代表您已阅读并同意《条管家用户注册服务协议》、《条管家用户隐私协议》、《条管家用户支付充值协议》、《CFCA数字证书服务协议》，如果您不同意，将可能影响使用条管家的产品和服务。\n我们将按法律法规要求，采取相应安全保护措施，尽力保护您的个人信息安全可控。</string>
+
 </resources>

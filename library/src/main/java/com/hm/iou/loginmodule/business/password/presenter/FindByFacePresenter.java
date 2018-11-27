@@ -12,7 +12,6 @@ import com.hm.iou.loginmodule.business.password.FindByFaceContract;
 import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.sharedata.event.FaceCheckAgainEvent;
-import com.hm.iou.sharedata.event.LoginSuccEvent;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -29,9 +28,9 @@ import org.greenrobot.eventbus.ThreadMode;
 public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceContract.View> implements FindByFaceContract.Present {
 
     //活体校验失败，今日次数已达上限
-    private static final String ERROR_CODE_FACE_CHECK_TODAY_NOTIME = "203005";
+    private static final String ERROR_CODE_FACE_CHECK_TODAY_NOTIME = "203032";
     //活体校验失败，retMsg中携带剩余次数
-    private static final String ERROR_CODE_FACE_CHECK_FAILED = "203009";
+    private static final String ERROR_CODE_FACE_CHECK_FAILED = "203033";
 
     public FindByFacePresenter(@NonNull Context context, @NonNull FindByFaceContract.View view) {
         super(context, view);
