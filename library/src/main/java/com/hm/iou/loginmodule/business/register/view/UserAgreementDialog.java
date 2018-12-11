@@ -10,6 +10,7 @@ import android.text.TextPaint;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -52,36 +53,27 @@ public class UserAgreementDialog extends Dialog implements View.OnClickListener 
 
         String str = tvMsg.getText().toString();
         SpannableString spanStr = new SpannableString(str);
-        String a = "《条管家用户注册服务协议》";
-        String b = "《条管家用户隐私协议》";
-        String c = "《条管家用户支付充值协议》";
-        String d = "《CFCA数字证书服务协议》";
+        String a = "协议1：《条管家用户注册协议》";
+        String b = "协议2：《条管家用户隐私协议》";
+        String c = "协议3：《条管家用户支付协议》";
+        String d = "协议4：《CFCA数字证书服务协议》";
 
         int start = str.indexOf(a);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + a.length(), 0);
+        spanStr.setSpan(new ForegroundColorSpan(0XFF3C6EFF), start, start + a.length(), 0);
         spanStr.setSpan(new UserAgreementClickableSpan(0), start, start + a.length(), 0);
+        spanStr.setSpan(new UnderlineSpan(), start, start + a.length(), 0);
         start = str.indexOf(b);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + b.length(), 0);
+        spanStr.setSpan(new ForegroundColorSpan(0XFF3C6EFF), start, start + b.length(), 0);
         spanStr.setSpan(new UserAgreementClickableSpan(1), start, start + b.length(), 0);
+        spanStr.setSpan(new UnderlineSpan(), start, start + b.length(), 0);
         start = str.indexOf(c);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + c.length(), 0);
+        spanStr.setSpan(new ForegroundColorSpan(0XFF3C6EFF), start, start + c.length(), 0);
         spanStr.setSpan(new UserAgreementClickableSpan(2), start, start + c.length(), 0);
+        spanStr.setSpan(new UnderlineSpan(), start, start + c.length(), 0);
         start = str.indexOf(d);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + d.length(), 0);
+        spanStr.setSpan(new ForegroundColorSpan(0XFF3C6EFF), start, start + d.length(), 0);
         spanStr.setSpan(new UserAgreementClickableSpan(3), start, start + d.length(), 0);
-
-        start = str.lastIndexOf(a);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + a.length(), 0);
-        spanStr.setSpan(new UserAgreementClickableSpan(0), start, start + a.length(), 0);
-        start = str.lastIndexOf(b);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + b.length(), 0);
-        spanStr.setSpan(new UserAgreementClickableSpan(1), start, start + b.length(), 0);
-        start = str.lastIndexOf(c);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + c.length(), 0);
-        spanStr.setSpan(new UserAgreementClickableSpan(2), start, start + c.length(), 0);
-        start = str.lastIndexOf(d);
-        spanStr.setSpan(new ForegroundColorSpan(0xff5199c6), start, start + d.length(), 0);
-        spanStr.setSpan(new UserAgreementClickableSpan(3), start, start + d.length(), 0);
+        spanStr.setSpan(new UnderlineSpan(), start, start + d.length(), 0);
 
         tvMsg.setText(spanStr);
         tvMsg.setHighlightColor(context.getResources().getColor(android.R.color.transparent));

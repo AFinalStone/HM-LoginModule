@@ -144,9 +144,11 @@
             android:id="@+id/tv_agreement01"
             style="@style/UikitTextView"
             android:minHeight="30dp"
-            android:text="《注册协议》"
-            android:textColor="#262626"
-            android:textSize="@dimen/textFontSize_13" />
+            android:text="“所有协议”"
+            android:textColor="#0284e2"
+            android:textSize="@dimen/textFontSize_13"
+            android:paddingLeft="3dip"
+            />
 
     </LinearLayout>
 </LinearLayout>
