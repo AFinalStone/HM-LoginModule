@@ -134,7 +134,7 @@
         <TextView
             style="@style/UikitTextView"
             android:minHeight="18dp"
-            android:text="已同意条管家"
+            android:text="我已阅读并同意"
             android:textColor="#878787"
             android:textSize="@dimen/textFontSize_13"
             android:layout_marginLeft="10dip"
