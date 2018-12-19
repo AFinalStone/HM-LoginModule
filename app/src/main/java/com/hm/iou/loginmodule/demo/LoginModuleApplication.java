@@ -24,7 +24,7 @@ public class LoginModuleApplication extends Application {
         BaseBizAppLike baseBizAppLike = new BaseBizAppLike();
         baseBizAppLike.onCreate(this);
         baseBizAppLike.setDebug(true);
-        baseBizAppLike.initServer("http://api.54jietiao.com", "http://192.168.1.217",
+        baseBizAppLike.initServer("http://192.168.1.217", "http://192.168.1.217",
                 "http://192.168.1.217");
 //        baseBizAppLike.initServer("http://api.54jietiao.com", "http://upload.54jietiao.com",
 //                "http://h5.54jietiao.com");

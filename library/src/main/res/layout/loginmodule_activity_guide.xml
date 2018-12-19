@@ -87,7 +87,37 @@
                 android:textSize="@dimen/textFontSize_16" />
 
         </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_guide_wx_only"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="5dip"
+        android:background="#fff"
+        android:clickable="true"
+        android:visibility="gone"
+        >
+
+        <Button
+            android:id="@+id/btn_guide_wx_only"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:text="微信登录"
+            android:textColor="#fff7faf7"
+            android:textSize="16sp"
+            android:background="@drawable/loginmodule_btn_wx_green"
+            />
 
     </LinearLayout>
+
 </RelativeLayout>

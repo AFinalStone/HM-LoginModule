@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="15dip"
+    android:paddingBottom="15dip"
+    >
+
+    <TextView
+        android:id="@+id/tv_tag_name"
+        android:layout_width="98dip"
+        android:layout_height="35dip"
+        android:textSize="16sp"
+        android:textColor="#ff000a00"
+        android:background="@drawable/loginmodule_bg_tag_normal"
+        android:gravity="center"
+        android:clickable="true"
+        tools:text="我是律师"
+        />
+
+</LinearLayout>

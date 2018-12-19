@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    >
+
+    <EditText
+        android:id="@+id/et_dialog_name"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_margin="10dip"
+        android:background="@drawable/loginmodule_bg_modify_name_edit"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:textColor="#ff030303"
+        android:textSize="@dimen/textFontSize_16"
+        android:maxLength="16"
+        android:maxLines="1"
+        android:hint="输入新昵称"
+        />
+
+    <Button
+        style="@style/UikitButton"
+        android:id="@+id/btn_dialog_ok"
+        android:layout_width="80dip"
+        android:layout_height="42dip"
+        android:layout_marginRight="10dip"
+        android:text="确 定"
+        />
+
+</LinearLayout>

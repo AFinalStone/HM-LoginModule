@@ -5,6 +5,9 @@
     <string name="loginmodule_login_type_by_mobile">手机号</string>
     <string name="loginmodule_login_type_by_wx_chat">微信号</string>
     <string name="loginmodule_login_type_only_look">随便看看</string>
+    <string name="loginmodule_no_wx_title">没有安装微信</string>
+    <string name="loginmodule_no_wx_msg">您的设备没有安装微信，我们自动为您切换成用手机号做为登录方式。</string>
+    <string name="loginmodule_change_login_type">切换登录模式</string>
 
     <!--请输入手机号-->
     <string name="loginmodule_input_mobile_title">注册/登录</string>
@@ -70,5 +73,4 @@
     <string name="loginmodule_bind_email_or_reset_login_psd_bind">绑定</string>
 
     <string name="loginmodule_dialog_useragreement">感谢您使用条管家！我们依据国家法律法规、监管政策及业务情况，出具了相关协议：\n协议1：《条管家用户注册协议》\n协议2：《条管家用户隐私协议》\n协议3：《条管家用户支付协议》\n协议4：《CFCA数字证书服务协议》\n请您务必仔细阅读并透彻理解相关条款内容，确认充分理解并同意后使用条管家相关产品或服务。请点击【同意】即代表您已阅读并同意以上所有协议，如果您不同意，请点【不同意】，我们感谢每一位客户对我们产品的关注与支持。</string>
-
 </resources>

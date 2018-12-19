@@ -4,15 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.hm.iou.base.BaseBizAppLike;
-import com.hm.iou.loginmodule.business.email.BindEmailActivity;
-import com.hm.iou.loginmodule.business.login.view.InputMobileActivity;
-import com.hm.iou.loginmodule.business.login.view.MobileLoginActivity;
-import com.hm.iou.loginmodule.business.password.view.FindByEmailActivity;
-import com.hm.iou.loginmodule.business.password.view.FindByInputMobileActivity;
-import com.hm.iou.loginmodule.business.password.view.FindBySMSActivity;
-import com.hm.iou.loginmodule.business.password.view.ResetLoginPsdActivity;
-import com.hm.iou.loginmodule.business.register.view.RegisterByMobileActivity;
-import com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity;
+import com.hm.iou.loginmodule.business.tags.AddTagActivity;
 import com.hm.iou.router.Router;
 
 /**
@@ -286,4 +278,14 @@ public class NavigationHelper {
         Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/login/bindemail")
                 .navigation(context);
     }
+
+    /**
+     * 跳转到添加标签页面
+     *
+     * @param context
+     */
+    public static void toAddTagPage(Context context) {
+        context.startActivity(new Intent(context, AddTagActivity.class));
+    }
+
 }

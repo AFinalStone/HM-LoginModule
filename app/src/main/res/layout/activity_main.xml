@@ -31,4 +31,18 @@
         android:onClick="onClickBindEmail"
         android:text="绑定邮箱" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加标签"
+        android:onClick="toClickAddTag"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="引导页"
+        android:onClick="toClickGuide"
+        />
+
 </LinearLayout>

@@ -8,7 +8,7 @@
     {
       "url": "hmiou://m.54jietiao.com/login/guide",
       "iclass": "",
-      "aclass": "com.hm.iou.loginmodule.business.login.view.InputMobileActivity"
+      "aclass": "com.hm.iou.loginmodule.business.guide.view.GuideActivity"
     },
     {
       "url": "hmiou://m.54jietiao.com/login/selecttype",

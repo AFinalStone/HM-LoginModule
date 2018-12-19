@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.business.guide.view.GuideActivity;
 import com.hm.iou.loginmodule.business.launch.view.LaunchActivity;
 import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.tools.ToastUtil;
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationHelper.toBindEmail(this);
     }
 
+    public void toClickAddTag(View view) {
+        NavigationHelper.toAddTagPage(this);
+    }
+
+    public void toClickGuide(View view) {
+        startActivity(new Intent(this, GuideActivity.class));
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvenBusBindEmail(CommBizEvent commBizEvent) {

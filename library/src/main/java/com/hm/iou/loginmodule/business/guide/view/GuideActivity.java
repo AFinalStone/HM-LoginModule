@@ -1,6 +1,7 @@
 package com.hm.iou.loginmodule.business.guide.view;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -16,7 +17,9 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.guide.GuideContract;
 import com.hm.iou.loginmodule.business.guide.GuidePresenter;
+import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.uikit.CircleIndicator;
+import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.wxapi.WXEntryActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -27,6 +30,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+
+import static com.hm.iou.socialshare.SocialShareUtil.PACKAGE_NAME_OF_WX_CHAT;
 
 /**
  * 引导页
@@ -51,6 +56,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @BindView(R2.id.ll_loginByMobile)
     LinearLayout mLlLoginByMobile;
 
+    @BindView(R2.id.ll_guide_wx_only)
+    View mLayoutWxOnly;
+
     private GuidePagerAdapter mAdapter;
 
     private boolean mAccessFineLocation;//定位
@@ -68,7 +76,6 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
     @Override
     protected void initEventAndData(Bundle bundle) {
-        mPresenter.init();
         //请求权限：定位权限、日历读写权限
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.requestEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
@@ -107,6 +114,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                     }
                 });
         mIvLoginByWx.setColorFilter(Color.BLACK);
+
+        mPresenter.init();
+        mPresenter.checkVersion();
     }
 
     @Override
@@ -121,7 +131,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         WXEntryActivity.cleanWXLeak();
     }
 
-    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile})
+    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile, R2.id.btn_guide_wx_only})
     public void onClick(View view) {
         int id = view.getId();
         if (R.id.ll_loginByChat == id) {
@@ -130,6 +140,26 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         } else if (R.id.ll_loginByMobile == id) {
             TraceUtil.onEvent(this, "guide_mob_click");
             NavigationHelper.toInputMobile(mContext);
+        } else if (R.id.btn_guide_wx_only == id) {
+            boolean flag = SystemUtil.isAppInstalled(mContext, PACKAGE_NAME_OF_WX_CHAT);
+            if (flag) {
+                TraceUtil.onEvent(this, "guide_wx_click");
+                mPresenter.getWxCode();
+            } else {
+                new IOSAlertDialog.Builder(this)
+                        .setTitle(getString(R.string.loginmodule_no_wx_title))
+                        .setMessage(getString(R.string.loginmodule_no_wx_msg))
+                        .setPositiveButton(getString(R.string.loginmodule_change_login_type), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                TraceUtil.onEvent(GuideActivity.this, "guide_mob_click");
+                                NavigationHelper.toInputMobile(mContext);
+                            }
+                        })
+                        .setCanceledOnTouchOutside(false)
+                        .setPositiveButtonTextColor(getResources().getColor(R.color.uikit_blue))
+                        .show();
+            }
         }
     }
 
