@@ -232,8 +232,8 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
             return c;
         }
 
-        public List<String> getTagIdList() {
-            List<String> list = new ArrayList<>();
+        public List<Integer> getTagIdList() {
+            List<Integer> list = new ArrayList<>();
             if (mData != null) {
                 for (ITagItem item : mData) {
                     if (item.isSelected()) {

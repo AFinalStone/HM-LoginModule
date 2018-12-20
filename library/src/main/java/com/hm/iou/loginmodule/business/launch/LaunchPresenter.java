@@ -9,6 +9,7 @@ import com.hm.iou.loginmodule.LoginModuleConstants;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
+import com.hm.iou.loginmodule.bean.LoginType;
 import com.hm.iou.loginmodule.event.InitEvent;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
@@ -107,15 +108,15 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     public void init() {
         //初始化启动统计
         LoginModuleApi.init()
-                .subscribe(new Consumer<BaseResponse<Integer>>() {
+                .subscribe(new Consumer<BaseResponse<LoginType>>() {
                     @Override
-                    public void accept(BaseResponse<Integer> response) throws Exception {
+                    public void accept(BaseResponse<LoginType> response) throws Exception {
                         if (response.getErrorCode() == 0) {
-                            Integer result = response.getData();
+                            LoginType result = response.getData();
                             if (result != null) {
                                 //请求成功
-                                SPUtil.put(mContext, LoginModuleConstants.SP_LOGIN_FILE, SP_KEY_LOGIN_TYPE, result);
-                                EventBus.getDefault().post(new InitEvent(result));
+                                SPUtil.put(mContext, LoginModuleConstants.SP_LOGIN_FILE, SP_KEY_LOGIN_TYPE, result.getLoginControlType());
+                                EventBus.getDefault().post(new InitEvent(result.getLoginControlType()));
                             }
                         }
                     }

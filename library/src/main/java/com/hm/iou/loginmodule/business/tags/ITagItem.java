@@ -8,7 +8,7 @@ public interface ITagItem {
 
     String getTagName();
 
-    String getTagId();
+    int getTagId();
 
     int getTextColor();
 

@@ -1,10 +1,11 @@
 package com.hm.iou.loginmodule.api;
 
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
+import com.hm.iou.loginmodule.bean.CheckUserTagResp;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
-import com.hm.iou.loginmodule.bean.UserTagBean;
+import com.hm.iou.loginmodule.bean.LoginType;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
 import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
@@ -105,13 +106,13 @@ public interface LoginModuleService {
     Flowable<BaseResponse<String>> faceCheckWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
             , @Query("idCardNum") String idCardNum);
 
-    @GET("http://192.168.1.108:3000/getTagStatus")
-    Flowable<BaseResponse<List<UserTagBean>>> getUserTagStatus();
+    @GET("http://192.168.1.108:3000/api/iou/label/v1/checkUserLabel")
+    Flowable<BaseResponse<CheckUserTagResp>> getUserTagStatus();
 
-    @GET("http://192.168.1.108:3000/init?mobile=15967132741")
-    Flowable<BaseResponse<Integer>> init();
+    @GET("http://192.168.1.108:3000/api/iou/user/v1/recordAndControl?mobile=15967132741")
+    Flowable<BaseResponse<LoginType>> init();
 
-    @POST("http://192.168.1.108:3000/setTags")
+    @POST("http://192.168.1.108:3000/api/iou/label/v1/addUserLabel")
     Flowable<BaseResponse<Object>> setTags(@Body SetTagReqBean tagReqBean);
 
 }

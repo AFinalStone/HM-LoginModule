@@ -1,5 +1,7 @@
 package com.hm.iou.loginmodule.bean.req;
 
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -10,8 +12,8 @@ public class SetTagReqBean {
 
     String avatarUrl;
 
-    String nickname;
+    String nickName;
 
-    String tags;
+    List<Integer> lableIdList;
 
 }

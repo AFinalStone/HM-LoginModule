@@ -200,4 +200,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         mLayoutWxOnly.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void hideWXLoginOnly() {
+        mLayoutWxOnly.setVisibility(View.GONE);
+    }
 }

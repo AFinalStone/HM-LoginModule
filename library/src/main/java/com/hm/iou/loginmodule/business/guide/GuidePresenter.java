@@ -247,6 +247,8 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
     public void onInitEvent(InitEvent event) {
         if (event.getType() == 1) {
             mView.showWXLoginOnly();
+        } else {
+            mView.hideWXLoginOnly();
         }
     }
 }

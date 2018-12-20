@@ -45,7 +45,7 @@ public interface AddTagContract {
 
         void init();
 
-        void submitData(List<String> tagList, File avatarUrl, String nickname);
+        void submitData(List<Integer> tagList, File avatarUrl, String nickname);
 
     }
 

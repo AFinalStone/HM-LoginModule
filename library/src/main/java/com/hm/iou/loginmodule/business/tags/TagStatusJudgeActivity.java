@@ -9,12 +9,12 @@ import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
+import com.hm.iou.loginmodule.bean.CheckUserTagResp;
 import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.model.BaseResponse;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.functions.Consumer;
 
@@ -48,15 +48,16 @@ public class TagStatusJudgeActivity extends BaseActivity {
 
         showLoadingView();
         LoginModuleApi.getUserTagStatus()
-            .subscribe(new Consumer<BaseResponse<List<UserTagBean>>>() {
+            .subscribe(new Consumer<BaseResponse<CheckUserTagResp>>() {
                 @Override
-                public void accept(BaseResponse<List<UserTagBean>> response) throws Exception {
+                public void accept(BaseResponse<CheckUserTagResp> response) throws Exception {
                     dismissLoadingView();
                     if( response.getErrorCode() == 0) {
-                        List<UserTagBean> tagList = response.getData();
-                        if (tagList != null && !tagList.isEmpty()) {
+                        CheckUserTagResp checkResp = response.getData();
+                        if (checkResp != null && checkResp.isNeedSetLabel() &&
+                                checkResp.getLabelRespList() != null && checkResp.getLabelRespList().size() > 0) {
                             //跳转到设置标签页
-                            NavigationHelper.toAddTagPage(TagStatusJudgeActivity.this, (ArrayList<UserTagBean>) tagList);
+                            NavigationHelper.toAddTagPage(TagStatusJudgeActivity.this, (ArrayList<UserTagBean>) checkResp.getLabelRespList());
                         } else {
                             //直接进入数据加载页
                             NavigationHelper.toLoginLoading(TagStatusJudgeActivity.this, mLoadFailUrl);

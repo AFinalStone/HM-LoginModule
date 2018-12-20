@@ -12,10 +12,10 @@ import lombok.Data;
  * Created by hjy on 2018/12/20.
  */
 @Data
-public class UserTagBean implements Parcelable, ITagItem {
+public class UserTagBean implements ITagItem, Parcelable {
 
-    String tagId;
-    String tagName;
+    int labelId;
+    String name;
 
     boolean selected;
 
@@ -40,22 +40,35 @@ public class UserTagBean implements Parcelable, ITagItem {
     }
 
     @Override
+    public String getTagName() {
+        return name;
+    }
+
+    @Override
+    public int getTagId() {
+        return labelId;
+    }
+
+
+    @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.tagId);
-        dest.writeString(this.tagName);
+        dest.writeInt(this.labelId);
+        dest.writeString(this.name);
+        dest.writeByte(this.selected ? (byte) 1 : (byte) 0);
     }
 
     protected UserTagBean(Parcel in) {
-        this.tagId = in.readString();
-        this.tagName = in.readString();
+        this.labelId = in.readInt();
+        this.name = in.readString();
+        this.selected = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<UserTagBean> CREATOR = new Parcelable.Creator<UserTagBean>() {
+    public static final Creator<UserTagBean> CREATOR = new Creator<UserTagBean>() {
         @Override
         public UserTagBean createFromParcel(Parcel source) {
             return new UserTagBean(source);

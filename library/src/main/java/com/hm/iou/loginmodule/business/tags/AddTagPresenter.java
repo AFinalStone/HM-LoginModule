@@ -50,7 +50,7 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
     }
 
     @Override
-    public void submitData(final List<String> tagList, File newAvatarFile, final String newNickname) {
+    public void submitData(final List<Integer> tagList, File newAvatarFile, final String newNickname) {
         if (tagList == null || tagList.size() < 2) {
             Logger.d("tag的数量 < 2");
             mView.showErrorMsg(View.VISIBLE);
@@ -69,8 +69,7 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
                         @Override
                         public void handleResult(FileUploadResult result) {
                             mView.dismissLoadingView();
-                            setUserTags(tagList, result.getFileUrl(), TextUtils.isEmpty(newNickname) ? userInfo.getNickName() : newNickname);
-
+                            setUserTags(tagList, result.getFileId(), TextUtils.isEmpty(newNickname) ? userInfo.getNickName() : newNickname);
                         }
 
                         @Override
@@ -84,15 +83,9 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
         }
     }
 
-    private void setUserTags(List<String> tagList, String avatar, String nickname) {
+    private void setUserTags(List<Integer> tagList, String avatar, String nickname) {
         mView.showLoadingView();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tagList.size(); i++) {
-            sb.append(tagList.get(i));
-            if (i < tagList.size() - 1)
-                sb.append(",");
-        }
-        LoginModuleApi.setTags(avatar, nickname, sb.toString())
+        LoginModuleApi.setTags(avatar, nickname, tagList)
                 .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.handleResponse())
                 .subscribeWith(new CommSubscriber<Object>(mView) {

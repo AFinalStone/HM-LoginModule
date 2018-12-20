@@ -1,10 +1,11 @@
 package com.hm.iou.loginmodule.api;
 
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
+import com.hm.iou.loginmodule.bean.CheckUserTagResp;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
-import com.hm.iou.loginmodule.bean.UserTagBean;
+import com.hm.iou.loginmodule.bean.LoginType;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
 import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
@@ -345,19 +346,19 @@ public class LoginModuleApi {
      *
      * @return
      */
-    public static Flowable<BaseResponse<List<UserTagBean>>> getUserTagStatus() {
+    public static Flowable<BaseResponse<CheckUserTagResp>> getUserTagStatus() {
         return getService().getUserTagStatus().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Flowable<BaseResponse<Integer>> init() {
+    public static Flowable<BaseResponse<LoginType>> init() {
         return getService().init().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Flowable<BaseResponse<Object>> setTags(String avatarUrl, String nickname, String tags) {
+    public static Flowable<BaseResponse<Object>> setTags(String avatarUrl, String nickname, List<Integer> tagList) {
         SetTagReqBean reqBean = new SetTagReqBean();
         reqBean.setAvatarUrl(avatarUrl);
-        reqBean.setNickname(nickname);
-        reqBean.setTags(tags);
+        reqBean.setNickName(nickname);
+        reqBean.setLableIdList(tagList);
         return getService().setTags(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
