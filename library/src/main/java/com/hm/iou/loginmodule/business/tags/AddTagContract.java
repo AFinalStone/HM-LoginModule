@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.tags;
 
 import com.hm.iou.base.mvp.BaseContract;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -37,20 +38,14 @@ public interface AddTagContract {
 
         void showErrorMsg(int visibility);
 
-        void showLoadingTags();
-
-        void showTagsLoadFail();
-
-        void showTags(List<ITagItem> list);
+        void toDataLoadingPage();
     }
 
     interface Presenter extends BaseContract.BasePresenter {
 
         void init();
 
-        void getTagList();
-
-        void submitData(List<String> tagList);
+        void submitData(List<String> tagList, File avatarUrl, String nickname);
 
     }
 

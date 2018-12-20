@@ -24,6 +24,8 @@ public interface GuideContract {
          * 隐藏微信登录的方式
          */
         void hideButtonForLoginByWx();
+
+        void showWXLoginOnly();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

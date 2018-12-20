@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toClickAddTag(View view) {
-        NavigationHelper.toAddTagPage(this);
+        NavigationHelper.toAddTagPage(this, null);
     }
 
     public void toClickGuide(View view) {

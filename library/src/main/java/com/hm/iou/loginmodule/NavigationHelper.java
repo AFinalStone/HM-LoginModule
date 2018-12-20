@@ -3,9 +3,12 @@ package com.hm.iou.loginmodule;
 import android.content.Context;
 import android.content.Intent;
 
-import com.hm.iou.base.BaseBizAppLike;
+import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.loginmodule.business.tags.AddTagActivity;
+import com.hm.iou.loginmodule.business.tags.TagStatusJudgeActivity;
 import com.hm.iou.router.Router;
+
+import java.util.ArrayList;
 
 /**
  * @author syl
@@ -88,31 +91,6 @@ public class NavigationHelper {
                 .withString("mobile", mobile)
                 .navigation(context);
     }
-
-    /**
-     * 跳转到注册与使用协议
-     *
-     * @param context
-     */
-    public static void ToRegisterAndUseAgreement(Context context) {
-        Router.getInstance()
-                .buildWithUrl("hmiou://m.54jietiao.com/webview/index")
-                .withString("url", BaseBizAppLike.getInstance().getH5Server() + LoginModuleConstants.H5_URL_REGISTER_AGREEMENT)
-                .navigation(context);
-    }
-
-    /**
-     * 跳转到隐私协议
-     *
-     * @param context
-     */
-    public static void toPrivateAgreement(Context context) {
-        Router.getInstance()
-                .buildWithUrl("hmiou://m.54jietiao.com/webview/index")
-                .withString("url", BaseBizAppLike.getInstance().getH5Server() + LoginModuleConstants.H5_URL_PRIVACY_AGREEMENT)
-                .navigation(context);
-    }
-
 
     /**
      * 跳转到手机号登录页面
@@ -266,7 +244,6 @@ public class NavigationHelper {
                 .navigation(context);
     }
 
-
     /**
      * 跳转到邮箱绑定页面
      *
@@ -284,8 +261,22 @@ public class NavigationHelper {
      *
      * @param context
      */
-    public static void toAddTagPage(Context context) {
-        context.startActivity(new Intent(context, AddTagActivity.class));
+    public static void toAddTagPage(Context context, ArrayList<UserTagBean> list) {
+        Intent intent = new Intent(context, AddTagActivity.class);
+        intent.putParcelableArrayListExtra(AddTagActivity.EXTRA_KEY_TAG_LIST, list);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 判断是否添加过标签
+     *
+     * @param context
+     * @param loadingFailedUrl
+     */
+    public static void toTagStatusJudgePage(Context context, String loadingFailedUrl) {
+        Intent intent = new Intent(context, TagStatusJudgeActivity.class);
+        intent.putExtra(TagStatusJudgeActivity.EXTRA_KEY_LOAD_FAIL_URL, loadingFailedUrl);
+        context.startActivity(intent);
     }
 
 }

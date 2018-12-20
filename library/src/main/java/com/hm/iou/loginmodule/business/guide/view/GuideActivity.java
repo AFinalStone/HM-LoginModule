@@ -195,4 +195,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         mLlLoginByChat.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showWXLoginOnly() {
+        mLayoutWxOnly.setVisibility(View.VISIBLE);
+    }
+
 }

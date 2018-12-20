@@ -66,7 +66,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
+                        NavigationHelper.toTagStatusJudgePage(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
                         TraceUtil.onEvent(mContext, "mob_reg_succ");
                     }
 

@@ -13,18 +13,21 @@ import com.hm.iou.base.utils.RxJavaStopException;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.base.version.CheckVersionResBean;
 import com.hm.iou.base.version.VersionApi;
+import com.hm.iou.loginmodule.LoginModuleConstants;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.GuidePageBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.guide.view.IGuidePageItem;
+import com.hm.iou.loginmodule.event.InitEvent;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.ImageLoader;
+import com.hm.iou.tools.SPUtil;
 import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.wxapi.WXEntryActivity;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -132,6 +135,11 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
         isInstalledWxChatAPP();
         List<IGuidePageItem> listData = readDataFromAssert();
         mView.showViewPager(listData);
+
+        int loginType = SPUtil.getInt(mContext, LoginModuleConstants.SP_LOGIN_FILE, LoginModuleConstants.SP_KEY_LOGIN_TYPE);
+        if (loginType == 1) {
+            mView.showWXLoginOnly();
+        }
     }
 
     private void isWXAccountHaveBindMobile(String code) {
@@ -161,7 +169,7 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/selecttype");
+                        NavigationHelper.toTagStatusJudgePage(mContext, "hmiou://m.54jietiao.com/login/selecttype");
                     }
 
                     @Override
@@ -232,6 +240,13 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
     public void onEvenBusOpenWXResult(OpenWxResultEvent openWxResultEvent) {
         if (KEY_OPEN_WX_CHAT_GET_COE.equals(openWxResultEvent.getKey())) {
             isWXAccountHaveBindMobile(openWxResultEvent.getCode());
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onInitEvent(InitEvent event) {
+        if (event.getType() == 1) {
+            mView.showWXLoginOnly();
         }
     }
 }

@@ -4,6 +4,7 @@ import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
+import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
 import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
@@ -15,6 +16,7 @@ import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByFaceReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdBySMSReqBean;
 import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
+import com.hm.iou.loginmodule.bean.req.SetTagReqBean;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 
@@ -102,4 +104,14 @@ public interface LoginModuleService {
     @POST("/api/iou/user/v1/photoAndIDCardVerificationWithoutLogin")
     Flowable<BaseResponse<String>> faceCheckWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
             , @Query("idCardNum") String idCardNum);
+
+    @GET("http://192.168.1.108:3000/getTagStatus")
+    Flowable<BaseResponse<List<UserTagBean>>> getUserTagStatus();
+
+    @GET("http://192.168.1.108:3000/init?mobile=15967132741")
+    Flowable<BaseResponse<Integer>> init();
+
+    @POST("http://192.168.1.108:3000/setTags")
+    Flowable<BaseResponse<Object>> setTags(@Body SetTagReqBean tagReqBean);
+
 }

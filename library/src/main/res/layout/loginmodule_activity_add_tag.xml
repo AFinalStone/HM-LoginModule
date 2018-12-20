@@ -69,14 +69,6 @@
         android:textSize="16sp"
         android:visibility="invisible" />
 
-    <com.hm.iou.uikit.HMLoadingView
-        android:id="@+id/loading_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        >
-    </com.hm.iou.uikit.HMLoadingView>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_tag_list"
         android:layout_width="match_parent"

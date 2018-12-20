@@ -18,11 +18,12 @@ import com.hm.iou.base.photo.CompressPictureUtil;
 import com.hm.iou.base.photo.ImageCropper;
 import com.hm.iou.base.photo.PhotoUtil;
 import com.hm.iou.logger.Logger;
+import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
+import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.tools.DensityUtil;
 import com.hm.iou.tools.ImageLoader;
-import com.hm.iou.uikit.HMLoadingView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ import butterknife.OnClick;
  */
 
 public class AddTagActivity extends BaseActivity<AddTagPresenter> implements AddTagContract.View {
+
+    public static final String EXTRA_KEY_TAG_LIST = "tag_list";
 
     private static final int REQ_CODE_ALBUM = 10;
 
@@ -51,8 +54,8 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
     Button mBtnSubmit;
     @BindView(R2.id.tv_tag_error_hint)
     TextView mTvErrorHint;
-    @BindView(R2.id.loading_tag)
-    HMLoadingView mLoadingView;
+
+    private ArrayList<UserTagBean> mTagList;
 
     private TagAdapter mTagAdapter;
     private ModifyNameDialog mDialog;
@@ -74,7 +77,19 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
 
     @Override
     protected void initEventAndData(Bundle bundle) {
+        mTagList = getIntent().getParcelableArrayListExtra(EXTRA_KEY_TAG_LIST);
+        if (bundle != null) {
+            mTagList = bundle.getParcelableArrayList(EXTRA_KEY_TAG_LIST);
+        }
+
         mTagAdapter = new TagAdapter();
+        List<ITagItem> list = new ArrayList<>();
+        if (mTagList != null) {
+            for (UserTagBean bean : mTagList) {
+                list.add(bean);
+            }
+        }
+        mTagAdapter.setNewData(list);
         mRvTagList.setLayoutManager(new GridLayoutManager(this, 3));
         mRvTagList.setAdapter(mTagAdapter);
         mTagAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -95,7 +110,12 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
         });
 
         mPresenter.init();
-        mPresenter.getTagList();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(EXTRA_KEY_TAG_LIST, mTagList);
     }
 
     @Override
@@ -119,7 +139,7 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
         if (v.getId() == R.id.btn_tag_submit) {
             //领取大礼包
             Logger.d("click submit");
-            mPresenter.submitData(mTagAdapter.getTagIdList());
+            mPresenter.submitData(mTagAdapter.getTagIdList(), mAvatarFile, mNewNickname);
         } else if (v.getId() == R.id.tv_tag_nickname) {
             //点此设置昵称
             if (mDialog == null) {
@@ -190,24 +210,8 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
     }
 
     @Override
-    public void showLoadingTags() {
-        mLoadingView.showDataLoading();
-    }
-
-    @Override
-    public void showTagsLoadFail() {
-        mLoadingView.showDataFail(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.getTagList();
-            }
-        });
-    }
-
-    @Override
-    public void showTags(List<ITagItem> list) {
-        mLoadingView.setVisibility(View.GONE);
-        mTagAdapter.setNewData(list);
+    public void toDataLoadingPage() {
+        NavigationHelper.toLoginLoading(this, "hmiou://m.54jietiao.com/login/selecttype");
     }
 
     class TagAdapter extends BaseQuickAdapter<ITagItem , BaseViewHolder> {

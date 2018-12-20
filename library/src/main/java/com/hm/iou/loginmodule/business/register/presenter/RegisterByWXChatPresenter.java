@@ -105,8 +105,7 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/selecttype");
-
+                        NavigationHelper.toTagStatusJudgePage(mContext, "hmiou://m.54jietiao.com/login/selecttype");
                         TraceUtil.onEvent(mContext, "wx_bind_click_succ_count");
                         TraceUtil.onEvent(mContext, "wx_bind_succ_count");
                     }

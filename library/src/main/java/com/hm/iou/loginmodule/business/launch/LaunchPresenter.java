@@ -5,10 +5,16 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.loginmodule.LoginModuleConstants;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
+import com.hm.iou.loginmodule.event.InitEvent;
 import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.tools.SPUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +26,8 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.hm.iou.loginmodule.LoginModuleConstants.SP_KEY_LOGIN_TYPE;
 
 /**
  * 初始化
@@ -97,6 +105,28 @@ public class LaunchPresenter implements LaunchContract.Presenter {
 
     @Override
     public void init() {
+        //初始化启动统计
+        LoginModuleApi.init()
+                .subscribe(new Consumer<BaseResponse<Integer>>() {
+                    @Override
+                    public void accept(BaseResponse<Integer> response) throws Exception {
+                        if (response.getErrorCode() == 0) {
+                            Integer result = response.getData();
+                            if (result != null) {
+                                //请求成功
+                                SPUtil.put(mContext, LoginModuleConstants.SP_LOGIN_FILE, SP_KEY_LOGIN_TYPE, result);
+                                EventBus.getDefault().post(new InitEvent(result));
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        t.printStackTrace();
+                    }
+                });
+
+        //获取公告
         LoginModuleApi.getAdvertisement()
                 .map(RxUtil.<List<AdvertisementRespBean>>handleResponse())
                 .subscribe(new Consumer<List<AdvertisementRespBean>>() {

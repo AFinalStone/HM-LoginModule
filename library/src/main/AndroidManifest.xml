@@ -85,6 +85,14 @@
             android:name=".business.tags.AddTagActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".business.tags.TagStatusJudgeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/UikitTranslucentThemeActivity"
+            />
+
     </application>
 
 </manifest>

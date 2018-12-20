@@ -15,13 +15,6 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-
 /**
  * @author syl
  * @time 2018/5/19 下午4:54
@@ -108,7 +101,7 @@ public class ResetLoginPsdPresenter extends BaseLoginModulePresenter<ResetLoginP
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
                         HttpReqManager.getInstance().setUserId(userInfo.getUserId());
                         HttpReqManager.getInstance().setToken(userInfo.getToken());
-                        NavigationHelper.toLoginLoading(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
+                        NavigationHelper.toTagStatusJudgePage(mContext, "hmiou://m.54jietiao.com/login/mobilelogin?mobile=" + mobile);
                     }
 
                     @Override

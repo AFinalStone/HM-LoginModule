@@ -4,6 +4,7 @@ import com.hm.iou.loginmodule.bean.AdvertisementRespBean;
 import com.hm.iou.loginmodule.bean.GetResetPsdMethodRespBean;
 import com.hm.iou.loginmodule.bean.IsBindWXRespBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
+import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.loginmodule.bean.req.BindEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.BindWXReqBean;
 import com.hm.iou.loginmodule.bean.req.CheckIDCardReqBean;
@@ -15,6 +16,7 @@ import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByEmailReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdByFaceReqBean;
 import com.hm.iou.loginmodule.bean.req.ResetLoginPsdBySMSReqBean;
 import com.hm.iou.loginmodule.bean.req.SendMessageReqBean;
+import com.hm.iou.loginmodule.bean.req.SetTagReqBean;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
@@ -338,5 +340,25 @@ public class LoginModuleApi {
         return getService().faceCheckWithoutLogin(partFile, mobile, idCard).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * 获取该用户设置标签的状态
+     *
+     * @return
+     */
+    public static Flowable<BaseResponse<List<UserTagBean>>> getUserTagStatus() {
+        return getService().getUserTagStatus().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static Flowable<BaseResponse<Integer>> init() {
+        return getService().init().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static Flowable<BaseResponse<Object>> setTags(String avatarUrl, String nickname, String tags) {
+        SetTagReqBean reqBean = new SetTagReqBean();
+        reqBean.setAvatarUrl(avatarUrl);
+        reqBean.setNickname(nickname);
+        reqBean.setTags(tags);
+        return getService().setTags(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 
 }
