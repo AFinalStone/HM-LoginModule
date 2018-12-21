@@ -14,6 +14,6 @@ public class SetTagReqBean {
 
     String nickName;
 
-    List<Integer> lableIdList;
+    List<Integer> labelIdList;
 
 }

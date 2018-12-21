@@ -16,12 +16,12 @@ import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.file.FileUtil;
 import com.hm.iou.base.photo.CompressPictureUtil;
 import com.hm.iou.base.photo.ImageCropper;
-import com.hm.iou.base.photo.PhotoUtil;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.bean.UserTagBean;
+import com.hm.iou.router.Router;
 import com.hm.iou.tools.DensityUtil;
 import com.hm.iou.tools.ImageLoader;
 
@@ -127,7 +127,7 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_CODE_ALBUM) {
             if (resultCode == RESULT_OK) {
-                String path = PhotoUtil.getPath(this, data.getData());
+                String path = data.getStringExtra("extra_result_selection_path_first");
                 initImageCropper();
                 mImageCropper.crop(path, 150, 150, false, "crop");
             }
@@ -154,7 +154,10 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
             }
             mDialog.show();
         } else if (v.getId() == R.id.iv_tag_avatar) {
-            PhotoUtil.openAlbum(this, REQ_CODE_ALBUM);
+            Router.getInstance()
+                    .buildWithUrl("hmiou://m.54jietiao.com/select_pic/index")
+                    .withString("enable_select_max_num", String.valueOf(1))
+                    .navigation(mContext, REQ_CODE_ALBUM);
         }
     }
 

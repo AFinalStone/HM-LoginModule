@@ -358,7 +358,7 @@ public class LoginModuleApi {
         SetTagReqBean reqBean = new SetTagReqBean();
         reqBean.setAvatarUrl(avatarUrl);
         reqBean.setNickName(nickname);
-        reqBean.setLableIdList(tagList);
+        reqBean.setLabelIdList(tagList);
         return getService().setTags(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
