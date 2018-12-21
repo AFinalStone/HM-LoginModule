@@ -106,13 +106,13 @@ public interface LoginModuleService {
     Flowable<BaseResponse<String>> faceCheckWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
             , @Query("idCardNum") String idCardNum);
 
-    @GET("http://192.168.1.108:3000/api/iou/label/v1/checkUserLabel")
+    @GET("/api/iou/label/v1/checkUserLabel")
     Flowable<BaseResponse<CheckUserTagResp>> getUserTagStatus();
 
-    @GET("http://192.168.1.108:3000/api/iou/user/v1/recordAndControl?mobile=15967132741")
+    @GET("/api/iou/user/v1/recordAndControl")
     Flowable<BaseResponse<LoginType>> init();
 
-    @POST("http://192.168.1.108:3000/api/iou/label/v1/addUserLabel")
+    @POST("/api/iou/label/v1/addUserLabel")
     Flowable<BaseResponse<Object>> setTags(@Body SetTagReqBean tagReqBean);
 
 }
