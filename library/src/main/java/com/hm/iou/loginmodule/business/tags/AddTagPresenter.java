@@ -69,7 +69,7 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
                         @Override
                         public void handleResult(FileUploadResult result) {
                             mView.dismissLoadingView();
-                            setUserTags(tagList, result.getFileId(), TextUtils.isEmpty(newNickname) ? userInfo.getNickName() : newNickname);
+                            setUserTags(tagList, result.getFileId(), result.getFileUrl(), newNickname);
                         }
 
                         @Override
@@ -79,19 +79,28 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
                     });
         } else {
             //直接设置
-            setUserTags(tagList, userInfo.getAvatarUrl(), TextUtils.isEmpty(newNickname) ? userInfo.getNickName() : newNickname);
+            setUserTags(tagList, null, null, newNickname);
         }
     }
 
-    private void setUserTags(List<Integer> tagList, String avatar, String nickname) {
+    private void setUserTags(List<Integer> tagList, final String avatarFileId, final String avatarFileUrl, final String nickname) {
         mView.showLoadingView();
-        LoginModuleApi.setTags(avatar, nickname, tagList)
+        LoginModuleApi.setTags(avatarFileId, nickname, tagList)
                 .compose(getProvider().<BaseResponse<Object>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.handleResponse())
                 .subscribeWith(new CommSubscriber<Object>(mView) {
                     @Override
                     public void handleResult(Object o) {
                         mView.dismissLoadingView();
+                        //设置成功，保存更新用户头像和昵称
+
+                        if (!TextUtils.isEmpty(avatarFileId) && !TextUtils.isEmpty(avatarFileUrl)) {
+                            UserManager.getInstance(mContext).updateAvatar(avatarFileUrl);
+                        }
+                        if (!TextUtils.isEmpty(nickname)) {
+                            UserManager.getInstance(mContext).updateNickname(nickname);
+                        }
+
                         mView.toDataLoadingPage();
                         mView.closeCurrPage();
                     }
