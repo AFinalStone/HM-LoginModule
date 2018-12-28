@@ -188,6 +188,10 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
 
     @Override
     public void updateNickname(String nickname) {
+        if (nickname != null && nickname.length() > 6) {
+            mTvNickname.setText(nickname.substring(0, 6) + "...");
+            return;
+        }
         mTvNickname.setText(nickname);
     }
 
