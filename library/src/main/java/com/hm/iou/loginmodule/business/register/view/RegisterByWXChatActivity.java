@@ -1,6 +1,5 @@
 package com.hm.iou.loginmodule.business.register.view;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,7 @@ import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMTopBarView;
-import com.hm.iou.uikit.dialog.IOSAlertDialog;
+import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -150,22 +149,24 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         String msg = getString(R.string.loginmodule_register_by_wx_chat_dialog01_msg);
         String cancel = getString(R.string.base_cancel);
         String ok = getString(R.string.loginmodule_register_by_wx_chat_dialog01_ok);
-        new IOSAlertDialog.Builder(mContext)
+        new HMAlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(msg)
-                .setNegativeButton(cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(cancel)
+                .setPositiveButton(ok)
+                .setOnClickListener(new HMAlertDialog.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton(ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onPosClick() {
                         NavigationHelper.toMobileLogin(mContext, mStrMobile);
                     }
-                }).show();
+
+                    @Override
+                    public void onNegClick() {
+
+                    }
+                })
+                .create()
+                .show();
     }
 
     @Override
@@ -174,22 +175,24 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         String msg = getString(R.string.loginmodule_register_by_wx_chat_dialog02_msg);
         String cancel = getString(R.string.base_cancel);
         String ok = getString(R.string.loginmodule_register_by_wx_chat_dialog02_ok);
-        new IOSAlertDialog.Builder(mContext)
+        new HMAlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(msg)
-                .setNegativeButton(cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(cancel)
+                .setPositiveButton(ok)
+                .setOnClickListener(new HMAlertDialog.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton(ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onPosClick() {
                         mPresenter.getSmsCode(mStrMobile);
                     }
-                }).show();
+
+                    @Override
+                    public void onNegClick() {
+
+                    }
+                })
+                .create()
+                .show();
     }
 
     @Override
