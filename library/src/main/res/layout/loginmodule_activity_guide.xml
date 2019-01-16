@@ -14,8 +14,6 @@
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:ci_drawable="@drawable/loginmodule_circle_indicator_radius_select"
-        app:ci_drawable_unselected="@drawable/loginmodule_circle_indicator_radius_unselect"
         app:ci_height="6dp"
         app:ci_width="6dp"
         android:layout_above="@+id/ll_login_bottom"
