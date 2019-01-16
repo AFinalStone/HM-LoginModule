@@ -20,8 +20,6 @@ public interface AddTagContract {
          */
         void updateNickname(String nickname);
 
-        void showChangeAvatarTip(int visibility);
-
         /**
          * 更新头像
          *
@@ -36,7 +34,7 @@ public interface AddTagContract {
          */
         void updateBtnBackground(int resId);
 
-        void showErrorMsg(int visibility);
+        void updateBtnTextColor(int colorStateListId);
 
         void toDataLoadingPage();
     }

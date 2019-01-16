@@ -11,10 +11,10 @@
 
     <TextView
         android:id="@+id/tv_tag_name"
-        android:layout_width="98dip"
-        android:layout_height="35dip"
-        android:textSize="16sp"
-        android:textColor="#ff000a00"
+        android:layout_width="80dip"
+        android:layout_height="36dip"
+        android:textSize="14sp"
+        android:textColor="@color/uikit_text_auxiliary"
         android:background="@drawable/loginmodule_bg_tag_normal"
         android:gravity="center"
         android:clickable="true"

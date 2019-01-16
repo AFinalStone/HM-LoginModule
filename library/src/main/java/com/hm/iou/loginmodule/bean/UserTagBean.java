@@ -21,11 +21,11 @@ public class UserTagBean implements ITagItem, Parcelable {
 
     @Override
     public int getTextColor() {
-        return selected ? 0xffffffff : 0xff000a00;
+        return selected ? 0xffffffff : 0xff9b9b9b;
     }
 
     @Override
-    public int getBgRedId() {
+    public int getBgResId() {
         return selected ? R.drawable.loginmodule_bg_tag_selected : R.drawable.loginmodule_bg_tag_normal;
     }
 

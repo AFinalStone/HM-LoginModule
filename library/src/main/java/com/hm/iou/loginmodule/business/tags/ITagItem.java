@@ -12,7 +12,7 @@ public interface ITagItem {
 
     int getTextColor();
 
-    int getBgRedId();
+    int getBgResId();
 
     boolean isSelected();
 

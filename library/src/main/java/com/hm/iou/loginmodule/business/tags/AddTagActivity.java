@@ -44,16 +44,12 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
 
     @BindView(R2.id.iv_tag_avatar)
     ImageView mIvAvatar;
-    @BindView(R2.id.tv_tag_change)
-    TextView mTvChangeAvatarTip;
     @BindView(R2.id.tv_tag_nickname)
     TextView mTvNickname;
     @BindView(R2.id.rv_tag_list)
     RecyclerView mRvTagList;
     @BindView(R2.id.btn_tag_submit)
     Button mBtnSubmit;
-    @BindView(R2.id.tv_tag_error_hint)
-    TextView mTvErrorHint;
 
     private ArrayList<UserTagBean> mTagList;
 
@@ -100,11 +96,11 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
                 mTagAdapter.notifyDataSetChanged();
                 int c = mTagAdapter.getSelectedSize();
                 if (c >= 2) {
-                    updateBtnBackground(R.drawable.uikit_shape_common_btn_selector);
-                    showErrorMsg(View.INVISIBLE);
+                    updateBtnBackground(R.drawable.uikit_selector_btn_main);
+                    updateBtnTextColor(R.color.uikit_selector_btn_main);
                 } else {
-                    updateBtnBackground(R.drawable.uikit_shape_common_btn_unenable);
-                    showErrorMsg(View.VISIBLE);
+                    updateBtnBackground(R.drawable.uikit_selector_btn_minor);
+                    mBtnSubmit.setTextColor(getResources().getColor(R.color.uikit_text_auxiliary));
                 }
             }
         });
@@ -180,7 +176,6 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
         CompressPictureUtil.compressPic(this, fileUrl, new CompressPictureUtil.OnCompressListener() {
             public void onCompressPicSuccess(File file) {
                 mAvatarFile = file;
-                showChangeAvatarTip(View.INVISIBLE);
                 updateAvatar("file://" + file.getAbsolutePath());
             }
         });
@@ -196,11 +191,6 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
     }
 
     @Override
-    public void showChangeAvatarTip(int visibility) {
-        mTvChangeAvatarTip.setVisibility(visibility);
-    }
-
-    @Override
     public void updateAvatar(String url) {
         ImageLoader.getInstance(this).displayImage(url, mIvAvatar, R.drawable.uikit_bg_pic_loading_place,
                 R.drawable.uikit_bg_pic_loading_error);
@@ -212,8 +202,8 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
     }
 
     @Override
-    public void showErrorMsg(int visibility) {
-        mTvErrorHint.setVisibility(visibility);
+    public void updateBtnTextColor(int colorStateListId) {
+        mBtnSubmit.setTextColor(getResources().getColorStateList(colorStateListId));
     }
 
     @Override
@@ -257,7 +247,7 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
             helper.addOnClickListener(R.id.tv_tag_name);
             TextView tvTagName = helper.getView(R.id.tv_tag_name);
             tvTagName.setTextColor(item.getTextColor());
-            tvTagName.setBackgroundResource(item.getBgRedId());
+            tvTagName.setBackgroundResource(item.getBgResId());
         }
     }
 

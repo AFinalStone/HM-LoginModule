@@ -42,7 +42,7 @@
 
         <Button
             android:id="@+id/btn_copyWeiXin"
-            style="@style/UikitButton.Bottom"
+            style="@style/UikitHMButton.Large.Main"
             android:layout_width="wrap_content"
             android:layout_marginTop="36dp"
             android:minWidth="205dp"

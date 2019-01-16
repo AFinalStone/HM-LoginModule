@@ -9,27 +9,24 @@
 
     <EditText
         android:id="@+id/et_dialog_name"
+        style="@style/UikitEditText.Normal.TextArea"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="40dip"
         android:layout_weight="1"
         android:layout_margin="10dip"
-        android:background="@drawable/loginmodule_bg_modify_name_edit"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:textColor="#ff030303"
-        android:textSize="@dimen/textFontSize_16"
         android:maxLength="16"
         android:hint="输入新昵称"
         />
 
     <Button
-        style="@style/UikitButton"
         android:id="@+id/btn_dialog_ok"
-        android:layout_width="80dip"
+        style="@style/UikitHMButton"
+        android:layout_width="50dip"
         android:layout_height="42dip"
-        android:layout_marginRight="10dip"
-        android:text="确 定"
+        android:textSize="@dimen/uikit_main_content_text_size"
+        android:padding="0px"
+        android:text="确定"
         />
 
 </LinearLayout>

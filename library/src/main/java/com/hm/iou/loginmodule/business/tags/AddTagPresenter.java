@@ -3,7 +3,6 @@ package com.hm.iou.loginmodule.business.tags;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.view.View;
 
 import com.hm.iou.base.file.FileApi;
 import com.hm.iou.base.file.FileBizType;
@@ -37,10 +36,7 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
         String nickname = userInfo.getNickName();
         String avatar = userInfo.getAvatarUrl();
         if (!TextUtils.isEmpty(avatar)) {
-            mView.showChangeAvatarTip(View.INVISIBLE);
             mView.updateAvatar(avatar);
-        } else {
-            mView.showChangeAvatarTip(View.VISIBLE);
         }
         if (TextUtils.isEmpty(nickname) || "小管家".equals(nickname)) {
             mView.updateNickname("点此设置昵称");
@@ -53,10 +49,9 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
     public void submitData(final List<Integer> tagList, File newAvatarFile, final String newNickname) {
         if (tagList == null || tagList.size() < 2) {
             Logger.d("tag的数量 < 2");
-            mView.showErrorMsg(View.VISIBLE);
+            mView.toastMessage("请至少选择两个标签哟～");
             return;
         }
-        mView.showErrorMsg(View.INVISIBLE);
 
         final UserInfo userInfo = UserManager.getInstance(mContext).getUserInfo();
         if (newAvatarFile != null) {
