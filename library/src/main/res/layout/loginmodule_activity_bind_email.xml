@@ -24,14 +24,6 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/loginmodule_icon_email_black" />
-
-
         <com.hm.iou.uikit.ClearEditText
             android:id="@+id/et_email"
             style="@style/UikitEditText"
@@ -56,14 +48,6 @@
         android:layout_marginRight="35dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/loginmodule_icon_register_message" />
 
 
         <EditText

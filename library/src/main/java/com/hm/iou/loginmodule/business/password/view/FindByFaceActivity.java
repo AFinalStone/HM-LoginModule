@@ -53,7 +53,7 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
 
     @Override
     protected int getLayoutId() {
-        return R.layout.facecheck_activity_face_check_find_login_psd;
+        return R.layout.loginmodule_activity_face_check_find_login_psd;
     }
 
     @Override

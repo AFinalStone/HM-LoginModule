@@ -12,32 +12,10 @@
         app:bottomDividerIsShow="false"
         app:titleText="@string/loginmodule_find_password_resetPsd" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/uikit_icon_password" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.hm.iou.uikit.ShowHidePasswordEditText
-                android:id="@+id/et_password"
-                style="@style/UikitEditText.Password"
-                android:inputType="textVisiblePassword" />
-        </LinearLayout>
-
-    </LinearLayout>
+    <com.hm.iou.uikit.ShowHidePasswordEditText
+        android:id="@+id/et_password"
+        style="@style/LoginPassword"
+        android:inputType="textVisiblePassword" />
 
     <View
         style="@style/UikitDivider.Horizontal"
@@ -46,7 +24,9 @@
 
     <Button
         android:id="@+id/btn_ok"
-        style="@style/UikitButton.Bottom"
-        android:layout_marginTop="60dp"
+        style="@style/UikitHMButton.Large.Main"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:text="@string/loginmodule_find_password_btn_ok" />
 </LinearLayout>

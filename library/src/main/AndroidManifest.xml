@@ -26,10 +26,6 @@
         </activity>
 
         <activity
-            android:name=".business.launch.view.LaunchAdvertisementDetailActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".business.guide.view.GuideActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />

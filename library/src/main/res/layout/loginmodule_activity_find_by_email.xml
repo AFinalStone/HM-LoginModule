@@ -16,63 +16,41 @@
         app:titleBackground="@color/transparent"
         app:titleText="@string/loginmodule_reset_login_psd_by_email_title" />
 
-    <LinearLayout
+    <com.hm.iou.uikit.ClearEditText
+        android:id="@+id/et_email"
+        style="@style/UikitEditText"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/loginmodule_icon_email_black" />
-
-
-        <com.hm.iou.uikit.ClearEditText
-            android:id="@+id/et_email"
-            style="@style/UikitEditText"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:textSize="@dimen/textFontSize_14" />
-
-    </LinearLayout>
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:background="@null"
+        />
 
     <View
         style="@style/UikitDivider.Horizontal"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/loginmodule_icon_register_message" />
-
-
         <EditText
             android:id="@+id/et_emailCode"
-            style="@style/UikitEditText.CheckCode" />
+            style="@style/LoginCheckCode" />
+
 
         <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/tv_getEmailCode"
-            style="@style/UikitButton.CheckCode" />
-
+            style="@style/UikitHMButton.CheckCode"
+            android:gravity="right"
+            android:paddingLeft="40dip"
+            android:paddingRight="35dip" />
     </LinearLayout>
 
     <View
@@ -82,9 +60,10 @@
 
     <Button
         android:id="@+id/btn_find"
-        style="@style/UikitButton.Bottom"
-        android:layout_marginTop="60dp"
+        style="@style/UikitHMButton.Large.Main"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="30dp"
         android:text="@string/loginmodule_bind_email_or_reset_login_psd_btn_find" />
-
 
 </LinearLayout>

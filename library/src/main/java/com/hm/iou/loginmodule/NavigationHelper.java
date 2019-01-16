@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule;
 import android.content.Context;
 import android.content.Intent;
 
+import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.loginmodule.business.tags.AddTagActivity;
 import com.hm.iou.loginmodule.business.tags.TagStatusJudgeActivity;
@@ -22,10 +23,7 @@ public class NavigationHelper {
      * @param context
      */
     public static void toLaunchAdvertisement(Context context, String url) {
-        Router.getInstance()
-                .buildWithUrl("hmiou://m.54jietiao.com/login/launchAdvertisementDetail")
-                .withString("url", url)
-                .navigation(context);
+        RouterUtil.clickMenuLink(context, url);
     }
 
     /**

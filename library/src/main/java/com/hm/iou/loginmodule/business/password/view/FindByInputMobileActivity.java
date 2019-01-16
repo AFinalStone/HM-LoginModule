@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.constants.HMConstants;
@@ -49,7 +48,6 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {

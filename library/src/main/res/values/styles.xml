@@ -3,7 +3,27 @@
     <style name="LoginModuleLaunchTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/loginmodule_launch_layerlist</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
 
+    <style name="LoginMobile" parent="UikitEditText.InputMobile">
+        <item name="android:layout_marginLeft">35dip</item>
+        <item name="android:layout_marginRight">35dip</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:layout_marginBottom">10dip</item>
+    </style>
+
+    <style name="LoginPassword" parent="UikitEditText.Password">
+        <item name="android:layout_marginLeft">35dip</item>
+        <item name="android:layout_marginRight">35dip</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:layout_marginBottom">10dip</item>
+    </style>
+
+    <style name="LoginCheckCode" parent="UikitEditText.CheckCode">
+        <item name="android:layout_marginLeft">35dip</item>
+        <item name="android:layout_marginRight">35dip</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:layout_marginBottom">10dip</item>
     </style>
 
 </resources>

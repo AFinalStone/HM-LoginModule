@@ -76,7 +76,7 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.btn_login, R2.id.tv_forgetPassword})
+    @OnClick({R2.id.btn_login, R2.id.tv_forgetPassword, R2.id.et_mobile})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.btn_login == id) {
@@ -84,8 +84,9 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
             mPresenter.mobileLogin(mMobile, mStrPsd);
         } else if (R.id.tv_forgetPassword == id) {
             NavigationHelper.toFindByInputMobile(mContext, mMobile);
+        } else if (R.id.et_mobile == id) {
+            finish();
         }
     }
-
 
 }

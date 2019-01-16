@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.hm.iou.uikit.HMTopBarView
@@ -16,19 +17,17 @@
         app:titleText="@string/loginmodule_input_phone_code_title" />
 
     <TextView
-        style="@style/UikitTextView"
-        android:minHeight="28dp"
+        style="@style/UikitTextView.Auxiliary.Large"
         android:text="@string/loginmodule_input_phone_code_send_code"
-        android:textColor="@color/uikit_blue"
-        android:textSize="@dimen/textFontSize_22" />
+        android:layout_marginTop="15dip"
+        />
 
 
     <TextView
         android:id="@+id/tv_mobile"
-        style="@style/UikitTextView"
-        android:minHeight="28dp"
-        android:textColor="@color/uikit_blue"
-        android:textSize="@dimen/textFontSize_22" />
+        style="@style/UikitTextView.Auxiliary.Large"
+        android:layout_marginTop="8dip"
+        />
 
     <com.hm.iou.uikit.keyboard.input.HMInputCodeView
         android:id="@+id/inputCodeView"
@@ -38,12 +37,13 @@
 
     <TextView
         android:id="@+id/tv_retryCode"
-        style="@style/UikitTextView"
+        style="@style/UikitTextView.Auxiliary.Normal"
         android:layout_marginTop="12dp"
-        android:minHeight="18dp"
-        android:minWidth="292dp"
         android:text="@string/loginmodule_input_phone_code_try_again"
-        android:textSize="@dimen/textFontSize_13" />
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:paddingBottom="10dip"
+        />
 
 
 </LinearLayout>

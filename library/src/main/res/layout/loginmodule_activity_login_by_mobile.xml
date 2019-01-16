@@ -13,64 +13,20 @@
         app:bottomDividerIsShow="false"
         app:titleText="@string/loginmodule_login_by_mobile_title" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/loginmodule_icon_mobile_black" />
-
-        <TextView
-            android:id="@+id/et_mobile"
-            style="@style/UikitEditText.InputMobile"
-            android:layout_marginStart="10dp"
-            android:textSize="@dimen/textFontSize_14" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/et_mobile"
+        style="@style/LoginMobile"
+        />
 
     <View
         style="@style/UikitDivider.Horizontal"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/uikit_icon_password" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.hm.iou.uikit.ShowHidePasswordEditText
-                android:id="@+id/et_password"
-                style="@style/UikitEditText.Password" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
+    <com.hm.iou.uikit.ShowHidePasswordEditText
+        android:id="@+id/et_password"
+        style="@style/LoginPassword"
+        />
 
     <View
         style="@style/UikitDivider.Horizontal"
@@ -79,17 +35,22 @@
 
     <TextView
         android:id="@+id/tv_forgetPassword"
-        style="@style/UikitTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:gravity="center"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:minHeight="60dp"
         android:text="@string/loginmodule_login_by_mobile_tv_forgetPassword"
+        android:textColor="@color/uikit_text_sub_content"
         android:textSize="@dimen/textFontSize_14" />
 
     <Button
         android:id="@+id/btn_login"
-        style="@style/UikitButton.Bottom"
+        style="@style/UikitHMButton.Large.Main"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:text="@string/loginmodule_login_by_mobile_btn_login" />
 
 </LinearLayout>

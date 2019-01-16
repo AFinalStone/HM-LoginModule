@@ -105,7 +105,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_agreement01})
+    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_register_agreement, R2.id.et_mobile})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.btn_register == id) {
@@ -114,9 +114,11 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         } else if (R.id.tv_getSmsCheckCode == id) {
             TraceUtil.onEvent(this, "mob_code_click");
             mPresenter.getSMSCode(mMobile);
-        } else if (R.id.tv_agreement01 == id) {
+        } else if (R.id.tv_register_agreement == id) {
             TraceUtil.onEvent(this, "web_useragreement");
             showUserAgreementDialog();
+        } else if (R.id.et_mobile == id) {
+            finish();
         }
     }
 

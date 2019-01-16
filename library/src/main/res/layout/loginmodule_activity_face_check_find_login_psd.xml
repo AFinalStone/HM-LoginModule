@@ -18,12 +18,12 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/loginmodule_please_input_id_card_sub_six"
-        android:textColor="@color/uikit_blue"
-        android:textSize="@dimen/textFontSize_22" />
+        style="@style/UikitTextView.Auxiliary.Large"
+        android:layout_marginTop="15dip"
+        android:lineSpacingMultiplier="1.3"
+        />
 
     <com.hm.iou.uikit.keyboard.input.HMInputCodeView
         android:id="@+id/inputCodeView"

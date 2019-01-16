@@ -1,13 +1,10 @@
 package com.hm.iou.loginmodule.business.guide.view;
 
 import android.Manifest;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Button;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.TraceUtil;
@@ -19,7 +16,7 @@ import com.hm.iou.loginmodule.business.guide.GuideContract;
 import com.hm.iou.loginmodule.business.guide.GuidePresenter;
 import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.uikit.CircleIndicator;
-import com.hm.iou.uikit.dialog.IOSAlertDialog;
+import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.wxapi.WXEntryActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -43,19 +40,12 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
     @BindView(R2.id.viewPager)
     ViewPager mViewPager;
-
     @BindView(R2.id.indicator)
     CircleIndicator mIndicator;
-
-    @BindView(R2.id.iv_loginByWX)
-    ImageView mIvLoginByWx;
-
-    @BindView(R2.id.ll_loginByChat)
-    LinearLayout mLlLoginByChat;
-
-    @BindView(R2.id.ll_loginByMobile)
-    LinearLayout mLlLoginByMobile;
-
+    @BindView(R2.id.btn_login_wx)
+    Button mBtnWx;
+    @BindView(R2.id.btn_login_mobile)
+    Button mBtnMobile;
     @BindView(R2.id.ll_guide_wx_only)
     View mLayoutWxOnly;
 
@@ -113,7 +103,6 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                         }
                     }
                 });
-        mIvLoginByWx.setColorFilter(Color.BLACK);
 
         mPresenter.init();
         mPresenter.checkVersion();
@@ -131,13 +120,13 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         WXEntryActivity.cleanWXLeak();
     }
 
-    @OnClick({R2.id.ll_loginByChat, R2.id.ll_loginByMobile, R2.id.btn_guide_wx_only})
+    @OnClick({R2.id.btn_login_wx, R2.id.btn_login_mobile, R2.id.btn_guide_wx_only})
     public void onClick(View view) {
         int id = view.getId();
-        if (R.id.ll_loginByChat == id) {
+        if (R.id.btn_login_wx == id) {
             TraceUtil.onEvent(this, "guide_wx_click");
             mPresenter.getWxCode();
-        } else if (R.id.ll_loginByMobile == id) {
+        } else if (R.id.btn_login_mobile == id) {
             TraceUtil.onEvent(this, "guide_mob_click");
             NavigationHelper.toInputMobile(mContext);
         } else if (R.id.btn_guide_wx_only == id) {
@@ -146,18 +135,25 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                 TraceUtil.onEvent(this, "guide_wx_click");
                 mPresenter.getWxCode();
             } else {
-                new IOSAlertDialog.Builder(this)
+                new HMAlertDialog.Builder(this)
                         .setTitle(getString(R.string.loginmodule_no_wx_title))
                         .setMessage(getString(R.string.loginmodule_no_wx_msg))
-                        .setPositiveButton(getString(R.string.loginmodule_change_login_type), new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.loginmodule_change_login_type))
+                        .setCancelable(false)
+                        .setCanceledOnTouchOutside(false)
+                        .setOnClickListener(new HMAlertDialog.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPosClick() {
                                 TraceUtil.onEvent(GuideActivity.this, "guide_mob_click");
                                 NavigationHelper.toInputMobile(mContext);
                             }
+
+                            @Override
+                            public void onNegClick() {
+
+                            }
                         })
-                        .setCanceledOnTouchOutside(false)
-                        .setPositiveButtonTextColor(getResources().getColor(R.color.uikit_blue))
+                        .create()
                         .show();
             }
         }
@@ -192,7 +188,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
     @Override
     public void hideButtonForLoginByWx() {
-        mLlLoginByChat.setVisibility(View.GONE);
+        mBtnWx.setVisibility(View.GONE);
     }
 
     @Override

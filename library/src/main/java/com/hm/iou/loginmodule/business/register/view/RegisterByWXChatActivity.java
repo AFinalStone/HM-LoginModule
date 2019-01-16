@@ -123,7 +123,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         outState.putString(EXTRA_KEY_WX_CHAT_SN, mWXChatSN);
     }
 
-    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_agreement01})
+    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_register_agreement})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_getSMSCheckCode == id) {
@@ -131,7 +131,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         } else if (R.id.btn_next == id) {
             TraceUtil.onEvent(this, "wx_bind_click");
             mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
-        } else if (R.id.tv_agreement01 == id) {
+        } else if (R.id.tv_register_agreement == id) {
             TraceUtil.onEvent(this, "web_useragreement");
             showUserAgreementDialog();
         }

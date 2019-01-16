@@ -54,12 +54,12 @@
 
     <!--通过活体校验找回密码-->
     <string name="loginmodule_check_id_card">验证身份证</string>
-    <string name="loginmodule_please_input_id_card_sub_six">请输入%S\n身份证前6位数字</string>
+    <string name="loginmodule_please_input_id_card_sub_six">请输入（%S）身份证\n前6位数字</string>
     <string name="loginmodule_current_user_name">当前用户</string>
     <string name="loginmodule_check_id_card_failed">身份证校验失败</string>
 
     <!--短信验证码-->
-    <string name="loginmodule_input_phone_code_title">验证短信</string>
+    <string name="loginmodule_input_phone_code_title">输入验证码</string>
     <string name="loginmodule_input_phone_code_send_code">验证码已发送至</string>
     <string name="loginmodule_input_phone_code_try_again">重发验证码</string>
 
