@@ -184,6 +184,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     public void toAdDetail(String linkUrl) {
         if (!TextUtils.isEmpty(linkUrl)) {
             mIsHaveOpenMain = true;
+            NavigationHelper.toMain(mContext);
             NavigationHelper.toLaunchAdvertisement(mContext, linkUrl);
             mView.closeCurrPage();
         } else {
