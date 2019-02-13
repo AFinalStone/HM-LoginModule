@@ -10,14 +10,14 @@
 
 
     <RelativeLayout
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="50dip">
 
         <com.hm.iou.uikit.ShapedImageView
             android:id="@+id/iv_tag_avatar"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:background="@mipmap/uikit_icon_header_unknow"
             android:contentDescription="更换头像"
@@ -43,7 +43,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:text="点此设置昵称"
-        android:textColor="@color/uikit_text_main_content"
+        android:textColor="@color/uikit_text_sub_content"
         android:textSize="30sp" />
 
     <android.support.v7.widget.RecyclerView

@@ -14,7 +14,7 @@
         android:layout_width="80dip"
         android:layout_height="36dip"
         android:textSize="14sp"
-        android:textColor="@color/uikit_text_auxiliary"
+        android:textColor="#FFE6E6E6"
         android:background="@drawable/loginmodule_bg_tag_normal"
         android:gravity="center"
         android:clickable="true"
