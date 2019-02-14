@@ -9,10 +9,13 @@ import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.CustomerTypeEnum;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 绑定邮箱
@@ -72,6 +75,7 @@ public class BindEmailPresenter extends MvpActivityPresenter<BindEmailContract.V
                         }
                         userInfo.setType(type);
                         UserManager.getInstance(mContext).updateOrSaveUserInfo(userInfo);
+                        EventBus.getDefault().post(new CommBizEvent("bind_email_succ", ""));
                         mView.closeCurrPage();
                     }
 
