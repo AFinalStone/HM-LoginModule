@@ -160,7 +160,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     }
 
     @Override
-    public void showViewPager(List<IGuidePageItem> list) {
+    public void showViewPager(List<Integer> list) {
         mAdapter = new GuidePagerAdapter(mContext, list);
         mViewPager.setAdapter(mAdapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

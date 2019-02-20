@@ -1,12 +1,9 @@
 package com.hm.iou.loginmodule.business.guide;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hm.iou.base.event.OpenWxResultEvent;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxJavaStopException;
@@ -15,18 +12,16 @@ import com.hm.iou.base.version.CheckVersionResBean;
 import com.hm.iou.base.version.VersionApi;
 import com.hm.iou.loginmodule.LoginModuleConstants;
 import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
-import com.hm.iou.loginmodule.bean.GuidePageBean;
 import com.hm.iou.loginmodule.bean.IsWXExistRespBean;
 import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
-import com.hm.iou.loginmodule.business.guide.view.IGuidePageItem;
 import com.hm.iou.loginmodule.event.InitEvent;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
-import com.hm.iou.tools.ImageLoader;
 import com.hm.iou.tools.SPUtil;
 import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.wxapi.WXEntryActivity;
@@ -37,8 +32,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.reactivestreams.Publisher;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,60 +73,16 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
         }
     }
 
-    /**
-     * 从assert文件中读取数据
-     *
-     * @return
-     */
-    private List<IGuidePageItem> readDataFromAssert() {
-        List<IGuidePageItem> listData = new ArrayList<>();
-        try {
-            AssetManager manager = mContext.getAssets();
-            InputStream inputStream = manager.open("loginmodule_guide_data.json");
-            List<GuidePageBean> list = readDataFromInputStream(inputStream);
-            for (final GuidePageBean bean : list) {
-                IGuidePageItem item = new IGuidePageItem() {
-                    @Override
-                    public String getImage() {
-                        return bean.getImageUrl();
-                    }
-                };
-                listData.add(item);
-                ImageLoader.getInstance(mContext).fetchImage(bean.getImageUrl());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listData;
-    }
-
-    /**
-     * 从InputStream流里读取配置
-     *
-     * @param inputStream
-     * @return
-     */
-    private List<GuidePageBean> readDataFromInputStream(InputStream inputStream) {
-        try {
-            int length = inputStream.available();
-            byte[] buffer = new byte[length];
-            inputStream.read(buffer);
-            inputStream.close();
-            String json = new String(buffer);
-            Gson gson = new Gson();
-            List<GuidePageBean> list = gson.fromJson(json, new TypeToken<List<GuidePageBean>>() {
-            }.getType());
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @Override
     public void init() {
         isInstalledWxChatAPP();
-        List<IGuidePageItem> listData = readDataFromAssert();
+        List<Integer> listData = new ArrayList<>();
+        listData.add(R.mipmap.loginmodule_background_guide_01);
+        listData.add(R.mipmap.loginmodule_background_guide_02);
+        listData.add(R.mipmap.loginmodule_background_guide_03);
+        listData.add(R.mipmap.loginmodule_background_guide_04);
+        listData.add(R.mipmap.loginmodule_background_guide_05);
+        listData.add(R.mipmap.loginmodule_background_guide_06);
         mView.showViewPager(listData);
 
         int loginType = SPUtil.getInt(mContext, LoginModuleConstants.SP_LOGIN_FILE, LoginModuleConstants.SP_KEY_LOGIN_TYPE);

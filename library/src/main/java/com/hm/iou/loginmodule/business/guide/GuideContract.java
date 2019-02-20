@@ -2,7 +2,6 @@ package com.hm.iou.loginmodule.business.guide;
 
 
 import com.hm.iou.base.mvp.BaseContract;
-import com.hm.iou.loginmodule.business.guide.view.IGuidePageItem;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface GuideContract {
         /**
          * 显示viewPager
          */
-        void showViewPager(List<IGuidePageItem> list);
+        void showViewPager(List<Integer> list);
 
         /**
          * 隐藏微信登录的方式
