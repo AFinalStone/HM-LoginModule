@@ -24,12 +24,16 @@
             android:scaleType="centerCrop"
             app:shape_mode="circle" />
 
-        <ImageView
+        <com.hm.iou.uikit.ShapedImageView
             android:layout_width="34dip"
             android:layout_height="34dip"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/uikit_icon_open_camera_yellow" />
+            app:shape_mode="circle"
+            android:background="#ffffdd4a"
+            android:src="@mipmap/loginmodule_ic_camera_black"
+            android:scaleType="centerInside"
+            />
     </RelativeLayout>
 
     <TextView
