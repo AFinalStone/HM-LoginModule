@@ -69,7 +69,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         //请求权限：定位权限、日历读写权限
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.requestEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
+                Manifest.permission.ACCESS_COARSE_LOCATION)
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
@@ -82,13 +82,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {
-                        if (permission.name.equals(Manifest.permission.WRITE_CALENDAR)) {
-                            if (permission.granted) {
-                                TraceUtil.onEvent(GuideActivity.this, "perm_calendar_allow");
-                            } else {
-                                TraceUtil.onEvent(GuideActivity.this, "perm_calendar_disallow");
-                            }
-                        } else if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        if (permission.name.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
                             if (permission.granted) {
                                 mAccessFineLocation = true;
                             } else {
