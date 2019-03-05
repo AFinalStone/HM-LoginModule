@@ -4,29 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="260dp"
-        android:layout_height="390dp"
+        android:layout_width="270dip"
+        android:layout_height="270dip"
         android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:scaleType="fitXY"
+        tools:src="@mipmap/loginmodule_background_guide_01"
+        />
 
 </LinearLayout>

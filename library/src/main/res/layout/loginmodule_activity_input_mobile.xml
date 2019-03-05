@@ -13,7 +13,7 @@
         app:bottomDividerIsShow="false"
         app:titleText="@string/loginmodule_input_mobile_title" />
 
-    <com.hm.iou.uikit.ClearEditText
+    <EditText
         android:id="@+id/et_mobile"
         style="@style/LoginMobile" />
 
