@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.login.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.BaseBizAppLike;
@@ -14,7 +15,6 @@ import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.loginmodule.business.login.presenter.InputMobilePresenter;
 import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
-import com.hm.iou.uikit.ClearEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -32,7 +32,7 @@ import io.reactivex.functions.Consumer;
 public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
 
     @BindView(R2.id.et_mobile)
-    ClearEditText mEtMobile;
+    EditText mEtMobile;
     @BindView(R2.id.btn_next)
     Button mBtnNext;
 
