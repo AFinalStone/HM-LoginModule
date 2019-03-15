@@ -45,7 +45,9 @@ public class UserAgreementDialog extends Dialog implements View.OnClickListener 
         super(context, R.style.UikitAlertDialogStyle);
         setContentView(R.layout.loginmodule_dialog_user_agreement);
         mContext = context;
-        setBgRadius();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setBgRadius();
+        }
 
         final Window dialogWindow = getWindow();
         if (dialogWindow != null) {
