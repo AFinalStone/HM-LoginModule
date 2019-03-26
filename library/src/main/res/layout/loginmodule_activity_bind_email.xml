@@ -14,19 +14,18 @@
         app:bottomDividerIsShow="false"
         app:rightText="@string/base_customer_service"
         app:titleBackground="@color/transparent"
-        app:titleText="@string/loginmodule_bind_email_title" />
+        app:titleText="绑定邮箱" />
 
     <com.hm.iou.uikit.ClearEditText
         android:id="@+id/et_email"
         style="@style/UikitEditText.Normal"
+        android:layout_marginBottom="10dip"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginTop="10dip"
-        android:layout_marginBottom="10dip"
         android:background="@null"
-        android:hint="@string/loginmodule_bind_email_or_reset_login_psd_input_email"
+        android:hint="@string/loginmodule_bind_email_or_reset_login_psd_input_email" />
 
-        />
     <View
         style="@style/UikitDivider.Horizontal"
         android:layout_marginLeft="35dp"
@@ -63,7 +62,7 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginTop="30dp"
-        android:text="@string/loginmodule_bind_email_or_reset_login_psd_bind" />
+        android:text="绑定邮箱" />
 
 
 </LinearLayout>

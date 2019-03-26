@@ -64,13 +64,11 @@
     <string name="loginmodule_input_phone_code_try_again">重发验证码</string>
 
     <!--绑定邮箱，邮箱验证码-->
-    <string name="loginmodule_bind_email_title">请输入绑定的邮箱</string>
     <string name="loginmodule_reset_login_psd_by_email_title">验证邮箱</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_tip">提示：</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_email">邮箱</string>
     <string name="loginmodule_bind_email_or_reset_login_psd_btn_find">通过邮箱找回</string>
-    <string name="loginmodule_bind_email_or_reset_login_psd_input_email">请输入您需要绑定的邮箱</string>
-    <string name="loginmodule_bind_email_or_reset_login_psd_bind">绑定</string>
+    <string name="loginmodule_bind_email_or_reset_login_psd_input_email">输入未绑定的邮箱</string>
 
     <string name="loginmodule_dialog_useragreement">感谢您使用条管家！我们依据国家法律法规、监管政策及业务情况，出具了相关协议：\n协议1：《条管家用户注册协议》\n协议2：《条管家用户隐私协议》\n协议3：《条管家用户支付协议》\n协议4：《CFCA数字证书服务协议》\n请您务必仔细阅读并透彻理解相关条款内容，确认充分理解并同意后使用条管家相关产品或服务。请点击【同意】即代表您已阅读并同意以上所有协议，如果您不同意，请点【不同意】，我们感谢每一位客户对我们产品的关注与支持。</string>
 </resources>
