@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.loginmodule.bean.UserTagBean;
+import com.hm.iou.loginmodule.business.WarnCanNotRegisterActivity;
 import com.hm.iou.loginmodule.business.tags.AddTagActivity;
 import com.hm.iou.loginmodule.business.tags.TagStatusJudgeActivity;
 import com.hm.iou.router.Router;
@@ -274,6 +275,17 @@ public class NavigationHelper {
     public static void toTagStatusJudgePage(Context context, String loadingFailedUrl) {
         Intent intent = new Intent(context, TagStatusJudgeActivity.class);
         intent.putExtra(TagStatusJudgeActivity.EXTRA_KEY_LOAD_FAIL_URL, loadingFailedUrl);
+        context.startActivity(intent);
+    }
+
+
+    /**
+     * 警告禁止注册
+     *
+     * @param context
+     */
+    public static void toWarnCanNotRegister(Context context) {
+        Intent intent = new Intent(context, WarnCanNotRegisterActivity.class);
         context.startActivity(intent);
     }
 

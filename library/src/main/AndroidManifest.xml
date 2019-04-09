@@ -83,6 +83,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".business.WarnCanNotRegisterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+
+        <activity
             android:name=".business.tags.TagStatusJudgeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"

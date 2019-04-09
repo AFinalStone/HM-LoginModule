@@ -19,4 +19,6 @@ public class LoginModuleConstants {
     public static final String SP_KEY_MOBILE = "mobile";
     public static final String SP_KEY_LOGIN_TYPE = "login_type";    //0-正常显示登录入口，1-只显示微信登录入口
 
+
+    public static final String ERR_CODE_ACCOUNT_CLOSED = "501017";      //账号已注销的错误码
 }

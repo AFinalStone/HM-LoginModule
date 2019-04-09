@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.register.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
@@ -16,6 +17,8 @@ import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import static com.hm.iou.loginmodule.LoginModuleConstants.ERR_CODE_ACCOUNT_CLOSED;
 
 /**
  * 1.通过微信号进行注册并绑定手机
@@ -55,8 +58,20 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                     }
 
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
+                    public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
+                        if (!TextUtils.isEmpty(code)) {
+                            if (ERR_CODE_ACCOUNT_CLOSED.equals(code)) {
+                                NavigationHelper.toWarnCanNotRegister(mContext);
+                            } else {
+                                mView.toastErrorMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
                     }
                 });
     }
@@ -86,8 +101,20 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                     }
 
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
+                    public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
+                        if (!TextUtils.isEmpty(code)) {
+                            if (ERR_CODE_ACCOUNT_CLOSED.equals(code)) {
+                                NavigationHelper.toWarnCanNotRegister(mContext);
+                            } else {
+                                mView.toastErrorMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
                     }
                 });
     }
@@ -111,9 +138,22 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                     }
 
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
+                    public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
                         TraceUtil.onEvent(mContext, "wx_bind_fail_count");
+
+                        if (!TextUtils.isEmpty(code)) {
+                            if (ERR_CODE_ACCOUNT_CLOSED.equals(code)) {
+                                NavigationHelper.toWarnCanNotRegister(mContext);
+                            } else {
+                                mView.toastErrorMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
                     }
                 });
     }

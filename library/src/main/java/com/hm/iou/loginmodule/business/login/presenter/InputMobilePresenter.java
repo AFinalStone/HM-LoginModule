@@ -2,6 +2,7 @@ package com.hm.iou.loginmodule.business.login.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
@@ -12,6 +13,8 @@ import com.hm.iou.loginmodule.business.BaseLoginModulePresenter;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import static com.hm.iou.loginmodule.LoginModuleConstants.ERR_CODE_ACCOUNT_CLOSED;
 
 /**
  * 1.通过微信号进行注册并绑定手机
@@ -45,9 +48,27 @@ public class InputMobilePresenter extends BaseLoginModulePresenter<InputMobileCo
                     }
 
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
+                    public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
                         TraceUtil.onEvent(mContext, "mob_next_err");
+
+                        if (!TextUtils.isEmpty(code)) {
+                            if (ERR_CODE_ACCOUNT_CLOSED.equals(code)) {
+                                NavigationHelper.toWarnCanNotRegister(mContext);
+                            } else {
+                                mView.toastErrorMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public boolean isShowCommError() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
                     }
                 });
     }
