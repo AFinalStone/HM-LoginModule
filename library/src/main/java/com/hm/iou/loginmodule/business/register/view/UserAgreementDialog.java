@@ -53,6 +53,7 @@ public class UserAgreementDialog extends Dialog implements View.OnClickListener 
         if (dialogWindow != null) {
             WindowManager.LayoutParams lp = dialogWindow.getAttributes();
             lp.width = (int) (context.getResources().getDisplayMetrics().widthPixels * 0.8);
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
             dialogWindow.setAttributes(lp);
         }
 
