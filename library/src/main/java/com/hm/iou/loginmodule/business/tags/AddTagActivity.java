@@ -106,6 +106,7 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
         });
 
         mPresenter.init();
+        mPresenter.searchClipBoard();
     }
 
     @Override

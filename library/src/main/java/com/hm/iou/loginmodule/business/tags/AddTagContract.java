@@ -43,6 +43,8 @@ public interface AddTagContract {
 
         void init();
 
+        void searchClipBoard();
+
         void submitData(List<Integer> tagList, File avatarUrl, String nickname);
 
     }

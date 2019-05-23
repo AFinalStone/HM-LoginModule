@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.hm.iou.base.comm.ClipBoardBean;
+import com.hm.iou.base.comm.CommApi;
 import com.hm.iou.base.file.FileApi;
 import com.hm.iou.base.file.FileBizType;
 import com.hm.iou.base.file.FileUploadResult;
@@ -15,6 +17,7 @@ import com.hm.iou.loginmodule.api.LoginModuleApi;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
+import com.hm.iou.tools.ClipUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.io.File;
@@ -43,6 +46,41 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
         } else {
             mView.updateNickname(nickname);
         }
+    }
+
+    @Override
+    public void searchClipBoard() {
+        CharSequence content = ClipUtil.getTextFromClipboard(mContext);
+        Logger.d("剪切板内容为：" + content);
+        if (TextUtils.isEmpty(content) || !content.toString().startsWith("【条管家】")) {
+            Logger.d("不搜索剪切板...");
+            return;
+        }
+        Logger.d("开始搜索剪切板....");
+        CommApi.searchClipBoardOnLabel(content.toString())
+                .compose(getProvider().<BaseResponse<ClipBoardBean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<ClipBoardBean>handleResponse())
+                .subscribeWith(new CommSubscriber<ClipBoardBean>(mView) {
+                    @Override
+                    public void handleResult(ClipBoardBean data) {
+                        ClipUtil.putTextIntoClipboard(mContext, null, null);
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+
+                    }
+
+                    @Override
+                    public boolean isShowCommError() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+                });
     }
 
     @Override
