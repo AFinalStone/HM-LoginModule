@@ -11,17 +11,16 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
+        app:backIcon="@mipmap/uikit_icon_close_black"
         app:bottomDividerIsShow="false"
         app:rightText="@string/base_customer_service"
-        app:backIcon="@mipmap/uikit_icon_close_black"
         app:titleBackground="@color/transparent"
         app:titleText="@string/loginmodule_register_by_wx_chat_title" />
 
     <com.hm.iou.uikit.ClearEditText
         android:id="@+id/et_mobile"
         style="@style/LoginMobile"
-        android:hint="@string/loginmodule_register_by_wx_chat_et_mobileHint"
-        />
+        android:hint="@string/loginmodule_register_by_wx_chat_et_mobileHint" />
 
     <View
         style="@style/UikitDivider.Horizontal"
@@ -41,9 +40,8 @@
         <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/tv_getSMSCheckCode"
             style="@style/UikitHMButton.CheckCode"
-            android:enabled="false"
             android:layout_marginRight="35dip"
-            />
+            android:enabled="false" />
 
     </LinearLayout>
 
@@ -66,18 +64,31 @@
     <Button
         android:id="@+id/btn_next"
         style="@style/UikitHMButton.Large.Main"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="35dp"
         android:text="@string/loginmodule_register_by_wx_chat_register" />
 
-    <TextView
-        android:id="@+id/tv_register_agreement"
-        style="@style/UikitTextView"
-        android:paddingBottom="10dip"
-        android:paddingTop="16dip"
-        android:text="我已阅读并同意“所有协议”"
-        android:textColor="@color/uikit_text_auxiliary"
-        android:textSize="@dimen/uikit_main_content_text_size" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dip"
+            android:layout_height="16dip"
+            android:layout_marginRight="6dip"
+            android:src="@mipmap/uikit_icon_check_black" />
+
+        <TextView
+            android:id="@+id/tv_register_agreement"
+            style="@style/UikitTextView"
+            android:paddingTop="16dip"
+            android:paddingBottom="16dip"
+            android:text="我已阅读并同意“所有协议”"
+            android:textColor="@color/uikit_text_auxiliary"
+            android:textSize="@dimen/uikit_main_content_text_size" />
+    </LinearLayout>
 
 </LinearLayout>

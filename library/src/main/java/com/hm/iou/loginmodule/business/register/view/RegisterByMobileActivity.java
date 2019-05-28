@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.register.view;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,7 +103,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
 
         String str = mTvAgreement.getText().toString();
         SpannableString spanStr = new SpannableString(str);
-        spanStr.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.uikit_function_remind)), 7, 13, 0);
+        spanStr.setSpan(new UnderlineSpan(), 8, 12, 0);
         mTvAgreement.setText(spanStr);
 
         showUserAgreementDialog();

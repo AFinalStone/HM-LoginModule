@@ -1,9 +1,12 @@
 package com.hm.iou.loginmodule.business.register.view;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.constants.HMConstants;
@@ -48,6 +51,9 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     EditText mEtPassword;
     @BindView(R2.id.btn_next)
     Button mBtnNext;
+    @BindView(R2.id.tv_register_agreement)
+    TextView mTvAgreement;
+
 
     String mStrSMSCheckCode = "";
     String mStrMobile = "";
@@ -112,6 +118,11 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         if (savedInstanceState != null) {
             mWXChatSN = savedInstanceState.getString(EXTRA_KEY_WX_CHAT_SN);
         }
+
+        String str = mTvAgreement.getText().toString();
+        SpannableString spanStr = new SpannableString(str);
+        spanStr.setSpan(new UnderlineSpan(), 8, 12, 0);
+        mTvAgreement.setText(spanStr);
 
         showUserAgreementDialog();
     }

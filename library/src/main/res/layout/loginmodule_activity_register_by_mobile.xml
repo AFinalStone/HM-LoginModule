@@ -68,16 +68,29 @@
         android:layout_marginTop="30dp"
         android:text="@string/loginmodule_register_by_mobile_btn_reg" />
 
-    <TextView
-        android:id="@+id/tv_register_agreement"
-        style="@style/UikitTextView"
-        android:paddingBottom="10dip"
-        android:paddingTop="16dip"
-        android:text="我已阅读并同意“所有协议”"
-        android:textColor="@color/uikit_text_auxiliary"
-        android:textSize="@dimen/uikit_main_content_text_size"
-        android:drawableLeft="@mipmap/uikit_icon_check_green"
-        android:drawablePadding="10dip"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="16dip"
+            android:layout_height="16dip"
+            android:src="@mipmap/uikit_icon_check_black"
+            android:layout_marginRight="6dip"
+            />
+
+        <TextView
+            android:id="@+id/tv_register_agreement"
+            style="@style/UikitTextView"
+            android:paddingBottom="16dip"
+            android:paddingTop="16dip"
+            android:text="我已阅读并同意“所有协议”"
+            android:textColor="@color/uikit_text_auxiliary"
+            android:textSize="@dimen/uikit_main_content_text_size"
+            />
+    </LinearLayout>
 
 </LinearLayout>
