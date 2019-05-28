@@ -21,13 +21,12 @@
 
     <Button
         android:id="@+id/btn_dialog_ok"
-        style="@style/UikitHMButton"
+        style="@style/UikitHMButton.Small.Main"
         android:textColor="@color/uikit_text_sub_content"
-        android:layout_width="50dip"
-        android:layout_height="42dip"
-        android:textSize="@dimen/uikit_main_content_text_size"
-        android:padding="0px"
-        android:text="确定"
+        android:layout_width="80dip"
+        android:layout_height="40dip"
+        android:text="确认"
+        android:layout_marginRight="10dip"
         />
 
 </LinearLayout>

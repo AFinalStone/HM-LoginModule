@@ -15,6 +15,7 @@ import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.loginmodule.business.login.presenter.InputMobilePresenter;
 import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
+import com.hm.iou.uikit.MobileInputEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -32,7 +33,7 @@ import io.reactivex.functions.Consumer;
 public class InputMobileActivity extends BaseActivity<InputMobilePresenter> implements InputMobileContract.View {
 
     @BindView(R2.id.et_mobile)
-    EditText mEtMobile;
+    MobileInputEditText mEtMobile;
     @BindView(R2.id.btn_next)
     Button mBtnNext;
 
@@ -54,10 +55,11 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mStrMobile = String.valueOf(charSequence);
+                mStrMobile = mEtMobile.getTextWithoutSpace();
                 mBtnNext.setEnabled(false);
                 if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE)) {
                     mBtnNext.setEnabled(true);
+                    mPresenter.checkAccountIsExist(mStrMobile);
                 }
             }
         });

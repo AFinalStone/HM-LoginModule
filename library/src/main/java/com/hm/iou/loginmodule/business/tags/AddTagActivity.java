@@ -193,8 +193,8 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
 
     @Override
     public void updateAvatar(String url) {
-        ImageLoader.getInstance(this).displayImage(url, mIvAvatar, R.drawable.uikit_bg_pic_loading_place,
-                R.drawable.uikit_bg_pic_loading_error);
+        ImageLoader.getInstance(this).displayImage(url, mIvAvatar, R.mipmap.loginmodule_icon_header_unknow,
+                R.mipmap.loginmodule_icon_header_unknow);
     }
 
     @Override
@@ -212,7 +212,7 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
         NavigationHelper.toLoginLoading(this, "hmiou://m.54jietiao.com/login/selecttype");
     }
 
-    class TagAdapter extends BaseQuickAdapter<ITagItem , BaseViewHolder> {
+    class TagAdapter extends BaseQuickAdapter<ITagItem, BaseViewHolder> {
 
         public TagAdapter() {
             super(R.layout.loginmodule_item_user_tag);

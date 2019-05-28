@@ -1,6 +1,8 @@
 package com.hm.iou.loginmodule.business.register.view;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +46,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     ShowHidePasswordEditText mEtPsd;
     @BindView(R2.id.btn_register)
     Button mBtnRegister;
+    @BindView(R2.id.tv_register_agreement)
+    TextView mTvAgreement;
 
     private String mStrSmsCheckCode = "";
     private String mMobile = "";
@@ -95,6 +99,11 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
         }
         mEtMobile.setText(mMobile);
+
+        String str = mTvAgreement.getText().toString();
+        SpannableString spanStr = new SpannableString(str);
+        spanStr.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.uikit_function_remind)), 7, 13, 0);
+        mTvAgreement.setText(spanStr);
 
         showUserAgreementDialog();
     }

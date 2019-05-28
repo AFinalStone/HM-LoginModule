@@ -15,9 +15,12 @@
         app:titleBackground="@color/transparent"
         app:titleText="@string/loginmodule_find_password_title" />
 
-    <com.hm.iou.uikit.ClearEditText
+    <com.hm.iou.uikit.MobileInputEditText
         android:id="@+id/et_mobile"
         style="@style/LoginMobile"
+        android:hint="输入11位手机号"
+        android:gravity="center"
+        android:textSize="24dip"
         />
 
     <View

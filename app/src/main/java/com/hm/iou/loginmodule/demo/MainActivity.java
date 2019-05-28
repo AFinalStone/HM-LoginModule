@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.hm.iou.loginmodule.NavigationHelper;
+import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.loginmodule.business.guide.view.GuideActivity;
 import com.hm.iou.loginmodule.business.launch.view.LaunchActivity;
 import com.hm.iou.sharedata.event.CommBizEvent;
@@ -14,6 +15,8 @@ import com.hm.iou.tools.ToastUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +55,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toClickAddTag(View view) {
-        NavigationHelper.toAddTagPage(this, null);
+        ArrayList<UserTagBean> list = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            UserTagBean data = new UserTagBean();
+            data.setLabelId(i);
+            data.setName("我是个人");
+            list.add(data);
+        }
+        NavigationHelper.toAddTagPage(this, list);
     }
 
     public void toClickGuide(View view) {

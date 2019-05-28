@@ -19,6 +19,9 @@ public class UserTagBean implements ITagItem, Parcelable {
 
     boolean selected;
 
+    public UserTagBean() {
+    }
+
     @Override
     public int getTextColor() {
         return selected ? 0xffffffff : 0xff9b9b9b;

@@ -13,6 +13,7 @@ import com.hm.iou.loginmodule.business.password.FindByInputMobileContract;
 import com.hm.iou.loginmodule.business.password.presenter.FindByInputMobilePresenter;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
+import com.hm.iou.uikit.MobileInputEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
@@ -30,7 +31,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
     public static final String EXTRA_KEY_MOBILE = "mobile";
 
     @BindView(R2.id.et_mobile)
-    ClearEditText mEtMobile;
+    MobileInputEditText mEtMobile;
     @BindView(R2.id.btn_find)
     Button mBtnFind;
 
@@ -51,7 +52,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
-                mMobile = String.valueOf(charSequence);
+                mMobile = mEtMobile.getTextWithoutSpace();
                 mBtnFind.setEnabled(false);
                 if (StringUtil.matchRegex(mMobile, HMConstants.REG_MOBILE)) {
                     mBtnFind.setEnabled(true);
@@ -64,7 +65,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
         }
         if (!TextUtils.isEmpty(mMobile)) {
             mEtMobile.setText(mMobile);
-            mEtMobile.setSelection(mMobile.length());
+            mEtMobile.setSelection(mEtMobile.length());
         }
         showSoftKeyboard();
     }

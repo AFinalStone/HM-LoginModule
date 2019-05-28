@@ -40,9 +40,8 @@
             android:id="@+id/tv_getSmsCheckCode"
             style="@style/UikitHMButton.CheckCode"
             android:enabled="true"
-            android:gravity="right"
-            android:paddingLeft="40dip"
-            android:paddingRight="35dip" />
+            android:layout_marginRight="35dip"
+            />
 
     </LinearLayout>
 
@@ -76,6 +75,9 @@
         android:paddingTop="16dip"
         android:text="我已阅读并同意“所有协议”"
         android:textColor="@color/uikit_text_auxiliary"
-        android:textSize="@dimen/uikit_main_content_text_size" />
+        android:textSize="@dimen/uikit_main_content_text_size"
+        android:drawableLeft="@mipmap/uikit_icon_check_green"
+        android:drawablePadding="10dip"
+        />
 
 </LinearLayout>

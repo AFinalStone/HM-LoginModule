@@ -19,21 +19,20 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:background="@mipmap/uikit_icon_header_unknow"
             android:contentDescription="更换头像"
             android:scaleType="centerCrop"
+            android:src="@mipmap/loginmodule_icon_header_unknow"
             app:shape_mode="circle" />
 
         <com.hm.iou.uikit.ShapedImageView
             android:layout_width="34dip"
             android:layout_height="34dip"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            app:shape_mode="circle"
+            android:layout_alignParentBottom="true"
             android:background="#ffffdd4a"
-            android:src="@mipmap/loginmodule_ic_camera_black"
             android:scaleType="centerInside"
-            />
+            android:src="@mipmap/loginmodule_ic_camera_black"
+            app:shape_mode="circle" />
     </RelativeLayout>
 
     <TextView
@@ -50,23 +49,31 @@
         android:textColor="@color/uikit_text_sub_content"
         android:textSize="30sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_tag_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:layout_weight="1">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:paddingTop="20dip"
+        android:paddingBottom="30dip"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_tag_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_tag_submit"
         style="@style/UikitHMButton.Large.Main"
-        android:layout_marginBottom="20dip"
         android:layout_marginLeft="35dip"
         android:layout_marginRight="35dip"
+        android:layout_marginBottom="20dip"
         android:background="@drawable/uikit_selector_btn_minor"
-        android:text="领取大礼包"
-        android:textColor="@color/uikit_text_auxiliary"
-        />
+        android:text="马上登录"
+        android:textColor="@color/uikit_text_auxiliary" />
 
 </LinearLayout>

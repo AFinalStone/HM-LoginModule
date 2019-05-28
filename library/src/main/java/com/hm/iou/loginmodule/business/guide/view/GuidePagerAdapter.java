@@ -9,12 +9,11 @@ import android.widget.ImageView;
 
 import com.hm.iou.loginmodule.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GuidePagerAdapter extends PagerAdapter {
 
-    private List<Integer> mPicListData = new ArrayList<>();
+    private List<Integer> mPicListData;
     private Context mContext;
 
     public GuidePagerAdapter(Context context, List<Integer> mPicListData) {

@@ -42,9 +42,7 @@
             android:id="@+id/tv_getSMSCheckCode"
             style="@style/UikitHMButton.CheckCode"
             android:enabled="false"
-            android:gravity="right"
-            android:paddingLeft="40dip"
-            android:paddingRight="35dip"
+            android:layout_marginRight="35dip"
             />
 
     </LinearLayout>

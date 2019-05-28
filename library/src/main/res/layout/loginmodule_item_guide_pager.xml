@@ -9,11 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="270dip"
-        android:layout_height="270dip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:scaleType="fitXY"
-        tools:src="@mipmap/loginmodule_background_guide_01"
-        />
+        android:scaleType="centerInside"
+        tools:src="@mipmap/loginmodule_background_guide_01" />
 
 </LinearLayout>

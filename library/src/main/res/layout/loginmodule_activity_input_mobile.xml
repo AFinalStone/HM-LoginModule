@@ -13,9 +13,13 @@
         app:bottomDividerIsShow="false"
         app:titleText="@string/loginmodule_input_mobile_title" />
 
-    <EditText
+    <com.hm.iou.uikit.MobileInputEditText
         android:id="@+id/et_mobile"
-        style="@style/LoginMobile" />
+        style="@style/LoginMobile"
+        android:hint="输入11位手机号"
+        android:gravity="center"
+        android:textSize="24dip"
+        />
 
     <View
         style="@style/UikitDivider.Horizontal"
