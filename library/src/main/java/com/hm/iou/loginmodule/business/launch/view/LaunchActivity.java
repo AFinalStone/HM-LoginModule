@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hm.iou.base.ActivityManager;
 import com.hm.iou.base.utils.TraceUtil;
@@ -35,8 +36,8 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
 
     @BindView(R2.id.iv_advertisement)
     ImageView ivAdvertisement;
-    @BindView(R2.id.btn_jump)
-    Button btnJump;
+    @BindView(R2.id.ll_jump)
+    LinearLayout mLlJump;
 
     private LaunchPresenter mPresenter;
 
@@ -66,7 +67,6 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
             return;
         }
         mPresenter.init();
-
     }
 
     @Override
@@ -91,7 +91,7 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
         ActivityManager.getInstance().removeActivity(this);
     }
 
-    @OnClick(R2.id.btn_jump)
+    @OnClick(value = {R2.id.ll_jump})
     public void onClick() {
         TraceUtil.onEvent(this, "launch_skip");
         mPresenter.toMain();
@@ -130,9 +130,8 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
     }
 
     @Override
-    public void setJumpBtnText(String desc) {
-        btnJump.setVisibility(View.VISIBLE);
-        btnJump.setText(desc);
+    public void showJumpLayout(int visibility) {
+        mLlJump.setVisibility(visibility);
     }
 
     @Override

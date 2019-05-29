@@ -19,21 +19,30 @@
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
 
-        <Button
-            android:id="@+id/btn_jump"
-            style="@style/UikitHMButton"
+        <LinearLayout
+            android:id="@+id/ll_jump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/loginmodule_shape_launch_time_count_down"
-            android:minHeight="30dp"
-            android:minWidth="66dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textFontSize_14"
-            android:visibility="gone" />
+            android:layout_alignParentBottom="true"
+            android:padding="15dip"
+            android:visibility="invisible"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/loginmodule_shape_launch_time_count_down"
+                android:minWidth="70dp"
+                android:minHeight="30dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="跳过"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textFontSize_14"
+
+                />
+        </LinearLayout>
     </RelativeLayout>
 
 
@@ -41,8 +50,8 @@
         android:id="@+id/backgroundSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="30dip"
         android:paddingTop="30dip"
+        android:paddingBottom="30dip"
         android:scaleType="fitCenter"
         android:src="@mipmap/loginmodule_background_launch" />
 </LinearLayout>

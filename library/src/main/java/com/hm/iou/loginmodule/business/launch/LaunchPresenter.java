@@ -3,6 +3,7 @@ package com.hm.iou.loginmodule.business.launch;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.LoginModuleConstants;
@@ -45,7 +46,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     private Context mContext;
     private LaunchContract.View mView;
 
-    private long mCountDownTime = 3;
+    private int mCountDownTime = 6;
     private boolean mIsHaveOpenMain = false;
     private Disposable mCountDownDisposable;
 
@@ -66,7 +67,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     public void startCountDown() {
         pauseCountDown();
         if (mView != null) {
-            mView.setJumpBtnText(mCountDownTime + " 跳过");
+            mView.showJumpLayout(View.VISIBLE);
         }
         mCountDownDisposable = Flowable.interval(1, 1, TimeUnit.SECONDS)
                 .take(mCountDownTime)
@@ -90,10 +91,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        String desc = aLong + " 跳过";
-                        if (mView != null) {
-                            mView.setJumpBtnText(desc);
-                        }
+
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -146,6 +144,10 @@ public class LaunchPresenter implements LaunchContract.Presenter {
             AdvertisementRespBean adBean = CacheDataUtil.getAdvertisement(mContext.getApplicationContext());
             if (adBean != null) {
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
+                int showTimeSec = adBean.getShowHowLong();
+                mCountDownTime = showTimeSec;
+                if (mCountDownTime <= 0)
+                    mCountDownTime = 6;
                 startCountDown();
             } else {
                 delayToMainPage();

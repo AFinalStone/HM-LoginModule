@@ -18,12 +18,7 @@ public interface LaunchContract {
          */
         void showAdvertisement(String imageUrl, String linkUrl);
 
-        /**
-         * 设置倒计时按钮的文字描述
-         *
-         * @param desc
-         */
-        void setJumpBtnText(String desc);
+        void showJumpLayout(int visibility);
 
         void closeCurrPage();
     }

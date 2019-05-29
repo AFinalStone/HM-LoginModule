@@ -27,5 +27,6 @@ public class AdvertisementRespBean implements Serializable {
     private String pushType;
     private String startTime;
     private String endTime;
+    private int showHowLong;
 
 }
