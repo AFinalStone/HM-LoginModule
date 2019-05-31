@@ -59,6 +59,7 @@ public class CacheDataUtil {
      */
     public static void cacheAdvertisementList(Context context, List<AdvertisementRespBean> list) {
         if (list == null || list.isEmpty()) {
+            clearAdvertisementListCache(context);
             return;
         }
         clearAdvertisementListCache(context);
