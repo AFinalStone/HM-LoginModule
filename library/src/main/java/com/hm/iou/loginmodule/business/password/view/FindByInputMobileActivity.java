@@ -56,6 +56,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
                 mBtnFind.setEnabled(false);
                 if (StringUtil.matchRegex(mMobile, HMConstants.REG_MOBILE)) {
                     mBtnFind.setEnabled(true);
+                    mPresenter.getResetPsdMethod(mMobile);
                 }
             }
         });

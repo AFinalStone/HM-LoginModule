@@ -35,7 +35,9 @@
             android:id="@+id/btn_login_mobile"
             style="@style/UikitHMButton.Large.Bordered"
             android:layout_weight="1"
-            android:text="@string/loginmodule_login_type_by_mobile" />
+            android:text="@string/loginmodule_login_type_by_mobile"
+            android:textColor="@color/uikit_text_sub_content"
+            />
 
         <View
             android:layout_width="12dip"
@@ -45,8 +47,7 @@
             android:id="@+id/btn_login_wx"
             style="@style/UikitHMButton.Large.Main"
             android:layout_weight="1"
-            android:text="@string/loginmodule_login_type_by_wx_chat"
-            android:textColor="@color/uikit_text_sub_content" />
+            android:text="@string/loginmodule_login_type_by_wx_chat" />
 
     </LinearLayout>
 
