@@ -46,7 +46,9 @@ public class LaunchPresenter implements LaunchContract.Presenter {
     private Context mContext;
     private LaunchContract.View mView;
 
+    private int mDefCountDownTime = 9;
     private int mCountDownTime = 9;
+
     private boolean mIsHaveOpenMain = false;
     private Disposable mCountDownDisposable;
 
@@ -145,9 +147,10 @@ public class LaunchPresenter implements LaunchContract.Presenter {
             if (adBean != null) {
                 mView.showAdvertisement(adBean.getAdimageUrl(), adBean.getLinkUrl());
                 int showTimeSec = adBean.getShowHowLong();
-                mCountDownTime = showTimeSec;
-                if (mCountDownTime <= 0)
-                    mCountDownTime = 9;
+                mDefCountDownTime = showTimeSec;
+                if (mDefCountDownTime <= 0)
+                    mDefCountDownTime = 9;
+                mCountDownTime = mDefCountDownTime;
                 startCountDown();
             } else {
                 delayToMainPage();
@@ -167,7 +170,7 @@ public class LaunchPresenter implements LaunchContract.Presenter {
 
     @Override
     public void resumeCountDown() {
-        mCountDownTime = 9;
+        mCountDownTime = mDefCountDownTime;
         startCountDown();
     }
 
