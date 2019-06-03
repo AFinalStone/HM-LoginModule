@@ -49,6 +49,17 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
+        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
+        if (savedInstanceState != null) {
+            savedInstanceState.putString(EXTRA_KEY_MOBILE, mMobile);
+        }
+        if (!TextUtils.isEmpty(mMobile)) {
+            mEtMobile.setText(mMobile);
+            mEtMobile.setSelection(mEtMobile.length());
+        } else {
+            showSoftKeyboard();
+        }
+
         RxTextView.textChanges(mEtMobile).subscribe(new Consumer<CharSequence>() {
             @Override
             public void accept(CharSequence charSequence) throws Exception {
@@ -60,15 +71,6 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
                 }
             }
         });
-        mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
-        if (savedInstanceState != null) {
-            savedInstanceState.putString(EXTRA_KEY_MOBILE, mMobile);
-        }
-        if (!TextUtils.isEmpty(mMobile)) {
-            mEtMobile.setText(mMobile);
-            mEtMobile.setSelection(mEtMobile.length());
-        }
-        showSoftKeyboard();
     }
 
     @Override
