@@ -36,7 +36,6 @@
             style="@style/UikitHMButton.Large.Bordered"
             android:layout_weight="1"
             android:text="@string/loginmodule_login_type_by_mobile"
-            android:textColor="@color/uikit_text_sub_content"
             />
 
         <View
