@@ -10,15 +10,15 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/indicator"
-        android:layout_alignParentTop="true" />
+        android:layout_marginBottom="100dip"
+        />
 
     <com.hm.iou.uikit.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="38dp"
         android:layout_above="@+id/ll_login_bottom"
-        android:layout_marginBottom="30dip"
+        android:layout_marginBottom="20dip"
         app:ci_height="6dp"
         app:ci_width="6dp" />
 
@@ -27,16 +27,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:paddingBottom="40dip"
         android:paddingLeft="36dip"
-        android:paddingRight="36dip"
-        android:paddingBottom="40dip">
+        android:paddingRight="36dip">
 
         <Button
             android:id="@+id/btn_login_mobile"
             style="@style/UikitHMButton.Large.Bordered"
             android:layout_weight="1"
-            android:text="@string/loginmodule_login_type_by_mobile"
-            />
+            android:text="@string/loginmodule_login_type_by_mobile" />
 
         <View
             android:layout_width="12dip"
@@ -59,9 +58,9 @@
         android:clickable="true"
         android:gravity="center"
         android:orientation="horizontal"
+        android:paddingBottom="40dp"
         android:paddingLeft="36dip"
         android:paddingRight="36dip"
-        android:paddingBottom="40dp"
         android:visibility="gone">
 
         <Button
@@ -70,5 +69,34 @@
             android:text="微信登录" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_guide_decorator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/loginmodule_guide_right" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@mipmap/loginmodule_guide_top" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="100dip"
+            android:src="@mipmap/loginmodule_guide_left" />
+    </RelativeLayout>
 
 </RelativeLayout>

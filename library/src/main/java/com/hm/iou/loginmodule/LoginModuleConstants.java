@@ -21,4 +21,7 @@ public class LoginModuleConstants {
 
 
     public static final String ERR_CODE_ACCOUNT_CLOSED = "501017";      //账号已注销的错误码
+
+
+    public static final String PRO_PACKAGE_NAME = "com.hm.iou.professional";
 }

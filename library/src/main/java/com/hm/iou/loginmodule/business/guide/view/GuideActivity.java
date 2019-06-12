@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.cityselect.location.LocationManager;
+import com.hm.iou.loginmodule.LoginModuleConstants;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -49,10 +50,15 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     @BindView(R2.id.ll_guide_wx_only)
     View mLayoutWxOnly;
 
+    @BindView(R2.id.rl_guide_decorator)
+    View mLlDecorator;
+
     private GuidePagerAdapter mAdapter;
 
     private boolean mAccessFineLocation;//定位
     private boolean mAccessCoarseLocation;//定位
+
+    private boolean mIsProVersion;
 
     @Override
     protected int getLayoutId() {
@@ -66,6 +72,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
     @Override
     protected void initEventAndData(Bundle bundle) {
+        mIsProVersion = LoginModuleConstants.PRO_PACKAGE_NAME.equals(getPackageName());
+
         //请求权限：定位权限、日历读写权限
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.requestEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
@@ -100,6 +108,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
         mPresenter.init();
         mPresenter.checkVersion();
+
+        mLlDecorator.setVisibility(mIsProVersion ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -160,7 +170,10 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                System.out.println("position = " + position + ", offset = " + positionOffset);
+                if (mIsProVersion && position == 0) {
+                    mLlDecorator.setAlpha(1 - positionOffset);
+                }
             }
 
             @Override

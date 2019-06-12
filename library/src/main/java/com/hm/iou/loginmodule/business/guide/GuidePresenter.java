@@ -38,6 +38,8 @@ import java.util.List;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
 
+import static com.hm.iou.loginmodule.LoginModuleConstants.PRO_PACKAGE_NAME;
+
 /**
  * @author syl
  * @time 2018/5/31 下午3:01
@@ -77,6 +79,8 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
     public void init() {
         isInstalledWxChatAPP();
         List<Integer> listData = new ArrayList<>();
+        if (PRO_PACKAGE_NAME.equals(mContext.getPackageName()))
+            listData.add(R.mipmap.loginmodule_guide_pro);
         listData.add(R.mipmap.loginmodule_background_guide_01);
         listData.add(R.mipmap.loginmodule_background_guide_02);
         listData.add(R.mipmap.loginmodule_background_guide_03);
