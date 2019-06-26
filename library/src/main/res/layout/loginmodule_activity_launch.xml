@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -19,39 +18,47 @@
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
 
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backgroundSplash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="30dip"
+            android:paddingBottom="30dip"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/loginmodule_background_launch" />
+
+
         <LinearLayout
             android:id="@+id/ll_jump"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:padding="15dip"
-            android:visibility="invisible"
-            >
+            android:visibility="invisible">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:background="@drawable/loginmodule_shape_launch_time_count_down"
+                android:gravity="center"
                 android:minWidth="70dp"
                 android:minHeight="30dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="跳过"
-                android:textColor="@color/white"
+                android:textColor="#ff9b9b9b"
                 android:textSize="@dimen/textFontSize_14"
 
                 />
         </LinearLayout>
     </RelativeLayout>
-
-
-    <ImageView
-        android:id="@+id/backgroundSplash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dip"
-        android:paddingBottom="30dip"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/loginmodule_background_launch" />
 </LinearLayout>
