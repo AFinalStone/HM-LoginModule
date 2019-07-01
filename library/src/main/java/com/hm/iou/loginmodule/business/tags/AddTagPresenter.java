@@ -63,7 +63,7 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
                 .subscribeWith(new CommSubscriber<ClipBoardBean>(mView) {
                     @Override
                     public void handleResult(ClipBoardBean data) {
-                        ClipUtil.putTextIntoClipboard(mContext, null, null);
+                    //    ClipUtil.putTextIntoClipboard(mContext, null, null);
                     }
 
                     @Override
