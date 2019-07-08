@@ -35,7 +35,7 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
     private Unbinder mUnbinder;
 
     @BindView(R2.id.iv_advertisement)
-    ImageView ivAdvertisement;
+    ImageView mIvAdvertisement;
     @BindView(R2.id.ll_jump)
     LinearLayout mLlJump;
 
@@ -100,9 +100,9 @@ public class LaunchActivity extends Activity implements LaunchContract.View {
 
     @Override
     public void showAdvertisement(String imageUrl, final String linkUrl) {
-        ImageLoader.getInstance(this).displayImage(imageUrl, ivAdvertisement
+        ImageLoader.getInstance(this).displayImage(imageUrl, mIvAdvertisement
                 , R.drawable.uikit_bg_pic_loading_place, R.drawable.uikit_bg_pic_loading_error);
-        ivAdvertisement.setOnTouchListener(new View.OnTouchListener() {
+        mIvAdvertisement.setOnTouchListener(new View.OnTouchListener() {
 
             long touchStart;
 

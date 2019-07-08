@@ -3,6 +3,11 @@
     <item>
         <color android:color="#ffffffff" />
     </item>
+    <item android:bottom="90dp">
+        <bitmap android:src="@mipmap/loginmodule_text_logo"
+            android:gravity="center"
+            />
+    </item>
     <item android:bottom="30dip">
         <bitmap
             android:gravity="center_horizontal|bottom"
