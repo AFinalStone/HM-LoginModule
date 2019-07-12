@@ -14,25 +14,21 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dip">
 
-        <com.hm.iou.uikit.ShapedImageView
+        <com.hm.iou.uikit.CircleIndicator
             android:id="@+id/iv_tag_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:contentDescription="更换头像"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/loginmodule_icon_header_unknow"
-            app:shape_mode="circle" />
+            android:src="@mipmap/loginmodule_icon_header_unknow" />
 
-        <com.hm.iou.uikit.ShapedImageView
+        <com.hm.iou.uikit.CircleIndicator
             android:layout_width="34dip"
             android:layout_height="34dip"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:background="#ffffdd4a"
-            android:scaleType="centerInside"
-            android:src="@mipmap/loginmodule_ic_camera_black"
-            app:shape_mode="circle" />
+            android:src="@mipmap/loginmodule_ic_camera_black" />
     </RelativeLayout>
 
     <TextView
@@ -53,25 +49,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:gravity="bottom"
-        android:paddingTop="20dip"
+        android:orientation="vertical"
         android:paddingBottom="30dip"
-        >
+        android:paddingTop="20dip">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_tag_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_tag_submit"
         style="@style/UikitHMButton.Large.Main"
+        android:layout_marginBottom="20dip"
         android:layout_marginLeft="35dip"
         android:layout_marginRight="35dip"
-        android:layout_marginBottom="20dip"
         android:background="@drawable/uikit_selector_btn_minor"
         android:text="马上登录"
         android:textColor="@color/uikit_text_auxiliary" />
