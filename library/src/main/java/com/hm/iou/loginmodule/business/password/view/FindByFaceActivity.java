@@ -1,11 +1,13 @@
 package com.hm.iou.loginmodule.business.password.view;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.PermissionUtil;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -17,8 +19,11 @@ import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.keyboard.input.HMInputCodeView;
 import com.hm.iou.uikit.keyboard.input.OnInputCodeListener;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 
 /**
@@ -50,6 +55,8 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
     private String mUserName;
     //用户输入的身份证前六位
     private String mIDCardNum;
+
+    private boolean mHasCameraPermission;
 
     @Override
     protected int getLayoutId() {
@@ -135,10 +142,36 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
 
     @Override
     public void toScanFace() {
-        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/scan_face")
-                .withString("is_return_video", "false")
-                .withString("is_return_encrypted", "false")
-                .navigation(mContext, CODE_REQ_SCAN_FACE);
+        RxPermissions rxPermissions = new RxPermissions(this);
+        boolean hasPermission = rxPermissions.isGranted(Manifest.permission.CAMERA);
+        if (hasPermission) {
+            Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/scan_face")
+                    .withString("is_return_video", "false")
+                    .withString("is_return_encrypted", "false")
+                    .navigation(mContext, CODE_REQ_SCAN_FACE);
+        } else {
+            mHasCameraPermission = false;
+            rxPermissions.request(Manifest.permission.CAMERA)
+                    .doOnComplete(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            if (!mHasCameraPermission) {
+                                PermissionUtil.showCameraPermissionDialog(FindByFaceActivity.this, null);
+                            } else {
+                                Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/scan_face")
+                                        .withString("is_return_video", "false")
+                                        .withString("is_return_encrypted", "false")
+                                        .navigation(mContext, CODE_REQ_SCAN_FACE);
+                            }
+                        }
+                    })
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean aBoolean) throws Exception {
+                            mHasCameraPermission = aBoolean;
+                        }
+                    });
+        }
 
     }
 
