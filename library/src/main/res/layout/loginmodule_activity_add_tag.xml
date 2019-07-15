@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dip">
 
-        <com.hm.iou.uikit.CircleIndicator
+        <com.hm.iou.uikit.CircleImageView
             android:id="@+id/iv_tag_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -22,13 +22,15 @@
             android:contentDescription="更换头像"
             android:src="@mipmap/loginmodule_icon_header_unknow" />
 
-        <com.hm.iou.uikit.CircleIndicator
+        <ImageView
             android:layout_width="34dip"
             android:layout_height="34dip"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:background="#ffffdd4a"
-            android:src="@mipmap/loginmodule_ic_camera_black" />
+            android:background="@drawable/loginmodule_bg_camera"
+            android:src="@mipmap/loginmodule_ic_camera_black"
+            android:scaleType="centerInside"
+            />
     </RelativeLayout>
 
     <TextView
