@@ -62,6 +62,11 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
                     mPresenter.checkAccountIsExist(mStrMobile);
                 }
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                throwable.printStackTrace();
+            }
         });
         showSoftKeyboard();
 

@@ -1,12 +1,15 @@
 package com.hm.iou.loginmodule.demo;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.network.HttpRequestConfig;
 import com.hm.iou.router.Router;
+import com.hm.iou.tools.ClipUtil;
 
 
 /**
@@ -35,15 +38,22 @@ public class LoginModuleApplication extends Application {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        ClipUtil.putTextIntoClipboard(this, null, null);
     }
 
+    @Override
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
+    }
 
     private void initNetwork() {
         System.out.println("init-----------");
         HttpRequestConfig config = new HttpRequestConfig.Builder(this)
                 .setDebug(true)
                 .setAppChannel("yyb")
-                .setAppVersion("1.0.2")
+                .setAppVersion("1.3.3")
                 .setDeviceId("123abc123")
                 .setBaseUrl(BaseBizAppLike.getInstance().getApiServer())
                 .build();

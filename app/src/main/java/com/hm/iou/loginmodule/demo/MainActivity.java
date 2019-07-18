@@ -8,7 +8,7 @@ import android.view.View;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.bean.UserTagBean;
 import com.hm.iou.loginmodule.business.guide.view.GuideActivity;
-import com.hm.iou.loginmodule.business.launch.view.LaunchActivity;
+import com.hm.iou.loginmodule.business.register.view.RegisterByWXChatActivity;
 import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.tools.ToastUtil;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_open_launch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LaunchActivity.class));
+                startActivity(new Intent(MainActivity.this, RegisterByWXChatActivity.class));
             }
         });
     }
