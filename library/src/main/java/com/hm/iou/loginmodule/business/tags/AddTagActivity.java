@@ -78,6 +78,8 @@ public class AddTagActivity extends BaseActivity<AddTagPresenter> implements Add
             mTagList = bundle.getParcelableArrayList(EXTRA_KEY_TAG_LIST);
         }
 
+        initImageCropper();
+
         mTagAdapter = new TagAdapter();
         List<ITagItem> list = new ArrayList<>();
         if (mTagList != null) {
