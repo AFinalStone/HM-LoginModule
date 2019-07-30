@@ -189,7 +189,7 @@ public class LoginModuleApi {
     /**
      * 发送短信验证码或者邮箱验证码
      *
-     * @param type 用途--1:短信注册码，2:短信重置验证码，3:修改手机号，4:绑定邮箱，5:重置邮箱 ,6获取重置登陆密码的邮箱验证码
+     * @param type 用途--1:短信注册码，2:短信重置验证码，3:修改手机号，4:绑定邮箱，5:重置邮箱 6获取重置登陆密码的邮箱验证码
      * @param to   手机号码或者邮箱
      * @return
      */
@@ -198,6 +198,20 @@ public class LoginModuleApi {
         reqBean.setPurpose(type);
         reqBean.setTo(to);
         return getService().sendMessage(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 发送语音验证码
+     *
+     * @param type 用途--1:短信注册码，2:短信重置验证码，3:修改手机号，4:绑定邮箱，5:重置邮箱 6获取重置登陆密码的邮箱验证码
+     * @param to   手机号码或者邮箱
+     * @return
+     */
+    public static Flowable<BaseResponse<String>> sendVoiceCode(int type, String to) {
+        SendMessageReqBean reqBean = new SendMessageReqBean();
+        reqBean.setPurpose(type);
+        reqBean.setTo(to);
+        return getService().sendVoiceCode(reqBean).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

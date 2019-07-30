@@ -74,6 +74,9 @@ public interface LoginModuleService {
     @POST("/api/base/msg/v1/sendMessage")
     Flowable<BaseResponse<String>> sendMessage(@Body SendMessageReqBean sendMessageReqBean);
 
+    @POST("/api/base/msg/v1/sendCodeVoice")
+    Flowable<BaseResponse<String>> sendVoiceCode(@Body SendMessageReqBean sendMessageReqBean);
+
     @POST("/api/iou/user/v1/compareCheckCode")
     Flowable<BaseResponse<Integer>> compareSMSCheckCode(@Body CompareSMSCheckCodeReqBean compareSMSCheckCodeReqBean);
 
@@ -114,5 +117,6 @@ public interface LoginModuleService {
 
     @POST("/api/iou/label/v1/addUserLabel")
     Flowable<BaseResponse<Object>> setTags(@Body SetTagReqBean tagReqBean);
+
 
 }

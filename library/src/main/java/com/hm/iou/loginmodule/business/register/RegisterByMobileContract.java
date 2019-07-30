@@ -13,6 +13,11 @@ public interface RegisterByMobileContract {
          * 开始倒计时
          */
         void startCountDown();
+
+        /**
+         * 显示语音可能会延迟的提示
+         */
+        void showVoiceTipDialog();
     }
 
     interface Presenter extends BaseContract.BasePresenter {
@@ -23,6 +28,13 @@ public interface RegisterByMobileContract {
          * @param mobile
          */
         void getSMSCode(String mobile);
+
+        /**
+         * 获取语音验证码
+         *
+         * @param mobile
+         */
+        void getVoiceCode(String mobile);
 
         /**
          * 通过手机号进行账号注册

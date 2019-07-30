@@ -36,7 +36,9 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
     //手机号存在且已经绑定微信
     private static final int MOBILE_HAVE_BIND_WX = 1;
     //绑定微信
-    private final int PURPOSE_TYPE_BIND_WX_BY_SMS = 2;
+    private static final int PURPOSE_TYPE_BIND_WX_BY_SMS = 2;
+    //上次发送语音验证码的时间
+    private long mLastSendVoiceCodeTime = -1;
 
     public RegisterByWXChatPresenter(@NonNull Context context, @NonNull RegisterByWXChatContract.View view) {
         super(context, view);
@@ -77,7 +79,43 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
     }
 
     @Override
-    public void isMobileHaveBindWX(final String mobile) {
+    public void getVoiceCode(String mobile) {
+        if (mLastSendVoiceCodeTime != -1 && System.currentTimeMillis() - mLastSendVoiceCodeTime < 30000) {
+            mView.showVoiceTipDialog();
+            return;
+        }
+        LoginModuleApi.sendVoiceCode(PURPOSE_TYPE_BIND_WX_BY_SMS, mobile)
+                .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<String>handleResponse())
+                .subscribeWith(new CommSubscriber<String>(mView) {
+                    @Override
+                    public void handleResult(String str) {
+                        mLastSendVoiceCodeTime = System.currentTimeMillis();
+                        mView.dismissLoadingView();
+                        mView.toastMessage("语音验证码获取成功，请注意接听");
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String code, String msg) {
+                        mView.dismissLoadingView();
+                        if (!TextUtils.isEmpty(code)) {
+                            if (ERR_CODE_ACCOUNT_CLOSED.equals(code)) {
+                                NavigationHelper.toWarnCanNotRegister(mContext);
+                            } else {
+                                mView.toastErrorMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+                });
+    }
+
+    @Override
+    public void isMobileHaveBindWX(final String mobile, final boolean isGetSmsCode) {
         mView.showLoadingView();
         LoginModuleApi.isBindWX(mobile)
                 .compose(getProvider().<BaseResponse<IsBindWXRespBean>>bindUntilEvent(ActivityEvent.DESTROY))
@@ -93,7 +131,7 @@ public class RegisterByWXChatPresenter extends BaseLoginModulePresenter<Register
                         } else if (MOBILE_NOT_BIND_WX == type) {
                             TraceUtil.onEvent(mContext, "wx_mob_bound_continue");
                             mView.dismissLoadingView();
-                            mView.warnMobileNotBindWX(null);
+                            mView.warnMobileNotBindWX(null, isGetSmsCode);
                         } else if (MOBILE_NOT_EXIST == type) {
                             TraceUtil.onEvent(mContext, "wx_mob_bound_succ");
                             getSmsCode(mobile);

@@ -26,7 +26,12 @@ public interface RegisterByWXChatContract {
          *
          * @param desc 提示信息
          */
-        void warnMobileNotBindWX(String desc);
+        void warnMobileNotBindWX(String desc, boolean isGetSmsCode);
+
+        /**
+         * 显示语音可能会延迟的提示
+         */
+        void showVoiceTipDialog();
 
         /**
          * 开始倒计时
@@ -45,11 +50,18 @@ public interface RegisterByWXChatContract {
         void getSmsCode(String mobile);
 
         /**
+         * 获取语音验证码
+         *
+         * @param mobile
+         */
+        void getVoiceCode(String mobile);
+
+        /**
          * 查询手机号是否绑定过微信
          *
          * @param mobile
          */
-        void isMobileHaveBindWX(String mobile);
+        void isMobileHaveBindWX(String mobile, boolean isGetSmsCode);
 
         /**
          * 通过微信进行绑定或者注册

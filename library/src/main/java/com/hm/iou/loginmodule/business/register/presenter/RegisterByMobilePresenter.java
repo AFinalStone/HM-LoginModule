@@ -29,6 +29,7 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
 
     //注册
     private final int PURPOSE_TYPE_REGISTER_BY_SMS = 1;
+    private long mLastSendVoiceCodeTime = -1;
 
     public RegisterByMobilePresenter(@NonNull Context context, @NonNull RegisterByMobileContract.View view) {
         super(context, view);
@@ -47,6 +48,42 @@ public class RegisterByMobilePresenter extends BaseLoginModulePresenter<Register
                         mView.dismissLoadingView();
                         mView.toastMessage("验证码已成功发送至尾号" + mobileLastNum + "手机号上");
                         mView.startCountDown();
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String code, String msg) {
+                        mView.dismissLoadingView();
+                        if (!TextUtils.isEmpty(code)) {
+                            if (ERR_CODE_ACCOUNT_CLOSED.equals(code)) {
+                                NavigationHelper.toWarnCanNotRegister(mContext);
+                            } else {
+                                mView.toastErrorMessage(msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+                });
+    }
+
+    @Override
+    public void getVoiceCode(String mobile) {
+        if (mLastSendVoiceCodeTime != -1 && System.currentTimeMillis() - mLastSendVoiceCodeTime < 30000) {
+            mView.showVoiceTipDialog();
+            return;
+        }
+        LoginModuleApi.sendVoiceCode(PURPOSE_TYPE_REGISTER_BY_SMS, mobile)
+                .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<String>handleResponse())
+                .subscribeWith(new CommSubscriber<String>(mView) {
+                    @Override
+                    public void handleResult(String str) {
+                        mLastSendVoiceCodeTime = System.currentTimeMillis();
+                        mView.dismissLoadingView();
+                        mView.toastMessage("语音验证码获取成功，请注意接听");
                     }
 
                     @Override

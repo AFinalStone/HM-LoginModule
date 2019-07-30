@@ -19,7 +19,12 @@ import com.hm.iou.router.Router;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.ShowHidePasswordEditText;
+import com.hm.iou.uikit.dialog.HMActionSheetDialog;
+import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,6 +58,9 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     private String mStrSmsCheckCode = "";
     private String mMobile = "";
     private String mStrPsd = "";
+
+    private HMActionSheetDialog mBottomDialog;
+    private HMAlertDialog mVoiceDialog;
 
     @Override
     protected int getLayoutId() {
@@ -115,7 +123,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         outState.putString(EXTRA_KEY_MOBILE, mMobile);
     }
 
-    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_register_agreement, R2.id.et_mobile})
+    @OnClick({R2.id.btn_register, R2.id.tv_getSmsCheckCode, R2.id.tv_register_agreement, R2.id.et_mobile, R2.id.tv_not_get_code})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.btn_register == id) {
@@ -129,6 +137,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             showUserAgreementDialog();
         } else if (R.id.et_mobile == id) {
             finish();
+        } else if (R.id.tv_not_get_code == id) {
+            showBottomDialog();
         }
     }
 
@@ -142,6 +152,19 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
     @Override
     public void startCountDown() {
         mTvGetSmsCheckCode.startCountDown();
+    }
+
+    @Override
+    public void showVoiceTipDialog() {
+        if (mVoiceDialog == null) {
+            mVoiceDialog = new HMAlertDialog
+                    .Builder(mContext)
+                    .setTitle("温馨提示")
+                    .setMessage("语音可能有延迟，请再等一会儿")
+                    .setPositiveButton("再等一会儿")
+                    .create();
+        }
+        mVoiceDialog.show();
     }
 
     private void showUserAgreementDialog() {
@@ -160,6 +183,30 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             }
         });
         dialog.show();
+    }
+
+    private void showBottomDialog() {
+        if (mBottomDialog == null) {
+            List<String> list = new ArrayList<>();
+            list.add("获取语音验证码");
+//            list.add("一键反馈问题");
+            mBottomDialog = new HMActionSheetDialog
+                    .Builder(mContext)
+                    .setCanSelected(false)
+                    .setActionSheetList(list)
+                    .setOnItemClickListener(new HMActionSheetDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int i, String s) {
+                            if (0 == i) {
+                                mPresenter.getVoiceCode(mMobile);
+                            } else if (1 == i) {
+
+                            }
+                        }
+                    })
+                    .create();
+        }
+        mBottomDialog.show();
     }
 
 }

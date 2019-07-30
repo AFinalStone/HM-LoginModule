@@ -21,8 +21,12 @@ import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMTopBarView;
+import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,6 +58,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     @BindView(R2.id.tv_register_agreement)
     TextView mTvAgreement;
 
+    private HMActionSheetDialog mBottomDialog;
+    private HMAlertDialog mVoiceDialog;
 
     String mStrSMSCheckCode = "";
     String mStrMobile = "";
@@ -133,17 +139,19 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         outState.putString(EXTRA_KEY_WX_CHAT_SN, mWXChatSN);
     }
 
-    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_register_agreement})
+    @OnClick({R2.id.btn_next, R2.id.tv_getSMSCheckCode, R2.id.tv_register_agreement, R2.id.tv_not_get_code})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (R.id.tv_getSMSCheckCode == id) {
-            mPresenter.isMobileHaveBindWX(mStrMobile);
+            mPresenter.isMobileHaveBindWX(mStrMobile, true);
         } else if (R.id.btn_next == id) {
             TraceUtil.onEvent(this, "wx_bind_click");
             mPresenter.bindWX(mStrMobile, mStrSMSCheckCode, mStrPsd, mWXChatSN);
         } else if (R.id.tv_register_agreement == id) {
             TraceUtil.onEvent(this, "web_useragreement");
             showUserAgreementDialog();
+        } else if (R.id.tv_not_get_code == id) {
+            showBottomDialog();
         }
     }
 
@@ -181,7 +189,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     }
 
     @Override
-    public void warnMobileNotBindWX(String desc) {
+    public void warnMobileNotBindWX(String desc, final boolean isGetSmsCode) {
         String title = getString(R.string.loginmodule_register_by_wx_chat_dialog02_title);
         String msg = getString(R.string.loginmodule_register_by_wx_chat_dialog02_msg);
         String cancel = getString(R.string.base_cancel);
@@ -194,7 +202,11 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                 .setOnClickListener(new HMAlertDialog.OnClickListener() {
                     @Override
                     public void onPosClick() {
-                        mPresenter.getSmsCode(mStrMobile);
+                        if (isGetSmsCode) {
+                            mPresenter.getSmsCode(mStrMobile);
+                        } else {
+                            mPresenter.getVoiceCode(mStrMobile);
+                        }
                     }
 
                     @Override
@@ -204,6 +216,19 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                 })
                 .create()
                 .show();
+    }
+
+    @Override
+    public void showVoiceTipDialog() {
+        if (mVoiceDialog == null) {
+            mVoiceDialog = new HMAlertDialog
+                    .Builder(mContext)
+                    .setTitle("温馨提示")
+                    .setMessage("语音可能有延迟，请再等一会儿")
+                    .setPositiveButton("再等一会儿")
+                    .create();
+        }
+        mVoiceDialog.show();
     }
 
     @Override
@@ -227,6 +252,31 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             }
         });
         dialog.show();
+    }
+
+
+    private void showBottomDialog() {
+        if (mBottomDialog == null) {
+            List<String> list = new ArrayList<>();
+            list.add("获取语音验证码");
+//            list.add("一键反馈问题");
+            mBottomDialog = new HMActionSheetDialog
+                    .Builder(mContext)
+                    .setCanSelected(false)
+                    .setActionSheetList(list)
+                    .setOnItemClickListener(new HMActionSheetDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int i, String s) {
+                            if (0 == i) {
+                                mPresenter.getVoiceCode(mStrMobile);
+                            } else if (1 == i) {
+
+                            }
+                        }
+                    })
+                    .create();
+        }
+        mBottomDialog.show();
     }
 
 }

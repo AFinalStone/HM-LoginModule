@@ -60,13 +60,23 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp" />
 
+    <TextView
+        android:id="@+id/tv_not_get_code"
+        style="@style/UikitTextView.Auxiliary.Small"
+        android:layout_width="100dp"
+        android:layout_height="27dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="11dp"
+        android:gravity="center"
+        android:text="获取不到验证码" />
 
     <Button
         android:id="@+id/btn_next"
         style="@style/UikitHMButton.Large.Main"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="30dp"
         android:layout_marginRight="35dp"
+        android:layout_marginTop="25dp"
         android:text="@string/loginmodule_register_by_wx_chat_register" />
 
     <LinearLayout
@@ -84,8 +94,8 @@
         <TextView
             android:id="@+id/tv_register_agreement"
             style="@style/UikitTextView"
-            android:paddingTop="16dip"
             android:paddingBottom="16dip"
+            android:paddingTop="16dip"
             android:text="我已阅读并同意“所有协议”"
             android:textColor="@color/uikit_text_auxiliary"
             android:textSize="@dimen/uikit_main_content_text_size" />
