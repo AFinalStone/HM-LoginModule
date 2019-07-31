@@ -40,7 +40,7 @@
         <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/tv_getSMSCheckCode"
             style="@style/UikitHMButton.CheckCode"
-            android:layout_marginRight="35dip"
+            android:layout_marginEnd="35dip"
             android:enabled="false" />
 
     </LinearLayout>
@@ -66,8 +66,9 @@
         android:layout_width="100dp"
         android:layout_height="27dp"
         android:layout_gravity="end"
-        android:layout_marginRight="35dp"
+        android:layout_marginEnd="35dp"
         android:layout_marginTop="11dp"
+        android:enabled="false"
         android:gravity="center"
         android:text="获取不到验证码" />
 

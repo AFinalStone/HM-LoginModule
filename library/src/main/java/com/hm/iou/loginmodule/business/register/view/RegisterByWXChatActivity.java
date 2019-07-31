@@ -51,6 +51,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
     EditText mEtSMSCheckCode;
     @BindView(R2.id.tv_getSMSCheckCode)
     HMCountDownTextView mTvGetSMSCheckCode;
+    @BindView(R2.id.tv_not_get_code)
+    TextView mTvNotGetCode;
     @BindView(R2.id.et_password)
     EditText mEtPassword;
     @BindView(R2.id.btn_next)
@@ -99,8 +101,10 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             public void accept(CharSequence charSequence) throws Exception {
                 mStrMobile = String.valueOf(charSequence);
                 mTvGetSMSCheckCode.setEnabled(false);
+                mTvNotGetCode.setEnabled(false);
                 if (StringUtil.matchRegex(mStrMobile, HMConstants.REG_MOBILE)) {
                     mTvGetSMSCheckCode.setEnabled(true);
+                    mTvNotGetCode.setEnabled(true);
                 }
                 checkValue();
             }
