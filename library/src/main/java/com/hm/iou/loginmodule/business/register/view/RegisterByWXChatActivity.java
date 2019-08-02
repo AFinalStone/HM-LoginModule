@@ -263,7 +263,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         if (mBottomDialog == null) {
             List<String> list = new ArrayList<>();
             list.add("获取语音验证码");
-//            list.add("一键反馈问题");
+            list.add("一键反馈问题");
             mBottomDialog = new HMActionSheetDialog
                     .Builder(mContext)
                     .setCanSelected(false)
@@ -274,7 +274,8 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                             if (0 == i) {
                                 mPresenter.getVoiceCode(mStrMobile);
                             } else if (1 == i) {
-
+                                Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/person/helper_center")
+                                        .navigation(mContext);
                             }
                         }
                     })

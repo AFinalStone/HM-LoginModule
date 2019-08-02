@@ -189,7 +189,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         if (mBottomDialog == null) {
             List<String> list = new ArrayList<>();
             list.add("获取语音验证码");
-//            list.add("一键反馈问题");
+            list.add("一键反馈问题");
             mBottomDialog = new HMActionSheetDialog
                     .Builder(mContext)
                     .setCanSelected(false)
@@ -200,7 +200,8 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
                             if (0 == i) {
                                 mPresenter.getVoiceCode(mMobile);
                             } else if (1 == i) {
-
+                                Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/person/helper_center")
+                                        .navigation(mContext);
                             }
                         }
                     })
