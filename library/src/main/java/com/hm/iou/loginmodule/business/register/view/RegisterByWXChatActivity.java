@@ -273,8 +273,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
                             if (0 == i) {
                                 mPresenter.getVoiceCode(mStrMobile);
                             } else if (1 == i) {
-                                Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/person/helper_center")
-                                        .navigation(mContext);
+                                RouterUtil.toSubmitFeedback(RegisterByWXChatActivity.this, "Mobile_Register_Not_Recv_Code", "Register_Not_Recv_Mobile_Code");
                             }
                         }
                     })

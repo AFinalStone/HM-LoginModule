@@ -199,8 +199,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
                             if (0 == i) {
                                 mPresenter.getVoiceCode(mMobile);
                             } else if (1 == i) {
-                                Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/person/helper_center")
-                                        .navigation(mContext);
+                                RouterUtil.toSubmitFeedback(RegisterByMobileActivity.this, "Mobile_Register_Not_Recv_Code", "Register_Not_Recv_Mobile_Code");
                             }
                         }
                     })
