@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -79,9 +80,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
             @Override
             public void onClickTextMenu() {
                 TraceUtil.onEvent(RegisterByMobileActivity.this, "mob_help_click");
-                Router.getInstance()
-                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
-                        .navigation(mContext);
+                RouterUtil.toSubmitFeedback(RegisterByMobileActivity.this, "Mobile_Register", "Register_Not_Recv_Mobile_Code");
             }
 
             @Override

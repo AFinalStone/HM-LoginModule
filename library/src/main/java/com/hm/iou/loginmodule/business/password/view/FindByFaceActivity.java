@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.PermissionUtil;
+import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
@@ -107,9 +108,7 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
         mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
             @Override
             public void onClickTextMenu() {
-                Router.getInstance()
-                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
-                        .navigation(mContext);
+                RouterUtil.toSubmitFeedback(FindByFaceActivity.this, "Find_Pwd_By_Face", "About_Person_Auth");
             }
 
             @Override

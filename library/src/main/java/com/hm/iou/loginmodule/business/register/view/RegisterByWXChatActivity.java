@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.constants.HMConstants;
+import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.loginmodule.NavigationHelper;
 import com.hm.iou.loginmodule.R;
@@ -86,9 +87,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
             @Override
             public void onClickTextMenu() {
                 TraceUtil.onEvent(RegisterByWXChatActivity.this, "wx_help_click");
-                Router.getInstance()
-                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
-                        .navigation(mContext);
+                RouterUtil.toSubmitFeedback(RegisterByWXChatActivity.this, "WX_Register", "Register_Not_Recv_Mobile_Code");
             }
 
             @Override

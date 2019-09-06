@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindBySMSContract;
@@ -57,9 +58,7 @@ public class FindBySMSActivity extends BaseActivity<FindBySMSPresenter> implemen
         mTopBar.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
             @Override
             public void onClickTextMenu() {
-                Router.getInstance()
-                        .buildWithUrl("hmiou://m.54jietiao.com/login/customer_service")
-                        .navigation(mContext);
+                RouterUtil.toSubmitFeedback(FindBySMSActivity.this, "Find_Pwd_By_Mobile", "Forget_Pwd_Not_Recv_Mobile_Code");
             }
 
             @Override
