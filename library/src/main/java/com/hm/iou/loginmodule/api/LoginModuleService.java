@@ -29,6 +29,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -47,9 +48,15 @@ public interface LoginModuleService {
     @GET("/api/iou/user/v1/isAccountExist")
     Flowable<BaseResponse<Boolean>> isAccountExist(@Query("mobile") String mobile);
 
+    @Headers({
+            "encrypt: 1"
+    })
     @POST("/api/iou/user/v1/mobileLogin")
     Flowable<BaseResponse<UserInfo>> mobileLogin(@Body MobileLoginReqBean mobileLoginReqBean);
 
+    @Headers({
+            "encrypt: 1"
+    })
     @POST("/api/iou/user/v1/mobileRegLogin")
     Flowable<BaseResponse<UserInfo>> mobileRegLogin(@Body MobileRegLoginReqBean mobileRegLoginReqBean);
 
@@ -68,6 +75,9 @@ public interface LoginModuleService {
     @GET("/api/iou/user/acct/getResetPswdMethod")
     Flowable<BaseResponse<GetResetPsdMethodRespBean>> getResetPswdMethod(@Query("pswdType") String pswdType, @Query("mobile") String mobile);
 
+    @Headers({
+            "encrypt: 1"
+    })
     @GET("/api/iou/user/v1/wxLogin")
     Flowable<BaseResponse<UserInfo>> wxLogin(@Query("wxSn") String wxSn);
 
