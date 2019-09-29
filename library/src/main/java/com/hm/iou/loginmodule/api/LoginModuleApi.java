@@ -341,10 +341,6 @@ public class LoginModuleApi {
      * @param idCard
      * @param imagePath
      * @return String
-     * 一、返回: 流水号
-     * 二、错误码：
-     * 203009错误码时，retMsg中携带剩余次数;
-     * 203005错误码时，表示还剩余0次，今日失败达到上限
      */
     public static Flowable<BaseResponse<String>> faceCheckWithoutLogin(String mobile, String idCard, String imagePath) {
         File file = new File(imagePath);
@@ -353,6 +349,15 @@ public class LoginModuleApi {
         //创建`MultipartBody.Part`，其中需要注意第一个参数`file`需要与服务器对应,也就是`键`
         MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
         return getService().faceCheckWithoutLogin(partFile, mobile, idCard).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static Flowable<BaseResponse<String>> senseTimeFaceCheckWithoutLogin(String mobile, String idCard, String imagePath, String requestId) {
+        File file = new File(imagePath);
+        //封装
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        //创建`MultipartBody.Part`，其中需要注意第一个参数`file`需要与服务器对应,也就是`键`
+        MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        return getService().sensetimeFaceCheckWithoutLogin(partFile, mobile, idCard, requestId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

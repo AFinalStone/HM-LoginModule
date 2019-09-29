@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.hm.iou.base.utils.CommSubscriber;
+import com.hm.iou.base.utils.RealNameChannelUtil;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.api.LoginModuleApi;
@@ -17,6 +18,8 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import lombok.val;
 
 /**
  * 这个页面是在登录模块LoginModule发起使用的，
@@ -47,7 +50,12 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                     public void handleResult(Boolean aBoolean) {
                         mView.dismissLoadingView();
                         if (aBoolean) {
-                            mView.toScanFace();
+                            val isSensetime = RealNameChannelUtil.isSenseTimeChannel(mContext);
+                            if (isSensetime) {
+                                mView.toScanFaceBySenseTime();
+                            } else {
+                                mView.toScanFace();
+                            }
                         } else {
                             mView.warnCheckFailed();
                             mView.toastMessage(R.string.loginmodule_check_id_card_failed);
@@ -98,7 +106,56 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                             mView.toastMessage(msg);
                             mView.warnCheckFailed();
                         }
+                    }
 
+                    @Override
+                    public boolean isShowBusinessError() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isShowCommError() {
+                        return false;
+                    }
+                });
+    }
+
+    @Override
+    public void senseTimeFaceCheckWithoutLogin(final String mobile, final String idCardNum, String imagePath, String requestId) {
+        mView.showLoadingView();
+        LoginModuleApi.senseTimeFaceCheckWithoutLogin(mobile, idCardNum, imagePath, requestId)
+                .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<String>handleResponse())
+                .subscribeWith(new CommSubscriber<String>(mView) {
+                    @Override
+                    public void handleResult(String faceCheckSN) {
+                        mView.dismissLoadingView();
+                        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/login/reset_login_psd")
+                                .withString("reset_psd_type", "face")
+                                .withString("mobile", mobile)
+                                .withString("user_id_card", idCardNum)
+                                .withString("face_check_sn", faceCheckSN)
+                                .navigation(mContext);
+                        mView.closeCurrPage();
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String code, String msg) {
+                        mView.dismissLoadingView();
+                        if (ERROR_CODE_FACE_CHECK_FAILED.equals(code)) {
+                            Router.getInstance()
+                                    .buildWithUrl("hmiou://m.54jietiao.com/facecheck/facecheckfailed")
+                                    .withString("face_check_remainder_number", msg)
+                                    .navigation(mContext);
+                        } else if (ERROR_CODE_FACE_CHECK_TODAY_NOTIME.equals(code)) {
+                            Router.getInstance()
+                                    .buildWithUrl("hmiou://m.54jietiao.com/facecheck/facecheckfailed")
+                                    .withString("face_check_remainder_number", "0")
+                                    .navigation(mContext);
+                        } else {
+                            mView.toastMessage(msg);
+                            mView.warnCheckFailed();
+                        }
                     }
 
                     @Override

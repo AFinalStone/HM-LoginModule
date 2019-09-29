@@ -19,6 +19,11 @@ public interface FindByFaceContract {
         void toScanFace();
 
         /**
+         * 通过商汤SDK进行活体校验
+         */
+        void toScanFaceBySenseTime();
+
+        /**
          * 校验失败
          */
         void warnCheckFailed();
@@ -44,6 +49,16 @@ public interface FindByFaceContract {
          */
         void faceCheckWithoutLogin(String mobile, String idCardNum, String imagePath);
 
+
+        /**
+         * 通过商汤进行身份校验
+         *
+         * @param mobile
+         * @param idCardNum
+         * @param imagePath
+         * @param requestId
+         */
+        void senseTimeFaceCheckWithoutLogin(String mobile, String idCardNum, String imagePath, String requestId);
     }
 
 }

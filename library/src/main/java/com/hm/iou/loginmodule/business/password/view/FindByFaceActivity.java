@@ -25,6 +25,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import butterknife.BindView;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import lombok.val;
 
 
 /**
@@ -42,6 +43,8 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
      * 活体认证，人脸识别请求码
      */
     private static final int CODE_REQ_SCAN_FACE = 100;
+    //通过商汤进行活体识别
+    private static final int CODE_REQ_SENSTIME_SCANFACE = 101;
 
     @BindView(R2.id.topBar)
     HMTopBarView mTopBar;
@@ -99,6 +102,19 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
             if (!TextUtils.isEmpty(imagePath)) {
                 Logger.d("imagePath===" + imagePath);
                 mPresenter.faceCheckWithoutLogin(mMobile, mIDCardNum, imagePath);
+            }
+        }
+        if (CODE_REQ_SENSTIME_SCANFACE == requestCode && resultCode == RESULT_OK) {
+            boolean hasError = data.getBooleanExtra("result_deal_error_inner", false);
+            Logger.d("活体检测结果：$hasError");
+            if (!hasError) {
+                String requestId = data.getStringExtra("request_id");
+                String imagePath = data.getStringExtra("extra_result_image_path");
+                if (!TextUtils.isEmpty(requestId) && !TextUtils.isEmpty(imagePath)) {
+                    mPresenter.senseTimeFaceCheckWithoutLogin(mMobile, mIDCardNum, imagePath, requestId);
+                }
+            } else {
+                toastErrorMessage("活体检测出现错误");
             }
         }
     }
@@ -172,6 +188,31 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
                     });
         }
 
+    }
+
+    @Override
+    public void toScanFaceBySenseTime() {
+        final RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        if (aBoolean == true) {
+                            Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/facecheck/st/scan_face")
+                                    .navigation(FindByFaceActivity.this, CODE_REQ_SENSTIME_SCANFACE);
+                        } else {
+                            if (!rxPermissions.isGranted(Manifest.permission.CAMERA)) {
+                                PermissionUtil.showCameraPermissionDialog(FindByFaceActivity.this, null)
+                            } else if (!rxPermissions.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                PermissionUtil.showStoragePermissionDialog(FindByFaceActivity.this, null)
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                    }
+                });
     }
 
     @Override

@@ -119,6 +119,11 @@ public interface LoginModuleService {
     Flowable<BaseResponse<String>> faceCheckWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
             , @Query("idCardNum") String idCardNum);
 
+    @Multipart
+    @POST("/api/iou/user/v1/sensetime/photoAndIDCardVerificationWithoutLogin")
+    Flowable<BaseResponse<String>> sensetimeFaceCheckWithoutLogin(@Part MultipartBody.Part file, @Query("mobile") String mobile
+            , @Query("idCardNum") String idCardNum, @Query("appLivenessRequestId") String requestId);
+
     @GET("/api/iou/label/v1/checkUserLabel")
     Flowable<BaseResponse<CheckUserTagResp>> getUserTagStatus();
 
