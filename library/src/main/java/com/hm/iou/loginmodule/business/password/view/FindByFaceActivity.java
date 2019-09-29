@@ -202,9 +202,9 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
                                     .navigation(FindByFaceActivity.this, CODE_REQ_SENSTIME_SCANFACE);
                         } else {
                             if (!rxPermissions.isGranted(Manifest.permission.CAMERA)) {
-                                PermissionUtil.showCameraPermissionDialog(FindByFaceActivity.this, null)
+                                PermissionUtil.showCameraPermissionDialog(FindByFaceActivity.this, null);
                             } else if (!rxPermissions.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                                PermissionUtil.showStoragePermissionDialog(FindByFaceActivity.this, null)
+                                PermissionUtil.showStoragePermissionDialog(FindByFaceActivity.this, null);
                             }
                         }
                     }
