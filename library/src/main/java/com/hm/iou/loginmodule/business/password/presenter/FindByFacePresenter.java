@@ -19,8 +19,6 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import lombok.val;
-
 /**
  * 这个页面是在登录模块LoginModule发起使用的，
  * 获取活体校验流水号，然后到下一步进行登录密码找回操作
@@ -50,7 +48,7 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
                     public void handleResult(Boolean aBoolean) {
                         mView.dismissLoadingView();
                         if (aBoolean) {
-                            val isSensetime = RealNameChannelUtil.isSenseTimeChannel(mContext);
+                            boolean isSensetime = RealNameChannelUtil.isSenseTimeChannel(mContext);
                             if (isSensetime) {
                                 mView.toScanFaceBySenseTime();
                             } else {
