@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.hm.iou.base.event.OpenWxResultEvent;
 import com.hm.iou.base.utils.CommSubscriber;
+import com.hm.iou.base.utils.RealNameChannelUtil;
 import com.hm.iou.base.utils.RxJavaStopException;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.base.version.CheckVersionResBean;
@@ -93,6 +94,9 @@ public class GuidePresenter extends BaseLoginModulePresenter<GuideContract.View>
         if (loginType == 1) {
             mView.showWXLoginOnly();
         }
+
+        //获取实名认证的方式
+        RealNameChannelUtil.updateRealNameChannel(mContext);
     }
 
     private void isWXAccountHaveBindMobile(String code) {
