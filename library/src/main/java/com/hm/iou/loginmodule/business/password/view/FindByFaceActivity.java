@@ -103,6 +103,7 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
                 Logger.d("imagePath===" + imagePath);
                 mPresenter.faceCheckWithoutLogin(mMobile, mIDCardNum, imagePath);
             }
+            return;
         }
         if (CODE_REQ_SENSTIME_SCANFACE == requestCode && resultCode == RESULT_OK) {
             boolean hasError = data.getBooleanExtra("result_deal_error_inner", false);
@@ -116,6 +117,7 @@ public class FindByFaceActivity extends BaseActivity<FindByFacePresenter> implem
             } else {
                 toastErrorMessage("活体检测出现错误");
             }
+            return;
         }
     }
 
