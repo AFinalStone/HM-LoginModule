@@ -175,7 +175,12 @@ public class FindByFacePresenter extends BaseLoginModulePresenter<FindByFaceCont
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvenBusFaceCheckAgain(FaceCheckAgainEvent faceCheckAgainEvent) {
-        mView.toScanFace();
+        boolean isSensetime = RealNameChannelUtil.isSenseTimeChannel(mContext);
+        if (isSensetime) {
+            mView.toScanFaceBySenseTime();
+        } else {
+            mView.toScanFace();
+        }
     }
 
     /**
