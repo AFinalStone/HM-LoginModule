@@ -91,11 +91,10 @@ public class AddTagPresenter extends MvpActivityPresenter<AddTagContract.View> i
             return;
         }
 
-        final UserInfo userInfo = UserManager.getInstance(mContext).getUserInfo();
         if (newAvatarFile != null) {
             //需要上传头像文件
             mView.showLoadingView("图片上传中...");
-            FileApi.uploadImage(newAvatarFile, FileBizType.Avatar)
+            FileApi.INSTANCE.uploadImage(newAvatarFile, FileBizType.Avatar)
                     .compose(getProvider().<BaseResponse<FileUploadResult>>bindUntilEvent(ActivityEvent.DESTROY))
                     .map(RxUtil.<FileUploadResult>handleResponse())
                     .subscribeWith(new CommSubscriber<FileUploadResult>(mView) {
