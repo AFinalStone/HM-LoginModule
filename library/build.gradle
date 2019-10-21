@@ -3,13 +3,11 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.hm.plugin.commconfig'
 
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -39,8 +37,8 @@ dependencies {
     //黄油刀
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    compile 'com.heima.iou:hmbasebizlocal:1.0.0'
-    compile 'com.heima.iou:hmcityselectlocal:1.0.0'
+    api 'com.heima.iou:hmbasebizlocal:1.0.0'
+    api 'com.heima.iou:hmcityselectlocal:1.0.0'
 
 }
 apply from: './maven_local.gradle'
