@@ -17,7 +17,6 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByWXChatContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByWXChatPresenter;
-import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
@@ -133,6 +132,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         spanStr.setSpan(new UnderlineSpan(), 8, 12, 0);
         mTvAgreement.setText(spanStr);
 
+        mEtSMSCheckCode.requestFocus();
         showUserAgreementDialog();
     }
 
@@ -246,7 +246,7 @@ public class RegisterByWXChatActivity extends BaseActivity<RegisterByWXChatPrese
         dialog.setOnUserAgreementListener(new UserAgreementDialog.OnUserAgreementListener() {
             @Override
             public void onAgree() {
-
+                mEtSMSCheckCode.requestFocus();
             }
 
             @Override

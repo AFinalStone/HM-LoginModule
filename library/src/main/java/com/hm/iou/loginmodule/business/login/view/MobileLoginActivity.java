@@ -62,12 +62,14 @@ public class MobileLoginActivity extends BaseActivity<MobileLoginPresenter> impl
                 }
             }
         });
-        showSoftKeyboard();
         mMobile = getIntent().getStringExtra(EXTRA_KEY_MOBILE);
         if (savedInstanceState != null) {
             mMobile = savedInstanceState.getString(EXTRA_KEY_MOBILE);
         }
         mTvMobile.setText(mMobile);
+
+        etPassword.requestFocus();
+        showSoftKeyboard();
     }
 
     @Override

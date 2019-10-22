@@ -12,7 +12,6 @@ import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.password.FindByInputMobileContract;
 import com.hm.iou.loginmodule.business.password.presenter.FindByInputMobilePresenter;
 import com.hm.iou.tools.StringUtil;
-import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.MobileInputEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -55,6 +54,7 @@ public class FindByInputMobileActivity extends BaseActivity<FindByInputMobilePre
         }
         if (!TextUtils.isEmpty(mMobile)) {
             mEtMobile.setText(mMobile);
+            mEtMobile.requestFocus();
             mEtMobile.setSelection(mEtMobile.length());
         } else {
             showSoftKeyboard();

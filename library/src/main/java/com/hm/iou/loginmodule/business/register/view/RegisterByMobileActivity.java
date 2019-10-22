@@ -2,7 +2,6 @@ package com.hm.iou.loginmodule.business.register.view;
 
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.register.RegisterByMobileContract;
 import com.hm.iou.loginmodule.business.register.presenter.RegisterByMobilePresenter;
-import com.hm.iou.router.Router;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.ShowHidePasswordEditText;
@@ -113,6 +111,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         spanStr.setSpan(new UnderlineSpan(), 8, 12, 0);
         mTvAgreement.setText(spanStr);
 
+        mEtSMSCheckCode.requestFocus();
         showUserAgreementDialog();
     }
 
@@ -173,7 +172,7 @@ public class RegisterByMobileActivity extends BaseActivity<RegisterByMobilePrese
         dialog.setOnUserAgreementListener(new UserAgreementDialog.OnUserAgreementListener() {
             @Override
             public void onAgree() {
-
+                mEtSMSCheckCode.requestFocus();
             }
 
             @Override

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.loginmodule.R;
@@ -113,6 +112,8 @@ public class ResetLoginPsdActivity extends BaseActivity<ResetLoginPsdPresenter> 
             mFaceCheckSN = savedInstanceState.getString(EXTRA_FACE_CHECK_SN);
             mUserIDCard = savedInstanceState.getString(EXTRA_USER_ID_CARD);
         }
+
+        mEtPsd.requestFocus();
     }
 
     @Override

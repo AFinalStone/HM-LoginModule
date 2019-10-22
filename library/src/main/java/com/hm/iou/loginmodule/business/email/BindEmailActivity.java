@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.constants.HMConstants;
 import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.loginmodule.R;
 import com.hm.iou.loginmodule.R2;
-import com.hm.iou.router.Router;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
@@ -85,6 +83,8 @@ public class BindEmailActivity extends BaseActivity<BindEmailPresenter> implemen
                 checkValue();
             }
         });
+
+        mEtEmail.requestFocus();
         showSoftKeyboard();
     }
 

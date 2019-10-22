@@ -3,7 +3,6 @@ package com.hm.iou.loginmodule.business.login.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.BaseBizAppLike;
@@ -14,6 +13,7 @@ import com.hm.iou.loginmodule.R2;
 import com.hm.iou.loginmodule.business.login.InputMobileContract;
 import com.hm.iou.loginmodule.business.login.presenter.InputMobilePresenter;
 import com.hm.iou.router.Router;
+import com.hm.iou.tools.KeyboardUtil;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.uikit.MobileInputEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -68,7 +68,9 @@ public class InputMobileActivity extends BaseActivity<InputMobilePresenter> impl
                 throwable.printStackTrace();
             }
         });
-        showSoftKeyboard();
+
+        mEtMobile.requestFocus();
+        KeyboardUtil.toggleKeyboard(this);
 
         if (BaseBizAppLike.getInstance().isDebug()) {
             Button btnSwitch = findViewById(R.id.btn_switch_env);
