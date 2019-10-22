@@ -61,6 +61,7 @@ public class ModifyNameDialog extends Dialog implements DialogInterface.OnShowLi
 
     @Override
     public void onShow(DialogInterface dialog) {
+        mEtContent.requestFocus();
         mEtContent.postDelayed(new Runnable() {
             @Override
             public void run() {
