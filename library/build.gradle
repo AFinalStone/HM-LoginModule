@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.hm.plugin.commconfig'
-
 android {
     compileSdkVersion 28
 
@@ -37,8 +38,8 @@ dependencies {
     //黄油刀
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    api 'com.heima.iou:hmbasebizlocal:1.0.0'
-    api 'com.heima.iou:hmcityselectlocal:1.0.0'
+    implementation 'com.heima.iou:hmbasebizlocal:1.0.0'
+    implementation 'com.heima.iou:hmcityselectlocal:1.0.0'
 
 }
 apply from: './maven_local.gradle'
